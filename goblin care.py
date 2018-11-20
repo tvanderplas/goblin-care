@@ -103,6 +103,8 @@ def game():
 
 		if pygame.sprite.spritecollideany(player, enemies):
 			player.kill()
+			for sprite in all_sprites:
+				sprite.kill()
 			isRunning = False
 		for enemy in pygame.sprite.groupcollide(enemies, bullets, True, True):
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
@@ -110,8 +112,14 @@ def game():
 
 		for event in pygame.event.get():
 			if event.type == KEYDOWN and event.key == K_ESCAPE:
+				player.kill()
+				for sprite in all_sprites:
+					sprite.kill()
 				isRunning = False
 			elif event.type == QUIT:
+				player.kill()
+				for sprite in all_sprites:
+					sprite.kill()
 				isRunning = False
 			elif event.type == ADDENEMY:
 				new_enemy = Enemy()
