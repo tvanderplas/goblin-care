@@ -136,15 +136,13 @@ def game():
 
 menu_screen = Background(image_path + 'stopgo.png', [0, 0])
 
-isMenuOpen = True
-
-while isMenuOpen:
+while True:
 	for event in pygame.event.get():
 		if event.type == MOUSEBUTTONDOWN:
 			if pygame.mouse.get_pos()[0] < info.current_w / 2:
 				game()
 			elif pygame.mouse.get_pos()[0] >= info.current_w / 2:
-				isMenuOpen = False
+				raise SystemExit
 	pygame.display.flip()
 	screen.blit(menu_screen.image, menu_screen.rect)
 	clock.tick(15)
