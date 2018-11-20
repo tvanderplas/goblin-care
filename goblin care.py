@@ -75,13 +75,6 @@ class Background(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.left, self.rect.top = location
 
-class Screen(pygame.sprite.Sprite):
-	def __init__(self, image_file, location):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.transform.scale(pygame.image.load(image_file), (info.current_w, info.current_h))
-		self.rect = self.image.get_rect()
-		self.rect.left, self.rect.top = location
-
 pygame.init()
 clock = pygame.time.Clock()
 image_path = '''game art\\'''
@@ -141,7 +134,7 @@ def game():
 		screen.blit(background.image, background.rect)
 		clock.tick(60)
 
-menu_screen = Screen(image_path + 'stopgo.png', [0, 0])
+menu_screen = Background(image_path + 'stopgo.png', [0, 0])
 
 isMenuOpen = True
 
