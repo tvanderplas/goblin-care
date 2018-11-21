@@ -14,7 +14,8 @@ class Player(pygame.sprite.Sprite):
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(0, info.current_h / 2))
 		self.speed = 10
-	def update(self, pressed_keys):
+	def update(self):
+		pressed_keys = pygame.key.get_pressed()
 		if pressed_keys[K_w] or pressed_keys[K_UP]:
 			self.rect.move_ip(0, -self.speed)
 		if pressed_keys[K_s] or pressed_keys[K_DOWN]:
@@ -33,11 +34,11 @@ class Player(pygame.sprite.Sprite):
 			self.rect.bottom = info.current_h
 
 class PlayerBullet(pygame.sprite.Sprite):
-	def __init__(self):
+	def __init__(self, x, y):
 		super(PlayerBullet, self).__init__()
 		self.image = pygame.image.load(image_path + 'bullet.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(player.rect.right, player.rect.centery))
+		self.rect = self.image.get_rect(center=(x, y))
 		self.speed = 30
 	def update(self):
 		self.rect.move_ip(self.speed, 0)
@@ -82,15 +83,17 @@ info = pygame.display.Info()
 screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSCREEN)
 
 background = Background(image_path + 'desert road.png', [0, 0])
-player = Player()
+ADDENEMY = pygame.USEREVENT + 1
+SHOOT = pygame.USEREVENT + 2
+pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
 enemies = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
 all_sprites = pygame.sprite.Group()
 
 
 def game():
+	player = Player()
+	all_sprites.add(player)
 	isRunning = True
 	while isRunning:
 
@@ -119,12 +122,10 @@ def game():
 				enemies.add(new_enemy)
 				all_sprites.add(new_enemy)
 			elif event.type == KEYDOWN and event.key == K_SPACE:
-				new_player_bullet = PlayerBullet()
+				new_player_bullet = PlayerBullet(player.rect.right, player.rect.centery)
 				all_sprites.add(new_player_bullet)
 				bullets.add(new_player_bullet)
 
-		pressed_keys = pygame.key.get_pressed()
-		player.update(pressed_keys)
 		for sprite in all_sprites:
 			sprite.update()
 		for entity in all_sprites:
