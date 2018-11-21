@@ -84,7 +84,6 @@ screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSC
 
 background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
-SHOOT = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
 enemies = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
