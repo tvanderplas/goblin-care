@@ -86,6 +86,7 @@ background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
 enemies = pygame.sprite.Group()
+splats = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
@@ -104,6 +105,7 @@ def game():
 		for enemy in pygame.sprite.groupcollide(enemies, bullets, True, True):
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 			all_sprites.add(new_splat)
+			splats.add(new_splat)
 
 		for event in pygame.event.get():
 			if event.type == KEYDOWN and event.key == K_ESCAPE:
@@ -127,6 +129,8 @@ def game():
 
 		for sprite in all_sprites:
 			sprite.update()
+		for splat in splats:
+			screen.blit(splat.image, splat.rect)
 		for entity in all_sprites:
 			screen.blit(entity.image, entity.rect)
 		screen.blit(player.image, player.rect)
