@@ -7,6 +7,22 @@ user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
 print("stretching prevented")
 
+def randedge(distance):
+	edge = random.choice(['top', 'bottom', 'left', 'right'])
+	if edge == 'top':
+		x = random.randint(distance, info.current_w - distance)
+		y = distance
+	if edge == 'bottom':
+		x = random.randint(distance, info.current_w - distance)
+		y = info.current_h - distance
+	if edge == 'left':
+		x = distance
+		y = random.randint(distance, info.current_h - distance)
+	if edge == 'right':
+		x = info.current_w - distance
+		y = random.randint(distance, info.current_h - distance)
+	return [x, y]
+
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
 		super(Player, self).__init__()
@@ -14,6 +30,7 @@ class Player(pygame.sprite.Sprite):
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(0, info.current_h / 2))
 		self.speed = 10
+		self.bigtime = 0
 	def update(self):
 		pressed_keys = pygame.key.get_pressed()
 		if pressed_keys[K_w] or pressed_keys[K_UP]:
@@ -24,6 +41,10 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(-self.speed, 0)
 		if pressed_keys[K_d] or pressed_keys[K_RIGHT]:
 			self.rect.move_ip(self.speed, 0)
+		if self.bigtime <= 0:
+			self.image = pygame.image.load(image_path + 'car.png').convert()
+			self.image.set_colorkey((255, 255, 255), RLEACCEL)
+			self.rect = self.image.get_rect(center=(self.rect.center))
 		if self.rect.left < 0:
 			self.rect.left = 0
 		elif self.rect.right > info.current_w:
@@ -32,6 +53,12 @@ class Player(pygame.sprite.Sprite):
 			self.rect.top = 0
 		elif self.rect.bottom >= info.current_h:
 			self.rect.bottom = info.current_h
+		self.bigtime -= 1 if self.bigtime > 0 else 0
+	def embiggen(self):
+		self.image = pygame.image.load(image_path + 'big car.png').convert()
+		self.image.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.image.get_rect(center=(self.rect.center))
+		self.bigtime = 50
 
 class PlayerBullet(pygame.sprite.Sprite):
 	def __init__(self, x, y):
@@ -69,6 +96,15 @@ class Splat(pygame.sprite.Sprite):
 		if self.health <= 0:
 			self.kill()
 
+class Ranbo_Tornato(pygame.sprite.Sprite):
+	def __init__(self):
+		super(Ranbo_Tornato, self).__init__()
+		self.image = pygame.image.load(image_path + 'ranbo tornato.png').convert()
+		self.image.set_colorkey((0, 0, 0), RLEACCEL)
+		self.rect = self.image.get_rect(center=(randedge(25)))
+	def update(self):
+		pass
+
 class Background(pygame.sprite.Sprite):
 	def __init__(self, image_file, location):
 		pygame.sprite.Sprite.__init__(self)
@@ -84,10 +120,13 @@ screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSC
 
 background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
+NEWTORNATO = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
+pygame.time.set_timer(NEWTORNATO, random.randint(1, 2))
 enemies = pygame.sprite.Group()
 splats = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+tornatos = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 
@@ -106,6 +145,8 @@ def game():
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 			all_sprites.add(new_splat)
 			splats.add(new_splat)
+		if pygame.sprite.spritecollideany(player, tornatos):
+			player.embiggen()
 
 		for event in pygame.event.get():
 			if event.type == KEYDOWN and event.key == K_ESCAPE:
@@ -122,6 +163,10 @@ def game():
 				new_enemy = Enemy()
 				enemies.add(new_enemy)
 				all_sprites.add(new_enemy)
+			elif event.type == NEWTORNATO:
+				new_tornato = Ranbo_Tornato()
+				tornatos.add(new_tornato)
+				all_sprites.add(new_tornato)
 			elif event.type == KEYDOWN and event.key == K_SPACE:
 				new_player_bullet = PlayerBullet(player.rect.right, player.rect.centery)
 				all_sprites.add(new_player_bullet)
