@@ -1,4 +1,5 @@
 import random
+import math
 import pygame
 from pygame.locals import *
 import ctypes
@@ -22,6 +23,14 @@ def randedge(distance):
 		x = info.current_w - distance
 		y = random.randint(distance, info.current_h - distance)
 	return [x, y]
+def moveTo(initial, final, speed):
+	displacement_x = final[0] - initial[0] if final[0] != initial[0] else 1 # avoid division by 0
+	displacement_y = final[1] - initial[1]
+	slope = float(displacement_y / displacement_x)
+	inclination = math.atan(slope)
+	delta_x = speed * math.cos(inclination)
+	delta_y = speed * math.sin(inclination)
+	return [delta_x, delta_y]
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
@@ -102,8 +111,10 @@ class Ranbo_Tornato(pygame.sprite.Sprite):
 		self.image = pygame.image.load(image_path + 'ranbo tornato.png').convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
+		self.speed = random.randint(5, 8)
+		self.waypoint = [random.randint(info.current_w / 4, 3 * info.current_w / 4), random.randint(info.current_h / 4, 3 * info.current_h / 4)]
 	def update(self):
-		pass
+		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
 
 class Background(pygame.sprite.Sprite):
 	def __init__(self, image_file, location):
