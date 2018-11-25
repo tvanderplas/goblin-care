@@ -153,7 +153,6 @@ def game():
 	while isRunning:
 
 		if pygame.sprite.spritecollideany(player, enemies):
-			player.kill()
 			for sprite in all_sprites:
 				sprite.kill()
 			isRunning = False
@@ -166,12 +165,10 @@ def game():
 
 		for event in pygame.event.get():
 			if event.type == KEYDOWN and event.key == K_ESCAPE:
-				player.kill()
 				for sprite in all_sprites:
 					sprite.kill()
 				isRunning = False
 			elif event.type == QUIT:
-				player.kill()
 				for sprite in all_sprites:
 					sprite.kill()
 				isRunning = False
