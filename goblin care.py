@@ -9,20 +9,13 @@ user32.SetProcessDPIAware()
 print("stretching prevented")
 
 def randedge(distance):
-	edge = random.choice(['top', 'bottom', 'left', 'right'])
-	if edge == 'top':
-		x = random.randint(distance, info.current_w - distance)
-		y = distance
-	if edge == 'bottom':
-		x = random.randint(distance, info.current_w - distance)
-		y = info.current_h - distance
-	if edge == 'left':
-		x = distance
-		y = random.randint(distance, info.current_h - distance)
-	if edge == 'right':
-		x = info.current_w - distance
-		y = random.randint(distance, info.current_h - distance)
-	return [x, y]
+	edge = random.choice([
+		[random.randint(distance, info.current_w - distance), distance],# top
+		[random.randint(distance, info.current_w - distance), info.current_h - distance],# bottom
+		[distance, random.randint(distance, info.current_h - distance)],# left
+		[info.current_w - distance, random.randint(distance, info.current_h - distance)],# right
+	])
+	return edge
 def moveTo(initial, final, speed):
 	displacement_x = final[0] - initial[0]
 	displacement_y = final[1] - initial[1]
