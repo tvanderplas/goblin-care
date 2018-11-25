@@ -189,9 +189,13 @@ def game():
 			sprite.update()
 		for splat in splats:
 			screen.blit(splat.image, splat.rect)
-		for entity in all_sprites:
-			screen.blit(entity.image, entity.rect)
 		screen.blit(player.image, player.rect)
+		for enemy in enemies:
+			screen.blit(enemy.image, enemy.rect)
+		for bullet in bullets:
+			screen.blit(bullet.image, bullet.rect)
+		for tornato in tornatos:
+			screen.blit(tornato.image, tornato.rect)
 		pygame.display.flip()
 		screen.blit(background.image, background.rect)
 		clock.tick(60)
