@@ -193,6 +193,8 @@ menu_screen = Background(image_path + 'stopgo.png', [0, 0])
 
 while True:
 	for event in pygame.event.get():
+		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
+			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
 			if pygame.mouse.get_pos()[0] < info.current_w / 2:
 				game()
