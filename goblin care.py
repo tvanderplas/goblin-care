@@ -112,6 +112,9 @@ class Ranbo_Tornato(pygame.sprite.Sprite):
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
 		self.speed = random.randint(5, 8)
+		self.waypoint = []
+		self.__getWaypoint()
+	def __getWaypoint(self):
 		self.waypoint = [random.randint(info.current_w / 4, 3 * info.current_w / 4), random.randint(info.current_h / 4, 3 * info.current_h / 4)]
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
