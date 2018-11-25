@@ -24,13 +24,13 @@ def randedge(distance):
 		y = random.randint(distance, info.current_h - distance)
 	return [x, y]
 def moveTo(initial, final, speed):
-	displacement_x = final[0] - initial[0] if final[0] != initial[0] else 1 # avoid division by 0
+	displacement_x = final[0] - initial[0]
 	displacement_y = final[1] - initial[1]
-	slope = float(displacement_y / displacement_x)
+	slope = float(displacement_y / (displacement_x if displacement_x != 0 else 1))
 	inclination = math.atan(slope)
 	delta_x = speed * math.cos(inclination)
 	delta_y = speed * math.sin(inclination)
-	return [delta_x, delta_y]
+	return [delta_x, delta_y] if displacement_x > 0 else [-delta_x, -delta_y]
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
@@ -115,7 +115,9 @@ class Ranbo_Tornato(pygame.sprite.Sprite):
 		self.waypoint = []
 		self.__getWaypoint()
 	def __getWaypoint(self):
-		self.waypoint = [random.randint(info.current_w / 4, 3 * info.current_w / 4), random.randint(info.current_h / 4, 3 * info.current_h / 4)]
+		x = random.randint(info.current_w / 4, 3 * info.current_w / 4)
+		y = random.randint(info.current_h / 4, 3 * info.current_h / 4)
+		self.waypoint = moveTo(self.rect.center, [x, y], 3000)
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
 
