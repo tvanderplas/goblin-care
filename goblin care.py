@@ -84,8 +84,8 @@ class PlayerBullet(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self):
 		super(Enemy, self).__init__()
-		self.image = pygame.image.load(image_path + 'green_goblin.png').convert()
-		self.image.set_colorkey((255, 255, 255), RLEACCEL)
+		self.image = pygame.image.load(image_path + 'green goblin.png').convert()
+		self.image.set_colorkey((255, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(info.current_w, random.randint(25, info.current_h - 25)))
 		self.speed = random.randint(5, 20)
 	def update(self):
