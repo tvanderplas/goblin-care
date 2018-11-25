@@ -157,11 +157,7 @@ def game():
 			player.embiggen()
 
 		for event in pygame.event.get():
-			if event.type == KEYDOWN and event.key == K_ESCAPE:
-				for sprite in all_sprites:
-					sprite.kill()
-				isRunning = False
-			elif event.type == QUIT:
+			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 				for sprite in all_sprites:
 					sprite.kill()
 				isRunning = False
