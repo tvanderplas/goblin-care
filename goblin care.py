@@ -102,7 +102,7 @@ class Tornado(pygame.sprite.Sprite):
 	def __init__(self):
 		super(Tornado, self).__init__()
 		self.magic = random.randint(0, 10)
-		self.image = pygame.image.load(image_path + 'tornado.png' if self.magic < 8 else 'rainbow_tornado.png').convert()
+		self.image = pygame.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
 		self.speed = random.randint(5, 8)
@@ -132,7 +132,7 @@ background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
 NEWTORNADO = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
-pygame.time.set_timer(NEWTORNADO, random.randint(25000, 35000))
+pygame.time.set_timer(NEWTORNADO, random.randint(250, 350))
 enemies = pygame.sprite.Group()
 splats = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
@@ -154,8 +154,13 @@ def game():
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 			all_sprites.add(new_splat)
 			splats.add(new_splat)
-		if pygame.sprite.spritecollideany(player, tornados):
-			player.embiggen()
+		for tornado in pygame.sprite.spritecollide(player, tornados, False):
+			if tornado.magic < 8:
+				for sprite in all_sprites:
+					sprite.kill()
+				isRunning = False
+			else:
+				player.embiggen()
 
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
