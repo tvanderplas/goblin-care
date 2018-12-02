@@ -99,9 +99,10 @@ class Splat(pygame.sprite.Sprite):
 			self.kill()
 
 class Tornado(pygame.sprite.Sprite):
-	def __init__(self, image):
+	def __init__(self):
 		super(Tornado, self).__init__()
-		self.image = pygame.image.load(image_path + image).convert()
+		self.magic = random.randint(0, 10)
+		self.image = pygame.image.load(image_path + 'tornado.png' if self.magic < 8 else 'rainbow_tornado.png').convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
 		self.speed = random.randint(5, 8)
@@ -129,13 +130,13 @@ screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSC
 
 background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
-NEWTORNATO = pygame.USEREVENT + 2
+NEWTORNADO = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
-pygame.time.set_timer(NEWTORNATO, random.randint(25000, 35000))
+pygame.time.set_timer(NEWTORNADO, random.randint(25000, 35000))
 enemies = pygame.sprite.Group()
 splats = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-tornatos = pygame.sprite.Group()
+tornados = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 
@@ -153,7 +154,7 @@ def game():
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 			all_sprites.add(new_splat)
 			splats.add(new_splat)
-		if pygame.sprite.spritecollideany(player, tornatos):
+		if pygame.sprite.spritecollideany(player, tornados):
 			player.embiggen()
 
 		for event in pygame.event.get():
@@ -165,10 +166,10 @@ def game():
 				new_enemy = Enemy()
 				enemies.add(new_enemy)
 				all_sprites.add(new_enemy)
-			elif event.type == NEWTORNATO:
-				new_tornato = Tornado('ranbo tornato.png')
-				tornatos.add(new_tornato)
-				all_sprites.add(new_tornato)
+			elif event.type == NEWTORNADO:
+				new_tornado = Tornado()
+				tornados.add(new_tornado)
+				all_sprites.add(new_tornado)
 			elif event.type == KEYDOWN and event.key == K_SPACE:
 				new_player_bullet = PlayerBullet(player.rect.right, player.rect.centery)
 				all_sprites.add(new_player_bullet)
@@ -183,8 +184,8 @@ def game():
 			screen.blit(enemy.image, enemy.rect)
 		for bullet in bullets:
 			screen.blit(bullet.image, bullet.rect)
-		for tornato in tornatos:
-			screen.blit(tornato.image, tornato.rect)
+		for tornado in tornados:
+			screen.blit(tornado.image, tornado.rect)
 		pygame.display.flip()
 		screen.blit(background.image, background.rect)
 		clock.tick(60)
