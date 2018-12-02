@@ -98,9 +98,9 @@ class Splat(pygame.sprite.Sprite):
 		if self.health <= 0:
 			self.kill()
 
-class Ranbo_Tornato(pygame.sprite.Sprite):
+class Tornado(pygame.sprite.Sprite):
 	def __init__(self):
-		super(Ranbo_Tornato, self).__init__()
+		super(Tornado, self).__init__()
 		self.image = pygame.image.load(image_path + 'ranbo tornato.png').convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
@@ -166,7 +166,7 @@ def game():
 				enemies.add(new_enemy)
 				all_sprites.add(new_enemy)
 			elif event.type == NEWTORNATO:
-				new_tornato = Ranbo_Tornato()
+				new_tornato = Tornado()
 				tornatos.add(new_tornato)
 				all_sprites.add(new_tornato)
 			elif event.type == KEYDOWN and event.key == K_SPACE:
