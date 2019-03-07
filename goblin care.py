@@ -132,7 +132,7 @@ background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pygame.USEREVENT + 1
 NEWTORNADO = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
-pygame.time.set_timer(NEWTORNADO, random.randint(250, 350))
+pygame.time.set_timer(NEWTORNADO, random.randint(250, 3500))
 enemies = pygame.sprite.Group()
 splats = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
