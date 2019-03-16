@@ -1,9 +1,10 @@
 import random
 import math
 import pygame as pg
+# pylint: disable=no-name-in-module
 from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
-)
+)# pylint: enable=no-name-in-module
 import ctypes
 
 user32 = ctypes.windll.user32
