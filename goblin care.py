@@ -6,12 +6,12 @@ from pygame.constants import (
 )# pylint: enable=no-name-in-module
 from random import randint
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado
-from helpers import screen_width, screen_height
+import screen
 
 # pylint: disable=no-member
 pg.init()
 clock = pg.time.Clock()
-screen = pg.display.set_mode((screen_width, screen_height), pg.FULLSCREEN)
+view = pg.display.set_mode((screen.width, screen.height), pg.FULLSCREEN)
 
 background = Background('desert road.png', [0, 0])
 ADDENEMY = pg.USEREVENT + 1
@@ -68,16 +68,16 @@ def game():
 		for sprite in all_sprites:
 			sprite.update()
 		for splat in splats:
-			screen.blit(splat.image, splat.rect)
-		screen.blit(player.image, player.rect)
+			view.blit(splat.image, splat.rect)
+		view.blit(player.image, player.rect)
 		for enemy in enemies:
-			screen.blit(enemy.image, enemy.rect)
+			view.blit(enemy.image, enemy.rect)
 		for bullet in bullets:
-			screen.blit(bullet.image, bullet.rect)
+			view.blit(bullet.image, bullet.rect)
 		for tornado in tornados:
-			screen.blit(tornado.image, tornado.rect)
+			view.blit(tornado.image, tornado.rect)
 		pg.display.flip()
-		screen.blit(background.image, background.rect)
+		view.blit(background.image, background.rect)
 		clock.tick(60)
 
 menu_screen = Background('stopgo.png', [0, 0])
@@ -87,10 +87,10 @@ while True:
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
-			if pg.mouse.get_pos()[0] < screen_width // 2:
+			if pg.mouse.get_pos()[0] < screen.width // 2:
 				game()
-			elif pg.mouse.get_pos()[0] >= screen_width // 2:
+			elif pg.mouse.get_pos()[0] >= screen.width // 2:
 				raise SystemExit
 	pg.display.flip()
-	screen.blit(menu_screen.image, menu_screen.rect)
+	view.blit(menu_screen.image, menu_screen.rect)
 	clock.tick(15)
