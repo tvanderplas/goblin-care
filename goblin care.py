@@ -1,7 +1,9 @@
 import random
 import math
 import pygame as pg
-from pygame.locals import *
+from pygame.constants import (
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
+)
 import ctypes
 
 user32 = ctypes.windll.user32
@@ -123,6 +125,7 @@ class Background(pg.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.left, self.rect.top = location
 
+# pylint: disable=no-member
 pg.init()
 clock = pg.time.Clock()
 image_path = '''game art\\'''
@@ -139,7 +142,7 @@ splats = pg.sprite.Group()
 bullets = pg.sprite.Group()
 tornados = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
-
+# pylint: enable=no-member
 
 def game():
 	player = Player()
