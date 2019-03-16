@@ -4,17 +4,14 @@ import pygame as pg
 from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )# pylint: enable=no-name-in-module
-from ctypes import windll
 from random import randint
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado
-
-windll.user32.SetProcessDPIAware()
-print("stretching prevented")
+from helpers import screen_width, screen_height
 
 # pylint: disable=no-member
 pg.init()
 clock = pg.time.Clock()
-screen = pg.display.set_mode((pg.display.Info().current_w, pg.display.Info().current_h), pg.FULLSCREEN)
+screen = pg.display.set_mode((screen_width, screen_height), pg.FULLSCREEN)
 
 background = Background('desert road.png', [0, 0])
 ADDENEMY = pg.USEREVENT + 1
@@ -90,9 +87,9 @@ while True:
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
-			if pg.mouse.get_pos()[0] < pg.display.Info().current_w // 2:
+			if pg.mouse.get_pos()[0] < screen_width // 2:
 				game()
-			elif pg.mouse.get_pos()[0] >= pg.display.Info().current_w // 2:
+			elif pg.mouse.get_pos()[0] >= screen_width // 2:
 				raise SystemExit
 	pg.display.flip()
 	screen.blit(menu_screen.image, menu_screen.rect)

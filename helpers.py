@@ -2,13 +2,22 @@
 from random import randint, choice
 import pygame as pg
 from math import atan, cos, sin
+import tkinter
+from ctypes import windll
+
+windll.user32.SetProcessDPIAware()
+"""prevents stretching"""
+
+root = tkinter.Tk()
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
 
 def randedge(distance):
 	edge = choice([
-		[randint(distance, pg.display.Info().current_w - distance), distance],# top
-		[randint(distance, pg.display.Info().current_w - distance), pg.display.Info().current_h - distance],# bottom
-		[distance, randint(distance, pg.display.Info().current_h - distance)],# left
-		[pg.display.Info().current_w - distance, randint(distance, pg.display.Info().current_h - distance)],# right
+		[randint(distance, screen_width - distance), distance],# top
+		[randint(distance, screen_width - distance), screen_height - distance],# bottom
+		[distance, randint(distance, screen_height - distance)],# left
+		[screen_width - distance, randint(distance, screen_height - distance)],# right
 	])
 	return edge
 
