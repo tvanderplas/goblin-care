@@ -1,6 +1,6 @@
 import random
 import math
-import pygame
+import pygame as pg
 from pygame.locals import *
 import ctypes
 
@@ -25,16 +25,16 @@ def moveTo(initial, final, speed):
 	delta_y = speed * math.sin(inclination)
 	return [delta_x, delta_y] if displacement_x > 0 else [-delta_x, -delta_y]
 
-class Player(pygame.sprite.Sprite):
+class Player(pg.sprite.Sprite):
 	def __init__(self):
 		super(Player, self).__init__()
-		self.image = pygame.image.load(image_path + 'car.png').convert()
+		self.image = pg.image.load(image_path + 'car.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(0, info.current_h / 2))
 		self.speed = 10
 		self.bigtime = 0
 	def update(self):
-		pressed_keys = pygame.key.get_pressed()
+		pressed_keys = pg.key.get_pressed()
 		if pressed_keys[K_w] or pressed_keys[K_UP]:
 			self.rect.move_ip(0, -self.speed)
 		if pressed_keys[K_s] or pressed_keys[K_DOWN]:
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
 		if pressed_keys[K_d] or pressed_keys[K_RIGHT]:
 			self.rect.move_ip(self.speed, 0)
 		if self.bigtime <= 0:
-			self.image = pygame.image.load(image_path + 'car.png').convert()
+			self.image = pg.image.load(image_path + 'car.png').convert()
 			self.image.set_colorkey((255, 255, 255), RLEACCEL)
 			self.rect = self.image.get_rect(center=(self.rect.center))
 		if self.rect.left < 0:
@@ -57,15 +57,15 @@ class Player(pygame.sprite.Sprite):
 			self.rect.bottom = info.current_h
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 	def embiggen(self):
-		self.image = pygame.image.load(image_path + 'big car.png').convert()
+		self.image = pg.image.load(image_path + 'big car.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(self.rect.center))
 		self.bigtime = 50
 
-class PlayerBullet(pygame.sprite.Sprite):
+class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y):
 		super(PlayerBullet, self).__init__()
-		self.image = pygame.image.load(image_path + 'bullet.png').convert()
+		self.image = pg.image.load(image_path + 'bullet.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(x, y))
 		self.speed = 30
@@ -74,10 +74,10 @@ class PlayerBullet(pygame.sprite.Sprite):
 		if self.rect.right > info.current_w:
 			self.kill()
 
-class Enemy(pygame.sprite.Sprite):
+class Enemy(pg.sprite.Sprite):
 	def __init__(self):
 		super(Enemy, self).__init__()
-		self.image = pygame.image.load(image_path + 'green goblin.png').convert()
+		self.image = pg.image.load(image_path + 'green goblin.png').convert()
 		self.image.set_colorkey((255, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(info.current_w, random.randint(25, info.current_h - 25)))
 		self.speed = random.randint(5, 20)
@@ -86,10 +86,10 @@ class Enemy(pygame.sprite.Sprite):
 		if self.rect.right < 0:
 			self.kill()
 
-class Splat(pygame.sprite.Sprite):
+class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y):
 		super(Splat, self).__init__()
-		self.image = pygame.image.load(image_path + 'Splat.png').convert()
+		self.image = pg.image.load(image_path + 'Splat.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.image.get_rect(center=(x, y))
 		self.health = 300
@@ -98,11 +98,11 @@ class Splat(pygame.sprite.Sprite):
 		if self.health <= 0:
 			self.kill()
 
-class Tornado(pygame.sprite.Sprite):
+class Tornado(pg.sprite.Sprite):
 	def __init__(self):
 		super(Tornado, self).__init__()
 		self.magic = random.randint(0, 10)
-		self.image = pygame.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
+		self.image = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
 		self.speed = random.randint(5, 8)
@@ -115,29 +115,29 @@ class Tornado(pygame.sprite.Sprite):
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
 
-class Background(pygame.sprite.Sprite):
+class Background(pg.sprite.Sprite):
 	def __init__(self, image_file, location):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.transform.scale(pygame.image.load(image_file), (info.current_w, info.current_h))
+		pg.sprite.Sprite.__init__(self)
+		self.image = pg.transform.scale(pg.image.load(image_file), (info.current_w, info.current_h))
 		self.rect = self.image.get_rect()
 		self.rect.left, self.rect.top = location
 
-pygame.init()
-clock = pygame.time.Clock()
+pg.init()
+clock = pg.time.Clock()
 image_path = '''game art\\'''
-info = pygame.display.Info()
-screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSCREEN)
+info = pg.display.Info()
+screen = pg.display.set_mode((info.current_w, info.current_h), pg.FULLSCREEN)
 
 background = Background(image_path + 'desert road.png', [0, 0])
-ADDENEMY = pygame.USEREVENT + 1
-NEWTORNADO = pygame.USEREVENT + 2
-pygame.time.set_timer(ADDENEMY, random.randint(500, 750))
-pygame.time.set_timer(NEWTORNADO, random.randint(250, 3500))
-enemies = pygame.sprite.Group()
-splats = pygame.sprite.Group()
-bullets = pygame.sprite.Group()
-tornados = pygame.sprite.Group()
-all_sprites = pygame.sprite.Group()
+ADDENEMY = pg.USEREVENT + 1
+NEWTORNADO = pg.USEREVENT + 2
+pg.time.set_timer(ADDENEMY, random.randint(500, 750))
+pg.time.set_timer(NEWTORNADO, random.randint(250, 3500))
+enemies = pg.sprite.Group()
+splats = pg.sprite.Group()
+bullets = pg.sprite.Group()
+tornados = pg.sprite.Group()
+all_sprites = pg.sprite.Group()
 
 
 def game():
@@ -146,15 +146,15 @@ def game():
 	isRunning = True
 	while isRunning:
 
-		if pygame.sprite.spritecollideany(player, enemies):
+		if pg.sprite.spritecollideany(player, enemies):
 			for sprite in all_sprites:
 				sprite.kill()
 			isRunning = False
-		for enemy in pygame.sprite.groupcollide(enemies, bullets, True, True):
+		for enemy in pg.sprite.groupcollide(enemies, bullets, True, True):
 			new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 			all_sprites.add(new_splat)
 			splats.add(new_splat)
-		for tornado in pygame.sprite.spritecollide(player, tornados, False):
+		for tornado in pg.sprite.spritecollide(player, tornados, False):
 			if tornado.magic < 8:
 				for sprite in all_sprites:
 					sprite.kill()
@@ -162,7 +162,7 @@ def game():
 			else:
 				player.embiggen()
 
-		for event in pygame.event.get():
+		for event in pg.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 				for sprite in all_sprites:
 					sprite.kill()
@@ -191,21 +191,21 @@ def game():
 			screen.blit(bullet.image, bullet.rect)
 		for tornado in tornados:
 			screen.blit(tornado.image, tornado.rect)
-		pygame.display.flip()
+		pg.display.flip()
 		screen.blit(background.image, background.rect)
 		clock.tick(60)
 
 menu_screen = Background(image_path + 'stopgo.png', [0, 0])
 
 while True:
-	for event in pygame.event.get():
+	for event in pg.event.get():
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
-			if pygame.mouse.get_pos()[0] < info.current_w / 2:
+			if pg.mouse.get_pos()[0] < info.current_w / 2:
 				game()
-			elif pygame.mouse.get_pos()[0] >= info.current_w / 2:
+			elif pg.mouse.get_pos()[0] >= info.current_w / 2:
 				raise SystemExit
-	pygame.display.flip()
+	pg.display.flip()
 	screen.blit(menu_screen.image, menu_screen.rect)
 	clock.tick(15)
