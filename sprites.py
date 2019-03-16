@@ -1,5 +1,5 @@
 
-import random
+from random import randint
 import pygame as pg
 # pylint: disable=no-name-in-module
 from pygame.constants import (
@@ -62,8 +62,8 @@ class Enemy(pg.sprite.Sprite):
 		super(Enemy, self).__init__()
 		self.image = pg.image.load(image_path + 'green goblin.png').convert()
 		self.image.set_colorkey((255, 0, 0), RLEACCEL)
-		self.rect = self.image.get_rect(center=(pg.display.Info().current_w, random.randint(25, pg.display.Info().current_h - 25)))
-		self.speed = random.randint(5, 20)
+		self.rect = self.image.get_rect(center=(pg.display.Info().current_w, randint(25, pg.display.Info().current_h - 25)))
+		self.speed = randint(5, 20)
 	def update(self):
 		self.rect.move_ip(-self.speed, 0)
 		if self.rect.right < 0:
@@ -84,16 +84,16 @@ class Splat(pg.sprite.Sprite):
 class Tornado(pg.sprite.Sprite):
 	def __init__(self):
 		super(Tornado, self).__init__()
-		self.magic = random.randint(0, 10)
+		self.magic = randint(0, 10)
 		self.image = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
 		self.image.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.image.get_rect(center=(randedge(25)))
-		self.speed = random.randint(5, 8)
+		self.speed = randint(5, 8)
 		self.waypoint = []
 		self.__getWaypoint()
 	def __getWaypoint(self):
-		x = random.randint(pg.display.Info().current_w // 4, 3 * pg.display.Info().current_w // 4)
-		y = random.randint(pg.display.Info().current_h // 4, 3 * pg.display.Info().current_h // 4)
+		x = randint(pg.display.Info().current_w // 4, 3 * pg.display.Info().current_w // 4)
+		y = randint(pg.display.Info().current_h // 4, 3 * pg.display.Info().current_h // 4)
 		self.waypoint = moveTo(self.rect.center, [x, y], 3000)
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))

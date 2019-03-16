@@ -1,15 +1,14 @@
-import random
-import math
+
 import pygame as pg
 # pylint: disable=no-name-in-module
 from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )# pylint: enable=no-name-in-module
-import ctypes
+from ctypes import windll
+from random import randint
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, image_path
 
-user32 = ctypes.windll.user32
-user32.SetProcessDPIAware()
+windll.user32.SetProcessDPIAware()
 print("stretching prevented")
 
 # pylint: disable=no-member
@@ -20,8 +19,8 @@ screen = pg.display.set_mode((pg.display.Info().current_w, pg.display.Info().cur
 background = Background(image_path + 'desert road.png', [0, 0])
 ADDENEMY = pg.USEREVENT + 1
 NEWTORNADO = pg.USEREVENT + 2
-pg.time.set_timer(ADDENEMY, random.randint(500, 750))
-pg.time.set_timer(NEWTORNADO, random.randint(250, 3500))
+pg.time.set_timer(ADDENEMY, randint(500, 750))
+pg.time.set_timer(NEWTORNADO, randint(250, 3500))
 enemies = pg.sprite.Group()
 splats = pg.sprite.Group()
 bullets = pg.sprite.Group()
