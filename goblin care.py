@@ -6,7 +6,7 @@ from pygame.constants import (
 )# pylint: enable=no-name-in-module
 from ctypes import windll
 from random import randint
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, image_path
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado
 
 windll.user32.SetProcessDPIAware()
 print("stretching prevented")
@@ -16,7 +16,7 @@ pg.init()
 clock = pg.time.Clock()
 screen = pg.display.set_mode((pg.display.Info().current_w, pg.display.Info().current_h), pg.FULLSCREEN)
 
-background = Background(image_path + 'desert road.png', [0, 0])
+background = Background('desert road.png', [0, 0])
 ADDENEMY = pg.USEREVENT + 1
 NEWTORNADO = pg.USEREVENT + 2
 pg.time.set_timer(ADDENEMY, randint(500, 750))
@@ -83,7 +83,7 @@ def game():
 		screen.blit(background.image, background.rect)
 		clock.tick(60)
 
-menu_screen = Background(image_path + 'stopgo.png', [0, 0])
+menu_screen = Background('stopgo.png', [0, 0])
 
 while True:
 	for event in pg.event.get():

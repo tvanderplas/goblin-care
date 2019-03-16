@@ -101,6 +101,6 @@ class Tornado(pg.sprite.Sprite):
 class Background(pg.sprite.Sprite):
 	def __init__(self, image_file, location):
 		pg.sprite.Sprite.__init__(self)
-		self.image = pg.transform.scale(pg.image.load(image_file), (pg.display.Info().current_w, pg.display.Info().current_h))
+		self.image = pg.transform.scale(pg.image.load(image_path + image_file), (pg.display.Info().current_w, pg.display.Info().current_h))
 		self.rect = self.image.get_rect()
 		self.rect.left, self.rect.top = location
