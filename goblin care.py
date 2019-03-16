@@ -16,6 +16,7 @@ def randedge(distance):
 		[info.current_w - distance, random.randint(distance, info.current_h - distance)],# right
 	])
 	return edge
+
 def moveTo(initial, final, speed):
 	displacement_x = final[0] - initial[0]
 	displacement_y = final[1] - initial[1]
@@ -30,7 +31,7 @@ class Player(pg.sprite.Sprite):
 		super(Player, self).__init__()
 		self.image = pg.image.load(image_path + 'car.png').convert()
 		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(0, info.current_h / 2))
+		self.rect = self.image.get_rect(center=(0, info.current_h // 2))
 		self.speed = 10
 		self.bigtime = 0
 	def update(self):
@@ -109,8 +110,8 @@ class Tornado(pg.sprite.Sprite):
 		self.waypoint = []
 		self.__getWaypoint()
 	def __getWaypoint(self):
-		x = random.randint(info.current_w / 4, 3 * info.current_w / 4)
-		y = random.randint(info.current_h / 4, 3 * info.current_h / 4)
+		x = random.randint(info.current_w // 4, 3 * info.current_w // 4)
+		y = random.randint(info.current_h // 4, 3 * info.current_h // 4)
 		self.waypoint = moveTo(self.rect.center, [x, y], 3000)
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
@@ -202,9 +203,9 @@ while True:
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
-			if pg.mouse.get_pos()[0] < info.current_w / 2:
+			if pg.mouse.get_pos()[0] < info.current_w // 2:
 				game()
-			elif pg.mouse.get_pos()[0] >= info.current_w / 2:
+			elif pg.mouse.get_pos()[0] >= info.current_w // 2:
 				raise SystemExit
 	pg.display.flip()
 	screen.blit(menu_screen.image, menu_screen.rect)
