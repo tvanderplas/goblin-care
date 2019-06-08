@@ -90,9 +90,9 @@ while True:
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
 		if event.type == MOUSEBUTTONDOWN:
-			if pg.mouse.get_pos()[0] < screen.width // 2:
+			if play_button.is_active():
 				game()
-			elif pg.mouse.get_pos()[0] >= screen.width // 2:
+			elif quit_button.is_active():
 				raise SystemExit
 	pg.display.flip()
 	menu_screen.surface.blit(play_button.surface, play_button.rect)

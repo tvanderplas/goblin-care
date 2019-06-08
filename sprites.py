@@ -118,3 +118,5 @@ class Menu_Button():
 			self.surface, text_location, text, fgcolor=(170, 64, 78)
 		)
 		self.rect.left, self.rect.top = location
+	def is_active(self):
+		return True if self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom else False
