@@ -112,7 +112,8 @@ class Menu_Button():
 		self.rect = self.surface.fill((65, 65, 65))
 		self.text = pg.freetype.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
 		self.text.rect = self.text.get_rect(text)
-		text_location = (self.rect.right - self.text.rect.width, self.rect.top)
+		offset = (self.rect.height - self.text.rect.height) // 2
+		text_location = ((self.rect.right - self.text.rect.width) - offset, self.rect.top + offset)
 		self.text.rect = self.text.render_to(
 			self.surface, text_location, text, fgcolor=(170, 64, 78)
 		)
