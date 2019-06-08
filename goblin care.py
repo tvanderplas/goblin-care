@@ -68,16 +68,16 @@ def game():
 		for sprite in all_sprites:
 			sprite.update()
 		for splat in splats:
-			view.blit(splat.image, splat.rect)
-		view.blit(player.image, player.rect)
+			view.blit(splat.surface, splat.rect)
+		view.blit(player.surface, player.rect)
 		for enemy in enemies:
-			view.blit(enemy.image, enemy.rect)
+			view.blit(enemy.surface, enemy.rect)
 		for bullet in bullets:
-			view.blit(bullet.image, bullet.rect)
+			view.blit(bullet.surface, bullet.rect)
 		for tornado in tornados:
-			view.blit(tornado.image, tornado.rect)
+			view.blit(tornado.surface, tornado.rect)
 		pg.display.flip()
-		view.blit(background.image, background.rect)
+		view.blit(background.surface, background.rect)
 		clock.tick(60)
 
 menu_screen = Background('menu.png', [0, 0])
@@ -92,5 +92,5 @@ while True:
 			elif pg.mouse.get_pos()[0] >= screen.width // 2:
 				raise SystemExit
 	pg.display.flip()
-	view.blit(menu_screen.image, menu_screen.rect)
+	view.blit(menu_screen.surface, menu_screen.rect)
 	clock.tick(15)

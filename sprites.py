@@ -12,9 +12,9 @@ image_path = 'game art\\'
 class Player(pg.sprite.Sprite):
 	def __init__(self):
 		super(Player, self).__init__()
-		self.image = pg.image.load(image_path + 'car.png').convert()
-		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(0, screen.height // 2))
+		self.surface = pg.image.load(image_path + 'car.png').convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(0, screen.height // 2))
 		self.speed = 10
 		self.bigtime = 0
 	def update(self):
@@ -28,9 +28,9 @@ class Player(pg.sprite.Sprite):
 		if pressed_keys[K_d] or pressed_keys[K_RIGHT]:
 			self.rect.move_ip(self.speed, 0)
 		if self.bigtime <= 0:
-			self.image = pg.image.load(image_path + 'car.png').convert()
-			self.image.set_colorkey((255, 255, 255), RLEACCEL)
-			self.rect = self.image.get_rect(center=(self.rect.center))
+			self.surface = pg.image.load(image_path + 'car.png').convert()
+			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+			self.rect = self.surface.get_rect(center=(self.rect.center))
 		if self.rect.left < 0:
 			self.rect.left = 0
 		elif self.rect.right > screen.width:
@@ -41,17 +41,17 @@ class Player(pg.sprite.Sprite):
 			self.rect.bottom = screen.height
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 	def embiggen(self):
-		self.image = pg.image.load(image_path + 'big car.png').convert()
-		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(self.rect.center))
+		self.surface = pg.image.load(image_path + 'big car.png').convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(self.rect.center))
 		self.bigtime = 50
 
 class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y):
 		super(PlayerBullet, self).__init__()
-		self.image = pg.image.load(image_path + 'bullet.png').convert()
-		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(x, y))
+		self.surface = pg.image.load(image_path + 'bullet.png').convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(x, y))
 		self.speed = 30
 	def update(self):
 		self.rect.move_ip(self.speed, 0)
@@ -61,9 +61,9 @@ class PlayerBullet(pg.sprite.Sprite):
 class Enemy(pg.sprite.Sprite):
 	def __init__(self):
 		super(Enemy, self).__init__()
-		self.image = pg.image.load(image_path + 'green goblin.png').convert()
-		self.image.set_colorkey((255, 0, 0), RLEACCEL)
-		self.rect = self.image.get_rect(center=(screen.width, randint(25, screen.height - 25)))
+		self.surface = pg.image.load(image_path + 'green goblin.png').convert()
+		self.surface.set_colorkey((255, 0, 0), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(screen.width, randint(25, screen.height - 25)))
 		self.speed = randint(5, 20)
 	def update(self):
 		self.rect.move_ip(-self.speed, 0)
@@ -73,9 +73,9 @@ class Enemy(pg.sprite.Sprite):
 class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y):
 		super(Splat, self).__init__()
-		self.image = pg.image.load(image_path + 'Splat.png').convert()
-		self.image.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.image.get_rect(center=(x, y))
+		self.surface = pg.image.load(image_path + 'Splat.png').convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(x, y))
 		self.health = 300
 	def update(self):
 		self.health -= 1
@@ -86,9 +86,9 @@ class Tornado(pg.sprite.Sprite):
 	def __init__(self):
 		super(Tornado, self).__init__()
 		self.magic = randint(0, 10)
-		self.image = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
-		self.image.set_colorkey((0, 0, 0), RLEACCEL)
-		self.rect = self.image.get_rect(center=(randedge(25, screen.width, screen.height)))
+		self.surface = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
+		self.surface.set_colorkey((0, 0, 0), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(randedge(25, screen.width, screen.height)))
 		self.speed = randint(5, 8)
 		self.waypoint = []
 		self.__getWaypoint()
@@ -102,6 +102,6 @@ class Tornado(pg.sprite.Sprite):
 class Background(pg.sprite.Sprite):
 	def __init__(self, image_file, location):
 		pg.sprite.Sprite.__init__(self)
-		self.image = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
-		self.rect = self.image.get_rect()
+		self.surface = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
+		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
