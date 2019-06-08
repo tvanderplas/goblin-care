@@ -1,5 +1,6 @@
 
 import pygame as pg
+import pygame.freetype as ft
 # pylint: disable=no-name-in-module
 from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
@@ -81,7 +82,8 @@ def game():
 		clock.tick(60)
 
 menu_screen = Background('menu.png', [0, 0])
-
+words = pg.freetype.Font('fonts/calibri.ttf', size=30).render('boogers', fgcolor=(255, 0, 0), bgcolor=(127, 127, 127))
+menu_screen.surface.blit(words[0], (100, 100))
 while True:
 	for event in pg.event.get():
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
@@ -92,5 +94,6 @@ while True:
 			elif pg.mouse.get_pos()[0] >= screen.width // 2:
 				raise SystemExit
 	pg.display.flip()
+
 	view.blit(menu_screen.surface, menu_screen.rect)
 	clock.tick(15)
