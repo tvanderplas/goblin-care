@@ -84,7 +84,6 @@ def game():
 menu_screen = Background('menu.png', [0, 0])
 play_button = Menu_Button('Play!', (-screen.width // 8, screen.height // 2))
 quit_button = Menu_Button('Quit', (-screen.width // 8, screen.height * 3 // 5))
-print(play_button)
 
 while True:
 	for event in pg.event.get():

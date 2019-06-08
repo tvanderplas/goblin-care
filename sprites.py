@@ -110,6 +110,10 @@ class Menu_Button():
 	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
 		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
 		self.rect = self.surface.fill((65, 65, 65))
-		# button_text = pg.freetype.Font('fonts/calibri.ttf')
-		# self.surface = button_text.render(text, fgcolor=(170, 64, 78), size=size)[0]
+		self.text = pg.freetype.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
+		self.text.rect = self.text.get_rect(text)
+		text_location = (self.rect.right - self.text.rect.width, self.rect.top)
+		self.text.rect = self.text.render_to(
+			self.surface, text_location, text, fgcolor=(170, 64, 78)
+		)
 		self.rect.left, self.rect.top = location
