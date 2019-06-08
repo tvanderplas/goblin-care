@@ -80,7 +80,7 @@ def game():
 		view.blit(background.image, background.rect)
 		clock.tick(60)
 
-menu_screen = Background('stopgo.png', [0, 0])
+menu_screen = Background('menu.png', [0, 0])
 
 while True:
 	for event in pg.event.get():
