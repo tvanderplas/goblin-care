@@ -82,7 +82,7 @@ def game():
 		clock.tick(60)
 
 menu_screen = Background('menu.png', [0, 0])
-words = pg.freetype.Font('fonts/calibri.ttf', size=30).render('boogers', fgcolor=(255, 0, 0), bgcolor=(127, 127, 127))
+words = pg.freetype.Font('fonts/calibri.ttf', size=60).render('Play!', fgcolor=(170, 64, 78), bgcolor=(65, 65, 65))
 menu_screen.surface.blit(words[0], (100, 100))
 while True:
 	for event in pg.event.get():
