@@ -105,3 +105,11 @@ class Background(pg.sprite.Sprite):
 		self.surface = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
+
+class Menu_Button():
+	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
+		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
+		self.rect = self.surface.fill((65, 65, 65))
+		# button_text = pg.freetype.Font('fonts/calibri.ttf')
+		# self.surface = button_text.render(text, fgcolor=(170, 64, 78), size=size)[0]
+		self.rect.left, self.rect.top = location

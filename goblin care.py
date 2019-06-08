@@ -6,7 +6,7 @@ from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )# pylint: enable=no-name-in-module
 from random import randint
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Menu_Button
 import screen
 
 # pylint: disable=no-member
@@ -82,8 +82,10 @@ def game():
 		clock.tick(60)
 
 menu_screen = Background('menu.png', [0, 0])
-words = pg.freetype.Font('fonts/calibri.ttf', size=60).render('Play!', fgcolor=(170, 64, 78), bgcolor=(65, 65, 65))
-menu_screen.surface.blit(words[0], (100, 100))
+play_button = Menu_Button('Play!', (-screen.width // 8, screen.height // 2))
+quit_button = Menu_Button('Quit', (-screen.width // 8, screen.height * 3 // 5))
+print(play_button)
+
 while True:
 	for event in pg.event.get():
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
@@ -94,6 +96,7 @@ while True:
 			elif pg.mouse.get_pos()[0] >= screen.width // 2:
 				raise SystemExit
 	pg.display.flip()
-
+	menu_screen.surface.blit(play_button.surface, play_button.rect)
+	menu_screen.surface.blit(quit_button.surface, quit_button.rect)
 	view.blit(menu_screen.surface, menu_screen.rect)
 	clock.tick(15)
