@@ -150,6 +150,12 @@ class Game_UI_Element():
 		self.rect = self.surface.fill(color)
 		self.rect.left, self.rect.top = location
 
+class Game_UI_Text():
+	def __init__(self, text, location, size, color=(170, 64, 78)):
+		self.font = ft.Font('fonts/calibri.ttf', size=size)
+		self.surface, self.rect = self.font.render(text, fgcolor=color)
+		self.rect.center = location
+		
 class Game_UI_Window():
 	def __init__(self, title, location=(0, 0), size=(screen.width, screen.height)):
 		self.clock = pg.time.Clock()
@@ -160,13 +166,7 @@ class Game_UI_Window():
 		self.rect.left, self.rect.top = location
 
 		self.title_bar = Game_UI_Element(location, (size[0], screen.height // 30), (65, 65, 65))
-
-		# self.title = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
-		# print(type(self.title))
-		# self.title.fgcolor = (170, 64, 78)
-		# print(type(self.title))
-		# self.title.get_rect(title, center=(self.title_bar.center))
-		# print(type(self.title))
+		self.title = Game_UI_Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
 
 		self.is_open = True
 	def open(self):
@@ -180,5 +180,5 @@ class Game_UI_Window():
 			pg.display.flip()
 			self.view.blit(self.surface, self.rect)
 			self.view.blit(self.title_bar.surface, self.title_bar.rect)
-			# self.view.blit(self.title, self.title.rect)
+			self.view.blit(self.title.surface, self.title.rect)
 			self.clock.tick(60)
