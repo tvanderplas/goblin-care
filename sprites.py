@@ -1,10 +1,10 @@
 
 from random import randint
 import pygame as pg
-# pylint: disable=no-name-in-module
-from pygame.constants import (
+from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
-)# pylint: enable=no-name-in-module
+)
+import pygame.freetype as ft
 from helpers import moveTo, randedge
 import screen
 image_path = 'game art\\'
@@ -121,7 +121,7 @@ class Menu_Button():
 	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
 		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
 		self.rect = self.surface.fill((65, 65, 65))
-		self.text = pg.freetype.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
+		self.text = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
 		self.text.rect = self.text.get_rect(text)
 		offset = (self.rect.height - self.text.rect.height) // 2
 		text_location = ((self.rect.right - self.text.rect.width) - offset, self.rect.top + offset)
