@@ -33,6 +33,7 @@ class Game():
 		self.inv_button = Hud_Button('treasure.png', inv_button_location, inv_button_size)
 		self.all_sprites.add(self.inv_button)
 
+		self.splat_count = 0
 		self.isRunning = True
 	def play(self):
 		while self.isRunning:
@@ -45,6 +46,8 @@ class Game():
 				new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 				self.all_sprites.add(new_splat)
 				self.splats.add(new_splat)
+			for splat in pg.sprite.spritecollide(self.player, self.splats, True):
+				self.splat_count += 1
 			for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
 				if tornado.magic < 8:
 					for sprite in self.all_sprites:
@@ -71,7 +74,7 @@ class Game():
 					self.all_sprites.add(new_player_bullet)
 					self.bullets.add(new_player_bullet)
 				elif event.type == MOUSEBUTTONDOWN and self.inv_button.rollover():
-					inventory = ui.Window('Inventory', 1000000)
+					inventory = ui.Window('Inventory', self.splat_count)
 					inventory.open()
 
 			for sprite in self.all_sprites:
