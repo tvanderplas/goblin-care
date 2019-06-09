@@ -1,7 +1,7 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
+	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB
 )
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
@@ -78,7 +78,10 @@ class Game():
 					new_player_bullet = PlayerBullet(self.player.rect.right, self.player.rect.centery)
 					self.all_sprites.add(new_player_bullet)
 					self.bullets.add(new_player_bullet)
-				elif event.type == MOUSEBUTTONDOWN and self.inv_button.rollover():
+				elif (
+					event.type == MOUSEBUTTONDOWN and self.inv_button.rollover() or
+					(event.type == KEYDOWN and event.key == K_TAB)
+				):
 					loot = ui.Window('Loot', self.splat_count)
 					loot.open()
 

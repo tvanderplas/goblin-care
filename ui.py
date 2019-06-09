@@ -1,7 +1,7 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB
 )
 import pygame.freetype as ft
 import screen
@@ -111,10 +111,13 @@ class Window():
 		while self.is_open:
 			self.close_button.hover()
 			for event in pg.event.get():
-				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
+				if (
+					(event.type == KEYDOWN and event.key == K_ESCAPE) or
+					(event.type == KEYDOWN and event.key == K_TAB) or
+					(event.type == MOUSEBUTTONDOWN and self.close_button.rollover()) or
+					event.type == QUIT
+				):
 					self.is_open = False
-				if event.type == MOUSEBUTTONDOWN and self.close_button.rollover():
-						self.is_open = False
 			pg.display.flip()
 			self.view.blit(self.surface, self.rect)
 			self.view.blit(self.title_bar.surface, self.title_bar.rect)
