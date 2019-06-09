@@ -118,5 +118,14 @@ class Menu_Button():
 			self.surface, text_location, text, fgcolor=(170, 64, 78)
 		)
 		self.rect.left, self.rect.top = location
+		self.is_hovering = False
 	def is_active(self):
 		return True if self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom else False
+	def hover(self):
+		if self.is_active() and not self.is_hovering:
+			self.rect.move_ip(screen.width // 30, 0)
+			self.is_hovering = True
+		if not self.is_active() and self.is_hovering:
+			self.rect.move_ip(-screen.width // 30, 0)
+			self.is_hovering = False
+

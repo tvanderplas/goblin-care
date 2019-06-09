@@ -86,6 +86,8 @@ play_button = Menu_Button('Play!', (-screen.width // 5, screen.height // 2))
 quit_button = Menu_Button('Quit', (-screen.width // 5, screen.height * 3 // 5))
 
 while True:
+	play_button.hover()
+	quit_button.hover()
 	for event in pg.event.get():
 		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 			raise SystemExit
@@ -95,7 +97,7 @@ while True:
 			elif quit_button.is_active():
 				raise SystemExit
 	pg.display.flip()
-	menu_screen.surface.blit(play_button.surface, play_button.rect)
-	menu_screen.surface.blit(quit_button.surface, quit_button.rect)
 	view.blit(menu_screen.surface, menu_screen.rect)
-	clock.tick(15)
+	view.blit(play_button.surface, play_button.rect)
+	view.blit(quit_button.surface, quit_button.rect)
+	clock.tick(60)
