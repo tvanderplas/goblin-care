@@ -106,29 +106,6 @@ class Background(pg.sprite.Sprite):
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
 
-class Menu_Button():
-	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
-		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
-		self.rect = self.surface.fill((65, 65, 65))
-		self.text = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
-		self.text.rect = self.text.get_rect(text)
-		offset = (self.rect.height - self.text.rect.height) // 2
-		text_location = ((self.rect.right - self.text.rect.width) - offset, self.rect.top + offset)
-		self.text.rect = self.text.render_to(
-			self.surface, text_location, text, fgcolor=(170, 64, 78)
-		)
-		self.rect.left, self.rect.top = location
-		self.is_hovering = False
-	def rollover(self):
-		return self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom
-	def hover(self):
-		if self.rollover() and not self.is_hovering:
-			self.rect.move_ip(screen.width // 30, 0)
-			self.is_hovering = True
-		if not self.rollover() and self.is_hovering:
-			self.rect.move_ip(-screen.width // 30, 0)
-			self.is_hovering = False
-
 class Game_UI_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size):
 		pg.sprite.Sprite.__init__(self)
@@ -174,8 +151,7 @@ class Game_UI_Window():
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 					self.is_open = False
-				# if event.type == MOUSEBUTTONDOWN:
-					# if self.quit_button.rollover():
+				# if event.type == MOUSEBUTTONDOWN and self.quit_button.rollover():
 					# 	self.is_open = False
 			pg.display.flip()
 			self.view.blit(self.surface, self.rect)

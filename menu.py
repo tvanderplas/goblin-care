@@ -3,9 +3,33 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )
-from sprites import Background, Menu_Button
+import pygame.freetype as ft
+from sprites import Background
 from game_engine import Game
 import screen
+
+class Menu_Button():
+	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
+		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
+		self.rect = self.surface.fill((65, 65, 65))
+		self.text = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
+		self.text.rect = self.text.get_rect(text)
+		offset = (self.rect.height - self.text.rect.height) // 2
+		text_location = ((self.rect.right - self.text.rect.width) - offset, self.rect.top + offset)
+		self.text.rect = self.text.render_to(
+			self.surface, text_location, text, fgcolor=(170, 64, 78)
+		)
+		self.rect.left, self.rect.top = location
+		self.is_hovering = False
+	def rollover(self):
+		return self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom
+	def hover(self):
+		if self.rollover() and not self.is_hovering:
+			self.rect.move_ip(screen.width // 30, 0)
+			self.is_hovering = True
+		if not self.rollover() and self.is_hovering:
+			self.rect.move_ip(-screen.width // 30, 0)
+			self.is_hovering = False
 
 class Menu():
 	def __init__(self):
