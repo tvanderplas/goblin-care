@@ -106,17 +106,6 @@ class Background(pg.sprite.Sprite):
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
 
-class Game_UI_Button(pg.sprite.Sprite):
-	def __init__(self, image_file, location, size):
-		pg.sprite.Sprite.__init__(self)
-		self.surface = pg.image.load(image_path + image_file)
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.surface = pg.transform.scale(self.surface, size)
-		self.rect = self.surface.get_rect()
-		self.rect.left, self.rect.top = location
-	def update(self):
-		pass
-
 class Menu_Button():
 	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
 		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
@@ -139,3 +128,29 @@ class Menu_Button():
 		if not self.rollover() and self.is_hovering:
 			self.rect.move_ip(-screen.width // 30, 0)
 			self.is_hovering = False
+
+class Game_UI_Button(pg.sprite.Sprite):
+	def __init__(self, image_file, location, size):
+		pg.sprite.Sprite.__init__(self)
+		self.surface = pg.image.load(image_path + image_file)
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.surface = pg.transform.scale(self.surface, size)
+		self.rect = self.surface.get_rect()
+		self.rect.left, self.rect.top = location
+	def update(self):
+		pass
+
+class Game_UI_Window():
+	def __init__(self, title, location=(0, 0), size=(screen.width, screen.height)):
+		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
+		self.rect = self.surface.fill((21, 26, 27))
+		self.rect.left, self.rect.top = location
+
+		self.title_bar = pg.Surface((size[0], screen.height // 30)) # pylint: disable=too-many-function-args
+		self.title_bar.rect = self.surface.fill((65, 65, 65)).move_ip(location)
+
+		self.title = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
+		self.title.fgcolor((170, 64, 78))
+		self.title.rect = self.title.get_rect(title).move_ip(center=(self.title_bar.rect.center))
+	def open(self):
+		pass
