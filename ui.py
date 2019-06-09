@@ -1,10 +1,11 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE
 )
 import pygame.freetype as ft
 import screen
+from sprites import image_path
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0)):
@@ -17,7 +18,15 @@ class Text():
 		self.font = ft.Font('fonts/calibri.ttf', size=size)
 		self.surface, self.rect = self.font.render(text, fgcolor=color)
 		self.rect.center = location
-		
+
+class Icon():
+	def __init__(self, location, size, image_file):
+		self.surface = pg.image.load(image_path + image_file).convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.surface = pg.transform.scale(self.surface, size)
+		self.rect = self.surface.get_rect()
+		self.rect.left, self.rect.top = location
+
 class Window():
 	def __init__(self, title, location=(0, 0), size=(screen.width, screen.height)):
 		self.clock = pg.time.Clock()
@@ -29,6 +38,11 @@ class Window():
 
 		self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65))
 		self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
+		self.splat_icon = Icon(
+			(screen.width // 100, screen.height * 9 // 10),
+			(screen.width // 25, screen.height // 16),
+			'splat.png'
+		)
 
 		self.is_open = True
 	def open(self):
@@ -42,4 +56,5 @@ class Window():
 			self.view.blit(self.surface, self.rect)
 			self.view.blit(self.title_bar.surface, self.title_bar.rect)
 			self.view.blit(self.title.surface, self.title.rect)
+			self.view.blit(self.splat_icon.surface, self.splat_icon.rect)
 			self.clock.tick(60)
