@@ -6,7 +6,7 @@ from pygame.constants import (
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )# pylint: enable=no-name-in-module
 from random import randint
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Menu_Button
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Menu_Button, Game_UI_Button
 import screen
 
 # pylint: disable=no-member
@@ -29,6 +29,10 @@ all_sprites = pg.sprite.Group()
 def game():
 	player = Player()
 	all_sprites.add(player)
+	inventory_location = (screen.width // 100, screen.height * 9 // 10)
+	inventory_size = (screen.width // 19, screen.height // 12)
+	inventory = Game_UI_Button('treasure.png', inventory_location, inventory_size)
+	all_sprites.add(inventory)
 	isRunning = True
 	while isRunning:
 
@@ -77,6 +81,7 @@ def game():
 			view.blit(bullet.surface, bullet.rect)
 		for tornado in tornados:
 			view.blit(tornado.surface, tornado.rect)
+		view.blit(inventory.surface, inventory.rect)
 		pg.display.flip()
 		view.blit(background.surface, background.rect)
 		clock.tick(60)

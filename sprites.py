@@ -106,6 +106,17 @@ class Background(pg.sprite.Sprite):
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
 
+class Game_UI_Button(pg.sprite.Sprite):
+	def __init__(self, image_file, location, size):
+		pg.sprite.Sprite.__init__(self)
+		self.surface = pg.image.load(image_path + image_file)
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.surface = pg.transform.scale(self.surface, size)
+		self.rect = self.surface.get_rect()
+		self.rect.left, self.rect.top = location
+	def update(self):
+		pass
+
 class Menu_Button():
 	def __init__(self, text:str, location:tuple, size:tuple=(screen.width // 3, screen.height // 20)):
 		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
@@ -128,4 +139,3 @@ class Menu_Button():
 		if not self.rollover() and self.is_hovering:
 			self.rect.move_ip(-screen.width // 30, 0)
 			self.is_hovering = False
-
