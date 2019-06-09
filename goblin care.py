@@ -26,12 +26,13 @@ tornados = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 # pylint: enable=no-member
 
+inv_button_location = (screen.width // 100, screen.height * 9 // 10)
+inv_button_size = (screen.width // 19, screen.height // 12)
+inv_button = Game_UI_Button('treasure.png', inv_button_location, inv_button_size)
+
 def game():
 	player = Player()
 	all_sprites.add(player)
-	inv_button_location = (screen.width // 100, screen.height * 9 // 10)
-	inv_button_size = (screen.width // 19, screen.height // 12)
-	inv_button = Game_UI_Button('treasure.png', inv_button_location, inv_button_size)
 	all_sprites.add(inv_button)
 	isRunning = True
 	while isRunning:
