@@ -29,10 +29,10 @@ all_sprites = pg.sprite.Group()
 def game():
 	player = Player()
 	all_sprites.add(player)
-	inventory_location = (screen.width // 100, screen.height * 9 // 10)
-	inventory_size = (screen.width // 19, screen.height // 12)
-	inventory = Game_UI_Button('treasure.png', inventory_location, inventory_size)
-	all_sprites.add(inventory)
+	inv_button_location = (screen.width // 100, screen.height * 9 // 10)
+	inv_button_size = (screen.width // 19, screen.height // 12)
+	inv_button = Game_UI_Button('treasure.png', inv_button_location, inv_button_size)
+	all_sprites.add(inv_button)
 	isRunning = True
 	while isRunning:
 
@@ -81,7 +81,7 @@ def game():
 			view.blit(bullet.surface, bullet.rect)
 		for tornado in tornados:
 			view.blit(tornado.surface, tornado.rect)
-		view.blit(inventory.surface, inventory.rect)
+		view.blit(inv_button.surface, inv_button.rect)
 		pg.display.flip()
 		view.blit(background.surface, background.rect)
 		clock.tick(60)
