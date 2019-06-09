@@ -108,14 +108,29 @@ class Background(pg.sprite.Sprite):
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size):
 		pg.sprite.Sprite.__init__(self)
-		self.surface = pg.image.load(image_path + image_file)
+		self.surface = pg.image.load(image_path + image_file).convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.surface = pg.transform.scale(self.surface, size)
 		self.rect = self.surface.get_rect()
-		self.rect.left, self.rect.top = location
+		self.image_file = image_file
+		self.location, self.rect.topleft = location, location
+		self.size = size
+		self.is_hovering = False
 	def rollover(self):
 		over_x = self.rect.left < pg.mouse.get_pos()[0] < self.rect.right
 		over_y = self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom
 		return over_x and over_y
 	def update(self):
-		pass
+		if self.rollover() and not self.is_hovering:
+			rollover_size = (self.size[0] * 5 // 4, self.size[1] * 5 // 4)
+			self.surface = pg.image.load(image_path + self.image_file).convert()
+			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+			self.surface = pg.transform.scale(self.surface, rollover_size)
+			self.rect.move_ip(self.rect.width // 10, -self.rect.height // 5)
+			self.is_hovering = True
+		if not self.rollover() and self.is_hovering:
+			self.surface = pg.image.load(image_path + self.image_file).convert()
+			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+			self.surface = pg.transform.scale(self.surface, self.size)
+			self.rect.topleft = self.location
+			self.is_hovering = False
