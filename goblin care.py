@@ -90,24 +90,30 @@ class Game():
 			view.blit(background.surface, background.rect)
 			clock.tick(60)
 
-menu_screen = Background('menu.png', [0, 0])
-play_button = Menu_Button('Play!', (-screen.width // 5, screen.height // 2))
-quit_button = Menu_Button('Quit', (-screen.width // 5, screen.height * 3 // 5))
+class Menu():
+	def __init__(self):
+		self.menu_screen = Background('menu.png', [0, 0])
+		self.play_button = Menu_Button('Play!', (-screen.width // 5, screen.height // 2))
+		self.quit_button = Menu_Button('Quit', (-screen.width // 5, screen.height * 3 // 5))
+	def play(self):
+		while True:
+			self.play_button.hover()
+			self.quit_button.hover()
+			for event in pg.event.get():
+				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
+					raise SystemExit
+				if event.type == MOUSEBUTTONDOWN:
+					if self.play_button.rollover():
+						game = Game()
+						game.play()
+					elif self.quit_button.rollover():
+						raise SystemExit
+			pg.display.flip()
+			view.blit(self.menu_screen.surface, self.menu_screen.rect)
+			view.blit(self.play_button.surface, self.play_button.rect)
+			view.blit(self.quit_button.surface, self.quit_button.rect)
+			clock.tick(60)
 
-while True:
-	play_button.hover()
-	quit_button.hover()
-	for event in pg.event.get():
-		if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
-			raise SystemExit
-		if event.type == MOUSEBUTTONDOWN:
-			if play_button.rollover():
-				game = Game()
-				game.play()
-			elif quit_button.rollover():
-				raise SystemExit
-	pg.display.flip()
-	view.blit(menu_screen.surface, menu_screen.rect)
-	view.blit(play_button.surface, play_button.rect)
-	view.blit(quit_button.surface, quit_button.rect)
-	clock.tick(60)
+if __name__ == '__main__':
+	menu = Menu()
+	menu.play()
