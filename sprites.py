@@ -106,7 +106,7 @@ class Background(pg.sprite.Sprite):
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
 
-class Game_UI_Button(pg.sprite.Sprite):
+class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size):
 		pg.sprite.Sprite.__init__(self)
 		self.surface = pg.image.load(image_path + image_file)

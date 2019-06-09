@@ -3,7 +3,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Game_UI_Button, Game_UI_Window
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Hud_Button, Game_UI_Window
 import screen
 from random import randint
 
@@ -29,7 +29,7 @@ class Game():
 		self.background = Background('desert road.png', [0, 0])
 		inv_button_location = (screen.width // 100, screen.height * 9 // 10)
 		inv_button_size = (screen.width // 19, screen.height // 12)
-		self.inv_button = Game_UI_Button('treasure.png', inv_button_location, inv_button_size)
+		self.inv_button = Hud_Button('treasure.png', inv_button_location, inv_button_size)
 		self.all_sprites.add(self.inv_button)
 
 		self.isRunning = True
