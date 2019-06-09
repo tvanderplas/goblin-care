@@ -81,6 +81,18 @@ class Splat(pg.sprite.Sprite):
 		if self.health <= 0:
 			self.kill()
 
+class Splat_Collect(pg.sprite.Sprite):
+	def __init__(self, x, y, destination):
+		super(Splat_Collect, self).__init__()
+		self.surface = pg.image.load(image_path + 'Splat.png').convert()
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.rect = self.surface.get_rect(center=(x, y))
+		self.destination = destination
+	def update(self):
+		self.rect.move_ip(moveTo(self.rect.center, self.destination.center, 100))
+		if self.rect.colliderect(self.destination):
+			self.kill()
+
 class Tornado(pg.sprite.Sprite):
 	def __init__(self):
 		super(Tornado, self).__init__()

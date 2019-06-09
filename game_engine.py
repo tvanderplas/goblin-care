@@ -3,7 +3,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Hud_Button
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
 import screen
 from random import randint
@@ -20,6 +20,7 @@ class Game():
 
 		self.enemies = pg.sprite.Group()
 		self.splats = pg.sprite.Group()
+		self.splats_collect = pg.sprite.Group()
 		self.bullets = pg.sprite.Group()
 		self.tornados = pg.sprite.Group()
 		self.all_sprites = pg.sprite.Group()
@@ -46,8 +47,12 @@ class Game():
 				new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
 				self.all_sprites.add(new_splat)
 				self.splats.add(new_splat)
-			for splat in pg.sprite.spritecollide(self.player, self.splats, True):
+			for splat in pg.sprite.spritecollide(self.player, self.splats, False):
 				self.splat_count += 1
+				collect = Splat_Collect(*splat.rect.center, self.inv_button.rect)
+				self.splats_collect.add(collect)
+				self.all_sprites.add(collect)
+				splat.kill()
 			for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
 				if tornado.magic < 8:
 					for sprite in self.all_sprites:
@@ -88,6 +93,8 @@ class Game():
 				self.view.blit(bullet.surface, bullet.rect)
 			for tornado in self.tornados:
 				self.view.blit(tornado.surface, tornado.rect)
+			for splat in self.splats_collect:
+				self.view.blit(splat.surface, splat.rect)
 			self.view.blit(self.inv_button.surface, self.inv_button.rect)
 			pg.display.flip()
 			self.view.blit(self.background.surface, self.background.rect)
