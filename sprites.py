@@ -144,6 +144,12 @@ class Game_UI_Button(pg.sprite.Sprite):
 	def update(self):
 		pass
 
+class Game_UI_Element():
+	def __init__(self, location, size, color=(0, 0, 0)):
+		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
+		self.rect = self.surface.fill(color)
+		self.rect.left, self.rect.top = location
+
 class Game_UI_Window():
 	def __init__(self, title, location=(0, 0), size=(screen.width, screen.height)):
 		self.clock = pg.time.Clock()
@@ -153,11 +159,26 @@ class Game_UI_Window():
 		self.rect = self.surface.fill((21, 26, 27))
 		self.rect.left, self.rect.top = location
 
-		self.title_bar = pg.Surface((size[0], screen.height // 30)) # pylint: disable=too-many-function-args
-		self.title_bar.rect = self.surface.fill((65, 65, 65)).move_ip(location)
+		self.title_bar = Game_UI_Element(location, (size[0], screen.height // 30), (65, 65, 65))
 
-		self.title = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
-		self.title.fgcolor((170, 64, 78))
-		self.title.rect = self.title.get_rect(title).move_ip(center=(self.title_bar.rect.center))
+		# self.title = ft.Font('fonts/calibri.ttf', size=size[1] * 7 // 8)
+		# print(type(self.title))
+		# self.title.fgcolor = (170, 64, 78)
+		# print(type(self.title))
+		# self.title.get_rect(title, center=(self.title_bar.center))
+		# print(type(self.title))
+
+		self.is_open = True
 	def open(self):
-		pass
+		while self.is_open:
+			for event in pg.event.get():
+				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
+					self.is_open = False
+				# if event.type == MOUSEBUTTONDOWN:
+					# if self.quit_button.rollover():
+					# 	self.is_open = False
+			pg.display.flip()
+			self.view.blit(self.surface, self.rect)
+			self.view.blit(self.title_bar.surface, self.title_bar.rect)
+			# self.view.blit(self.title, self.title.rect)
+			self.clock.tick(60)

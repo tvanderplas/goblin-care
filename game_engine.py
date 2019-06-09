@@ -70,9 +70,8 @@ class Game():
 					self.all_sprites.add(new_player_bullet)
 					self.bullets.add(new_player_bullet)
 				elif event.type == MOUSEBUTTONDOWN and self.inv_button.rollover():
-					pass
-					# inventory = Game_UI_Window('Inventory')
-					# inventory.open()
+					inventory = Game_UI_Window('Inventory')
+					inventory.open()
 
 			for sprite in self.all_sprites:
 				sprite.update()
