@@ -3,7 +3,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Game_UI_Button
+from sprites import Background, Enemy, Player, PlayerBullet, Splat, Tornado, Game_UI_Button, Game_UI_Window
 import screen
 from random import randint
 
@@ -69,6 +69,10 @@ class Game():
 					new_player_bullet = PlayerBullet(self.player.rect.right, self.player.rect.centery)
 					self.all_sprites.add(new_player_bullet)
 					self.bullets.add(new_player_bullet)
+				elif event.type == MOUSEBUTTONDOWN and self.inv_button.rollover():
+					pass
+					# inventory = Game_UI_Window('Inventory')
+					# inventory.open()
 
 			for sprite in self.all_sprites:
 				sprite.update()

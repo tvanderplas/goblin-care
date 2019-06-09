@@ -137,11 +137,18 @@ class Game_UI_Button(pg.sprite.Sprite):
 		self.surface = pg.transform.scale(self.surface, size)
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
+	def rollover(self):
+		over_x = self.rect.left < pg.mouse.get_pos()[0] < self.rect.right
+		over_y = self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom
+		return over_x and over_y
 	def update(self):
 		pass
 
 class Game_UI_Window():
 	def __init__(self, title, location=(0, 0), size=(screen.width, screen.height)):
+		self.clock = pg.time.Clock()
+		self.view = pg.display.set_mode((screen.width, screen.height), pg.FULLSCREEN) # pylint: disable=no-member
+
 		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
 		self.rect = self.surface.fill((21, 26, 27))
 		self.rect.left, self.rect.top = location
