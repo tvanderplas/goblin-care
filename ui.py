@@ -29,9 +29,9 @@ class Text():
 			self.rect.midleft = location
 
 class Icon():
-	def __init__(self, location, size, image_file, orientation='center'):
+	def __init__(self, location, size, image_file, orientation='center', color=(255, 255, 255)):
 		self.surface = pg.image.load(image_path + image_file).convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
+		self.surface.set_colorkey(color, RLEACCEL)
 		self.surface = pg.transform.scale(self.surface, size)
 		self.rect = self.surface.get_rect()
 		if orientation == 'center':
@@ -42,8 +42,14 @@ class Icon():
 			self.rect.topleft = location
 
 class Button():
-	def __init__(self, location, size, image_file, orientation='center'):
-		icon = Icon(location, size, image_file, orientation)
+	def __init__(self, location, size, image_file, orientation='center', color=(255, 255, 255)):
+		self.location = location
+		self.size = size
+		self.image_file = image_file
+		self.orientation = orientation
+		self.color = color
+
+		icon = Icon(self.location, self.size, self.image_file, self.orientation, self.color)
 		self.surface, self.rect = icon.surface, icon.rect
 		self.is_hovering = False
 	def rollover(self):
@@ -52,12 +58,23 @@ class Button():
 		return over_x and over_y
 	def hover(self):
 		if self.rollover() and not self.is_hovering:
-			# highlight red
+			self.surface = Icon(
+				self.location,
+				self.size,
+				self.image_file,
+				self.orientation,
+				color=(0, 0, 0)
+			).surface
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			# remove highlight
+			self.surface = Icon(
+				self.location,
+				self.size,
+				self.image_file,
+				self.orientation,
+				self.color
+			).surface
 			self.is_hovering = False
-
 
 class Window():
 	def __init__(self, title, splat_count, location=(0, 0), size=(screen.width, screen.height)):
@@ -74,7 +91,8 @@ class Window():
 			(screen.width, 0),
 			(self.title_bar.rect.height, self.title_bar.rect.height),
 			'window close.png',
-			orientation='topright'
+			orientation='topright',
+			color=(232, 17, 35)
 		)
 		self.splat_icon = Icon(
 			(screen.width // 50, screen.height * 11 // 12),
@@ -91,6 +109,7 @@ class Window():
 		self.is_open = True
 	def open(self):
 		while self.is_open:
+			self.close_button.hover()
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 					self.is_open = False
