@@ -29,10 +29,10 @@ class Game():
 		self.all_sprites.add(self.player)
 
 		self.background = Background('desert road.png', [0, 0])
-		inv_button_location = (screen.width // 100, screen.height * 9 // 10)
-		inv_button_size = (screen.width // 19, screen.height // 12)
-		self.inv_button = Hud_Button('treasure.png', inv_button_location, inv_button_size)
-		self.all_sprites.add(self.inv_button)
+		loot_button_location = (screen.width // 100, screen.height * 9 // 10)
+		loot_button_size = (screen.width // 19, screen.height // 12)
+		self.loot_button = Hud_Button('treasure.png', loot_button_location, loot_button_size)
+		self.all_sprites.add(self.loot_button)
 
 		self.splat_count = 0
 		self.isRunning = True
@@ -47,7 +47,7 @@ class Game():
 				self.splats.add(new_splat)
 			for splat in pg.sprite.spritecollide(self.player, self.splats, False):
 				self.splat_count += 1
-				collect = Splat_Collect(*splat.rect.center, self.inv_button.rect)
+				collect = Splat_Collect(*splat.rect.center, self.loot_button.rect)
 				self.splats_collect.add(collect)
 				self.all_sprites.add(collect)
 				splat.kill()
@@ -73,7 +73,7 @@ class Game():
 					self.all_sprites.add(new_player_bullet)
 					self.bullets.add(new_player_bullet)
 				elif (
-					event.type == MOUSEBUTTONDOWN and self.inv_button.rollover() or
+					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
 				):
 					loot = ui.Window('Loot', self.splat_count)
@@ -86,7 +86,7 @@ class Game():
 			self.view.blits([(bullet.surface, bullet.rect) for bullet in self.bullets])
 			self.view.blits([(tornado.surface, tornado.rect) for tornado in self.tornados])
 			self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
-			self.view.blit(self.inv_button.surface, self.inv_button.rect)
+			self.view.blit(self.loot_button.surface, self.loot_button.rect)
 			pg.display.flip()
 			self.view.blit(self.background.surface, self.background.rect)
 			self.clock.tick(60)
