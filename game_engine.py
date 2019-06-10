@@ -40,8 +40,7 @@ class Game():
 		while self.isRunning:
 
 			if pg.sprite.spritecollideany(self.player, self.enemies):
-				for sprite in self.all_sprites:
-					sprite.kill()
+				self.all_sprites.empty()
 				self.isRunning = False
 			for enemy in pg.sprite.groupcollide(self.enemies, self.bullets, True, True):
 				new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
@@ -55,16 +54,14 @@ class Game():
 				splat.kill()
 			for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
 				if tornado.magic < 8:
-					for sprite in self.all_sprites:
-						sprite.kill()
+					self.all_sprites.empty()
 					self.isRunning = False
 				else:
 					self.player.embiggen()
 
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
-					for sprite in self.all_sprites:
-						sprite.kill()
+					self.all_sprites.empty()
 					self.isRunning = False
 				elif event.type == self.ADDENEMY:
 					new_enemy = Enemy()
