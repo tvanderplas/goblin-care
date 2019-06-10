@@ -12,11 +12,11 @@ class Game():
 	def __init__(self):
 		self.clock = pg.time.Clock()
 		self.view = pg.display.set_mode((screen.width, screen.height), pg.FULLSCREEN) # pylint: disable=no-member
-		self.ADDENEMY = pg.USEREVENT + 1 # pylint: disable=no-member
-		self.NEWTORNADO = pg.USEREVENT + 2 # pylint: disable=no-member
 
+		self.ADDENEMY = pg.USEREVENT + 1 # pylint: disable=no-member
 		pg.time.set_timer(self.ADDENEMY, randint(500, 750))
-		pg.time.set_timer(self.NEWTORNADO, randint(250, 3500))
+		self.NEWTORNADO = pg.USEREVENT + 2 # pylint: disable=no-member
+		pg.time.set_timer(self.NEWTORNADO, randint(1000, 3500))
 
 		self.enemies = pg.sprite.Group()
 		self.splats = pg.sprite.Group()
