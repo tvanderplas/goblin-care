@@ -86,17 +86,12 @@ class Game():
 					loot.open()
 
 			self.all_sprites.update()
-			for splat in self.splats:
-				self.view.blit(splat.surface, splat.rect)
+			self.view.blits([(splat.surface, splat.rect) for splat in self.splats])
 			self.view.blit(self.player.surface, self.player.rect)
-			for enemy in self.enemies:
-				self.view.blit(enemy.surface, enemy.rect)
-			for bullet in self.bullets:
-				self.view.blit(bullet.surface, bullet.rect)
-			for tornado in self.tornados:
-				self.view.blit(tornado.surface, tornado.rect)
-			for splat in self.splats_collect:
-				self.view.blit(splat.surface, splat.rect)
+			self.view.blits([(enemy.surface, enemy.rect) for enemy in self.enemies])
+			self.view.blits([(bullet.surface, bullet.rect) for bullet in self.bullets])
+			self.view.blits([(tornado.surface, tornado.rect) for tornado in self.tornados])
+			self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			self.view.blit(self.inv_button.surface, self.inv_button.rect)
 			pg.display.flip()
 			self.view.blit(self.background.surface, self.background.rect)
