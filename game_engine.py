@@ -25,14 +25,12 @@ class Game():
 		self.tornados = pg.sprite.Group()
 		self.all_sprites = pg.sprite.Group()
 
-		self.player = Player()
-		self.all_sprites.add(self.player)
+		self.player = Player(self.all_sprites)
 
 		self.background = Background('desert road.png', [0, 0])
 		loot_button_location = (screen.width // 100, screen.height * 9 // 10)
 		loot_button_size = (screen.width // 19, screen.height // 12)
-		self.loot_button = Hud_Button('treasure.png', loot_button_location, loot_button_size)
-		self.all_sprites.add(self.loot_button)
+		self.loot_button = Hud_Button('treasure.png', loot_button_location, loot_button_size, self.all_sprites)
 
 		self.splat_count = 0
 		self.isRunning = True
@@ -42,14 +40,10 @@ class Game():
 			if pg.sprite.spritecollideany(self.player, self.enemies):
 				self.isRunning = False
 			for enemy in pg.sprite.groupcollide(self.enemies, self.bullets, True, True):
-				new_splat = Splat(enemy.rect.centerx, enemy.rect.centery)
-				self.all_sprites.add(new_splat)
-				self.splats.add(new_splat)
+				Splat(enemy.rect.centerx, enemy.rect.centery, (self.all_sprites, self.splats))
 			for splat in pg.sprite.spritecollide(self.player, self.splats, False):
 				self.splat_count += 1
-				collect = Splat_Collect(*splat.rect.center, self.loot_button.rect)
-				self.splats_collect.add(collect)
-				self.all_sprites.add(collect)
+				Splat_Collect(*splat.rect.center, self.loot_button.rect, (self.all_sprites, self.splats_collect))
 				splat.kill()
 			for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
 				if tornado.magic < 8:
@@ -61,17 +55,11 @@ class Game():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 					self.isRunning = False
 				elif event.type == self.ADDENEMY:
-					new_enemy = Enemy()
-					self.enemies.add(new_enemy)
-					self.all_sprites.add(new_enemy)
+					Enemy((self.all_sprites, self.enemies))
 				elif event.type == self.NEWTORNADO:
-					new_tornado = Tornado()
-					self.tornados.add(new_tornado)
-					self.all_sprites.add(new_tornado)
+					Tornado((self.all_sprites, self.tornados))
 				elif event.type == KEYDOWN and event.key == K_SPACE:
-					new_player_bullet = PlayerBullet(self.player.rect.right, self.player.rect.centery)
-					self.all_sprites.add(new_player_bullet)
-					self.bullets.add(new_player_bullet)
+					PlayerBullet(*self.player.rect.midright, (self.all_sprites, self.bullets))
 				elif (
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)

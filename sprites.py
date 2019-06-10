@@ -9,8 +9,8 @@ import screen
 image_path = 'game art\\'
 
 class Player(pg.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
+	def __init__(self, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + 'car.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(0, screen.height // 2))
@@ -46,8 +46,8 @@ class Player(pg.sprite.Sprite):
 		self.bigtime = 50
 
 class PlayerBullet(pg.sprite.Sprite):
-	def __init__(self, x, y):
-		super().__init__()
+	def __init__(self, x, y, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + 'bullet.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -58,8 +58,8 @@ class PlayerBullet(pg.sprite.Sprite):
 			self.kill()
 
 class Enemy(pg.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
+	def __init__(self, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + 'green goblin.png').convert()
 		self.surface.set_colorkey((255, 0, 0), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(screen.width, randint(25, screen.height - 25)))
@@ -70,8 +70,8 @@ class Enemy(pg.sprite.Sprite):
 			self.kill()
 
 class Splat(pg.sprite.Sprite):
-	def __init__(self, x, y):
-		super().__init__()
+	def __init__(self, x, y, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + 'Splat.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -82,8 +82,8 @@ class Splat(pg.sprite.Sprite):
 			self.kill()
 
 class Splat_Collect(pg.sprite.Sprite):
-	def __init__(self, x, y, destination):
-		super().__init__()
+	def __init__(self, x, y, destination, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + 'Splat.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -94,8 +94,8 @@ class Splat_Collect(pg.sprite.Sprite):
 			self.kill()
 
 class Tornado(pg.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
+	def __init__(self, *groups):
+		super().__init__(*groups)
 		self.magic = randint(0, 10)
 		self.surface = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
 		self.surface.set_colorkey((0, 0, 0), RLEACCEL)
@@ -118,8 +118,8 @@ class Background(pg.sprite.Sprite):
 		self.rect.left, self.rect.top = location
 
 class Hud_Button(pg.sprite.Sprite):
-	def __init__(self, image_file, location, size):
-		super().__init__()
+	def __init__(self, image_file, location, size, *groups):
+		super().__init__(*groups)
 		self.surface = pg.image.load(image_path + image_file).convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.surface = pg.transform.scale(self.surface, size)
