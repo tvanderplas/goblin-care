@@ -85,8 +85,7 @@ class Game():
 					loot = ui.Window('Loot', self.splat_count)
 					loot.open()
 
-			for sprite in self.all_sprites:
-				sprite.update()
+			self.all_sprites.update()
 			for splat in self.splats:
 				self.view.blit(splat.surface, splat.rect)
 			self.view.blit(self.player.surface, self.player.rect)
