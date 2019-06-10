@@ -101,7 +101,6 @@ class Tornado(pg.sprite.Sprite):
 		self.surface.set_colorkey((0, 0, 0), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(randedge(25, screen.width, screen.height)))
 		self.speed = randint(5, 8)
-		self.waypoint = []
 		self.__getWaypoint()
 	def __getWaypoint(self):
 		x = randint(screen.width // 4, 3 * screen.width // 4)
