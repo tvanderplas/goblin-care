@@ -10,7 +10,7 @@ image_path = 'game art\\'
 
 class Player(pg.sprite.Sprite):
 	def __init__(self):
-		super(Player, self).__init__()
+		super().__init__()
 		self.surface = pg.image.load(image_path + 'car.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(0, screen.height // 2))
@@ -47,7 +47,7 @@ class Player(pg.sprite.Sprite):
 
 class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y):
-		super(PlayerBullet, self).__init__()
+		super().__init__()
 		self.surface = pg.image.load(image_path + 'bullet.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -59,7 +59,7 @@ class PlayerBullet(pg.sprite.Sprite):
 
 class Enemy(pg.sprite.Sprite):
 	def __init__(self):
-		super(Enemy, self).__init__()
+		super().__init__()
 		self.surface = pg.image.load(image_path + 'green goblin.png').convert()
 		self.surface.set_colorkey((255, 0, 0), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(screen.width, randint(25, screen.height - 25)))
@@ -71,7 +71,7 @@ class Enemy(pg.sprite.Sprite):
 
 class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y):
-		super(Splat, self).__init__()
+		super().__init__()
 		self.surface = pg.image.load(image_path + 'Splat.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -83,7 +83,7 @@ class Splat(pg.sprite.Sprite):
 
 class Splat_Collect(pg.sprite.Sprite):
 	def __init__(self, x, y, destination):
-		super(Splat_Collect, self).__init__()
+		super().__init__()
 		self.surface = pg.image.load(image_path + 'Splat.png').convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(x, y))
@@ -95,7 +95,7 @@ class Splat_Collect(pg.sprite.Sprite):
 
 class Tornado(pg.sprite.Sprite):
 	def __init__(self):
-		super(Tornado, self).__init__()
+		super().__init__()
 		self.magic = randint(0, 10)
 		self.surface = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
 		self.surface.set_colorkey((0, 0, 0), RLEACCEL)
@@ -112,14 +112,14 @@ class Tornado(pg.sprite.Sprite):
 
 class Background(pg.sprite.Sprite):
 	def __init__(self, image_file, location):
-		pg.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.surface = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
 		self.rect = self.surface.get_rect()
 		self.rect.left, self.rect.top = location
 
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size):
-		pg.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.surface = pg.image.load(image_path + image_file).convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.surface = pg.transform.scale(self.surface, size)
