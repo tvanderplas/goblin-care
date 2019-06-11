@@ -8,12 +8,16 @@ from helpers import moveTo, randedge
 import screen
 image_path = 'game art\\'
 
+def set_sprite(image_file, location, color=(255, 255, 255)):
+	surface = pg.image.load(image_path + image_file).convert()
+	surface.set_colorkey(color, RLEACCEL)
+	rect = surface.get_rect(center=location)
+	return (surface, rect)
+
 class Player(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + 'car.png').convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(0, screen.height // 2))
+		self.surface, self.rect = set_sprite('car.png', (0, screen.height // 2))
 		self.speed = 10
 		self.bigtime = 0
 	def update(self):
@@ -48,9 +52,7 @@ class Player(pg.sprite.Sprite):
 class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + 'bullet.png').convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(x, y))
+		self.surface, self.rect = set_sprite('bullet.png', (x, y))
 		self.speed = 30
 	def update(self):
 		self.rect.move_ip(self.speed, 0)
@@ -60,9 +62,10 @@ class PlayerBullet(pg.sprite.Sprite):
 class Enemy(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + 'green goblin.png').convert()
-		self.surface.set_colorkey((255, 0, 0), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(screen.width, randint(25, screen.height - 25)))
+		self.surface, self.rect = set_sprite(
+			'green goblin.png',
+			(screen.width, randint(25, screen.height - 25)),
+			color=(255, 0, 0))
 		self.speed = randint(5, 20)
 	def update(self):
 		self.rect.move_ip(-self.speed, 0)
@@ -72,9 +75,7 @@ class Enemy(pg.sprite.Sprite):
 class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + 'Splat.png').convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(x, y))
+		self.surface, self.rect = set_sprite('Splat.png', (x, y))
 		self.health = 300
 	def update(self):
 		self.health -= 1
@@ -84,9 +85,7 @@ class Splat(pg.sprite.Sprite):
 class Splat_Collect(pg.sprite.Sprite):
 	def __init__(self, x, y, destination, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + 'Splat.png').convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(x, y))
+		self.surface, self.rect = set_sprite('Splat.png', (x, y))
 		self.destination = destination
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.destination.center, 100))
