@@ -104,11 +104,10 @@ class Tornado(pg.sprite.Sprite):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
 
 class Background(pg.sprite.Sprite):
-	def __init__(self, image_file, location):
+	def __init__(self, image_file):
 		super().__init__()
 		self.surface = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
-		self.rect = self.surface.get_rect()
-		self.rect.left, self.rect.top = location
+		self.rect = self.surface.get_rect(topleft=(0, 0))
 
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size, *groups):

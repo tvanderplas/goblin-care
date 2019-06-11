@@ -35,7 +35,7 @@ class Menu():
 	def __init__(self):
 		self.clock = pg.time.Clock()
 		self.view = pg.display.set_mode((screen.width, screen.height), pg.FULLSCREEN) # pylint: disable=no-member
-		self.menu_screen = Background('menu.png', [0, 0])
+		self.menu_screen = Background('menu.png')
 		self.play_button = Menu_Button('Play!', (-screen.width // 5, screen.height // 2))
 		self.quit_button = Menu_Button('Quit', (-screen.width // 5, screen.height * 3 // 5))
 	def play(self):

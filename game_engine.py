@@ -27,7 +27,7 @@ class Game():
 
 		self.player = Player(self.all_sprites)
 
-		self.background = Background('desert road.png', [0, 0])
+		self.background = Background('desert road.png')
 		loot_button_location = (screen.width // 100, screen.height * 9 // 10)
 		loot_button_size = (screen.width // 19, screen.height // 12)
 		self.loot_button = Hud_Button('treasure.png', loot_button_location, loot_button_size, self.all_sprites)
