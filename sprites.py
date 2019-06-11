@@ -31,9 +31,7 @@ class Player(pg.sprite.Sprite):
 		if pressed_keys[K_d] or pressed_keys[K_RIGHT]:
 			self.rect.move_ip(self.speed, 0)
 		if self.bigtime <= 0:
-			self.surface = pg.image.load(image_path + 'car.png').convert()
-			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-			self.rect = self.surface.get_rect(center=(self.rect.center))
+			self.surface, self.rect = set_sprite('car.png', self.rect.center)
 		if self.rect.left < 0:
 			self.rect.left = 0
 		elif self.rect.right > screen.width:
@@ -44,9 +42,7 @@ class Player(pg.sprite.Sprite):
 			self.rect.bottom = screen.height
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 	def embiggen(self):
-		self.surface = pg.image.load(image_path + 'big car.png').convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(self.rect.center))
+		self.surface, self.rect = set_sprite('big car.png', self.rect.center)
 		self.bigtime = 50
 
 class PlayerBullet(pg.sprite.Sprite):
@@ -97,9 +93,7 @@ class Tornado(pg.sprite.Sprite):
 		super().__init__(*groups)
 		self.is_rainbow = True if randint(0, 10) > 8 else False
 		self.image_file = 'rainbow_tornado.png' if self.is_rainbow else 'tornado.png'
-		self.surface = pg.image.load(image_path + self.image_file).convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.rect = self.surface.get_rect(center=(randedge(25, screen.width, screen.height)))
+		self.surface, self.rect = set_sprite(self.image_file, randedge(25, screen.width, screen.height))
 		self.speed = randint(5, 8)
 		self.__getWaypoint()
 	def __getWaypoint(self):
