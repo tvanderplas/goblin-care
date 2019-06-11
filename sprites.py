@@ -8,9 +8,11 @@ from helpers import moveTo, randedge
 import screen
 image_path = 'game art\\'
 
-def set_sprite(image_file, location, color=(255, 255, 255)):
+def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	surface = pg.image.load(image_path + image_file).convert()
 	surface.set_colorkey(color, RLEACCEL)
+	if size is not None:
+		surface = pg.transform.scale(surface, size)
 	rect = surface.get_rect(center=location)
 	return (surface, rect)
 
@@ -112,13 +114,10 @@ class Background(pg.sprite.Sprite):
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size, *groups):
 		super().__init__(*groups)
-		self.surface = pg.image.load(image_path + image_file).convert()
-		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-		self.surface = pg.transform.scale(self.surface, size)
-		self.rect = self.surface.get_rect()
 		self.image_file = image_file
-		self.location, self.rect.topleft = location, location
+		self.location = location
 		self.size = size
+		self.surface, self.rect = set_sprite(self.image_file, self.location, size=self.size)
 		self.is_hovering = False
 	def rollover(self):
 		over_x = self.rect.left < pg.mouse.get_pos()[0] < self.rect.right
@@ -127,14 +126,8 @@ class Hud_Button(pg.sprite.Sprite):
 	def update(self):
 		if self.rollover() and not self.is_hovering:
 			rollover_size = (self.size[0] * 5 // 4, self.size[1] * 5 // 4)
-			self.surface = pg.image.load(image_path + self.image_file).convert()
-			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-			self.surface = pg.transform.scale(self.surface, rollover_size)
-			self.rect.move_ip(self.rect.width // 10, -self.rect.height // 5)
+			self.surface, self.rect = set_sprite(self.image_file, self.location, size=rollover_size)
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			self.surface = pg.image.load(image_path + self.image_file).convert()
-			self.surface.set_colorkey((255, 255, 255), RLEACCEL)
-			self.surface = pg.transform.scale(self.surface, self.size)
-			self.rect.topleft = self.location
+			self.surface, self.rect = set_sprite(self.image_file, self.location, size=self.size)
 			self.is_hovering = False
