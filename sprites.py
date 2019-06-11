@@ -95,8 +95,9 @@ class Splat_Collect(pg.sprite.Sprite):
 class Tornado(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
-		self.magic = randint(0, 10)
-		self.surface = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
+		self.is_rainbow = True if randint(0, 10) > 8 else False
+		self.image_file = 'rainbow_tornado.png' if self.is_rainbow else 'tornado.png'
+		self.surface = pg.image.load(image_path + self.image_file).convert()
 		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(randedge(25, screen.width, screen.height)))
 		self.speed = randint(5, 8)

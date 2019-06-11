@@ -46,10 +46,10 @@ class Game():
 				Splat_Collect(*splat.rect.center, self.loot_button.rect, (self.all_sprites, self.splats_collect))
 				splat.kill()
 			for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
-				if tornado.magic < 8:
-					self.isRunning = False
-				else:
+				if tornado.is_rainbow:
 					self.player.embiggen()
+				else:
+					self.isRunning = False
 
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
