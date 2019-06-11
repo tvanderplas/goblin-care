@@ -1,10 +1,9 @@
 
-import tkinter
 from ctypes import windll
 
-windll.user32.SetProcessDPIAware()
+user32 = windll.user32
+user32.SetProcessDPIAware()
 """prevents stretching"""
 
-root = tkinter.Tk()
-width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
+width = user32.GetSystemMetrics(0)
+height = user32.GetSystemMetrics(1)
