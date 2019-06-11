@@ -19,7 +19,7 @@ def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 class Player(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
-		self.surface, self.rect = set_sprite('car.png', (0, screen.height // 2))
+		self.surface, self.rect = set_sprite('car.png', (screen.width // 4, screen.height // 2))
 		self.speed = 10
 		self.bigtime = 0
 	def update(self):
