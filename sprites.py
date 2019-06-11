@@ -65,7 +65,7 @@ class Enemy(pg.sprite.Sprite):
 		self.surface, self.rect = set_sprite(
 			'green goblin.png',
 			(screen.width, randint(25, screen.height - 25)),
-			color=(255, 0, 0))
+			color=(255, 255, 255))
 		self.speed = randint(5, 20)
 	def update(self):
 		self.rect.move_ip(-self.speed, 0)
@@ -97,7 +97,7 @@ class Tornado(pg.sprite.Sprite):
 		super().__init__(*groups)
 		self.magic = randint(0, 10)
 		self.surface = pg.image.load(image_path + ('tornado.png' if self.magic < 8 else 'rainbow_tornado.png')).convert()
-		self.surface.set_colorkey((0, 0, 0), RLEACCEL)
+		self.surface.set_colorkey((255, 255, 255), RLEACCEL)
 		self.rect = self.surface.get_rect(center=(randedge(25, screen.width, screen.height)))
 		self.speed = randint(5, 8)
 		self.__getWaypoint()
