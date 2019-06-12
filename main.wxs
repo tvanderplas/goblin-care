@@ -10,6 +10,8 @@
 
 			<Directory Id="DesktopFolder" Name="Desktop" />
 
+            <Directory Id="ProgramMenuFolder" Name="StartMenu" />
+
 		</Directory>
 
 		<DirectoryRef Id="application_root_directory">
@@ -21,7 +23,7 @@
 		<DirectoryRef Id="DesktopFolder">
 			<Component Id="desktop_shortcut_component" Guid="8F3F22B9-E2B0-4198-A11A-9AA6F9036A16">
 				<Shortcut Id="desktop_shortcut" 
-					Name="Goblin Care.exe"
+					Name="Goblin Care"
 					Icon="pygame_icon"
 					Description="A game about goblins and cars, developed with Pygame"
 					Target="[application_root_directory]\goblin care.exe"
@@ -31,9 +33,23 @@
 			</Component>
 		</DirectoryRef>
 
+		<DirectoryRef Id="ProgramMenuFolder">
+			<Component Id="start_menu_shortcut_component" Guid="729A1A41-C5DD-464C-8D7D-71691458CBFA">
+				<Shortcut Id="start_menu_shortcut" 
+					Name="Goblin Care"
+					Icon="pygame_icon"
+					Description="A game about goblins and cars, developed with Pygame"
+					Target="[application_root_directory]\goblin care.exe"
+					WorkingDirectory="application_root_directory" />
+				<RemoveFolder Id="ProgramMenuFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Goblin Care" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+
         <Feature Id='Files' Level='1'>
             <ComponentRef Id='main_exe_component' />
             <ComponentRef Id='desktop_shortcut_component' />
+            <ComponentRef Id='start_menu_shortcut_component' />
         </Feature>
 
 		<Icon Id="pygame_icon" SourceFile="SourceDir\Goblin Care\goblin care.exe" />
