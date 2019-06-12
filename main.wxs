@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="{B80B8ED8-AB99-406F-9357-5ECCDDE6BC3C}" Language="1033" Name="Goblin Care" UpgradeCode="{72476625-E7E0-49AA-87FD-51A4F00EA8CF}" Version="0.3.0" Manufacturer="Tim Vanderplas">
+		<Package Compressed="yes" InstallerVersion="200" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+
+            <Directory Id='ProgramFilesFolder' Name='PFiles'>
+				<Directory Id='application_root_directory' Name='Goblin Care' />
+			</Directory>
+
+			<Directory Id="DesktopFolder" Name="Desktop" />
+
+		</Directory>
+
+		<DirectoryRef Id="application_root_directory">
+			<Component Id="main_exe_component" Guid="{44698024-3E4B-425F-9E20-5F068818D6EA}">
+				<File Id="main_exe_file" KeyPath="yes" Source="SourceDir\Goblin Care\goblin care.exe" />
+			</Component>
+		</DirectoryRef>
+
+		<DirectoryRef Id="DesktopFolder">
+			<Component Id="desktop_shortcut_component" Guid="8F3F22B9-E2B0-4198-A11A-9AA6F9036A16">
+				<Shortcut Id="desktop_shortcut" 
+					Name="Goblin Care.exe"
+					Icon="pygame_icon"
+					Description="A game about goblins and cars, developed with Pygame"
+					Target="[application_root_directory]\goblin care.exe"
+					WorkingDirectory="application_root_directory" />
+				<RemoveFolder Id="DesktopFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Goblin Care" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+
+        <Feature Id='Files' Level='1'>
+            <ComponentRef Id='main_exe_component' />
+            <ComponentRef Id='desktop_shortcut_component' />
+        </Feature>
+
+		<Icon Id="pygame_icon" SourceFile="SourceDir\Goblin Care\goblin care.exe" />
+        <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+    </Product>
+</Wix>
