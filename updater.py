@@ -1,5 +1,7 @@
 
 import requests
+import zipfile as zf
+import subprocess
 
 current_version = 'v0.3.0'
 url = 'https://api.github.com/repos/tvanderplas/goblin-care/releases'
@@ -18,5 +20,13 @@ else:
 	download_url = url + f'/assets/{asset_id}'
 	download = requests.get(download_url, headers={'Accept':'application/octet-stream'})
 	print('download -', download.status_code)
-	update_file = open('Goblin Care.zip', 'wb')
+	zip_filename = f'Goblin Care {latest}.zip'
+	folder_name = f'Goblin Care {latest}'
+	update_file = open(zip_filename, 'wb')
 	update_file.write(download.content)
+
+	with zf.ZipFile(zip_filename) as zip:
+		zip.extractall(folder_name)
+
+command = f'"Goblin Care {latest}/Goblin Care/goblin care.exe"'
+subprocess.Popen(command)
