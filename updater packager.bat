@@ -11,8 +11,7 @@ xcopy "temp pyinstaller build\dist\updater" "Goblin Care" /E /Y /I
 rd /s /q "temp pyinstaller build"
 REM heat.exe dir "Goblin Care" -gg -sfrag -out windows.wxs
 REM python xml editing script here
-REM candle.exe "windows.wxs"
-REM light.exe "windows.wixobj"
-REM rd /s /q "Goblin Care"
-REM del "goblin care.wixobj"
-REM del "goblin care.wixpdb"
+candle.exe "windows.wxs"
+light.exe "windows.wixobj"
+del "windows.wixobj"
+del "windows.wixpdb"
