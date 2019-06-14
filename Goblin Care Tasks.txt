@@ -1,10 +1,10 @@
 
-auto updater
 player skins
 rainbow collecting bonuses
 rainbow bullet buff
 controls menu
 persistent game if not dead
+auto updater
 dependency inversion
 turning
 2d playfield
