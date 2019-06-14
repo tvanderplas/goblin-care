@@ -2,7 +2,7 @@
 from ctypes import windll
 import requests
 import zipfile as zf
-from subprocess import Popen
+from subprocess import Popen, CREATE_NO_WINDOW
 
 connect_error_title = "Goblin Care"
 connect_error_message = "Unable to connect to update server. Please check internet and firewall settings."
@@ -50,8 +50,6 @@ def get_latest_version(success, release_id):
 			print('Installing update...')
 			zip_filename = f'Goblin Care {latest}.zip'
 			folder_name = f'Goblin Care {latest}'
-			old_zip_filename = f'Goblin Care {current_version}.zip'
-			old_folder_name = f'Goblin Care {current_version}'
 			update_file = open(zip_filename, 'wb')
 			update_file.write(download.content)
 			with zf.ZipFile(zip_filename) as zip:
@@ -59,10 +57,13 @@ def get_latest_version(success, release_id):
 					zip.extract(member)
 			rename_args = f'rename "Goblin Care" "{folder_name}"'
 			Popen(rename_args, shell=True)
-			cleanup_args = f'del "{old_zip_filename}"'
-			Popen(cleanup_args, shell=True)
-			cleanup_args = f'rd /s /q "{old_folder_name}"'
-			Popen(cleanup_args, shell=True)
+			if current_version != '':
+				old_zip_filename = f'Goblin Care {current_version}.zip'
+				old_folder_name = f'Goblin Care {current_version}'
+				cleanup_args = f'del "{old_zip_filename}"'
+				Popen(cleanup_args, shell=True)
+				cleanup_args = f'rd /s /q "{old_folder_name}"'
+				Popen(cleanup_args, shell=True)
 		else:
 			success = False
 	else:
@@ -81,7 +82,7 @@ if success:
 	if (current_version == latest):
 		print('Up to date')
 	else:
-		print('Not up to date')
+		print('An update is available')
 		success = get_latest_version(success, release_id)
 if success:
 	change_version_info(latest)
@@ -89,5 +90,7 @@ if success:
 else:
 	windll.user32.MessageBoxW(0, connect_error_message, connect_error_title, 0)
 
+cwd = f'Goblin Care {current_version}'
+executable = '"goblin care.exe"'
 command = f'"Goblin Care {current_version}/goblin care.exe"'
-Popen(command)
+Popen(command, cwd=cwd, creationflags=CREATE_NO_WINDOW)
