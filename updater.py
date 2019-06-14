@@ -44,14 +44,25 @@ def get_latest_version(success, release_id):
 	if assets.status_code == 200:
 		asset_id = str(assets.json()[0]['id'])
 		download_url = url + f'/assets/{asset_id}'
+		print('Downloading update...')
 		download = requests.get(download_url, headers={'Accept':'application/octet-stream'})
 		if success and (download.status_code == 200):
+			print('Installing update...')
 			zip_filename = f'Goblin Care {latest}.zip'
 			folder_name = f'Goblin Care {latest}'
+			old_zip_filename = f'Goblin Care {current_version}.zip'
+			old_folder_name = f'Goblin Care {current_version}'
 			update_file = open(zip_filename, 'wb')
 			update_file.write(download.content)
 			with zf.ZipFile(zip_filename) as zip:
-				zip.extractall(folder_name)
+				for member in zip.infolist():
+					zip.extract(member)
+			rename_args = f'rename "Goblin Care" "{folder_name}"'
+			Popen(rename_args, shell=True)
+			cleanup_args = f'del "{old_zip_filename}"'
+			Popen(cleanup_args, shell=True)
+			cleanup_args = f'rd /s /q "{old_folder_name}"'
+			Popen(cleanup_args, shell=True)
 		else:
 			success = False
 	else:
@@ -78,5 +89,5 @@ if success:
 else:
 	windll.user32.MessageBoxW(0, connect_error_message, connect_error_title, 0)
 
-command = f'"Goblin Care {current_version}/Goblin Care/goblin care.exe"'
+command = f'"Goblin Care {current_version}/goblin care.exe"'
 Popen(command)
