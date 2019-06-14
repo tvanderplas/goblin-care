@@ -3,6 +3,7 @@ from ctypes import windll
 import requests
 import zipfile as zf
 from subprocess import Popen, CREATE_NO_WINDOW
+from time import sleep
 
 connect_error_title = "Goblin Care"
 connect_error_message = "Unable to connect to update server. Please check internet and firewall settings."
@@ -91,6 +92,6 @@ else:
 	windll.user32.MessageBoxW(0, connect_error_message, connect_error_title, 0)
 
 cwd = f'Goblin Care {current_version}'
-executable = '"goblin care.exe"'
 command = f'"Goblin Care {current_version}/goblin care.exe"'
-Popen(command, cwd=cwd, creationflags=CREATE_NO_WINDOW)
+sleep(.5)
+p = Popen(command, cwd=cwd, creationflags=CREATE_NO_WINDOW)
