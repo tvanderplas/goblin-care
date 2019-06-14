@@ -1,0 +1,14 @@
+
+auto updater
+player skins
+rainbow collecting bonuses
+rainbow bullet buff
+controls menu
+persistent game if not dead
+dependency inversion
+turning
+2d playfield
+customizable controls
+
+reinstall with windows installer
+linux release?
