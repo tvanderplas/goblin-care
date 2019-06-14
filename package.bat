@@ -4,6 +4,7 @@ mkdir "temp pyinstaller build"
 cd "temp pyinstaller build"
 set PATH=%PATH%;C:\Windows\System32\downlevel
 pyinstaller "C:\repos\goblin-care\goblin care.py"
+del "dist\goblin care\goblin care.exe.manifest"
 cd..
 xcopy "temp pyinstaller build\dist\goblin care" "Goblin Care" /E /Y /I
 xcopy "game art" "Goblin Care\game art" /Y /I
