@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="{B80B8ED8-AB99-406F-9357-5ECCDDE6BC3C}" Language="1033" Name="Goblin Care" UpgradeCode="{72476625-E7E0-49AA-87FD-51A4F00EA8CF}" Version="0.3.0" Manufacturer="Tim Vanderplas">
+    <Product Id="{B80B8ED8-AB99-406F-9357-5ECCDDE6BC3C}" Language="1033" Name="Goblin Care" UpgradeCode="{72476625-E7E0-49AA-87FD-51A4F00EA8CF}" Version="0.4.0" Manufacturer="Tim Vanderplas">
 		<Package Compressed="yes" InstallerVersion="200" />
         <Directory Id="TARGETDIR" Name="SourceDir">
 
