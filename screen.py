@@ -9,8 +9,8 @@ if platform.system() == 'Windows':
 	height = user32.GetSystemMetrics(1)
 
 if platform.system() == 'Linux':
-	width = 1920
-	height = 1080
+	width = 800
+	height = 600
 if platform.system() == 'Darwin':
-	width = 1920
-	height = 1080
+	width = 800
+	height = 600
