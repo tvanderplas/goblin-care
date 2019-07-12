@@ -4,11 +4,9 @@ rainbow collecting bonuses
 rainbow bullet buff
 controls menu
 persistent game if not dead
-auto updater
-dependency inversion
+auto updater - with git?
+automated tests
 turning
 2d playfield
 customizable controls
-
-reinstall with windows installer
-linux release?
+android release
