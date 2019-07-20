@@ -16,7 +16,7 @@ def Mtl(filename):
 		elif values[0] == 'map_Kd':
 			# load the texture referred to by this declaration
 			mtl[values[0]] = values[1] # pylint: disable=unsupported-assignment-operation
-			surf = pygame.image.load(mtl['map_Kd'])
+			surf = pygame.image.load(mtl['map_Kd']) # pylint: disable=unsubscriptable-object
 			image = pygame.image.tostring(surf, 'RGBA', 1)
 			ix, iy = surf.get_rect().size
 			texid = mtl['texture_Kd'] = glGenTextures(1) # pylint: disable=unsupported-assignment-operation
