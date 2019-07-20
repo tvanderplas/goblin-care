@@ -20,18 +20,19 @@ def main():
 	glEnable(GL_LIGHTING)
 	glEnable(GL_COLOR_MATERIAL)
 	glEnable(GL_DEPTH_TEST)
-	glShadeModel(GL_SMOOTH)           # most obj files expect to be smooth-shaded
+	glShadeModel(GL_SMOOTH) # most obj files expect to be smooth-shaded
 
-	gluPerspective(45, (display[0] / display[1]), 0.1, 500.0)
-	glTranslatef(0.0, 0.0, -50)
-	glRotatef(30, 1, 0, 0)
+	gluPerspective(45, (display[0] / display[1]), 0.1, 2000.0)
+	glTranslatef(0, 0, -1500)
+	glRotatef(-60, 1, 0, 0)
+	glRotatef(180, 0, 0, 1)
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				pygame.quit() # pylint: disable=no-member
 				quit()
 		
-		# glRotatef(1, 0, 1, 0)
+		glRotatef(1, 0, 0, 1)
 		glCallList(care.gl_list)
 		pygame.display.flip()
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
