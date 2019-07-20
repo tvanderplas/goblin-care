@@ -10,3 +10,9 @@ turning
 2d playfield
 customizable controls
 android release
+
+rotation and translation
+shading and lighting
+use 3d object as 2d sprite
+make textures
+buttons in loot menu
