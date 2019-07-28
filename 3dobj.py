@@ -22,7 +22,24 @@ def main():
 
 	white = (1, 1, 1)
 	red = (1, 0, 0)
-
+	player_model = np.array([
+		[1, 0, 0, 0],
+		[0, 1, 0, 0],
+		[0, 0, 1, 0],
+		[0, 0, 0, 1]
+	])
+	player_view = np.array([
+		[1, 0, 0, 0],
+		[0, 1, 0, 0],
+		[0, 0, 1, 0],
+		[0, 0, 0, 1]
+	])
+	player_projection = np.array([
+		[1, 0, 0, 0],
+		[0, 1, 0, 0],
+		[0, 0, 1, 0],
+		[0, 0, 0, 1]
+	])
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
 	layout (location = 0) in vec3 aPos;
@@ -69,7 +86,10 @@ def main():
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 	UNIFORM_LOCATIONS = {
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
-		'car_color': glGetUniformLocation(car_shader, 'car_color')
+		'car_color': glGetUniformLocation(car_shader, 'car_color'),
+		'model': glGetUniformLocation(car_shader, 'model'),
+		'view': glGetUniformLocation(car_shader, 'view'),
+		'projection': glGetUniformLocation(car_shader, 'projection')
 	}
 
 	lamp_fragment_shader = shaders.compileShader("""#version 330 core
@@ -97,6 +117,9 @@ def main():
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		glUniform3f(UNIFORM_LOCATIONS['light_color'], *white)
 		glUniform3f(UNIFORM_LOCATIONS['car_color'], *red)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['model'], 1, False, player_model)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['view'], 1, False, player_view)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['projection'], 1, False, player_projection)
 		glCallList(player.gl_list)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
