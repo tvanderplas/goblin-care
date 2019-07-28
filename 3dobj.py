@@ -22,21 +22,51 @@ def main():
 
 	white = (1, 1, 1)
 	red = (1, 0, 0)
-	car_fragment_shader = shaders.compileShader("""#version 330 core
+
+	car_vertex_shader = shaders.compileShader("""
+	#version 330 core
+	layout (location = 0) in vec3 aPos;
+	layout (location = 1) in vec3 aNormal;
+
+	out vec3 FragPos;
+	out vec3 Normal;
+
+	uniform mat4 model;
+	uniform mat4 view;
+	uniform mat4 projection;
+
+	void main()
+	{
+		FragPos = vec3(model * vec4(aPos, 1.0));
+		Normal = mat3(transpose(inverse(model))) * aNormal;  
+		
+		gl_Position = projection * view * vec4(FragPos, 1.0);
+	}""", GL_VERTEX_SHADER)
+	car_fragment_shader = shaders.compileShader("""
+	#version 330 core
 	out vec4 FragColor;
+
+	in vec3 Normal;
+	in vec3 FragPos;
 	
+	uniform vec3 lightPos;
+	uniform vec3 viewPos;
 	uniform vec3 car_color;
 	uniform vec3 light_color;
 
 	void main()
 	{
+		// ambient
 		float ambientStrength = 0.1;
 		vec3 ambient = ambientStrength * light_color;
-
-		vec3 result = ambient * car_color;
-		FragColor = vec4(result, 1.0);
+		
+		// diffuse 
+		vec3 norm = normalize(Normal);
+		vec3 lightDir = normalize(lightPos - FragPos);
+		float diff = max(dot(norm, lightDir), 0.0);
+		vec3 diffuse = diff * light_color;
 	}""", GL_FRAGMENT_SHADER)
-	car_shader = shaders.compileProgram(car_fragment_shader)
+	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 	UNIFORM_LOCATIONS = {
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
 		'car_color': glGetUniformLocation(car_shader, 'car_color')
