@@ -92,6 +92,14 @@ def main():
 		'projection': glGetUniformLocation(car_shader, 'projection')
 	}
 
+	lamp_vertex_shader = shaders.compileShader("""
+	#version 330 core
+	layout (location = 0) in vec3 aPos;
+
+	void main()
+	{
+		gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""#version 330 core
 	out vec4 FragColor;
 
@@ -99,7 +107,7 @@ def main():
 	{
 		FragColor = vec4(1.0); // set all 4 vector values to 1.0
 	}""", GL_FRAGMENT_SHADER)
-	lamp_shader = shaders.compileProgram(lamp_fragment_shader)
+	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 
 	gluPerspective(45, (display[0] / display[1]), 0.1, 2000.0)
 	glTranslatef(0, 0, -1500)
@@ -115,6 +123,7 @@ def main():
 		glRotatef(1, 0, 0, 1)
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
+		glBindVertexArray(player.VAO)
 		glUniform3f(UNIFORM_LOCATIONS['light_color'], *white)
 		glUniform3f(UNIFORM_LOCATIONS['car_color'], *red)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['model'], 1, False, player_model)
@@ -123,6 +132,8 @@ def main():
 		glCallList(player.gl_list)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
+		glBindVertexArray(light_cube.VAO)
+		glDrawArrays(GL_TRIANGLES, 0, len(light_cube.vertices))
 		glCallList(light_cube.gl_list)
 
 		pygame.display.flip()

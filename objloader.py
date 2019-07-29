@@ -1,6 +1,7 @@
 
 import pygame
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
+import numpy as np
 
 def Mtl(filename):
 	contents = {}
@@ -76,30 +77,24 @@ class Obj:
 					else:
 						norms.append(0)
 				self.faces.append((face, norms, texcoords, material))
+		self.indices = np.array([i[0] for i in self.faces], dtype=np.uint8)
+		self.indices[::] -= 1
+		self.vertices = np.array(self.vertices, dtype=GLfloat).flatten()
 
 	def generate(self):
-		self.gl_list = glGenLists(1)
-		glNewList(self.gl_list, GL_COMPILE)
-		glEnable(GL_TEXTURE_2D)
-		glFrontFace(GL_CCW)
-		for face in self.faces:
-			vertices, normals, texture_coords, material = face
+		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
+		glGenVertexArrays(1, id(self.VAO))
+		self.VBO = glGenBuffers(1)
+		self.EBO = glGenBuffers(1)
+		glBindVertexArray(self.VAO)
 
-			mtl = self.mtl[material]
-			if 'texture_Kd' in mtl:
-				# use diffuse texmap
-				glBindTexture(GL_TEXTURE_2D, mtl['texture_Kd'])
-			else:
-				# just use diffuse colour
-				glColor(*mtl['Kd'])
+		glBindBuffer(GL_ARRAY_BUFFER, self.VBO)
+		glBufferData(GL_ARRAY_BUFFER, self.vertices, GL_STATIC_DRAW)
 
-			glBegin(GL_POLYGON)
-			for i in range(len(vertices)):
-				if normals[i] > 0:
-					glNormal3fv(self.normals[normals[i] - 1])
-				if texture_coords[i] > 0:
-					glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
-				glVertex3fv(self.vertices[vertices[i] - 1])
-			glEnd()
-		glDisable(GL_TEXTURE_2D)
-		glEndList()
+		glBindBuffer(GL_ARRAY_BUFFER, self.EBO)
+		glBufferData(GL_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, self.vertices[0].__sizeof__(), None)
+		glEnableVertexAttribArray(0)
+		glBindBuffer(GL_ARRAY_BUFFER, 0)
+		glBindVertexArray(0)
