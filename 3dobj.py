@@ -14,7 +14,7 @@ def main():
 	player = Obj('care.obj')
 	player.generate()
 	light_cube = Obj('cube.obj')
-	light_cube.vertices[::] /= 10
+	light_cube.vertices[::, 0:3] /= 10
 	light_cube.generate()
 
 	white = (1, 1, 1)
@@ -91,19 +91,25 @@ def main():
 
 	lamp_vertex_shader = shaders.compileShader("""
 	#version 330 core
-	layout (location = 0) in vec3 aPos;
+	layout (location = 0) in vec3 position;
+	layout (location = 1) in vec3 test_color;
+
+	out vec3 color;
 
 	void main()
 	{
-		gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+		gl_Position = vec4(position.x, position.y, position.z, 1.0);
+		color = test_color;
 	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""
 	#version 330 core
 	out vec4 FragColor;
 
+	in vec3 color;
+
 	void main()
 	{
-		FragColor = vec4(1.0);
+		FragColor = vec4(color, 1.0);
 	}""", GL_FRAGMENT_SHADER)
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 

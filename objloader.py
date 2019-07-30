@@ -39,6 +39,16 @@ class Obj:
 		self.normals = []
 		self.texcoords = []
 		self.faces = []
+		self.colors = [
+			[0, 0, 0],
+			[1, 0, 0],
+			[0, 1, 0],
+			[0, 0, 1],
+			[1, 1, 0],
+			[1, 0, 1],
+			[0, 1, 1],
+			[1, 1, 1]
+		]
 
 		material = None
 		for line in open(filename, "r"):
@@ -79,7 +89,7 @@ class Obj:
 				self.faces.append((face, norms, texcoords, material))
 		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
 		self.indices -= 1 # change from 1-indexed to 0-indexed
-		self.vertices = np.array(self.vertices, dtype=np.float32)
+		self.vertices = np.array([i + j for i, j in zip(self.vertices, self.colors)], dtype=np.float32)
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
@@ -94,5 +104,7 @@ class Obj:
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, None)
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, ctypes.c_void_p(12))
 		glEnableVertexAttribArray(0)
+		glEnableVertexAttribArray(1)
