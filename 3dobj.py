@@ -3,7 +3,6 @@ import pygame
 from pygame.locals import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
-from OpenGL.GLU import * # pylint: disable=unused-wildcard-import
 from objloader import Obj, Mtl
 import numpy as np
 
@@ -107,18 +106,11 @@ def main():
 	}""", GL_FRAGMENT_SHADER)
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 
-	gluPerspective(45, (display[0] / display[1]), 0.1, 2000.0)
-	glTranslatef(0, 0, -1500)
-	glRotatef(-60, 1, 0, 0)
-	glRotatef(180, 0, 0, 1)
-
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				pygame.quit() # pylint: disable=no-member
 				quit()
-
-		glRotatef(1, 0, 0, 1)
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		glBindVertexArray(player.VAO)

@@ -77,9 +77,9 @@ class Obj:
 					else:
 						norms.append(0)
 				self.faces.append((face, norms, texcoords, material))
-		self.indices = np.array([i[0] for i in self.faces], dtype=np.uint8)
-		self.indices[::] -= 1
-		self.vertices = np.array(self.vertices, dtype=GLfloat).flatten()
+		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32)
+		self.indices -= 1
+		self.vertices = np.array(self.vertices, dtype=np.float32)
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
