@@ -130,7 +130,7 @@ def main():
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
 		glBindVertexArray(light_cube.VAO)
-		glDrawArrays(GL_TRIANGLES, 0, len(light_cube.vertices) // 3)
+		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, GL_ELEMENT_ARRAY_BUFFER)
 
 		pygame.display.flip()
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
