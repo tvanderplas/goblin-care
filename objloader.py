@@ -77,8 +77,8 @@ class Obj:
 					else:
 						norms.append(0)
 				self.faces.append((face, norms, texcoords, material))
-		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32)
-		self.indices -= 1
+		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
+		self.indices -= 1 # change from 1-indexed to 0-indexed
 		self.vertices = np.array(self.vertices, dtype=np.float32)
 
 	def generate(self):
@@ -94,5 +94,5 @@ class Obj:
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, self.vertices[0].__sizeof__(), None)
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
 		glEnableVertexAttribArray(0)
