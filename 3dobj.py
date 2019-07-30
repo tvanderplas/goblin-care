@@ -11,13 +11,11 @@ def main():
 	pygame.init() # pylint: disable=no-member
 	display = (800, 600)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
-	
+
 	player = Obj('care.obj')
 	player.generate()
 	light_cube = Obj('cube.obj')
-	for i, vertex in enumerate(light_cube.vertices):
-		vertex[2] += 100
-		light_cube.vertices[i] = vertex
+	light_cube.vertices[::] /= 10
 	light_cube.generate()
 
 	white = (1, 1, 1)
@@ -55,8 +53,8 @@ def main():
 	void main()
 	{
 		FragPos = vec3(model * vec4(aPos, 1.0));
-		Normal = mat3(transpose(inverse(model))) * aNormal;  
-		
+		Normal = mat3(transpose(inverse(model))) * aNormal; 
+	
 		gl_Position = projection * view * vec4(FragPos, 1.0);
 	}""", GL_VERTEX_SHADER)
 	car_fragment_shader = shaders.compileShader("""
@@ -65,7 +63,7 @@ def main():
 
 	in vec3 Normal;
 	in vec3 FragPos;
-	
+
 	uniform vec3 lightPos;
 	uniform vec3 viewPos;
 	uniform vec3 car_color;
@@ -76,8 +74,8 @@ def main():
 		// ambient
 		float ambientStrength = 0.1;
 		vec3 ambient = ambientStrength * light_color;
-		
-		// diffuse 
+	
+		// diffuse
 		vec3 norm = normalize(Normal);
 		vec3 lightDir = normalize(lightPos - FragPos);
 		float diff = max(dot(norm, lightDir), 0.0);
@@ -119,7 +117,7 @@ def main():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				pygame.quit() # pylint: disable=no-member
 				quit()
-		
+
 		glRotatef(1, 0, 0, 1)
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
@@ -129,12 +127,10 @@ def main():
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['model'], 1, False, player_model)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['view'], 1, False, player_view)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['projection'], 1, False, player_projection)
-		glCallList(player.gl_list)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
 		glBindVertexArray(light_cube.VAO)
-		glDrawArrays(GL_TRIANGLES, 0, len(light_cube.vertices))
-		glCallList(light_cube.gl_list)
+		glDrawArrays(GL_TRIANGLES, 0, len(light_cube.vertices) // 3)
 
 		pygame.display.flip()
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
