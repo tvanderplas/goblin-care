@@ -97,12 +97,13 @@ def main():
 	{
 		gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
 	}""", GL_VERTEX_SHADER)
-	lamp_fragment_shader = shaders.compileShader("""#version 330 core
+	lamp_fragment_shader = shaders.compileShader("""
+	#version 330 core
 	out vec4 FragColor;
 
 	void main()
 	{
-		FragColor = vec4(1.0); // set all 4 vector values to 1.0
+		FragColor = vec4(1.0);
 	}""", GL_FRAGMENT_SHADER)
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 
