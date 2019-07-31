@@ -11,6 +11,7 @@ def main():
 	pygame.init() # pylint: disable=no-member
 	display = (800, 600)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
+	glEnable(GL_DEPTH_TEST)
 
 	player = objloader.Obj('care.obj')
 	player.generate()
@@ -102,7 +103,7 @@ def main():
 		'transform': glGetUniformLocation(lamp_shader, 'transform')
 	}
 
-	objloader.set_perspective(pi / 4, *display, 0, 100)
+	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(0, 0, -5)
 	# light_cube.scale(5, 5, 5)
 	while True:
