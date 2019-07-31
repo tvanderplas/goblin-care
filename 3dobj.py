@@ -3,8 +3,9 @@ import pygame
 from pygame.locals import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
-from objloader import Obj, Mtl
+from objloader import Obj, Mtl, identity
 import numpy as np
+from math import pi
 
 def main():
 	pygame.init() # pylint: disable=no-member
@@ -19,24 +20,9 @@ def main():
 
 	white = (1, 1, 1)
 	red = (1, 0, 0)
-	player_model = np.array([
-		[1, 0, 0, 0],
-		[0, 1, 0, 0],
-		[0, 0, 1, 0],
-		[0, 0, 0, 1]
-	])
-	player_view = np.array([
-		[1, 0, 0, 0],
-		[0, 1, 0, 0],
-		[0, 0, 1, 0],
-		[0, 0, 0, 1]
-	])
-	player_projection = np.array([
-		[1, 0, 0, 0],
-		[0, 1, 0, 0],
-		[0, 0, 1, 0],
-		[0, 0, 0, 1]
-	])
+	player_model = np.array(identity)
+	player_view = np.array(identity)
+	player_projection = np.array(identity)
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
 	layout (location = 0) in vec3 aPos;
@@ -81,13 +67,6 @@ def main():
 		vec3 diffuse = diff * light_color;
 	}""", GL_FRAGMENT_SHADER)
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
-	UNIFORM_LOCATIONS = {
-		'light_color': glGetUniformLocation(car_shader, 'light_color'),
-		'car_color': glGetUniformLocation(car_shader, 'car_color'),
-		'model': glGetUniformLocation(car_shader, 'model'),
-		'view': glGetUniformLocation(car_shader, 'view'),
-		'projection': glGetUniformLocation(car_shader, 'projection')
-	}
 
 	lamp_vertex_shader = shaders.compileShader("""
 	#version 330 core
@@ -96,9 +75,11 @@ def main():
 
 	out vec3 color;
 
+	uniform mat4 transform;
+
 	void main()
 	{
-		gl_Position = vec4(position.x, position.y, position.z, 1.0);
+		gl_Position = transform * vec4(position, 1.0);
 		color = test_color;
 	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""
@@ -112,7 +93,17 @@ def main():
 		FragColor = vec4(color, 1.0);
 	}""", GL_FRAGMENT_SHADER)
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
+	UNIFORM_LOCATIONS = {
+		'light_color': glGetUniformLocation(car_shader, 'light_color'),
+		'car_color': glGetUniformLocation(car_shader, 'car_color'),
+		'model': glGetUniformLocation(car_shader, 'model'),
+		'view': glGetUniformLocation(car_shader, 'view'),
+		'projection': glGetUniformLocation(car_shader, 'projection'),
+		'transform': glGetUniformLocation(lamp_shader, 'transform')
+	}
 
+	light_cube.translate(.5, -.5, 0)
+	light_cube.scale(.5, .5, .5)
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
@@ -128,6 +119,8 @@ def main():
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['projection'], 1, False, player_projection)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
+		light_cube.rotate(pi / 100, 1, 0, 1)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['transform'], 1, False, light_cube.mvp)
 		glBindVertexArray(light_cube.VAO)
 		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, None)
 

@@ -2,6 +2,15 @@
 import pygame
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 import numpy as np
+import glm
+from math import pi
+
+identity = [
+	[1, 0, 0, 0],
+	[0, 1, 0, 0],
+	[0, 0, 1, 0],
+	[0, 0, 0, 1]
+]
 
 def Mtl(filename):
 	contents = {}
@@ -39,6 +48,7 @@ class Obj:
 		self.normals = []
 		self.texcoords = []
 		self.faces = []
+		self.mvp = np.matrix(identity, np.float32)
 		self.colors = [
 			[0, 0, 0],
 			[1, 0, 0],
@@ -108,3 +118,12 @@ class Obj:
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, ctypes.c_void_p(12))
 		glEnableVertexAttribArray(0)
 		glEnableVertexAttribArray(1)
+
+	def translate(self, x, y, z):
+		self.mvp = np.matrix(glm.translate(self.mvp, [x, y, z]), np.float32)
+
+	def rotate(self, angle, x, y, z):
+		self.mvp = np.matrix(glm.rotate(self.mvp, angle, [x, y, z]), np.float32)
+
+	def scale(self, x, y, z):
+		self.mvp = np.matrix(glm.scale(self.mvp, [x, y, z]), np.float32)
