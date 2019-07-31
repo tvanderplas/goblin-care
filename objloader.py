@@ -12,6 +12,14 @@ identity = [
 	[0, 0, 0, 1]
 ]
 
+PERSPECTIVE = np.matrix(identity, np.float32)
+obj_list = []
+
+def set_perspective(angle, width, height, z_min, z_max):
+	PERSPECTIVE = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
+	for i in obj_list:
+		i.perspective = PERSPECTIVE
+
 def Mtl(filename):
 	contents = {}
 	mtl = None
@@ -48,7 +56,8 @@ class Obj:
 		self.normals = []
 		self.texcoords = []
 		self.faces = []
-		self.mvp = np.matrix(identity, np.float32)
+		self.model = np.matrix(identity, np.float32)
+		self.perspective = PERSPECTIVE
 		self.colors = [
 			[0, 0, 0],
 			[1, 0, 0],
@@ -100,6 +109,7 @@ class Obj:
 		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
 		self.indices -= 1 # change from 1-indexed to 0-indexed
 		self.vertices = np.array([i + j for i, j in zip(self.vertices, self.colors)], dtype=np.float32)
+		obj_list.append(self)
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
@@ -119,11 +129,14 @@ class Obj:
 		glEnableVertexAttribArray(0)
 		glEnableVertexAttribArray(1)
 
+	def set_perspective(self, angle, width, height, z_min, z_max):
+		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
+
 	def translate(self, x, y, z):
-		self.mvp = np.matrix(glm.translate(self.mvp, [x, y, z]), np.float32)
+		self.model = np.matrix(glm.translate(self.model, [x, y, z]), np.float32)
 
 	def rotate(self, angle, x, y, z):
-		self.mvp = np.matrix(glm.rotate(self.mvp, angle, [x, y, z]), np.float32)
+		self.model = np.matrix(glm.rotate(self.model, angle, [x, y, z]), np.float32)
 
 	def scale(self, x, y, z):
-		self.mvp = np.matrix(glm.scale(self.mvp, [x, y, z]), np.float32)
+		self.model = np.matrix(glm.scale(self.model, [x, y, z]), np.float32)

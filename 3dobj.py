@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
-from objloader import Obj, Mtl, identity
+import objloader
 import numpy as np
 from math import pi
 
@@ -12,17 +12,17 @@ def main():
 	display = (800, 600)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 
-	player = Obj('care.obj')
+	player = objloader.Obj('care.obj')
 	player.generate()
-	light_cube = Obj('cube.obj')
+	light_cube = objloader.Obj('cube.obj')
 	light_cube.vertices[::, 0:3] /= 10
 	light_cube.generate()
 
 	white = (1, 1, 1)
 	red = (1, 0, 0)
-	player_model = np.array(identity)
-	player_view = np.array(identity)
-	player_projection = np.array(identity)
+	player_model = np.array(objloader.identity)
+	player_view = np.array(objloader.identity)
+	player_projection = np.array(objloader.identity)
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
 	layout (location = 0) in vec3 aPos;
@@ -102,8 +102,9 @@ def main():
 		'transform': glGetUniformLocation(lamp_shader, 'transform')
 	}
 
-	light_cube.translate(.5, -.5, 0)
-	light_cube.scale(.5, .5, .5)
+	objloader.set_perspective(pi / 4, *display, 0, 100)
+	light_cube.translate(0, 0, -5)
+	# light_cube.scale(5, 5, 5)
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
@@ -119,8 +120,8 @@ def main():
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['projection'], 1, False, player_projection)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
-		light_cube.rotate(pi / 100, 1, 0, 1)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['transform'], 1, False, light_cube.mvp)
+		light_cube.rotate(pi / 100, 3, 0, 1)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['transform'], 1, False, light_cube.model * light_cube.perspective)
 		glBindVertexArray(light_cube.VAO)
 		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, None)
 
