@@ -24,6 +24,8 @@ def main():
 	layout (location = 1) in vec3 vertex_normal;
 	layout (location = 2) in vec3 vertex_color;
 
+	out vec3 position;
+	out vec3 normal;
 	out vec3 color;
 
 	uniform mat4 car_transform;
@@ -31,14 +33,19 @@ def main():
 	void main()
 	{
 		gl_Position = car_transform * vec4(vertex_position, 1.0);
+		position = vertex_position;
+		normal = vertex_normal;
 		color = vertex_color;
 	}""", GL_VERTEX_SHADER)
 	car_fragment_shader = shaders.compileShader("""
 	#version 330 core
 	out vec4 FragColor;
 
+	in vec3 position;
+	in vec3 normal;
 	in vec3 color;
 	uniform vec3 light_color;
+	uniform vec3 light_position;
 
 	void main()
 	{
@@ -46,7 +53,10 @@ def main():
 		float ambientStrength = 0.1;
 		vec3 ambient = ambientStrength * light_color;
 
-		vec3 result = ambient * color;
+		vec3 light_direction = normalize(light_position - position);
+		float diff = max(dot(normal, light_direction), 0.0);
+		vec3 diffuse = diff * light_color;
+		vec3 result = (ambient + diffuse) * color;
 		FragColor = vec4(result, 1.0);
 	}""", GL_FRAGMENT_SHADER)
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
@@ -57,6 +67,8 @@ def main():
 	layout (location = 1) in vec3 vertex_normal;
 	layout (location = 2) in vec3 vertex_color;
 
+	out vec3 position;
+	out vec3 normal;
 	out vec3 color;
 
 	uniform mat4 lamp_transform;
@@ -64,12 +76,16 @@ def main():
 	void main()
 	{
 		gl_Position = lamp_transform * vec4(vertex_position, 1.0);
+		position = vec3(lamp_transform * vec4(vertex_position, 1.0));
+		normal = vertex_normal;
 		color = vertex_color;
 	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""
 	#version 330 core
 	out vec4 FragColor;
 
+	in vec3 position;
+	in vec3 normal;
 	in vec3 color;
 
 	void main()
@@ -80,6 +96,7 @@ def main():
 	UNIFORM_LOCATIONS = {
 		'car_transform': glGetUniformLocation(car_shader, 'car_transform'),
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
+		'light_position': glGetUniformLocation(car_shader, 'light_position'),
 		'lamp_transform': glGetUniformLocation(lamp_shader, 'lamp_transform')
 	}
 	shaders.glUseProgram(car_shader) # pylint: disable=no-member
@@ -102,6 +119,7 @@ def main():
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		player.rotate(pi / 1000, 0, 0, 1)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, player.model * player.perspective)
+		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
 		glBindVertexArray(player.VAO)
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
 
