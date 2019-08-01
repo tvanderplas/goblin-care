@@ -28,6 +28,8 @@ def Mtl(filename):
 		values = line.split()
 		if not values: continue
 		if values[0] == 'newmtl':
+			if values[1][:5] == 'color':
+				contents.update(color=values[1][6::])
 			mtl = contents[values[1]] = {}
 		elif mtl is None:
 			raise ValueError("mtl file doesn't start with newmtl stmt")
@@ -58,16 +60,6 @@ class Obj:
 		self.faces = []
 		self.model = np.matrix(identity, np.float32)
 		self.perspective = PERSPECTIVE
-		self.colors = [
-			[0, 0, 0],
-			[1, 0, 0],
-			[0, 1, 0],
-			[0, 0, 1],
-			[1, 1, 0],
-			[1, 0, 1],
-			[0, 1, 1],
-			[1, 1, 1]
-		]
 
 		material = None
 		for line in open(filename, "r"):
@@ -106,9 +98,12 @@ class Obj:
 					else:
 						norms.append(0)
 				self.faces.append((face, norms, texcoords, material))
+		color = self.mtl.get('color', [.5, .5, .5])
+		if isinstance(color, str):
+			self.color = [int(color[i:i+2], 16) for i in (0, 2, 4)]
 		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
 		self.indices -= 1 # change from 1-indexed to 0-indexed
-		self.vertices = np.array([i + j for i, j in zip(self.vertices, self.colors)], dtype=np.float32)
+		self.vertices = np.array([i + self.color for i in self.vertices], dtype=np.float32)
 		obj_list.append(self)
 
 	def generate(self):
