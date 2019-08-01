@@ -81,7 +81,7 @@ def main():
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
 		'lamp_transform': glGetUniformLocation(lamp_shader, 'lamp_transform')
 	}
-	shaders.glUseProgram(car_shader)
+	shaders.glUseProgram(car_shader) # pylint: disable=no-member
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
