@@ -21,17 +21,18 @@ def main():
 
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
-	layout (location = 0) in vec3 position;
-	layout (location = 1) in vec3 test_color;
+	layout (location = 0) in vec3 vertex_position;
+	layout (location = 1) in vec3 vertex_color;
 
 	out vec3 color;
 
 	uniform mat4 car_transform;
+	uniform vec3 light_color;
 
 	void main()
 	{
-		gl_Position = car_transform * vec4(position, 1.0);
-		color = test_color;
+		gl_Position = car_transform * vec4(vertex_position, 1.0);
+		color = vertex_color;
 	}""", GL_VERTEX_SHADER)
 	car_fragment_shader = shaders.compileShader("""
 	#version 330 core
@@ -47,8 +48,8 @@ def main():
 
 	lamp_vertex_shader = shaders.compileShader("""
 	#version 330 core
-	layout (location = 0) in vec3 position;
-	layout (location = 1) in vec3 test_color;
+	layout (location = 0) in vec3 vertex_position;
+	layout (location = 1) in vec3 vertex_color;
 
 	out vec3 color;
 
@@ -56,8 +57,8 @@ def main():
 
 	void main()
 	{
-		gl_Position = lamp_transform * vec4(position, 1.0);
-		color = test_color;
+		gl_Position = lamp_transform * vec4(vertex_position, 1.0);
+		color = vertex_color;
 	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""
 	#version 330 core
@@ -76,10 +77,12 @@ def main():
 	}
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
-	light_cube.translate(-20, 0, -50)
-	player.translate(20, 0, -50)
-	light_cube.rotate(pi / 6, 1, 0, 0)
+	light_cube.translate(10, 10, -50)
+	player.translate(0, 0, -50)
+	player.rotate(pi / 2, -1, 0, 0)
 	player.rotate(pi / 6, 1, 0, 0)
+	player.scale(.1, .1, .1)
+	light_cube.rotate(pi / 6, 1, 0, 0)
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
@@ -87,7 +90,7 @@ def main():
 				quit()
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
-		player.rotate(pi / 1000, 0, 1, 0)
+		player.rotate(pi / 1000, 0, 0, 1)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, player.model * player.perspective)
 		glBindVertexArray(player.VAO)
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
