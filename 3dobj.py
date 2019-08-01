@@ -27,7 +27,6 @@ def main():
 	out vec3 color;
 
 	uniform mat4 car_transform;
-	uniform vec3 light_color;
 
 	void main()
 	{
@@ -39,10 +38,16 @@ def main():
 	out vec4 FragColor;
 
 	in vec3 color;
+	uniform vec3 light_color;
 
 	void main()
 	{
-		FragColor = vec4(color, 1.0);
+		// ambient
+		float ambientStrength = 0.1;
+		vec3 ambient = ambientStrength * light_color;
+
+		vec3 result = ambient * color;
+		FragColor = vec4(result, 1.0);
 	}""", GL_FRAGMENT_SHADER)
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 
@@ -73,8 +78,11 @@ def main():
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 	UNIFORM_LOCATIONS = {
 		'car_transform': glGetUniformLocation(car_shader, 'car_transform'),
+		'light_color': glGetUniformLocation(car_shader, 'light_color'),
 		'lamp_transform': glGetUniformLocation(lamp_shader, 'lamp_transform')
 	}
+	shaders.glUseProgram(car_shader)
+	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 10, -50)
