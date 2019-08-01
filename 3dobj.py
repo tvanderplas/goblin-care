@@ -16,13 +16,13 @@ def main():
 	player = objloader.Obj('care.obj')
 	player.generate()
 	light_cube = objloader.Obj('cube.obj')
-	light_cube.vertices[::, 0:3] /= 6
 	light_cube.generate()
 
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
 	layout (location = 0) in vec3 vertex_position;
-	layout (location = 1) in vec3 vertex_color;
+	layout (location = 1) in vec3 vertex_normal;
+	layout (location = 2) in vec3 vertex_color;
 
 	out vec3 color;
 
@@ -54,7 +54,8 @@ def main():
 	lamp_vertex_shader = shaders.compileShader("""
 	#version 330 core
 	layout (location = 0) in vec3 vertex_position;
-	layout (location = 1) in vec3 vertex_color;
+	layout (location = 1) in vec3 vertex_normal;
+	layout (location = 2) in vec3 vertex_color;
 
 	out vec3 color;
 
@@ -86,6 +87,7 @@ def main():
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 10, -50)
+	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
 	player.rotate(pi / 2, -1, 0, 0)
 	player.rotate(pi / 6, 1, 0, 0)

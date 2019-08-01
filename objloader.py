@@ -4,6 +4,7 @@ from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 import numpy as np
 import glm
 from math import pi
+from ast import literal_eval
 
 identity = [
 	[1, 0, 0, 0],
@@ -54,12 +55,15 @@ def Mtl(filename):
 class Obj:
 	def __init__(self, filename, swapyz=False):
 		"""Loads a Wavefront OBJ file. """
-		self.vertices = []
+		self.points = [] # only unique positions
+		self.vertex_info = [] # unique combinations of position, normal and color
 		self.normals = []
 		self.texcoords = []
 		self.faces = []
 		self.model = np.matrix(identity, np.float32)
 		self.perspective = PERSPECTIVE
+		obj_list.append(self)
+		self.position = np.array([0, 0, 0], np.float32)
 
 		material = None
 		for line in open(filename, "r"):
@@ -70,7 +74,7 @@ class Obj:
 				v = list(map(float, values[1:4]))
 				if swapyz:
 					v = v[0], v[2], v[1]
-				self.vertices.append(v)
+				self.points.append(v)
 			elif values[0] == 'vn':
 				v = list(map(float, values[1:4]))
 				if swapyz:
@@ -101,10 +105,21 @@ class Obj:
 		color = self.mtl.get('color', [.5, .5, .5])
 		if isinstance(color, str):
 			self.color = [int(color[i:i+2], 16) / 256 for i in (0, 2, 4)]
-		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
-		self.indices -= 1 # change from 1-indexed to 0-indexed
-		self.vertices = np.array([i + self.color for i in self.vertices], dtype=np.float32)
-		obj_list.append(self)
+		self.indices = [f[0] for f in self.faces]
+		self.faces = [self.indices[i] + self.normals[i] for i in range(len(self.indices))]
+		vertex_info = {}
+		for i, face in enumerate(self.faces):
+			for j, vertex in enumerate([*[self.points[i - 1] + face[3:] + self.color for i in face[:3]]]):
+				strung = str(vertex)
+				if strung in vertex_info:
+					self.indices[i][j] = vertex_info[strung]
+				else:
+					self.indices[i][j] = len(vertex_info)
+					vertex_info[strung] = self.indices[i][j]
+		for i in vertex_info.keys():
+			self.vertex_info.append(literal_eval(i))
+		self.vertex_info = np.array(self.vertex_info, np.float32)
+		self.indices = np.array(self.indices, np.int32).flatten()
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
@@ -114,15 +129,17 @@ class Obj:
 		self.EBO = glGenBuffers(1)
 
 		glBindBuffer(GL_ARRAY_BUFFER, self.VBO)
-		glBufferData(GL_ARRAY_BUFFER, self.vertices, GL_STATIC_DRAW)
+		glBufferData(GL_ARRAY_BUFFER, self.vertex_info, GL_STATIC_DRAW)
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, None)
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, ctypes.c_void_p(12))
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 36, None)
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 36, ctypes.c_void_p(12))
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 36, ctypes.c_void_p(24))
 		glEnableVertexAttribArray(0)
 		glEnableVertexAttribArray(1)
+		glEnableVertexAttribArray(2)
 		glBindVertexArray(0)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
@@ -130,6 +147,7 @@ class Obj:
 
 	def translate(self, x, y, z):
 		self.model = np.matrix(glm.translate(self.model, [x, y, z]), np.float32)
+		self.position += np.array([x, y, z], np.float32)
 
 	def rotate(self, angle, x, y, z):
 		self.model = np.matrix(glm.rotate(self.model, angle, [x, y, z]), np.float32)
