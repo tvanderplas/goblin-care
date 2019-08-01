@@ -100,7 +100,7 @@ class Obj:
 				self.faces.append((face, norms, texcoords, material))
 		color = self.mtl.get('color', [.5, .5, .5])
 		if isinstance(color, str):
-			self.color = [int(color[i:i+2], 16) for i in (0, 2, 4)]
+			self.color = [int(color[i:i+2], 16) / 256 for i in (0, 2, 4)]
 		self.indices = np.array([i[0] for i in self.faces], dtype=np.int32).flatten()
 		self.indices -= 1 # change from 1-indexed to 0-indexed
 		self.vertices = np.array([i + self.color for i in self.vertices], dtype=np.float32)
