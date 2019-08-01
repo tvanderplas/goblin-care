@@ -108,10 +108,10 @@ class Obj:
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
-		glGenVertexArrays(1, id(self.VAO))
+		self.VAO = glGenVertexArrays(1)
+		glBindVertexArray(self.VAO)
 		self.VBO = glGenBuffers(1)
 		self.EBO = glGenBuffers(1)
-		glBindVertexArray(self.VAO)
 
 		glBindBuffer(GL_ARRAY_BUFFER, self.VBO)
 		glBufferData(GL_ARRAY_BUFFER, self.vertices, GL_STATIC_DRAW)
@@ -123,6 +123,7 @@ class Obj:
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, ctypes.c_void_p(12))
 		glEnableVertexAttribArray(0)
 		glEnableVertexAttribArray(1)
+		glBindVertexArray(0)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
