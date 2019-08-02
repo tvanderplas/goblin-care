@@ -9,11 +9,11 @@ from math import pi
 
 def main():
 	pygame.init() # pylint: disable=no-member
-	display = (800, 600)
+	display = (1024, 768)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	player = objloader.Obj('care.obj')
+	player = objloader.Obj('cube.obj')
 	player.generate()
 	light_cube = objloader.Obj('cube.obj')
 	light_cube.generate()
@@ -105,11 +105,11 @@ def main():
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
-	light_cube.translate(10, 10, -25)
+	light_cube.translate(10, 5, -25)
 	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
-	player.rotate(pi / 2, -1, 0, 0)
-	player.rotate(pi / 6, 1, 0, 0)
+	player.rotate(pi, 0, 0, 1)
+	player.rotate(pi / 3, 1, 0, 0)
 	player.scale(.1, .1, .1)
 	light_cube.rotate(pi / 6, 1, 0, 0)
 	while True:
@@ -120,7 +120,6 @@ def main():
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		player.rotate(pi / 1000, 0, 0, 1)
-		# player.translate(.1, 0, 0)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, player.model * player.perspective)
 		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, player.model)
@@ -128,7 +127,7 @@ def main():
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
-		light_cube.rotate(pi / 1000, 0, 1, 0)
+		light_cube.rotate(pi / 100, 0, -1, 0)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['lamp_transform'], 1, False, light_cube.model * light_cube.perspective)
 		glBindVertexArray(light_cube.VAO)
 		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, None)
