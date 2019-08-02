@@ -29,12 +29,13 @@ def main():
 	out vec3 color;
 
 	uniform mat4 car_transform;
+	uniform mat4 player_model;
 
 	void main()
 	{
 		gl_Position = car_transform * vec4(vertex_position, 1.0);
-		position = vertex_position;
-		normal = vertex_normal;
+		position = vec3(player_model * vec4(vertex_position, 1.0));
+		normal = normalize(mat3(transpose(inverse(player_model))) * vertex_normal);
 		color = vertex_color;
 	}""", GL_VERTEX_SHADER)
 	car_fragment_shader = shaders.compileShader("""
@@ -94,6 +95,7 @@ def main():
 	}""", GL_FRAGMENT_SHADER)
 	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 	UNIFORM_LOCATIONS = {
+		'player_model': glGetUniformLocation(car_shader, 'player_model'),
 		'car_transform': glGetUniformLocation(car_shader, 'car_transform'),
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
 		'light_position': glGetUniformLocation(car_shader, 'light_position'),
@@ -103,7 +105,7 @@ def main():
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
-	light_cube.translate(10, 10, -50)
+	light_cube.translate(10, 10, -25)
 	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
 	player.rotate(pi / 2, -1, 0, 0)
@@ -118,8 +120,10 @@ def main():
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		player.rotate(pi / 1000, 0, 0, 1)
+		# player.translate(.1, 0, 0)
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, player.model * player.perspective)
 		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, player.model)
 		glBindVertexArray(player.VAO)
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
 
