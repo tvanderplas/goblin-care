@@ -11,7 +11,8 @@ turning
 customizable controls
 android release
 
-shading and lighting
+window models and textures
+try pickling
+integrate opengl into game
 use 3d object as 2d sprite
-make textures
 buttons in loot menu
