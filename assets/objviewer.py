@@ -13,8 +13,10 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	player = objloader.Obj('cube.obj')
+	player = objloader.Obj('sedan_body.obj')
 	player.generate()
+	glass = objloader.Obj('sedan_windshield.obj')
+	glass.generate()
 	light_cube = objloader.Obj('cube.obj')
 	light_cube.generate()
 
@@ -108,9 +110,11 @@ def main():
 	light_cube.translate(10, 5, -25)
 	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
-	player.rotate(pi, 0, 0, 1)
-	player.rotate(pi / 3, 1, 0, 0)
-	player.scale(.1, .1, .1)
+	player.rotate(pi / 3, -1, 0, 0)
+	player.scale(.5, .5, .5)
+	glass.translate(0, 0, -50)
+	glass.rotate(pi / 3, -1, 0, 0)
+	glass.scale(.5, .5, .5)
 	light_cube.rotate(pi / 6, 1, 0, 0)
 	while True:
 		for event in pygame.event.get():
@@ -125,6 +129,13 @@ def main():
 		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, player.model)
 		glBindVertexArray(player.VAO)
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
+
+		glass.rotate(pi / 1000, 0, 0, 1)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, glass.model * glass.perspective)
+		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, glass.model)
+		glBindVertexArray(glass.VAO)
+		glDrawElements(GL_TRIANGLES, len(glass.indices), GL_UNSIGNED_INT, None)
 
 		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
 		light_cube.rotate(pi / 100, 0, -1, 0)
