@@ -15,7 +15,7 @@ def main():
 
 	player = objloader.Obj('sedan_body.obj')
 	player.generate()
-	glass = objloader.Obj('sedan_windshield.obj')
+	glass = objloader.Obj('sedan_glass.obj')
 	glass.generate()
 	light_cube = objloader.Obj('cube.obj')
 	light_cube.generate()
