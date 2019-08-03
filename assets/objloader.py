@@ -5,11 +5,6 @@ import numpy as np
 import glm
 from math import pi
 from ast import literal_eval
-import os
-
-cwd = os.getcwd()  # Get the current working directory (cwd)
-files = os.listdir(cwd)  # Get all the files in that directory
-print("Files in '%s': %s" % (cwd, files))
 
 identity = [
 	[1, 0, 0, 0],
@@ -71,7 +66,6 @@ class Obj:
 		self.position = np.array([0, 0, 0], np.float32)
 
 		material = None
-		print(filename)
 		for line in open(filename, "r"):
 			if line.startswith('#'): continue
 			values = line.split()
