@@ -11,7 +11,7 @@ turning
 customizable controls
 android release
 
-window models and textures
+textures
 try pickling
 integrate opengl into game
 use 3d object as 2d sprite
