@@ -46,8 +46,7 @@ def main():
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
-				pygame.quit() # pylint: disable=no-member
-				quit()
+				raise SystemExit
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		player.rotate(pi / 1000, 0, 0, 1)
