@@ -13,11 +13,11 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	player = objloader.Obj('sedan_uvmap.obj')
+	player = objloader.Obj('sedan_uvmap.obj', 'car body.vs', 'car body.fs')
 	player.generate()
-	glass = objloader.Obj('sedan_glass.obj')
+	glass = objloader.Obj('sedan_glass.obj', 'car body.vs', 'car body.fs')
 	glass.generate()
-	light_cube = objloader.Obj('cube.obj')
+	light_cube = objloader.Obj('cube.obj', 'basic vertex shader.vs', 'basic fragment shader.fs')
 	light_cube.generate()
 
 	car_vertex_shader = shaders.compileShader(open('car body.vs'), GL_VERTEX_SHADER)

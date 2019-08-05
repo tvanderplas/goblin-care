@@ -39,7 +39,7 @@ def dedup_and_index(sequence):
 	return indices, new_sequence
 
 class Obj:
-	def __init__(self, filename, swapyz=False):
+	def __init__(self, filename, v_shader, f_shader):
 		"""Loads a Wavefront OBJ file. """
 		self.filename = filename
 		self.vertex_info = [] # unique combinations of position, normal and color
@@ -47,8 +47,11 @@ class Obj:
 		self.perspective = PERSPECTIVE
 		obj_list.append(self)
 		self.position = np.array([0, 0, 0], np.float32)
+		self.shader = None
+		self.vertex_shader = open(v_shader)
+		self.fragment_shader = open(f_shader)
 
-		scene = Wavefront(self.filename, collect_faces=True)
+		scene = Wavefront(self.filename)
 		scene.parse()
 
 		for material in scene.materials.values():
@@ -60,7 +63,6 @@ class Obj:
 			indices, vertex_info = dedup_and_index(vertices)
 		self.indices = np.array(indices, np.int32)
 		self.vertex_info = np.array(vertex_info, np.float32)
-		self.shader = None
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
@@ -84,38 +86,9 @@ class Obj:
 		glBindVertexArray(0)
 
 	def compile_shader(self):
-		self.vertex_shader = shaders.compileShader("""
-		#version 330 core
-		layout (location = 0) in vec2 texture_coord;
-		layout (location = 1) in vec3 vertex_normal;
-		layout (location = 2) in vec3 vertex_position;
-
-		out vec3 position;
-		out vec3 normal;
-		out vec3 color;
-
-		uniform mat4 transform;
-
-		void main()
-		{
-			gl_Position = transform * vec4(vertex_position, 1.0);
-			position = vec3(transform * vec4(vertex_position, 1.0));
-			normal = vertex_normal;
-			color = vec3(0.5, 0.5, 0.5);
-		}""", GL_VERTEX_SHADER)
-		self.fragment_shader = shaders.compileShader("""
-		#version 330 core
-		out vec4 FragColor;
-
-		in vec3 position;
-		in vec3 normal;
-		in vec3 color;
-
-		void main()
-		{
-			FragColor = vec4(color, 1.0);
-		}""", GL_FRAGMENT_SHADER)
-		self.shader = shaders.compileProgram(self.vertex_shader, self.fragment_shader)
+		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
+		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
+		self.shader = shaders.compileProgram(vertex_shader, fragment_shader)
 		self.uniforms = {}
 		for name in ('transform'):
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
