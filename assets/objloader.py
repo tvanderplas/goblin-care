@@ -1,4 +1,5 @@
 
+from pywavefront import Wavefront
 import pygame
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 import numpy as np
@@ -70,6 +71,7 @@ def Mtl(filename):
 class Obj:
 	def __init__(self, filename, swapyz=False):
 		"""Loads a Wavefront OBJ file. """
+		self.filename = filename
 		self.points = [] # only unique positions
 		self.vertex_info = [] # unique combinations of position, normal and color
 		self.normals = []
@@ -117,9 +119,11 @@ class Obj:
 					else:
 						norms.append(0)
 				self.faces.append((face, norms, texcoords, material))
-		color = self.mtl.get('color', [.5, .5, .5])
-		if isinstance(color, str):
-			self.color = [int(color[i:i+2], 16) / 256 for i in (0, 2, 4)]
+		default_color = self.mtl.get('color', [.5, .5, .5])
+		if isinstance(default_color, str):
+			self.color = [int(default_color[i:i+2], 16) / 256 for i in (0, 2, 4)]
+		else:
+			self.color = default_color
 		self.indices = [f[0] for f in self.faces]
 		self.faces = [self.indices[i] + self.normals[i] for i in range(len(self.indices))]
 		vertex_info = {}
@@ -135,6 +139,27 @@ class Obj:
 			self.vertex_info.append(literal_eval(i))
 		self.vertex_info = np.array(self.vertex_info, np.float32)
 		self.indices = np.array(self.indices, np.int32).flatten()
+
+	def format_parsed(self, vertex_format):
+		result = [None * 3]
+		for i in vertex_format.split('_'):
+			pass
+		print(vertex_format)
+
+	def new_loader(self):
+		scene = Wavefront(self.filename, strict=True, encoding="iso-8859-1", parse=False)
+		scene.parse()
+
+		for name, material in scene.materials.items():
+			vertex_format = 0
+			self.format_parsed(material.vertex_format)
+			for i in material.vertex_format:
+				if i.isdigit():
+					vertex_format += int(i)
+			vertices = np.array(material.vertices, np.float32).reshape(len(material.vertices) // vertex_format, vertex_format)
+			self.indices, self.vertex_info = dedup_and_index(vertices)
+			for n in self.vertex_info:
+				pass
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
