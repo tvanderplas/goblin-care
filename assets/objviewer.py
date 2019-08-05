@@ -64,44 +64,11 @@ def main():
 	}""", GL_FRAGMENT_SHADER)
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 
-	lamp_vertex_shader = shaders.compileShader("""
-	#version 330 core
-	layout (location = 0) in vec2 texture_coord;
-	layout (location = 1) in vec3 vertex_normal;
-	layout (location = 2) in vec3 vertex_position;
-
-	out vec3 position;
-	out vec3 normal;
-	out vec3 color;
-
-	uniform mat4 lamp_transform;
-
-	void main()
-	{
-		gl_Position = lamp_transform * vec4(vertex_position, 1.0);
-		position = vec3(lamp_transform * vec4(vertex_position, 1.0));
-		normal = vertex_normal;
-		color = vec3(0.5, 0.5, 0.5);
-	}""", GL_VERTEX_SHADER)
-	lamp_fragment_shader = shaders.compileShader("""
-	#version 330 core
-	out vec4 FragColor;
-
-	in vec3 position;
-	in vec3 normal;
-	in vec3 color;
-
-	void main()
-	{
-		FragColor = vec4(color, 1.0);
-	}""", GL_FRAGMENT_SHADER)
-	lamp_shader = shaders.compileProgram(lamp_vertex_shader, lamp_fragment_shader)
 	UNIFORM_LOCATIONS = {
 		'player_model': glGetUniformLocation(car_shader, 'player_model'),
 		'car_transform': glGetUniformLocation(car_shader, 'car_transform'),
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
-		'light_position': glGetUniformLocation(car_shader, 'light_position'),
-		'lamp_transform': glGetUniformLocation(lamp_shader, 'lamp_transform')
+		'light_position': glGetUniformLocation(car_shader, 'light_position')
 	}
 	shaders.glUseProgram(car_shader) # pylint: disable=no-member
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
@@ -137,9 +104,9 @@ def main():
 		glBindVertexArray(glass.VAO)
 		glDrawElements(GL_TRIANGLES, len(glass.indices), GL_UNSIGNED_INT, None)
 
-		shaders.glUseProgram(lamp_shader) # pylint: disable=no-member
+		light_cube.use_shader() # pylint: disable=no-member
 		light_cube.rotate(pi / 100, 0, -1, 0)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['lamp_transform'], 1, False, light_cube.model * light_cube.perspective)
+		glUniformMatrix4fv(light_cube.uniforms.get('transform', 0), 1, False, light_cube.model * light_cube.perspective)
 		glBindVertexArray(light_cube.VAO)
 		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, None)
 
