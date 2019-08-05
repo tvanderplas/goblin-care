@@ -63,6 +63,7 @@ class Obj:
 					vertex_format += int(i)
 			vertices = np.array(material.vertices, np.float32).reshape(len(material.vertices) // vertex_format, vertex_format)
 			indices, vertex_info = dedup_and_index(vertices)
+			self.color = material.diffuse
 		self.indices = np.array(indices, np.int32)
 		self.vertex_info = np.array(vertex_info, np.float32)
 
@@ -109,9 +110,9 @@ class Obj:
 			if name == 'transform':
 				glUniformMatrix4fv(address, 1, False, self.model * self.perspective)
 			if name == 'light_color':
-				glUniform3f(address, *self.light_color)
+				glUniform3f(address, *self.light_color[:3])
 			if name == 'light_position':
-				glUniform3f(address, *self.light_position)
+				glUniform3f(address, *self.light_position[:3])
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
