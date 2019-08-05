@@ -85,9 +85,6 @@ class Obj:
 		glEnableVertexAttribArray(2)
 		glBindVertexArray(0)
 
-	def define_shaders(self, vs_filename, fs_filename, uniforms):
-		pass
-
 	def compile_shader(self):
 		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
 		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
