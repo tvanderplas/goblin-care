@@ -1,6 +1,6 @@
 # FreeCAD v0.18 build16117 (Git) Arch module
 # http://www.freecadweb.org
-newmtl color_ff0000
+newmtl car_material
 Kd 1.0 0.0 0.0
 d 0
 # Material Count: 1

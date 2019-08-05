@@ -2,7 +2,7 @@
 # http://www.freecadweb.org
 mtllib sedan_body.mtl
 o Fusion
-usemtl color_808080
+usemtl car_material
 v 9.930123 -9.058150 0.454497
 v 5.518815 -9.016127 0.344826
 v 9.909514 -9.000000 0.303700

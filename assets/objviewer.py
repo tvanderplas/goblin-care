@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
-import objloader
+import newloader
 import numpy as np
 from math import pi
 
@@ -13,18 +13,18 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	player = objloader.Obj('sedan_body.obj')
+	player = newloader.Obj('sedan_uvmap.obj')
 	player.generate()
-	glass = objloader.Obj('sedan_glass.obj')
+	glass = newloader.Obj('sedan_glass.obj')
 	glass.generate()
-	light_cube = objloader.Obj('cube.obj')
+	light_cube = newloader.Obj('cube.obj')
 	light_cube.generate()
 
 	car_vertex_shader = shaders.compileShader("""
 	#version 330 core
-	layout (location = 0) in vec3 vertex_position;
+	layout (location = 0) in vec2 texture_coord;
 	layout (location = 1) in vec3 vertex_normal;
-	layout (location = 2) in vec3 vertex_color;
+	layout (location = 2) in vec3 vertex_position;
 
 	out vec3 position;
 	out vec3 normal;
@@ -38,7 +38,7 @@ def main():
 		gl_Position = car_transform * vec4(vertex_position, 1.0);
 		position = vec3(player_model * vec4(vertex_position, 1.0));
 		normal = normalize(mat3(transpose(inverse(player_model))) * vertex_normal);
-		color = vertex_color;
+		color = vec3(0.5, 0.5, 0.5);
 	}""", GL_VERTEX_SHADER)
 	car_fragment_shader = shaders.compileShader("""
 	#version 330 core
@@ -66,9 +66,9 @@ def main():
 
 	lamp_vertex_shader = shaders.compileShader("""
 	#version 330 core
-	layout (location = 0) in vec3 vertex_position;
+	layout (location = 0) in vec2 texture_coord;
 	layout (location = 1) in vec3 vertex_normal;
-	layout (location = 2) in vec3 vertex_color;
+	layout (location = 2) in vec3 vertex_position;
 
 	out vec3 position;
 	out vec3 normal;
@@ -81,7 +81,7 @@ def main():
 		gl_Position = lamp_transform * vec4(vertex_position, 1.0);
 		position = vec3(lamp_transform * vec4(vertex_position, 1.0));
 		normal = vertex_normal;
-		color = vertex_color;
+		color = vec3(0.5, 0.5, 0.5);
 	}""", GL_VERTEX_SHADER)
 	lamp_fragment_shader = shaders.compileShader("""
 	#version 330 core
@@ -106,7 +106,7 @@ def main():
 	shaders.glUseProgram(car_shader) # pylint: disable=no-member
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
-	objloader.set_perspective(pi / 4, *display, 0.1, 100)
+	newloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
