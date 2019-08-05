@@ -94,12 +94,12 @@ class Obj:
 		out vec3 normal;
 		out vec3 color;
 
-		uniform mat4 lamp_transform;
+		uniform mat4 transform;
 
 		void main()
 		{
-			gl_Position = lamp_transform * vec4(vertex_position, 1.0);
-			position = vec3(lamp_transform * vec4(vertex_position, 1.0));
+			gl_Position = transform * vec4(vertex_position, 1.0);
+			position = vec3(transform * vec4(vertex_position, 1.0));
 			normal = vertex_normal;
 			color = vec3(0.5, 0.5, 0.5);
 		}""", GL_VERTEX_SHADER)
@@ -117,7 +117,7 @@ class Obj:
 		}""", GL_FRAGMENT_SHADER)
 		self.shader = shaders.compileProgram(self.vertex_shader, self.fragment_shader)
 		self.uniforms = {}
-		for name in ('lamp_transform'):
+		for name in ('transform'):
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
 	def use_shader(self):
