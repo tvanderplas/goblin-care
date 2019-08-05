@@ -20,48 +20,8 @@ def main():
 	light_cube = objloader.Obj('cube.obj')
 	light_cube.generate()
 
-	car_vertex_shader = shaders.compileShader("""
-	#version 330 core
-	layout (location = 0) in vec2 texture_coord;
-	layout (location = 1) in vec3 vertex_normal;
-	layout (location = 2) in vec3 vertex_position;
-
-	out vec3 position;
-	out vec3 normal;
-	out vec3 color;
-
-	uniform mat4 car_transform;
-	uniform mat4 player_model;
-
-	void main()
-	{
-		gl_Position = car_transform * vec4(vertex_position, 1.0);
-		position = vec3(player_model * vec4(vertex_position, 1.0));
-		normal = normalize(mat3(transpose(inverse(player_model))) * vertex_normal);
-		color = vec3(0.5, 0.5, 0.5);
-	}""", GL_VERTEX_SHADER)
-	car_fragment_shader = shaders.compileShader("""
-	#version 330 core
-	out vec4 FragColor;
-
-	in vec3 position;
-	in vec3 normal;
-	in vec3 color;
-	uniform vec3 light_color;
-	uniform vec3 light_position;
-
-	void main()
-	{
-		// ambient
-		float ambientStrength = 0.1;
-		vec3 ambient = ambientStrength * light_color;
-
-		vec3 light_direction = normalize(light_position - position);
-		float diff = max(dot(normal, light_direction), 0.0);
-		vec3 diffuse = diff * light_color;
-		vec3 result = (ambient + diffuse) * color;
-		FragColor = vec4(result, 1.0);
-	}""", GL_FRAGMENT_SHADER)
+	car_vertex_shader = shaders.compileShader(open('car body.vs'), GL_VERTEX_SHADER)
+	car_fragment_shader = shaders.compileShader(open('car body.fs'), GL_FRAGMENT_SHADER)
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 
 	UNIFORM_LOCATIONS = {
