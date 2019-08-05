@@ -50,7 +50,7 @@ class Obj:
 		scene = Wavefront(self.filename, collect_faces=True)
 		scene.parse()
 
-		for name, material in scene.materials.items():
+		for material in scene.materials.values():
 			vertex_format = 0
 			for i in material.vertex_format:
 				if i.isdigit():
