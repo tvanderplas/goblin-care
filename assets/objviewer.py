@@ -25,8 +25,8 @@ def main():
 	car_shader = shaders.compileProgram(car_vertex_shader, car_fragment_shader)
 
 	UNIFORM_LOCATIONS = {
-		'player_model': glGetUniformLocation(car_shader, 'player_model'),
-		'car_transform': glGetUniformLocation(car_shader, 'car_transform'),
+		'model': glGetUniformLocation(car_shader, 'model'),
+		'transform': glGetUniformLocation(car_shader, 'transform'),
 		'light_color': glGetUniformLocation(car_shader, 'light_color'),
 		'light_position': glGetUniformLocation(car_shader, 'light_position')
 	}
@@ -50,16 +50,16 @@ def main():
 
 		shaders.glUseProgram(car_shader) # pylint: disable=no-member
 		player.rotate(pi / 1000, 0, 0, 1)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, player.model * player.perspective)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['transform'], 1, False, player.model * player.perspective)
 		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, player.model)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['model'], 1, False, player.model)
 		glBindVertexArray(player.VAO)
 		glDrawElements(GL_TRIANGLES, len(player.indices), GL_UNSIGNED_INT, None)
 
 		glass.rotate(pi / 1000, 0, 0, 1)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['car_transform'], 1, False, glass.model * glass.perspective)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['transform'], 1, False, glass.model * glass.perspective)
 		glUniform3f(UNIFORM_LOCATIONS['light_position'], *light_cube.position)
-		glUniformMatrix4fv(UNIFORM_LOCATIONS['player_model'], 1, False, glass.model)
+		glUniformMatrix4fv(UNIFORM_LOCATIONS['model'], 1, False, glass.model)
 		glBindVertexArray(glass.VAO)
 		glDrawElements(GL_TRIANGLES, len(glass.indices), GL_UNSIGNED_INT, None)
 

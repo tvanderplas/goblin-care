@@ -85,18 +85,23 @@ class Obj:
 		glEnableVertexAttribArray(2)
 		glBindVertexArray(0)
 
+	def define_shaders(self, vs_filename, fs_filename, uniforms):
+		pass
+
 	def compile_shader(self):
 		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
 		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
 		self.shader = shaders.compileProgram(vertex_shader, fragment_shader)
 		self.uniforms = {}
-		for name in ('transform'):
+		for name in ('model', 'transform', 'light_color', 'light_position'):
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
 	def use_shader(self):
 		if self.shader == None:
 			self.compile_shader()
 		shaders.glUseProgram(self.shader) # pylint: disable=no-member
+		for uniform in self.uniforms.keys():
+			glUniformMatrix4fv(self.uniforms.get('transform', 0), 1, False, self.model * self.perspective)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
@@ -113,6 +118,5 @@ class Obj:
 
 	def draw(self):
 		self.use_shader() # pylint: disable=no-member
-		glUniformMatrix4fv(self.uniforms.get('transform', 0), 1, False, self.model * self.perspective)
 		glBindVertexArray(self.VAO)
 		glDrawElements(GL_TRIANGLES, len(self.indices), GL_UNSIGNED_INT, None)

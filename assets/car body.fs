@@ -5,6 +5,7 @@ out vec4 FragColor;
 in vec3 position;
 in vec3 normal;
 in vec3 color;
+
 uniform vec3 light_color;
 uniform vec3 light_position;
 
