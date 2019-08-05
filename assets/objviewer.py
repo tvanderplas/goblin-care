@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
-import newloader
+import objloader
 import numpy as np
 from math import pi
 
@@ -13,11 +13,11 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	player = newloader.Obj('sedan_uvmap.obj')
+	player = objloader.Obj('sedan_uvmap.obj')
 	player.generate()
-	glass = newloader.Obj('sedan_glass.obj')
+	glass = objloader.Obj('sedan_glass.obj')
 	glass.generate()
-	light_cube = newloader.Obj('cube.obj')
+	light_cube = objloader.Obj('cube.obj')
 	light_cube.generate()
 
 	car_vertex_shader = shaders.compileShader("""
@@ -106,7 +106,7 @@ def main():
 	shaders.glUseProgram(car_shader) # pylint: disable=no-member
 	glUniform3fv(UNIFORM_LOCATIONS['light_color'], 1, (1,1,1))
 
-	newloader.set_perspective(pi / 4, *display, 0.1, 100)
+	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
