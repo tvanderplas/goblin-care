@@ -137,3 +137,9 @@ class Obj:
 
 	def scale(self, x, y, z):
 		self.model = np.matrix(glm.scale(self.model, [x, y, z]), np.float32)
+
+	def draw(self):
+		self.use_shader() # pylint: disable=no-member
+		glUniformMatrix4fv(self.uniforms.get('transform', 0), 1, False, self.model * self.perspective)
+		glBindVertexArray(self.VAO)
+		glDrawElements(GL_TRIANGLES, len(self.indices), GL_UNSIGNED_INT, None)

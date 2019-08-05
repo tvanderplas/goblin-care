@@ -104,11 +104,8 @@ def main():
 		glBindVertexArray(glass.VAO)
 		glDrawElements(GL_TRIANGLES, len(glass.indices), GL_UNSIGNED_INT, None)
 
-		light_cube.use_shader() # pylint: disable=no-member
 		light_cube.rotate(pi / 100, 0, -1, 0)
-		glUniformMatrix4fv(light_cube.uniforms.get('transform', 0), 1, False, light_cube.model * light_cube.perspective)
-		glBindVertexArray(light_cube.VAO)
-		glDrawElements(GL_TRIANGLES, len(light_cube.indices), GL_UNSIGNED_INT, None)
+		light_cube.draw()
 
 		pygame.display.flip()
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
