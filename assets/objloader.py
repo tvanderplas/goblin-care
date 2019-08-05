@@ -93,7 +93,7 @@ class Obj:
 		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
 		self.shader = shaders.compileProgram(vertex_shader, fragment_shader)
 		self.uniforms = {}
-		for name in ('model', 'transform', 'light_color', 'light_position'):
+		for name in ('model', 'transform', 'self_color', 'light_color', 'light_position'):
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
 	def set_light_source(self, source):
@@ -109,6 +109,8 @@ class Obj:
 				glUniformMatrix4fv(address, 1, False, self.model)
 			if name == 'transform':
 				glUniformMatrix4fv(address, 1, False, self.model * self.perspective)
+			if name == 'self_color':
+				glUniform3f(address, *self.color[:3])
 			if name == 'light_color':
 				glUniform3f(address, *self.light_color[:3])
 			if name == 'light_position':

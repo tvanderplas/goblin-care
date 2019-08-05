@@ -10,11 +10,12 @@ out vec3 color;
 
 uniform mat4 transform;
 uniform mat4 model;
+uniform vec3 self_color;
 
 void main()
 {
 	gl_Position = transform * vec4(vertex_position, 1.0);
 	position = vec3(transform * vec4(vertex_position, 1.0));
 	normal = vertex_normal;
-	color = vec3(0.5, 0.5, 0.5);
+	color = self_color;
 }
