@@ -21,6 +21,21 @@ def set_perspective(angle, width, height, z_min, z_max):
 	for i in obj_list:
 		i.perspective = PERSPECTIVE
 
+def dedup_and_index(sequence):
+	sequence_ref = {}
+	new_sequence = []
+	indices = [i for i in range(len(sequence))]
+	for i, vertex in enumerate(list(sequence)):
+		strung = str(list(vertex))
+		if strung in sequence_ref:
+			indices[i] = sequence_ref[strung]
+		else:
+			indices[i] = len(sequence_ref)
+			sequence_ref[strung] = indices[i]
+	for i in sequence_ref.keys():
+		new_sequence.append(literal_eval(i))
+	return indices, new_sequence
+
 def Mtl(filename):
 	contents = {}
 	mtl = None
