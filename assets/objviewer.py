@@ -15,7 +15,7 @@ def main():
 
 	light_cube = objloader.Obj('cube.obj', 'basic vertex shader.vs', 'basic fragment shader.fs')
 	light_cube.generate()
-	player = objloader.Obj('sedan_uvmap.obj', 'car body.vs', 'car body.fs')
+	player = objloader.Obj('sedan_body.obj', 'car body.vs', 'car body.fs')
 	player.generate()
 	player.set_light_source(light_cube)
 	glass = objloader.Obj('sedan_glass.obj', 'car body.vs', 'car body.fs')
