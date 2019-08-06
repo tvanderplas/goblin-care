@@ -25,7 +25,6 @@ def main():
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.rotate(pi / 6, 1, 0, 0)
-	light_cube.scale(.1, .1, .1)
 	player.translate(0, 0, -50)
 	player.rotate(pi / 3, -1, 0, 0)
 	player.scale(.5, .5, .5)
