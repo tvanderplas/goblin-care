@@ -13,12 +13,12 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	light_cube = objloader.Obj('cube.obj', 'basic vertex shader.vs', 'basic fragment shader.fs')
+	light_cube = objloader.Obj('cube.obj', 'light.vs', 'light.fs')
 	light_cube.generate()
-	player = objloader.Obj('sedan_body.obj', 'car body.vs', 'car body.fs')
+	player = objloader.Obj('sedan_body.obj', 'object.vs', 'object.fs')
 	player.generate()
 	player.set_light_source(light_cube)
-	glass = objloader.Obj('sedan_glass.obj', 'car body.vs', 'car body.fs')
+	glass = objloader.Obj('sedan_glass.obj', 'object.vs', 'object.fs')
 	glass.generate()
 	glass.set_light_source(light_cube)
 
@@ -35,7 +35,7 @@ def main():
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				raise SystemExit
-			if (event.type == KEYDOWN and event.key == K_SPACE):
+			if (event.type == KEYDOWN and event.key == K_SPACE): # pylint: disable=undefined-variable
 				player.set_texture(player.texture_mode ^ 1)
 
 		player.rotate(pi / 1000, 0, 0, 1)

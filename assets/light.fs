@@ -1,6 +1,6 @@
 
 #version 330 core
-out vec3 fragment_color;
+out vec4 fragment_color;
 
 in vec3 position;
 in vec3 normal;
@@ -13,5 +13,5 @@ uniform sampler2D texture;
 
 void main()
 {
-	fragment_color = vec3(texture_coord, 0.0);
+	fragment_color = vec4(color, 0.0);
 }
