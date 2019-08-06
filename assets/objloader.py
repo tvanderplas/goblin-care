@@ -53,6 +53,7 @@ class Obj:
 		self.shader = None
 		self.vertex_shader = open(v_shader)
 		self.fragment_shader = open(f_shader)
+		self.texture_mode = 0
 
 		scene = Wavefront(self.filename)
 		scene.parse()
@@ -88,6 +89,18 @@ class Obj:
 		glEnableVertexAttribArray(1)
 		glEnableVertexAttribArray(2)
 
+		glBindVertexArray(0)
+		self.set_texture(self.texture_mode)
+
+	def compile_shader(self):
+		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
+		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
+		self.shader = shaders.compileProgram(vertex_shader, fragment_shader)
+		self.uniforms = {}
+		for name in ('model', 'transform', 'self_color', 'light_color', 'light_position', 'texture_mode'):
+			self.uniforms[name] = glGetUniformLocation(self.shader, name)
+
+	def apply_texture(self):
 		glEnable(GL_TEXTURE_2D)
 		texture_surface = pygame.image.load('uv_test.png')
 		texture_data = pygame.image.tostring(texture_surface, "RGBA", 1)
@@ -101,16 +114,6 @@ class Obj:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 		glGenerateMipmap(GL_TEXTURE_2D)
-
-		glBindVertexArray(0)
-
-	def compile_shader(self):
-		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
-		fragment_shader = shaders.compileShader(self.fragment_shader, GL_FRAGMENT_SHADER)
-		self.shader = shaders.compileProgram(vertex_shader, fragment_shader)
-		self.uniforms = {}
-		for name in ('model', 'transform', 'self_color', 'light_color', 'light_position'):
-			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
 	def set_light_source(self, source):
 		self.light = source
@@ -130,8 +133,13 @@ class Obj:
 				glUniform3f(address, *self.light.color[:3])
 			if name == 'light_position':
 				glUniform3f(address, *self.light.position[:3])
-			# if name == 'texture':
-			# 	glUniform1i(address, self.tex_id)
+			if name == 'texture_mode':
+				glUniform1i(address, self.texture_mode)
+
+	def set_texture(self, setting):
+		self.texture_mode = setting
+		if self.texture_mode:
+			self.apply_texture()
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)

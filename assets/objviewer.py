@@ -35,6 +35,8 @@ def main():
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				raise SystemExit
+			if (event.type == KEYDOWN and event.key == K_SPACE):
+				player.set_texture(player.texture_mode ^ 1)
 
 		player.rotate(pi / 1000, 0, 0, 1)
 		player.draw()

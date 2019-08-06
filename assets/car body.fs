@@ -10,6 +10,7 @@ in vec2 texture_coord;
 uniform vec3 light_color;
 uniform vec3 light_position;
 uniform sampler2D textureObj;
+uniform int texture_mode;
 
 void main()
 {
@@ -21,5 +22,9 @@ void main()
 	float diff = max(dot(normal, light_direction), 0.0);
 	vec3 diffuse = diff * light_color;
 	vec3 result = (ambient + diffuse) * color;
-	fragment_color = texture2D(textureObj, texture_coord);
+	if (texture_mode == 0) {
+		fragment_color = vec4(result, 1.0);
+	} else {
+		fragment_color = texture2D(textureObj, texture_coord);
+	}
 }
