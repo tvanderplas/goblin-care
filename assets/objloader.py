@@ -47,8 +47,9 @@ class Obj:
 		self.perspective = PERSPECTIVE
 		obj_list.append(self)
 		self.position = np.array([0, 0, 0], np.float32)
-		self.light_color = (0, 0, 0)
-		self.light_position = (0, 0, 0)
+		self.light = self
+		self.light.color = (0, 0, 0)
+		self.light.position = (0, 0, 0)
 		self.shader = None
 		self.vertex_shader = open(v_shader)
 		self.fragment_shader = open(f_shader)
@@ -97,8 +98,7 @@ class Obj:
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
 	def set_light_source(self, source):
-		self.light_color = source.color
-		self.light_position = source.position
+		self.light = source
 
 	def use_shader(self):
 		if self.shader == None:
@@ -112,9 +112,9 @@ class Obj:
 			if name == 'self_color':
 				glUniform3f(address, *self.color[:3])
 			if name == 'light_color':
-				glUniform3f(address, *self.light_color[:3])
+				glUniform3f(address, *self.light.color[:3])
 			if name == 'light_position':
-				glUniform3f(address, *self.light_position[:3])
+				glUniform3f(address, *self.light.position[:3])
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
