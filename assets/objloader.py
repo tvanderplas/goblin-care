@@ -87,6 +87,21 @@ class Obj:
 		glEnableVertexAttribArray(0)
 		glEnableVertexAttribArray(1)
 		glEnableVertexAttribArray(2)
+
+		glEnable(GL_TEXTURE_2D)
+		texture_surface = pygame.image.load('uv_test.png')
+		texture_data = pygame.image.tostring(texture_surface, "RGBA", 1)
+		width = texture_surface.get_width()
+		height = texture_surface.get_height()
+
+		# self.tex_id = glGenTextures(1)
+
+		# glBindTexture(GL_TEXTURE_2D, self.tex_id)
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+		glGenerateMipmap(GL_TEXTURE_2D)
+
 		glBindVertexArray(0)
 
 	def compile_shader(self):
@@ -115,6 +130,8 @@ class Obj:
 				glUniform3f(address, *self.light.color[:3])
 			if name == 'light_position':
 				glUniform3f(address, *self.light.position[:3])
+			# if name == 'texture':
+			# 	glUniform1i(address, self.tex_id)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
