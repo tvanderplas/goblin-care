@@ -6,7 +6,8 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 from helpers import moveTo, randedge
 import screen
-image_path = 'game art\\'
+image_path = 'assets\\'
+from assets import objloader
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	surface = pg.image.load(image_path + image_file).convert()
@@ -105,11 +106,11 @@ class Tornado(pg.sprite.Sprite):
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
 
-class Background(pg.sprite.Sprite):
+class Background(objloader.Obj):
 	def __init__(self, image_file):
-		super().__init__()
-		self.surface = pg.transform.scale(pg.image.load(image_path + image_file), (screen.width, screen.height))
-		self.rect = self.surface.get_rect(topleft=(0, 0))
+		super().__init__(image_path + 'square.obj', image_path + 'object.vs', image_path + 'object.fs', image_path + image_file)
+		super().generate()
+		super().set_texture(1)
 
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size, *groups):

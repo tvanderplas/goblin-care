@@ -39,7 +39,7 @@ def dedup_and_index(sequence):
 	return indices, new_sequence
 
 class Obj:
-	def __init__(self, filename, v_shader, f_shader):
+	def __init__(self, filename, v_shader, f_shader, texture_file='uv_test.png'):
 		"""Loads a Wavefront OBJ file. """
 		self.filename = filename
 		self.vertex_info = [] # unique combinations of position, normal and color
@@ -54,6 +54,7 @@ class Obj:
 		self.vertex_shader = open(v_shader)
 		self.fragment_shader = open(f_shader)
 		self.texture_mode = 0
+		self.texture_file = texture_file
 
 		scene = Wavefront(self.filename)
 		scene.parse()
@@ -102,7 +103,7 @@ class Obj:
 
 	def apply_texture(self):
 		glEnable(GL_TEXTURE_2D)
-		texture_surface = pygame.image.load('uv_test.png')
+		texture_surface = pygame.image.load(self.texture_file)
 		texture_data = pygame.image.tostring(texture_surface, "RGBA", 1)
 		width = texture_surface.get_width()
 		height = texture_surface.get_height()
