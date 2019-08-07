@@ -15,34 +15,26 @@ def main():
 
 	light_cube = objloader.Obj('cube.obj', 'light.vs', 'light.fs')
 	light_cube.generate()
-	player = objloader.Obj('sedan_body.obj', 'object.vs', 'object.fs')
-	player.generate()
-	player.set_light_source(light_cube)
-	glass = objloader.Obj('sedan_glass.obj', 'object.vs', 'object.fs')
-	glass.generate()
-	glass.set_light_source(light_cube)
+	square = objloader.Obj('square.obj', 'object.vs', 'object.fs')
+	square.generate()
+	square.set_light_source(light_cube)
 
 	objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.rotate(pi / 6, 1, 0, 0)
-	player.translate(0, 0, -50)
-	player.rotate(pi / 3, -1, 0, 0)
-	player.scale(.5, .5, .5)
-	glass.translate(0, 0, -50)
-	glass.rotate(pi / 3, -1, 0, 0)
-	glass.scale(.5, .5, .5)
+	square.translate(0, 0, -50)
+	# square.rotate(pi / 3, -1, 0, 0)
+	# square.scale(.5, .5, .5)
+
 	while True:
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				raise SystemExit
 			if (event.type == KEYDOWN and event.key == K_SPACE): # pylint: disable=undefined-variable
-				player.set_texture(player.texture_mode ^ 1)
+				square.set_texture(square.texture_mode ^ 1)
 
-		player.rotate(pi / 1000, 0, 0, 1)
-		player.draw()
-
-		glass.rotate(pi / 1000, 0, 0, 1)
-		glass.draw()
+		square.rotate(pi / 100, 0, 1, 0)
+		square.draw()
 
 		light_cube.rotate(pi / 100, 0, -1, 0)
 		light_cube.draw()
