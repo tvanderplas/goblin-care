@@ -5,7 +5,6 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 import pygame.freetype as ft
 import screen
-from sprites import image_path
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0), orientation='center'):
@@ -30,7 +29,7 @@ class Text():
 
 class Icon():
 	def __init__(self, location, size, image_file, orientation='center', color=(255, 255, 255)):
-		self.surface = pg.image.load(image_path + image_file).convert()
+		self.surface = pg.image.load(image_file).convert()
 		self.surface.set_colorkey(color, RLEACCEL)
 		self.surface = pg.transform.scale(self.surface, size)
 		self.rect = self.surface.get_rect()

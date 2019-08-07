@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 from helpers import moveTo, randedge
 import screen
-image_path = 'assets\\'
+from assets.loader import *
 from assets import objloader
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
@@ -108,7 +108,7 @@ class Tornado(pg.sprite.Sprite):
 
 class Background(objloader.Obj):
 	def __init__(self, image_file):
-		super().__init__(image_path + 'square.obj', image_path + 'object.vs', image_path + 'object.fs', image_path + image_file)
+		super().__init__(square_obj, object_vs, object_fs, image_file)
 		super().generate()
 		super().set_texture(1)
 

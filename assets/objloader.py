@@ -1,13 +1,11 @@
 
-from pywavefront import Wavefront
-import pygame
+from pygame import image
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
 import numpy as np
 import glm
 from math import pi
 from ast import literal_eval
-
 identity = [
 	[1, 0, 0, 0],
 	[0, 1, 0, 0],
@@ -39,9 +37,8 @@ def dedup_and_index(sequence):
 	return indices, new_sequence
 
 class Obj:
-	def __init__(self, filename, v_shader, f_shader, texture_file='uv_test.png'):
+	def __init__(self, scene, v_shader, f_shader, texture):
 		"""Loads a Wavefront OBJ file. """
-		self.filename = filename
 		self.vertex_info = [] # unique combinations of position, normal and color
 		self.model = np.matrix(identity, np.float32)
 		self.perspective = PERSPECTIVE
@@ -51,14 +48,12 @@ class Obj:
 		self.light.color = (0, 0, 0)
 		self.light.position = (0, 0, 0)
 		self.shader = None
-		self.vertex_shader = open(v_shader)
-		self.fragment_shader = open(f_shader)
+		self.vertex_shader = v_shader
+		self.fragment_shader = f_shader
 		self.texture_mode = 0
-		self.texture_file = texture_file
+		self.texture = texture
 
-		scene = Wavefront(self.filename)
 		scene.parse()
-
 		for material in scene.materials.values():
 			vertex_format = 0
 			for i in material.vertex_format:
@@ -101,21 +96,6 @@ class Obj:
 		for name in ('model', 'transform', 'self_color', 'light_color', 'light_position', 'texture_mode'):
 			self.uniforms[name] = glGetUniformLocation(self.shader, name)
 
-	def apply_texture(self):
-		glEnable(GL_TEXTURE_2D)
-		texture_surface = pygame.image.load(self.texture_file)
-		texture_data = pygame.image.tostring(texture_surface, "RGBA", 1)
-		width = texture_surface.get_width()
-		height = texture_surface.get_height()
-
-		# self.tex_id = glGenTextures(1)
-
-		# glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-		glGenerateMipmap(GL_TEXTURE_2D)
-
 	def set_light_source(self, source):
 		self.light = source
 
@@ -141,6 +121,19 @@ class Obj:
 		self.texture_mode = setting
 		if self.texture_mode:
 			self.apply_texture()
+
+	def apply_texture(self):
+		texture_surface = image.load(self.texture)
+		texture_data = image.tostring(texture_surface, "RGBA", 1)
+
+		glBindVertexArray(self.VAO)
+		glEnable(GL_TEXTURE_2D)
+		self.tex_id = glGenTextures(1)
+		glBindTexture(GL_TEXTURE_2D, self.tex_id)
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture_surface.get_size(), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+		glGenerateMipmap(GL_TEXTURE_2D)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
 		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
