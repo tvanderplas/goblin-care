@@ -9,7 +9,7 @@ from game_engine import Game
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
-from assets.loader import *
+from assets.paths import *
 
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
@@ -46,7 +46,7 @@ class Menu():
 	def __init__(self):
 		self.clock = pg.time.Clock()
 		self.view = pg.display.set_mode((screen.width, screen.height), FULLSCREEN|OPENGL|DOUBLEBUF)
-		self.menu_screen = Background('menu.png')
+		self.menu_screen = Background(menu_png)
 		self.play_button = Menu_Button('Play!', (-screen.width // 5, screen.height // 2))
 		self.quit_button = Menu_Button('Quit', (-screen.width // 5, screen.height * 3 // 5))
 	def play(self):

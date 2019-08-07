@@ -6,11 +6,11 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 from helpers import moveTo, randedge
 import screen
-from assets.loader import *
 from assets import objloader
+from assets.paths import *
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
-	surface = pg.image.load(image_path + image_file).convert()
+	surface = pg.image.load(image_file).convert()
 	surface.set_colorkey(color, RLEACCEL)
 	if size is not None:
 		surface = pg.transform.scale(surface, size)

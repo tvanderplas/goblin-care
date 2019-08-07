@@ -2,6 +2,7 @@
 from pygame import image
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
+from pywavefront import Wavefront
 import numpy as np
 import glm
 from math import pi
@@ -48,11 +49,12 @@ class Obj:
 		self.light.color = (0, 0, 0)
 		self.light.position = (0, 0, 0)
 		self.shader = None
-		self.vertex_shader = v_shader
-		self.fragment_shader = f_shader
+		self.vertex_shader = open(v_shader)
+		self.fragment_shader = open(f_shader)
 		self.texture_mode = 0
 		self.texture = texture
 
+		scene = Wavefront(scene)
 		scene.parse()
 		for material in scene.materials.values():
 			vertex_format = 0
