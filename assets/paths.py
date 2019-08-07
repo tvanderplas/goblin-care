@@ -1,5 +1,4 @@
 
-from pywavefront import Wavefront
 from os.path import dirname, realpath, join
 dir_path = dirname(realpath(__file__))
 
