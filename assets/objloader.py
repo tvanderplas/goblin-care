@@ -153,4 +153,5 @@ class Obj:
 	def draw(self):
 		self.use_shader() # pylint: disable=no-member
 		glBindVertexArray(self.VAO)
+		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		glDrawElements(GL_TRIANGLES, len(self.indices), GL_UNSIGNED_INT, None)
