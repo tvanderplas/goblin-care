@@ -7,6 +7,7 @@ import numpy as np
 import glm
 from math import pi
 from ast import literal_eval
+
 identity = [
 	[1, 0, 0, 0],
 	[0, 1, 0, 0],
@@ -37,6 +38,15 @@ def dedup_and_index(sequence):
 		new_sequence.append(literal_eval(i))
 	return indices, new_sequence
 
+class Box:
+	def __init__(self, lx=None, ux=None, ly=None, uy=None, lz=None, uz=None):
+		self.lx = lx
+		self.ux = ux
+		self.ly = ly
+		self.uy = uy
+		self.lz = lz
+		self.uz = uz
+
 class Obj:
 	def __init__(self, scene, v_shader, f_shader, texture):
 		"""Loads a Wavefront OBJ file. """
@@ -66,6 +76,7 @@ class Obj:
 			self.color = material.diffuse
 		self.indices = np.array(indices, np.int32)
 		self.vertex_info = np.array(vertex_info, np.float32)
+		self.get_box()
 
 	def generate(self):
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
@@ -89,6 +100,12 @@ class Obj:
 
 		glBindVertexArray(0)
 		self.set_texture(self.texture_mode)
+
+	def get_box(self):
+		lx, ux = min(self.vertex_info[::, 0]), max(self.vertex_info[::, 0])
+		ly, uy = min(self.vertex_info[::, 1]), max(self.vertex_info[::, 1])
+		lz, uz = min(self.vertex_info[::, 2]), max(self.vertex_info[::, 2])
+		self.box = Box(lx, ux, ly, uy, lz, uz)
 
 	def compile_shader(self):
 		vertex_shader = shaders.compileShader(self.vertex_shader, GL_VERTEX_SHADER)
