@@ -15,13 +15,17 @@ class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
 		size = (screen.width // 3, screen.height // 20)
 		img = Image.new('RGB', size, color = (65, 65, 65))
-		font_ = ImageFont.truetype('fonts/calibri.ttf', 15)
+		text_location = (size[0] * 3 / 4, size[1] / 8)
+		font_ = ImageFont.truetype('fonts/calibri.ttf', size[1] * 7 // 8)
 		decoration = ImageDraw.Draw(img)
-		decoration.text((10,10), text, font=font_, fill=(170, 64, 78))
-		super().__init__(square_obj, object_vs, object_fs, decoration)
+		decoration.text(text_location, text, font=font_, fill=(170, 64, 78))
+		img.save(Menu_Button_png)
+
+		super().__init__(square_obj, object_vs, object_fs, Menu_Button_png)
 		super().generate()
 		super().translate(*location, 0)
 		super().scale(.33, .05, 1)
+		super().set_texture(1)
 
 		# self.is_hovering = False
 	def rollover(self):
