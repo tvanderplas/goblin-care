@@ -9,7 +9,7 @@ from game_engine import Game
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
-from assets.paths import *
+from assets.paths import square_obj, object_vs, object_fs, Menu_Button_png, menu_png
 
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
