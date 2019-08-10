@@ -8,18 +8,11 @@ import glm
 from math import pi
 from ast import literal_eval
 
-identity = [
-	[1, 0, 0, 0],
-	[0, 1, 0, 0],
-	[0, 0, 1, 0],
-	[0, 0, 0, 1]
-]
-
-PERSPECTIVE = np.matrix(identity, np.float32)
+PERSPECTIVE = glm.mat4()
 obj_list = []
 
 def set_perspective(angle, width, height, z_min, z_max):
-	PERSPECTIVE = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
+	PERSPECTIVE = glm.mat4(glm.perspective(angle, width / height, z_min, z_max))
 	for i in obj_list:
 		i.perspective = PERSPECTIVE
 
@@ -51,7 +44,7 @@ class Obj:
 	def __init__(self, scene, v_shader, f_shader, texture):
 		"""Loads a Wavefront OBJ file. """
 		self.vertex_info = [] # unique combinations of position, normal and color
-		self.model = np.matrix(identity, np.float32)
+		self.model = glm.mat4()
 		self.perspective = PERSPECTIVE
 		obj_list.append(self)
 		self.position = np.array([0, 0, 0], np.float32)
@@ -124,9 +117,9 @@ class Obj:
 		shaders.glUseProgram(self.shader) # pylint: disable=no-member
 		for name, address in self.uniforms.items():
 			if name == 'model':
-				glUniformMatrix4fv(address, 1, False, self.model)
+				glUniformMatrix4fv(address, 1, False, np.matrix(self.model))
 			if name == 'transform':
-				glUniformMatrix4fv(address, 1, False, self.model * self.perspective)
+				glUniformMatrix4fv(address, 1, False, np.matrix(self.model * self.perspective))
 			if name == 'self_color':
 				glUniform3f(address, *self.color[:3])
 			if name == 'light_color':
@@ -155,17 +148,17 @@ class Obj:
 		glGenerateMipmap(GL_TEXTURE_2D)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
-		self.perspective = np.matrix(glm.perspective(angle, width / height, z_min, z_max), np.float32)
+		self.perspective = glm.mat4(glm.perspective(angle, width / height, z_min, z_max))
 
 	def translate(self, x, y, z):
-		self.model = np.matrix(glm.translate(self.model, [x, y, z]), np.float32)
+		self.model = glm.mat4(glm.translate(self.model, [x, y, z]))
 		self.position += np.array([x, y, z], np.float32)
 
 	def rotate(self, angle, x, y, z):
-		self.model = np.matrix(glm.rotate(self.model, angle, [x, y, z]), np.float32)
+		self.model = glm.mat4(glm.rotate(self.model, angle, [x, y, z]))
 
 	def scale(self, x, y, z):
-		self.model = np.matrix(glm.scale(self.model, [x, y, z]), np.float32)
+		self.model = glm.mat4(glm.scale(self.model, [x, y, z]))
 
 	def draw(self):
 		self.use_shader() # pylint: disable=no-member
