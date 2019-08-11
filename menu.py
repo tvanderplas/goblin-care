@@ -53,7 +53,7 @@ class Menu_Button(objloader.Obj):
 		self.is_hovering = False
 
 	def rollover(self):
-		return self.box.ly - .05 < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
+		return self.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
 
 	def hover(self):
 		if self.rollover() and not self.is_hovering:
