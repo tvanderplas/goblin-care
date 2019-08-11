@@ -8,6 +8,7 @@ from helpers import moveTo, randedge
 import screen
 from assets import objloader
 from assets.paths import *
+from math import pi
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	surface = pg.image.load(image_file).convert()
@@ -17,36 +18,70 @@ def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	rect = surface.get_rect(center=location)
 	return (surface, rect)
 
-class Player(pg.sprite.Sprite):
-	def __init__(self, *groups):
-		super().__init__(*groups)
-		self.surface, self.rect = set_sprite('car.png', (screen.width // 4, screen.height // 2))
-		self.speed = 10
+class Player:
+	def __init__(self):
+		self.body = objloader.Obj(sedan_body_obj, object_vs, object_fs)
+		self.glass = objloader.Obj(sedan_glass_obj, object_vs, object_fs)
+		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
+		self.light.scale(0, 0, 0)
+		self.light.translate(0, 0, -2)
+		self.set_light_source(self.light)
+		self.rotate(pi, 1, 0, 0)
+		self.generate()
+		self.scale(.0025, .0045, .0045)
+		self.speed = .02
 		self.bigtime = 0
-	def update(self):
-		pressed_keys = pg.key.get_pressed()
-		if pressed_keys[K_w] or pressed_keys[K_UP]:
-			self.rect.move_ip(0, -self.speed)
-		if pressed_keys[K_s] or pressed_keys[K_DOWN]:
-			self.rect.move_ip(0, self.speed)
-		if pressed_keys[K_a] or pressed_keys[K_LEFT]:
-			self.rect.move_ip(-self.speed, 0)
-		if pressed_keys[K_d] or pressed_keys[K_RIGHT]:
-			self.rect.move_ip(self.speed, 0)
-		if self.bigtime <= 0:
-			self.surface, self.rect = set_sprite('car.png', self.rect.center)
-		if self.rect.left < 0:
-			self.rect.left = 0
-		elif self.rect.right > screen.width:
-			self.rect.right = screen.width
-		if self.rect.top <= 0:
-			self.rect.top = 0
-		elif self.rect.bottom >= screen.height:
-			self.rect.bottom = screen.height
-		self.bigtime -= 1 if self.bigtime > 0 else 0
+		self.is_big = False
+
 	def embiggen(self):
-		self.surface, self.rect = set_sprite('big car.png', self.rect.center)
+		self.scale(2, 2, 2)
 		self.bigtime = 50
+		self.is_big = True
+
+	def generate(self):
+		self.body.generate()
+		self.glass.generate()
+
+	def set_light_source(self, light):
+		self.body.set_light_source(light)
+		self.glass.set_light_source(light)
+
+	def translate(self, x, y, z):
+		self.body.translate(x, y, z)
+		self.glass.translate(x, y, z)
+
+	def rotate(self, angle, x, y, z):
+		self.body.rotate(angle, x, y, z)
+		self.glass.rotate(angle, x, y, z)
+
+	def scale(self, x, y, z):
+		self.body.scale(x, y, z)
+		self.glass.scale(x, y, z)
+
+	def draw(self):
+		pressed_keys = pg.key.get_pressed()
+		if pressed_keys[K_w] or pressed_keys[K_UP]: # pylint: disable=undefined-variable
+			self.translate(0, self.speed, 0)
+		if pressed_keys[K_s] or pressed_keys[K_DOWN]: # pylint: disable=undefined-variable
+			self.translate(0, -self.speed, 0)
+		if pressed_keys[K_a] or pressed_keys[K_LEFT]: # pylint: disable=undefined-variable
+			self.translate(-self.speed, 0, 0)
+		if pressed_keys[K_d] or pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
+			self.translate(self.speed, 0, 0)
+		if self.bigtime <= 0 and self.is_big:
+			self.scale(.5, .5, .5)
+			self.is_big = False
+		if self.body.box.lx < 0:
+			self.translate(0, 0, 0)
+		if self.body.box.ux > 1:
+			self.translate(0, 0, 0)
+		if self.body.box.uy <= 0:
+			self.translate(0, 0, 0)
+		if self.body.box.ly >= 1:
+			self.translate(0, 0, 0)
+		self.bigtime -= 1 if self.bigtime > 0 else 0
+		self.body.draw()
+		self.glass.draw()
 
 class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
