@@ -7,6 +7,7 @@ from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collec
 import ui
 import screen
 from random import randint
+from assets.paths import desert_road_png, treasure_png
 
 class Game():
 	def __init__(self):
@@ -27,10 +28,10 @@ class Game():
 
 		self.player = Player(self.all_sprites)
 
-		self.background = Background('desert road.png')
+		self.background = Background(desert_road_png)
 		loot_button_location = (screen.width // 20, screen.height * 11 // 12)
 		loot_button_size = (screen.width // 19, screen.height // 12)
-		self.loot_button = Hud_Button('treasure.png', loot_button_location, loot_button_size, self.all_sprites)
+		self.loot_button = Hud_Button(treasure_png, loot_button_location, loot_button_size, self.all_sprites)
 
 		self.splat_count = 0
 		self.isRunning = True

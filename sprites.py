@@ -51,7 +51,7 @@ class Player(pg.sprite.Sprite):
 class PlayerBullet(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
 		super().__init__(*groups)
-		self.surface, self.rect = set_sprite('bullet.png', (x, y))
+		self.surface, self.rect = set_sprite(bullet_png, (x, y))
 		self.speed = 30
 	def update(self):
 		self.rect.move_ip(self.speed, 0)
@@ -62,7 +62,7 @@ class Enemy(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
 		self.surface, self.rect = set_sprite(
-			'green goblin.png',
+			green_goblin_png,
 			(screen.width, randint(25, screen.height - 25)),
 			color=(255, 255, 255))
 		self.speed = randint(5, 20)
@@ -74,7 +74,7 @@ class Enemy(pg.sprite.Sprite):
 class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
 		super().__init__(*groups)
-		self.surface, self.rect = set_sprite('Splat.png', (x, y))
+		self.surface, self.rect = set_sprite(Splat_png, (x, y))
 		self.health = 300
 	def update(self):
 		self.health -= 1
@@ -84,7 +84,7 @@ class Splat(pg.sprite.Sprite):
 class Splat_Collect(pg.sprite.Sprite):
 	def __init__(self, x, y, destination, *groups):
 		super().__init__(*groups)
-		self.surface, self.rect = set_sprite('Splat.png', (x, y))
+		self.surface, self.rect = set_sprite(Splat_png, (x, y))
 		self.destination = destination
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.destination.center, 100))
@@ -95,7 +95,7 @@ class Tornado(pg.sprite.Sprite):
 	def __init__(self, *groups):
 		super().__init__(*groups)
 		self.is_rainbow = True if randint(0, 10) > 8 else False
-		self.image_file = 'rainbow_tornado.png' if self.is_rainbow else 'tornado.png'
+		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
 		self.surface, self.rect = set_sprite(self.image_file, randedge(25, screen.width, screen.height))
 		self.speed = randint(5, 8)
 		self.__getWaypoint()
