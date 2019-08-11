@@ -39,6 +39,15 @@ class Box:
 		self.uy = uy
 		self.lz = lz
 		self.uz = uz
+		self.mlx = (lx, self.avg([ly, uy]), self.avg([lz, uz]))
+		self.mux = (ux, self.avg([ly, uy]), self.avg([lz, uz]))
+		self.mly = (self.avg([lx, ux]), ly, self.avg([lz, uz]))
+		self.muy = (self.avg([lx, ux]), uy, self.avg([lz, uz]))
+		self.mlz = (self.avg([lx, ux]), self.avg([ly, uy]), lz)
+		self.muz = (self.avg([lx, ux]), self.avg([ly, uy]), uz)
+
+	def avg(self, arg:list):
+		return sum(arg) / len(arg)
 
 class Obj:
 	def __init__(self, scene, v_shader, f_shader, texture=None):
