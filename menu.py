@@ -58,6 +58,10 @@ class Menu_Button(objloader.Obj):
 			self.translate(-1 / 4, 0, 0)
 			self.is_hovering = False
 
+	def draw(self):
+		self.hover()
+		super().draw()
+
 class Menu():
 	def __init__(self):
 		self.clock = pg.time.Clock()
@@ -78,8 +82,6 @@ class Menu():
 						raise SystemExit
 			pg.display.flip()
 			self.menu_screen.draw()
-			self.play_button.hover()
 			self.play_button.draw()
-			self.quit_button.hover()
 			self.quit_button.draw()
 			self.clock.tick(60)
