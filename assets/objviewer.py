@@ -13,6 +13,7 @@ def main():
 	display = (1024, 768)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
+	# glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
 	light_cube = objloader.Obj(cube_obj, light_vs, light_fs, uv_test_png)
 	light_cube.generate()
