@@ -109,8 +109,8 @@ class Tornado(pg.sprite.Sprite):
 class Background(objloader.Obj):
 	def __init__(self, image_file):
 		super().__init__(square_obj, object_vs, object_fs, image_file)
-		super().generate()
-		super().set_texture(1)
+		self.generate()
+		self.set_texture(1)
 
 class Hud_Button(pg.sprite.Sprite):
 	def __init__(self, image_file, location, size, *groups):
