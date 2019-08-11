@@ -56,6 +56,9 @@ class Obj:
 		self.fragment_shader = open(f_shader)
 		self.texture_mode = 0
 		self.texture = texture
+		self.translated = glm.mat4()
+		self.rotated = glm.mat4()
+		self.scaled = glm.mat4()
 
 		scene = Wavefront(scene)
 		scene.parse()
@@ -152,16 +155,19 @@ class Obj:
 		self.perspective = glm.mat4(glm.perspective(angle, width / height, z_min, z_max))
 
 	def translate(self, x, y, z):
-		self.model = glm.mat4(glm.translate(self.model, [x, y, z]))
+		self.translated = glm.mat4(glm.translate(self.translated, [x, y, z]))
+		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 		self.position += np.array([x, y, z], np.float32)
 
 	def rotate(self, angle, x, y, z):
-		self.model = glm.mat4(glm.rotate(self.model, angle, [x, y, z]))
+		self.rotated = glm.mat4(glm.rotate(self.rotated, angle, [x, y, z]))
+		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 
 	def scale(self, x, y, z):
-		self.model = glm.mat4(glm.scale(self.model, [x, y, z]))
+		self.scaled = glm.mat4(glm.scale(self.scaled, [x, y, z]))
+		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 
 	def draw(self):
