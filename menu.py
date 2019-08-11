@@ -15,7 +15,7 @@ from fonts.paths import calibri_ttf
 def pixel_to_view(x, y):
 	vx = x / (screen.width / 2) - 1
 	vy = y / (screen.height / 2) - 1
-	return (-vx, -vy)
+	return (vx, -vy)
 
 class Pointer_Indicator(objloader.Obj):
 	def __init__(self):
