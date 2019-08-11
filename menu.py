@@ -17,6 +17,18 @@ def pixel_to_view(x, y):
 	vy = y / (screen.height / 2) - 1
 	return (-vx, -vy)
 
+class Pointer_Indicator(objloader.Obj):
+	def __init__(self):
+		super().__init__(square_obj, object_vs, object_fs)
+		self.generate()
+		self.scale(.01, .01, .01)
+		self.color = (0, 10, 10)
+
+	def update(self):
+		mousepos = pixel_to_view(*pg.mouse.get_pos())
+		vector = [mousepos[i] - self.position[i] for i in range(2)]
+		self.translate(vector[0], vector[1], 0)
+
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
 		size = (screen.width // 3, screen.height // 20)
