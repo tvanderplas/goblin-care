@@ -7,7 +7,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from helpers import moveTo, randedge
 import screen
 from assets import objloader
-from assets.paths import *
+from assets.paths import * # pylint: disable=unused-wildcard-import
 from math import pi
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
