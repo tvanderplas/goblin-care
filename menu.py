@@ -52,10 +52,10 @@ class Menu_Button(objloader.Obj):
 
 	def hover(self):
 		if self.rollover() and not self.is_hovering:
-			self.translate(1 / 4, 0, 0)
+			self.translate(1 / 8, 0, 0)
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			self.translate(-1 / 4, 0, 0)
+			self.translate(-1 / 8, 0, 0)
 			self.is_hovering = False
 
 	def draw(self):
