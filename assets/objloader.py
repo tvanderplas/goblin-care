@@ -95,9 +95,10 @@ class Obj:
 		self.set_texture(self.texture_mode)
 
 	def get_box(self):
-		lx, ux = min(self.vertex_info[::, 0]), max(self.vertex_info[::, 0])
-		ly, uy = min(self.vertex_info[::, 1]), max(self.vertex_info[::, 1])
-		lz, uz = min(self.vertex_info[::, 2]), max(self.vertex_info[::, 2])
+		minimums = [min(self.vertex_info[::, i]) for i in range(3)]
+		maximums = [max(self.vertex_info[::, i]) for i in range(3)]
+		lx, ly, lz = glm.vec3(self.model * glm.vec4(minimums + [1]))
+		ux, uy, uz = glm.vec3(self.model * glm.vec4(maximums + [1]))
 		self.box = Box(lx, ux, ly, uy, lz, uz)
 
 	def compile_shader(self):
@@ -152,13 +153,16 @@ class Obj:
 
 	def translate(self, x, y, z):
 		self.model = glm.mat4(glm.translate(self.model, [x, y, z]))
+		self.get_box()
 		self.position += np.array([x, y, z], np.float32)
 
 	def rotate(self, angle, x, y, z):
 		self.model = glm.mat4(glm.rotate(self.model, angle, [x, y, z]))
+		self.get_box()
 
 	def scale(self, x, y, z):
 		self.model = glm.mat4(glm.scale(self.model, [x, y, z]))
+		self.get_box()
 
 	def draw(self):
 		self.use_shader() # pylint: disable=no-member
