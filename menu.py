@@ -5,7 +5,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 import pygame.freetype as ft
 from sprites import Background
-from game_engine import Game
+import overworld
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
@@ -80,7 +80,7 @@ class Menu():
 					raise SystemExit
 				if event.type == MOUSEBUTTONDOWN:
 					if self.play_button.rollover():
-						game = Game()
+						game = overworld.Game()
 						game.play()
 						self.__init__()
 					elif self.quit_button.rollover():
