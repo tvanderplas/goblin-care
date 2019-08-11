@@ -10,6 +10,7 @@ import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
 from assets.paths import square_obj, object_vs, object_fs, Menu_Button_png, menu_png
+from fonts.paths import calibri_ttf
 
 def pixel_to_view(x, y):
 	vx = x / (screen.width / 2) - 1
@@ -21,7 +22,7 @@ class Menu_Button(objloader.Obj):
 		size = (screen.width // 3, screen.height // 20)
 		img = Image.new('RGB', size, color = (65, 65, 65))
 		text_location = (size[0] * 3 / 4, size[1] / 8)
-		font_ = ImageFont.truetype('fonts/calibri.ttf', size[1] * 7 // 8)
+		font_ = ImageFont.truetype(calibri_ttf, size[1] * 7 // 8)
 		decoration = ImageDraw.Draw(img)
 		decoration.text(text_location, text, font=font_, fill=(170, 64, 78))
 		img.save(Menu_Button_png)
