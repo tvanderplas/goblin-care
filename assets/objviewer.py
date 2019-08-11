@@ -6,6 +6,7 @@ from OpenGL.GL import shaders
 import objloader
 import numpy as np
 from math import pi
+from paths import * # pylint: disable=unused-wildcard-import
 
 def main():
 	pygame.init() # pylint: disable=no-member
@@ -13,9 +14,9 @@ def main():
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
 	glEnable(GL_DEPTH_TEST)
 
-	light_cube = objloader.Obj('cube.obj', 'light.vs', 'light.fs')
+	light_cube = objloader.Obj(cube_obj, light_vs, light_fs, uv_test_png)
 	light_cube.generate()
-	square = objloader.Obj('square.obj', 'object.vs', 'object.fs')
+	square = objloader.Obj(square_obj, object_vs, object_fs, uv_test_png)
 	square.generate()
 	square.set_light_source(light_cube)
 
