@@ -29,6 +29,10 @@ class Pointer_Indicator(objloader.Obj):
 		vector = [mousepos[i] - self.position[i] for i in range(2)]
 		self.translate(vector[0], vector[1], 0)
 
+	def draw(self):
+		self.update()
+		super().draw()
+
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
 		size = (screen.width // 3, screen.height // 20)
