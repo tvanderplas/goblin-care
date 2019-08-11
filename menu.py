@@ -82,6 +82,7 @@ class Menu():
 					if self.play_button.rollover():
 						game = Game()
 						game.play()
+						self.__init__()
 					elif self.quit_button.rollover():
 						raise SystemExit
 			pg.display.flip()
