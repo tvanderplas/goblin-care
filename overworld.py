@@ -3,6 +3,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB, FULLSCREEN, OPENGL, DOUBLEBUF
 )
+from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
 import screen
@@ -77,5 +78,6 @@ class Game():
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			# self.view.blit(self.loot_button.surface, self.loot_button.rect)
 			pg.display.flip()
+			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.background.draw()
 			self.clock.tick(60)

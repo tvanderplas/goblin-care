@@ -4,6 +4,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, FULLSCREEN, OPENGL, DOUBLEBUF
 )
 import pygame.freetype as ft
+from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 from sprites import Background
 import overworld
 import screen
@@ -86,6 +87,7 @@ class Menu():
 					elif self.quit_button.rollover():
 						raise SystemExit
 			pg.display.flip()
+			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.menu_screen.draw()
 			self.play_button.draw()
 			self.quit_button.draw()
