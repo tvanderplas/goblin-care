@@ -39,10 +39,10 @@ class Menu_Button(objloader.Obj):
 
 	def hover(self):
 		if self.rollover() and not self.is_hovering:
-			self.translate(1 / 30, 0, 0)
+			self.translate(1 / 4, 0, 0)
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			self.translate(-1 / 30, 0, 0)
+			self.translate(-1 / 4, 0, 0)
 			self.is_hovering = False
 
 class Menu():
@@ -50,8 +50,8 @@ class Menu():
 		self.clock = pg.time.Clock()
 		self.view = pg.display.set_mode((screen.width, screen.height), FULLSCREEN|OPENGL|DOUBLEBUF)
 		self.menu_screen = Background(menu_png)
-		self.play_button = Menu_Button('Play!', (-1, 0))
-		self.quit_button = Menu_Button('Quit', (-1, -.2))
+		self.play_button = Menu_Button('Play!', (-1.05, 0))
+		self.quit_button = Menu_Button('Quit', (-1.05, -.2))
 	def play(self):
 		while True:
 			for event in pg.event.get():
