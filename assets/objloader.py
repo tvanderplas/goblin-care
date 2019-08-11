@@ -41,7 +41,7 @@ class Box:
 		self.uz = uz
 
 class Obj:
-	def __init__(self, scene, v_shader, f_shader, texture):
+	def __init__(self, scene, v_shader, f_shader, texture=None):
 		"""Loads a Wavefront OBJ file. """
 		self.vertex_info = [] # unique combinations of position, normal and color
 		self.model = glm.mat4()
@@ -163,5 +163,6 @@ class Obj:
 	def draw(self):
 		self.use_shader() # pylint: disable=no-member
 		glBindVertexArray(self.VAO)
-		glBindTexture(GL_TEXTURE_2D, self.tex_id)
+		if self.texture_mode:
+			glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		glDrawElements(GL_TRIANGLES, len(self.indices), GL_UNSIGNED_INT, None)
