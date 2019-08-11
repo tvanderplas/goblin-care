@@ -31,8 +31,31 @@ def main():
 		for event in pygame.event.get():
 			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
 				raise SystemExit
-			if (event.type == KEYDOWN and event.key == K_SPACE): # pylint: disable=undefined-variable
-				square.set_texture(square.texture_mode ^ 1)
+		pressed_keys = pygame.key.get_pressed()
+		if pressed_keys[K_w]: # pylint: disable=undefined-variable
+			light_cube.translate(0, 0, .1)
+		if pressed_keys[K_s]: # pylint: disable=undefined-variable
+			light_cube.translate(0, 0, -.1)
+		if pressed_keys[K_a]: # pylint: disable=undefined-variable
+			light_cube.translate(-.1, 0, 0)
+		if pressed_keys[K_d]: # pylint: disable=undefined-variable
+			light_cube.translate(.1, 0, 0)
+		if pressed_keys[K_SPACE]: # pylint: disable=undefined-variable
+			light_cube.translate(0, .1, 0)
+		if pressed_keys[K_LCTRL]: # pylint: disable=undefined-variable
+			light_cube.translate(0, -.1, 0)
+		if pressed_keys[K_UP]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, 1, 0, 0)
+		if pressed_keys[K_DOWN]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, -1, 0, 0)
+		if pressed_keys[K_LEFT]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, 0, 1, 0)
+		if pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, 0, -1, 0)
+		if pressed_keys[K_q]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, 0, 0, 1)
+		if pressed_keys[K_e]: # pylint: disable=undefined-variable
+			light_cube.rotate(pi / 1000, 0, 0, -1)
 
 		square.rotate(pi / 100, 0, 1, 0)
 		square.draw()
