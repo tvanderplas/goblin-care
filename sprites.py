@@ -83,15 +83,20 @@ class Player:
 		self.body.draw()
 		self.glass.draw()
 
-class PlayerBullet(pg.sprite.Sprite):
+class PlayerBullet(objloader.Obj):
 	def __init__(self, x, y, *groups):
-		super().__init__(*groups)
-		self.surface, self.rect = set_sprite(bullet_png, (x, y))
-		self.speed = 30
-	def update(self):
-		self.rect.move_ip(self.speed, 0)
-		if self.rect.right > screen.width:
-			self.kill()
+		super().__init__(square_obj, object_vs, object_fs, bullet_png)
+		self.generate()
+		self.set_texture(1)
+		self.translate(x, y, 0)
+		self.scale(.005, .005, 1)
+		self.speed = .06
+		for group in groups:
+			group.append(self)
+
+	def draw(self):
+		self.translate(self.speed, 0, 0)
+		super().draw()
 
 class Enemy(pg.sprite.Sprite):
 	def __init__(self, *groups):
