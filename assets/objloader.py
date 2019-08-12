@@ -153,6 +153,8 @@ class Obj:
 
 		glBindVertexArray(self.VAO)
 		glEnable(GL_TEXTURE_2D)
+		glEnable(GL_BLEND)
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 		self.tex_id = glGenTextures(1)
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture_surface.get_size(), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
