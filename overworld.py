@@ -82,9 +82,6 @@ class Game():
 				else:
 					enemy.draw()
 			for tornado in self.tornados:
-				if tornado.box.ux < -1:
-					self.tornados.remove(tornado)
-				else:
 					tornado.draw()
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			# self.view.blit(self.loot_button.surface, self.loot_button.rect)

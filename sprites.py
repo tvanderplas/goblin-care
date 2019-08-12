@@ -140,6 +140,7 @@ class Tornado(objloader.Obj):
 			uniform(-.5, .5) - self.box.mlz[0],
 			uniform(-.5, .5) - self.box.mlz[1]
 		)
+		self.groups = groups
 		for group in groups:
 			group.append(self)
 	def get_vector(self, magnitude, x, y):
@@ -147,8 +148,20 @@ class Tornado(objloader.Obj):
 		normal_x = x / hypotenuse
 		normal_y = y / hypotenuse
 		return (normal_x * magnitude, normal_y * magnitude)
-	def draw(self):
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
+	def update(self):
 		self.translate(*self.vector, 0)
+		if any([
+			self.box.ux < -1.05,
+			self.box.lx > 1.05,
+			self.box.uy < -1.05,
+			self.box.ly > 1.05
+		]):
+			self.kill()
+	def draw(self):
+		self.update()
 		super().draw()
 
 class Background(objloader.Obj):
