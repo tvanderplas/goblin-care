@@ -1,10 +1,11 @@
 
+import context
 import sys
 from PIL import Image
 import numpy as np
 
-find_color = [255, 0, 0, 255]
-replace_color = [255, 255, 255, 255]
+find_color = [255, 255, 255, 255]
+replace_color = [255, 255, 255, 0]
 
 source = Image.open(sys.argv[-1])
 target = np.array(source)
