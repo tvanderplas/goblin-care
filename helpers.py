@@ -1,13 +1,13 @@
 
-from random import randint, choice
+from random import uniform, choice
 from math import atan, cos, sin
 
-def randedge(distance, screen_width, screen_height):
+def randedge(distance, x_min, x_max, y_min, y_max):
 	edge = choice([
-		[randint(distance, screen_width - distance), distance],# top
-		[randint(distance, screen_width - distance), screen_height - distance],# bottom
-		[distance, randint(distance, screen_height - distance)],# left
-		[screen_width - distance, randint(distance, screen_height - distance)],# right
+		[uniform(x_min + distance, x_max - distance), y_max + distance],# top
+		[uniform(x_min + distance, x_max - distance), y_min - distance],# bottom
+		[x_min - distance, uniform(y_min + distance, y_max - distance)],# left
+		[x_max + distance, uniform(y_min + distance, y_max - distance)],# right
 	])
 	return edge
 

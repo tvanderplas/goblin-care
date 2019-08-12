@@ -57,8 +57,8 @@ class Game():
 					self.isRunning = False
 				if event.type == self.ADDENEMY:
 					Enemy((self.all_sprites, self.enemies))
-				# if event.type == self.NEWTORNADO:
-				# 	Tornado((self.all_sprites, self.tornados))
+				if event.type == self.NEWTORNADO:
+					Tornado((self.all_sprites, self.tornados))
 				if event.type == KEYDOWN and event.key == K_SPACE:
 					PlayerBullet(*self.player.body.box.mux[:2], (self.bullets))
 				if (
@@ -81,7 +81,11 @@ class Game():
 					self.enemies.remove(enemy)
 				else:
 					enemy.draw()
-			# self.view.blits([(tornado.surface, tornado.rect) for tornado in self.tornados])
+			for tornado in self.tornados:
+				if tornado.box.ux < -1:
+					self.tornados.remove(tornado)
+				else:
+					tornado.draw()
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			# self.view.blit(self.loot_button.surface, self.loot_button.rect)
 			pg.display.flip()

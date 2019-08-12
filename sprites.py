@@ -1,5 +1,5 @@
 
-from random import randint, uniform
+from random import random, uniform
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
@@ -8,7 +8,7 @@ from helpers import moveTo, randedge
 import screen
 from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
-from math import pi
+from math import pi, sqrt
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	surface = pg.image.load(image_file).convert()
@@ -98,9 +98,8 @@ class Enemy(objloader.Obj):
 		height = uniform(-.9, .9)
 		self.translate(1, height, 0)
 		self.scale(.04, .06, 1)
-		self.speed = uniform(.005, .02)
+		self.speed = uniform(.002, .01)
 		for group in groups:
-			print(group)
 			group.append(self)
 	def draw(self):
 		self.translate(-self.speed, 0, 0)
@@ -126,20 +125,31 @@ class Splat_Collect(pg.sprite.Sprite):
 		if self.rect.colliderect(self.destination):
 			self.kill()
 
-class Tornado(pg.sprite.Sprite):
-	def __init__(self, *groups):
-		super().__init__(*groups)
-		self.is_rainbow = True if randint(0, 10) > 8 else False
+class Tornado(objloader.Obj):
+	def __init__(self, groups):
+		self.is_rainbow = True if random() > .8 else False
 		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
-		self.surface, self.rect = set_sprite(self.image_file, randedge(25, screen.width, screen.height))
-		self.speed = randint(5, 8)
-		self.__getWaypoint()
-	def __getWaypoint(self):
-		x = randint(screen.width // 4, 3 * screen.width // 4)
-		y = randint(screen.height // 4, 3 * screen.height // 4)
-		self.waypoint = moveTo(self.rect.center, [x, y], 3000)
-	def update(self):
-		self.rect.move_ip(moveTo(self.rect.center, self.waypoint, self.speed))
+		super().__init__(square_obj, object_vs, object_fs, self.image_file)
+		self.generate()
+		self.set_texture(1)
+		self.scale(.06, .09, 1)
+		self.translate(*randedge(.05, -1, 1, -1, 1), 0)
+		self.speed = uniform(.001, .003)
+		self.vector = self.get_vector(
+			self.speed,
+			uniform(-.5, .5) - self.box.mlz[0],
+			uniform(-.5, .5) - self.box.mlz[1]
+		)
+		for group in groups:
+			group.append(self)
+	def get_vector(self, magnitude, x, y):
+		hypotenuse = sqrt((x**2) + (y**2))
+		normal_x = x / hypotenuse
+		normal_y = y / hypotenuse
+		return (normal_x * magnitude, normal_y * magnitude)
+	def draw(self):
+		self.translate(*self.vector, 0)
+		super().draw()
 
 class Background(objloader.Obj):
 	def __init__(self, image_file):
