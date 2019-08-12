@@ -32,32 +32,25 @@ class Player:
 		self.speed = .02
 		self.bigtime = 0
 		self.is_big = False
-
 	def embiggen(self):
 		self.scale(2, 2, 2)
 		self.bigtime = 50
 		self.is_big = True
-
 	def generate(self):
 		self.body.generate()
 		self.glass.generate()
-
 	def set_light_source(self, light):
 		self.body.set_light_source(light)
 		self.glass.set_light_source(light)
-
 	def translate(self, x, y, z):
 		self.body.translate(x, y, z)
 		self.glass.translate(x, y, z)
-
 	def rotate(self, angle, x, y, z):
 		self.body.rotate(angle, x, y, z)
 		self.glass.rotate(angle, x, y, z)
-
 	def scale(self, x, y, z):
 		self.body.scale(x, y, z)
 		self.glass.scale(x, y, z)
-
 	def draw(self):
 		pressed_keys = pg.key.get_pressed()
 		if pressed_keys[K_w] or pressed_keys[K_UP]: # pylint: disable=undefined-variable
@@ -93,7 +86,6 @@ class PlayerBullet(objloader.Obj):
 		self.speed = .06
 		for group in groups:
 			group.append(self)
-
 	def draw(self):
 		self.translate(self.speed, 0, 0)
 		super().draw()
