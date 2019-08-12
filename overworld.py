@@ -20,13 +20,12 @@ class Game():
 		self.NEWTORNADO = pg.USEREVENT + 2 # pylint: disable=no-member
 		pg.time.set_timer(self.NEWTORNADO, randint(1000, 3500))
 
-		self.enemies = pg.sprite.Group()
-		self.splats = pg.sprite.Group()
-		self.splats_collect = pg.sprite.Group()
+		self.enemies = []
+		self.splats = []
+		self.splats_collect = []
 		self.bullets = []
-		self.tornados = pg.sprite.Group()
-		self.all_sprites = pg.sprite.Group()
-
+		self.tornados = []
+		self.all_sprites = []
 		self.player = Player()
 
 		self.background = Background(desert_road_png)
@@ -58,8 +57,8 @@ class Game():
 					self.isRunning = False
 				if event.type == self.ADDENEMY:
 					Enemy((self.all_sprites, self.enemies))
-				if event.type == self.NEWTORNADO:
-					Tornado((self.all_sprites, self.tornados))
+				# if event.type == self.NEWTORNADO:
+				# 	Tornado((self.all_sprites, self.tornados))
 				if event.type == KEYDOWN and event.key == K_SPACE:
 					PlayerBullet(*self.player.body.box.mux[:2], (self.bullets))
 				if (
@@ -69,15 +68,19 @@ class Game():
 					loot = ui.Window('Loot', self.splat_count)
 					loot.open()
 
-			self.all_sprites.update()
+			# self.all_sprites.update()
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats])
 			self.player.draw()
-			# self.view.blits([(enemy.surface, enemy.rect) for enemy in self.enemies])
 			for bullet in self.bullets:
 				if bullet.box.lx > 1:
 					self.bullets.remove(bullet)
 				else:
 					bullet.draw()
+			for enemy in self.enemies:
+				if enemy.box.ux < -1:
+					self.enemies.remove(enemy)
+				else:
+					enemy.draw()
 			# self.view.blits([(tornado.surface, tornado.rect) for tornado in self.tornados])
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			# self.view.blit(self.loot_button.surface, self.loot_button.rect)

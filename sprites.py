@@ -1,5 +1,5 @@
 
-from random import randint
+from random import randint, uniform
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
@@ -90,18 +90,21 @@ class PlayerBullet(objloader.Obj):
 		self.translate(self.speed, 0, 0)
 		super().draw()
 
-class Enemy(pg.sprite.Sprite):
-	def __init__(self, *groups):
-		super().__init__(*groups)
-		self.surface, self.rect = set_sprite(
-			green_goblin_png,
-			(screen.width, randint(25, screen.height - 25)),
-			color=(255, 255, 255))
-		self.speed = randint(5, 20)
-	def update(self):
-		self.rect.move_ip(-self.speed, 0)
-		if self.rect.right < 0:
-			self.kill()
+class Enemy(objloader.Obj):
+	def __init__(self, groups):
+		super().__init__(square_obj, object_vs, object_fs, green_goblin_png)
+		self.generate()
+		self.set_texture(1)
+		height = uniform(-.9, .9)
+		self.translate(1, height, 0)
+		self.scale(.04, .06, 1)
+		self.speed = uniform(.005, .02)
+		for group in groups:
+			print(group)
+			group.append(self)
+	def draw(self):
+		self.translate(-self.speed, 0, 0)
+		super().draw()
 
 class Splat(pg.sprite.Sprite):
 	def __init__(self, x, y, *groups):
