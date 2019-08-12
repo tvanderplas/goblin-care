@@ -4,7 +4,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
 )
-from helpers import moveTo, randedge
+from helpers import moveTo, randedge, pixel_to_view
 import screen
 from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
@@ -170,23 +170,25 @@ class Background(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 
-class Hud_Button(pg.sprite.Sprite):
-	def __init__(self, image_file, location, size, *groups):
-		super().__init__(*groups)
-		self.image_file = image_file
-		self.location = location
-		self.size = size
-		self.surface, self.rect = set_sprite(self.image_file, self.location, size=self.size)
+class Hud_Button(objloader.Obj):
+	def __init__(self, image_file, location):
+		super().__init__(square_obj, object_vs, object_fs, image_file)
+		self.generate()
+		self.set_texture(1)
+		self.scale(.1, .15, 1)
+		self.translate(*location, 0)
 		self.is_hovering = False
 	def rollover(self):
-		over_x = self.rect.left < pg.mouse.get_pos()[0] < self.rect.right
-		over_y = self.rect.top < pg.mouse.get_pos()[1] < self.rect.bottom
+		over_x = self.box.lx < pixel_to_view(*pg.mouse.get_pos())[0] < self.box.ux
+		over_y = self.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
 		return over_x and over_y
 	def update(self):
 		if self.rollover() and not self.is_hovering:
-			rollover_size = (self.size[0] * 5 // 4, self.size[1] * 5 // 4)
-			self.surface, self.rect = set_sprite(self.image_file, self.location, size=rollover_size)
+			self.scale(1.25, 1.25, 1)
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			self.surface, self.rect = set_sprite(self.image_file, self.location, size=self.size)
+			self.scale(.8, .8, 1)
 			self.is_hovering = False
+	def draw(self):
+		self.update()
+		super().draw()

@@ -29,9 +29,7 @@ class Game():
 		self.player = Player()
 
 		self.background = Background(desert_road_png)
-		loot_button_location = (screen.width // 20, screen.height * 11 // 12)
-		loot_button_size = (screen.width // 19, screen.height // 12)
-		self.loot_button = Hud_Button(treasure_png, loot_button_location, loot_button_size, self.all_sprites)
+		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
 
 		self.splat_count = 0
 		self.isRunning = True
@@ -71,6 +69,7 @@ class Game():
 			# self.all_sprites.update()
 			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats])
 			self.player.draw()
+			self.loot_button.draw()
 			for bullet in self.bullets:
 				if bullet.box.lx > 1:
 					self.bullets.remove(bullet)
