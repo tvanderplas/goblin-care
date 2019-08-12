@@ -86,6 +86,10 @@ class PlayerBullet(objloader.Obj):
 		self.speed = .06
 		for group in groups:
 			group.append(self)
+		self.groups = groups
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
 	def draw(self):
 		self.translate(self.speed, 0, 0)
 		super().draw()
@@ -101,6 +105,10 @@ class Enemy(objloader.Obj):
 		self.speed = uniform(.002, .01)
 		for group in groups:
 			group.append(self)
+		self.groups = groups
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
 	def draw(self):
 		self.translate(-self.speed, 0, 0)
 		super().draw()

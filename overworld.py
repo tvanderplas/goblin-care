@@ -9,6 +9,7 @@ import ui
 import screen
 from random import randint
 from assets.paths import desert_road_png, treasure_png
+from helpers import groupcollide
 
 class Game():
 	def __init__(self):
@@ -38,8 +39,8 @@ class Game():
 
 			# if pg.sprite.spritecollideany(self.player, self.enemies):
 			# 	self.isRunning = False
-			# for enemy in pg.sprite.groupcollide(self.enemies, self.bullets, True, True):
-			# 	Splat(enemy.rect.centerx, enemy.rect.centery, (self.all_sprites, self.splats))
+			for enemy in groupcollide(self.enemies, self.bullets, True, True):
+				pass # Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			# for splat in pg.sprite.spritecollide(self.player, self.splats, False):
 			# 	self.splat_count += 1
 			# 	Splat_Collect(*splat.rect.center, self.loot_button.rect, (self.all_sprites, self.splats_collect))

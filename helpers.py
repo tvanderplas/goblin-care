@@ -25,3 +25,21 @@ def pixel_to_view(x, y):
 	vx = x / (screen.width / 2) - 1
 	vy = y / (screen.height / 2) - 1
 	return (vx, -vy)
+
+def groupcollide(group1, group2, kill1:bool, kill2:bool):
+	answer = []
+	for entity1 in group1:
+		for entity2 in group2:
+			if any([
+					(entity1.box.lx < entity2.box.lx < entity1.box.ux),
+					(entity1.box.lx < entity2.box.ux < entity1.box.ux)
+				]) and any([
+					(entity1.box.ly < entity2.box.ly < entity1.box.uy),
+					(entity1.box.ly < entity2.box.uy < entity1.box.uy)
+				]):
+				answer.append(entity1)
+				if kill1:
+					entity1.kill()
+				if kill2:
+					entity2.kill()
+	return answer
