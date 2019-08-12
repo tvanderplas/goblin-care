@@ -1,6 +1,7 @@
 
 from random import uniform, choice
 from math import atan, cos, sin
+import screen
 
 def randedge(distance, x_min, x_max, y_min, y_max):
 	edge = choice([
@@ -19,3 +20,8 @@ def moveTo(initial, final, speed):
 	delta_x = speed * cos(inclination)
 	delta_y = speed * sin(inclination)
 	return [delta_x, delta_y] if displacement_x > 0 else [-delta_x, -delta_y]
+
+def pixel_to_view(x, y):
+	vx = x / (screen.width / 2) - 1
+	vy = y / (screen.height / 2) - 1
+	return (vx, -vy)
