@@ -67,7 +67,6 @@ class Game():
 					loot = ui.Window('Loot', self.splat_count)
 					loot.open()
 
-			# self.all_sprites.update()
 			for splat in self.splats:
 				splat.draw()
 			for splat in self.splats_collect:
@@ -80,7 +79,6 @@ class Game():
 					enemy.draw()
 			for tornado in self.tornados:
 					tornado.draw()
-			# self.view.blit(self.loot_button.surface, self.loot_button.rect)
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.background.draw()
