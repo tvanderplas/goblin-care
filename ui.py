@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs, title_bar_png
+from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs
 from fonts.paths import calibri_ttf
 from assets import objloader
 from helpers import text_image
@@ -95,9 +95,9 @@ class Window:
 		self.background.set_light_source(self.light)
 
 		size = (screen.width, screen.height // 30)
-		text_image(size, (65, 65, 65), title, (170, 64, 78), .5, title_bar_png)
+		text_image_file = text_image(size, (65, 65, 65), title, (170, 64, 78), .5)
 
-		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs, title_bar_png)
+		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
 		self.title_bar.generate()
 		self.title_bar.set_texture(1)
 		self.title_bar.scale(1, 1 / 30, 1)

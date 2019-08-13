@@ -10,7 +10,7 @@ import overworld
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
-from assets.paths import square_obj, object_vs, object_fs, Menu_Button_png, menu_png
+from assets.paths import square_obj, object_vs, object_fs, menu_png
 from fonts.paths import calibri_ttf
 from helpers import pixel_to_view, text_image
 
@@ -33,8 +33,8 @@ class Pointer_Indicator(objloader.Obj):
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
 		size = (screen.width // 3, screen.height // 20)
-		text_image(size, (65, 65, 65), text, (170, 64, 78), 3 / 4, Menu_Button_png)
-		super().__init__(square_obj, object_vs, object_fs, Menu_Button_png)
+		text_image_file = text_image(size, (65, 65, 65), text, (170, 64, 78), 3 / 4)
+		super().__init__(square_obj, object_vs, object_fs, text_image_file)
 		self.generate()
 		self.translate(*location, 0)
 		self.scale(.33, .05, 1)

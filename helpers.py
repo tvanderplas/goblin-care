@@ -3,15 +3,17 @@ from random import uniform, choice
 from math import sqrt
 import screen
 from fonts.paths import calibri_ttf
+from assets.paths import text_image_png
 from PIL import Image, ImageDraw, ImageFont
 
-def text_image(size, image_color, text, text_color, text_position, filename):
+def text_image(size, image_color, text, text_color, text_position):
 	img = Image.new('RGB', size, color = image_color)
 	text_location = (size[0] * text_position, size[1] / 8)
 	font_ = ImageFont.truetype(calibri_ttf, size[1] * 7 // 8)
 	decoration = ImageDraw.Draw(img)
 	decoration.text(text_location, text, font=font_, fill=text_color)
-	img.save(filename)
+	img.save(text_image_png)
+	return text_image_png
 
 def randedge(distance, x_min, x_max, y_min, y_max):
 	edge = choice([
