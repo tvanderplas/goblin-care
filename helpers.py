@@ -36,10 +36,14 @@ def pixel_to_view(x, y):
 def collide(entity1, entity2):
 	if any([
 			(entity1.box.lx < entity2.box.lx < entity1.box.ux),
-			(entity1.box.lx < entity2.box.ux < entity1.box.ux)
+			(entity1.box.lx < entity2.box.ux < entity1.box.ux),
+			(entity2.box.lx < entity1.box.lx < entity2.box.ux),
+			(entity2.box.lx < entity1.box.ux < entity2.box.ux)
 		]) and any([
 			(entity1.box.ly < entity2.box.ly < entity1.box.uy),
-			(entity1.box.ly < entity2.box.uy < entity1.box.uy)
+			(entity1.box.ly < entity2.box.uy < entity1.box.uy),
+			(entity2.box.ly < entity1.box.ly < entity2.box.uy),
+			(entity2.box.ly < entity1.box.uy < entity2.box.uy)
 		]):
 		return True
 	return False
