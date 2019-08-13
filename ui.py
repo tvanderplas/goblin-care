@@ -1,7 +1,7 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB, FULLSCREEN, OPENGL, DOUBLEBUF
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB
 )
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
