@@ -33,9 +33,10 @@ class Player:
 		self.bigtime = 0
 		self.is_big = False
 	def embiggen(self):
-		self.scale(2, 2, 2)
-		self.bigtime = 50
-		self.is_big = True
+		if not self.is_big:
+			self.scale(2, 2, 2)
+			self.bigtime = 50
+			self.is_big = True
 	def generate(self):
 		self.body.generate()
 		self.glass.generate()
