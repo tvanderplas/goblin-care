@@ -9,7 +9,7 @@ import ui
 import screen
 from random import randint
 from assets.paths import desert_road_png, treasure_png
-from helpers import groupcollide
+from helpers import groupcollide, collideany
 
 class Game():
 	def __init__(self):
@@ -37,8 +37,8 @@ class Game():
 	def play(self):
 		while self.isRunning:
 
-			# if pg.sprite.spritecollideany(self.player, self.enemies):
-			# 	self.isRunning = False
+			if collideany(self.player.body, self.enemies):
+				self.isRunning = False
 			for enemy in groupcollide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			# for splat in pg.sprite.spritecollide(self.player, self.splats, False):
