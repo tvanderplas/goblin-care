@@ -6,8 +6,9 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png
+from assets.paths import window_close_png, splat_png, square_obj, object_vs, object_fs
 from fonts.paths import calibri_ttf
+from assets import objloader
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0), orientation='center'):
@@ -78,14 +79,13 @@ class Button():
 			).surface
 			self.is_hovering = False
 
-class Window():
+class Window:
 	def __init__(self, title, splat_count, view):
 		self.clock = pg.time.Clock()
 		self.view = view
-
-		# self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
-		# self.rect = self.surface.fill((21, 26, 27))
-		# self.rect.left, self.rect.top = location
+		self.background = objloader.Obj(square_obj, object_vs, object_fs)
+		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
+		self.background.generate()
 
 		# self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65), 'topleft')
 		# self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
@@ -122,6 +122,7 @@ class Window():
 					self.is_open = False
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+			self.background.draw()
 			# self.view.blit(self.surface, self.rect)
 			# self.view.blit(self.title_bar.surface, self.title_bar.rect)
 			# self.view.blit(self.title.surface, self.title.rect)
