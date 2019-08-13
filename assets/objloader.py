@@ -109,8 +109,8 @@ class Obj:
 	def get_box(self):
 		minimums = [min(self.vertex_info[::, i]) for i in range(5, 8)]
 		maximums = [max(self.vertex_info[::, i]) for i in range(5, 8)]
-		lx, ly, lz = glm.vec3(self.model * glm.vec4(minimums + [1]))
-		ux, uy, uz = glm.vec3(self.model * glm.vec4(maximums + [1]))
+		lx, ly, lz = glm.vec3(self.translated * self.scaled * glm.vec4(minimums + [1]))
+		ux, uy, uz = glm.vec3(self.translated * self.scaled * glm.vec4(maximums + [1]))
 		self.box = Box(lx, ux, ly, uy, lz, uz)
 
 	def compile_shader(self):

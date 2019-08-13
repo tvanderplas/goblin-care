@@ -69,10 +69,10 @@ class Player:
 			self.translate(-1 - self.body.box.lx, 0, 0)
 		if self.body.box.ux > 1:
 			self.translate(1 - self.body.box.ux, 0, 0)
-		if self.body.box.uy < -1:
-			self.translate(0, -1 - self.body.box.uy, 0)
-		if self.body.box.ly > 1:
-			self.translate(0, 1 - self.body.box.ly, 0)
+		if self.body.box.ly < -1:
+			self.translate(0, -1 - self.body.box.ly, 0)
+		if self.body.box.uy > 1:
+			self.translate(0, 1 - self.body.box.uy, 0)
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 		self.body.draw()
 		self.glass.draw()
