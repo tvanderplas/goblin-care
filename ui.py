@@ -5,6 +5,8 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 import pygame.freetype as ft
 import screen
+from assets.paths import window_close_png, splat_png
+from fonts.paths import calibri_ttf
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0), orientation='center'):
@@ -20,7 +22,7 @@ class Element():
 
 class Text():
 	def __init__(self, text, location, size, orientation='center', color=(170, 64, 78)):
-		self.font = ft.Font('fonts/calibri.ttf', size=size)
+		self.font = ft.Font(calibri_ttf, size=size)
 		self.surface, self.rect = self.font.render(text, fgcolor=color)
 		if orientation == 'center':
 			self.rect.center = location
@@ -89,14 +91,14 @@ class Window():
 		self.close_button = Button(
 			(screen.width, 0),
 			(self.title_bar.rect.height, self.title_bar.rect.height),
-			'window close.png',
 			orientation='topright',
 			color=(232, 17, 35)
 		)
+		# 	window_close_png,
 		self.splat_icon = Icon(
 			(screen.width // 50, screen.height * 11 // 12),
 			(screen.width // 25, screen.height // 16),
-			'splat.png',
+			splat_png,
 			orientation='topleft'
 		)
 		self.splat_count = Text(
