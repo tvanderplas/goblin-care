@@ -6,11 +6,17 @@ from fonts.paths import calibri_ttf
 from assets.paths import text_image_png
 from PIL import Image, ImageDraw, ImageFont
 
-def text_image(size, image_color, text, text_color, text_position):
-	img = Image.new('RGB', size, color = image_color)
-	text_location = (size[0] * text_position, size[1] / 8)
-	font_ = ImageFont.truetype(calibri_ttf, size[1] * 7 // 8)
+def text_image(text, text_color, orientation='center'):
+	img = Image.new('RGBA', (screen.width, screen.height // 10), color=(0, 0, 0, 0))
+	font_ = ImageFont.truetype(calibri_ttf, screen.height // 10)
 	decoration = ImageDraw.Draw(img)
+	text_size = decoration.textsize(text)[0]
+	if orientation == 'left':
+		text_location = (0, 0)
+	elif orientation == 'right':
+		text_location = (screen.width - (text_size * 4.2 + 90), 0)
+	else:
+		text_location = ((screen.width / 2) - (text_size * 2.1 + 45), 0)
 	decoration.text(text_location, text, font=font_, fill=text_color)
 	img.save(text_image_png)
 	return text_image_png

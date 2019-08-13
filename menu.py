@@ -10,7 +10,7 @@ import overworld
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
-from assets.paths import square_obj, object_vs, object_fs, menu_png
+from assets.paths import square_obj, object_vs, object_fs, menu_png, ui_vs, ui_fs
 from fonts.paths import calibri_ttf
 from helpers import pixel_to_view, text_image
 
@@ -30,32 +30,42 @@ class Pointer_Indicator(objloader.Obj):
 		self.update()
 		super().draw()
 
-class Menu_Button(objloader.Obj):
+class Menu_Button:
 	def __init__(self, text:str, location:tuple):
-		size = (screen.width // 3, screen.height // 20)
-		text_image_file = text_image(size, (65, 65, 65), text, (170, 64, 78), 3 / 4)
-		super().__init__(square_obj, object_vs, object_fs, text_image_file)
-		self.generate()
-		self.translate(*location, 0)
-		self.scale(.33, .05, 1)
-		self.set_texture(1)
+		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
+		self.background.color = (.25, .25, .25)
+		self.background.generate()
+		self.background.translate(*location, 0)
+		self.background.scale(.33, .05, 1)
+
+		text_image_file = text_image(text, (170, 64, 78), 'right')
+		self.text = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
+		self.text.generate()
+		self.text.set_texture(1)
+		self.text.scale(1, .1, 1)
+		self.text.scale(.5, .5, 1)
+		self.text.translate(*location, 0)
+		self.text.translate(-.2, 0, 0)
 
 		self.is_hovering = False
 
 	def rollover(self):
-		return self.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
+		return self.background.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.background.box.uy
 
 	def hover(self):
 		if self.rollover() and not self.is_hovering:
-			self.translate(1 / 8, 0, 0)
+			self.background.translate(1 / 8, 0, 0)
+			self.text.translate(1 / 8, 0, 0)
 			self.is_hovering = True
 		if not self.rollover() and self.is_hovering:
-			self.translate(-1 / 8, 0, 0)
+			self.background.translate(-1 / 8, 0, 0)
+			self.text.translate(-1 / 8, 0, 0)
 			self.is_hovering = False
 
 	def draw(self):
 		self.hover()
-		super().draw()
+		self.background.draw()
+		self.text.draw()
 
 class Menu():
 	def __init__(self):
