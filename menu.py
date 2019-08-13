@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
 from assets.paths import square_obj, object_vs, object_fs, Menu_Button_png, menu_png
 from fonts.paths import calibri_ttf
-from helpers import pixel_to_view
+from helpers import pixel_to_view, text_image
 
 class Pointer_Indicator(objloader.Obj):
 	def __init__(self):
@@ -33,13 +33,7 @@ class Pointer_Indicator(objloader.Obj):
 class Menu_Button(objloader.Obj):
 	def __init__(self, text:str, location:tuple):
 		size = (screen.width // 3, screen.height // 20)
-		img = Image.new('RGB', size, color = (65, 65, 65))
-		text_location = (size[0] * 3 / 4, size[1] / 8)
-		font_ = ImageFont.truetype(calibri_ttf, size[1] * 7 // 8)
-		decoration = ImageDraw.Draw(img)
-		decoration.text(text_location, text, font=font_, fill=(170, 64, 78))
-		img.save(Menu_Button_png)
-
+		text_image(size, (65, 65, 65), text, (170, 64, 78), 3 / 4, Menu_Button_png)
 		super().__init__(square_obj, object_vs, object_fs, Menu_Button_png)
 		self.generate()
 		self.translate(*location, 0)
