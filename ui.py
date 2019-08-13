@@ -6,9 +6,10 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs
+from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs, title_bar_png
 from fonts.paths import calibri_ttf
 from assets import objloader
+from helpers import text_image
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0), orientation='center'):
@@ -93,14 +94,15 @@ class Window:
 		self.background.generate()
 		self.background.set_light_source(self.light)
 
-		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs)
-		self.title_bar.color = (.25, .25, .25, 1)
+		size = (screen.width, screen.height // 30)
+		text_image(size, (65, 65, 65), title, (170, 64, 78), .5, title_bar_png)
+
+		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs, title_bar_png)
 		self.title_bar.generate()
+		self.title_bar.set_texture(1)
 		self.title_bar.scale(1, 1 / 30, 1)
 		self.title_bar.translate(0, 1 - self.title_bar.box.uy, 0)
-		self.title_bar.set_light_source(self.light)
 
-		# self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65), 'topleft')
 		# self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
 		# self.close_button = Button(
 		# 	(screen.width, 0),
