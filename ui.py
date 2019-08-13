@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png, square_obj, object_vs, object_fs
+from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs
 from fonts.paths import calibri_ttf
 from assets import objloader
 
@@ -83,9 +83,22 @@ class Window:
 	def __init__(self, title, splat_count, view):
 		self.clock = pg.time.Clock()
 		self.view = view
+
+		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
+		self.light.scale(0, 0, 0)
+		self.light.translate(0, 0, 2)
+
 		self.background = objloader.Obj(square_obj, object_vs, object_fs)
 		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
 		self.background.generate()
+		self.background.set_light_source(self.light)
+
+		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs)
+		self.title_bar.color = (.25, .25, .25, 1)
+		self.title_bar.generate()
+		self.title_bar.scale(1, 1 / 30, 1)
+		self.title_bar.translate(0, 1 - self.title_bar.box.uy, 0)
+		self.title_bar.set_light_source(self.light)
 
 		# self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65), 'topleft')
 		# self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
@@ -109,6 +122,9 @@ class Window:
 			orientation='midleft'
 		)
 		self.is_open = True
+	def draw(self):
+		self.background.draw()
+		self.title_bar.draw()
 	def open(self):
 		while self.is_open:
 			# self.close_button.hover()
@@ -122,7 +138,7 @@ class Window:
 					self.is_open = False
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-			self.background.draw()
+			self.draw()
 			# self.view.blit(self.surface, self.rect)
 			# self.view.blit(self.title_bar.surface, self.title_bar.rect)
 			# self.view.blit(self.title.surface, self.title.rect)
