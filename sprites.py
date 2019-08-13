@@ -4,19 +4,10 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
 )
-from helpers import moveTo, randedge, pixel_to_view, get_vector
-import screen
+from helpers import randedge, pixel_to_view, get_vector
 from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
 from math import pi
-
-def set_sprite(image_file, location, color=(255, 255, 255), size=None):
-	surface = pg.image.load(image_file).convert()
-	surface.set_colorkey(color, RLEACCEL)
-	if size is not None:
-		surface = pg.transform.scale(surface, size)
-	rect = surface.get_rect(center=location)
-	return (surface, rect)
 
 class Player:
 	def __init__(self):
