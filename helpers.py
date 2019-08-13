@@ -1,6 +1,6 @@
 
 from random import uniform, choice
-from math import atan, cos, sin, sqrt
+from math import sqrt
 import screen
 
 def randedge(distance, x_min, x_max, y_min, y_max):
