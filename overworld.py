@@ -37,6 +37,7 @@ class Game():
 	def play(self):
 		while self.isRunning:
 
+			# collisions
 			if collide_any(self.player.body, self.enemies):
 				self.isRunning = False
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
@@ -51,6 +52,7 @@ class Game():
 				else:
 					self.isRunning = False
 
+			# input
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 					self.isRunning = False
@@ -67,6 +69,7 @@ class Game():
 					loot = ui.Window('Loot', self.splat_count)
 					loot.open()
 
+			# draw frame
 			for splat in self.splats:
 				splat.draw()
 			for splat in self.splats_collect:
