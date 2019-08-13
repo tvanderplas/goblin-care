@@ -40,7 +40,7 @@ class Game():
 			# if pg.sprite.spritecollideany(self.player, self.enemies):
 			# 	self.isRunning = False
 			for enemy in groupcollide(self.enemies, self.bullets, True, True):
-				pass # Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
+				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			# for splat in pg.sprite.spritecollide(self.player, self.splats, False):
 			# 	self.splat_count += 1
 			# 	Splat_Collect(*splat.rect.center, self.loot_button.rect, (self.all_sprites, self.splats_collect))
@@ -68,7 +68,8 @@ class Game():
 					loot.open()
 
 			# self.all_sprites.update()
-			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats])
+			for splat in self.splats:
+				splat.draw()
 			self.player.draw()
 			self.loot_button.draw()
 			for bullet in self.bullets:
@@ -77,9 +78,6 @@ class Game():
 				else:
 					bullet.draw()
 			for enemy in self.enemies:
-				if enemy.box.ux < -1:
-					self.enemies.remove(enemy)
-				else:
 					enemy.draw()
 			for tornado in self.tornados:
 					tornado.draw()

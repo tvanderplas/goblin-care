@@ -113,15 +113,27 @@ class Enemy(objloader.Obj):
 		self.translate(-self.speed, 0, 0)
 		super().draw()
 
-class Splat(pg.sprite.Sprite):
-	def __init__(self, x, y, *groups):
-		super().__init__(*groups)
-		self.surface, self.rect = set_sprite(Splat_png, (x, y))
+class Splat(objloader.Obj):
+	def __init__(self, location, groups):
+		super().__init__(square_obj, object_vs, object_fs, Splat_png)
+		self.generate()
+		self.set_texture(1)
+		self.translate(*location, 0)
+		self.scale(.04, .06, 1)
 		self.health = 300
+		for group in groups:
+			group.append(self)
+		self.groups = groups
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
 	def update(self):
 		self.health -= 1
 		if self.health <= 0:
 			self.kill()
+	def draw(self):
+		self.update()
+		super().draw()
 
 class Splat_Collect(pg.sprite.Sprite):
 	def __init__(self, x, y, destination, *groups):
