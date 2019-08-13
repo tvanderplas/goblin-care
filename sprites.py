@@ -115,7 +115,7 @@ class Enemy(objloader.Obj):
 
 class Splat(objloader.Obj):
 	def __init__(self, location, groups):
-		super().__init__(square_obj, object_vs, object_fs, Splat_png)
+		super().__init__(square_obj, object_vs, object_fs, splat_png)
 		self.generate()
 		self.set_texture(1)
 		self.translate(*location, 0)
@@ -138,7 +138,7 @@ class Splat(objloader.Obj):
 class Splat_Collect(pg.sprite.Sprite):
 	def __init__(self, x, y, destination, *groups):
 		super().__init__(*groups)
-		self.surface, self.rect = set_sprite(Splat_png, (x, y))
+		self.surface, self.rect = set_sprite(splat_png, (x, y))
 		self.destination = destination
 	def update(self):
 		self.rect.move_ip(moveTo(self.rect.center, self.destination.center, 100))
