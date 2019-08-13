@@ -66,7 +66,7 @@ class Game():
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
 				):
-					loot = ui.Window('Loot', self.splat_count)
+					loot = ui.Window('Loot', self.splat_count, self.view)
 					loot.open()
 
 			# draw frame

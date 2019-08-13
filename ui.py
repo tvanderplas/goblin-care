@@ -1,8 +1,9 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB, FULLSCREEN, OPENGL, DOUBLEBUF
 )
+from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
 from assets.paths import window_close_png, splat_png
@@ -78,23 +79,23 @@ class Button():
 			self.is_hovering = False
 
 class Window():
-	def __init__(self, title, splat_count, location=(0, 0), size=(screen.width, screen.height)):
+	def __init__(self, title, splat_count, view):
 		self.clock = pg.time.Clock()
-		self.view = pg.display.set_mode((screen.width, screen.height), pg.FULLSCREEN) # pylint: disable=no-member
+		self.view = view
 
-		self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
-		self.rect = self.surface.fill((21, 26, 27))
-		self.rect.left, self.rect.top = location
+		# self.surface = pg.Surface(size) # pylint: disable=too-many-function-args
+		# self.rect = self.surface.fill((21, 26, 27))
+		# self.rect.left, self.rect.top = location
 
-		self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65), 'topleft')
-		self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
-		self.close_button = Button(
-			(screen.width, 0),
-			(self.title_bar.rect.height, self.title_bar.rect.height),
-			orientation='topright',
-			color=(232, 17, 35)
-		)
+		# self.title_bar = Element(location, (size[0], screen.height // 30), (65, 65, 65), 'topleft')
+		# self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
+		# self.close_button = Button(
+		# 	(screen.width, 0),
+		# 	(self.title_bar.rect.height, self.title_bar.rect.height),
 		# 	window_close_png,
+		# 	orientation='topright',
+		# 	color=(232, 17, 35)
+		# )
 		self.splat_icon = Icon(
 			(screen.width // 50, screen.height * 11 // 12),
 			(screen.width // 25, screen.height // 16),
@@ -110,20 +111,21 @@ class Window():
 		self.is_open = True
 	def open(self):
 		while self.is_open:
-			self.close_button.hover()
+			# self.close_button.hover()
 			for event in pg.event.get():
 				if (
 					(event.type == KEYDOWN and event.key == K_ESCAPE) or
 					(event.type == KEYDOWN and event.key == K_TAB) or
-					(event.type == MOUSEBUTTONDOWN and self.close_button.rollover()) or
+					# (event.type == MOUSEBUTTONDOWN and self.close_button.rollover()) or
 					event.type == QUIT
 				):
 					self.is_open = False
 			pg.display.flip()
-			self.view.blit(self.surface, self.rect)
-			self.view.blit(self.title_bar.surface, self.title_bar.rect)
-			self.view.blit(self.title.surface, self.title.rect)
-			self.view.blit(self.close_button.surface, self.close_button.rect)
-			self.view.blit(self.splat_icon.surface, self.splat_icon.rect)
-			self.view.blit(self.splat_count.surface, self.splat_count.rect)
+			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+			# self.view.blit(self.surface, self.rect)
+			# self.view.blit(self.title_bar.surface, self.title_bar.rect)
+			# self.view.blit(self.title.surface, self.title.rect)
+			# self.view.blit(self.close_button.surface, self.close_button.rect)
+			# self.view.blit(self.splat_icon.surface, self.splat_icon.rect)
+			# self.view.blit(self.splat_count.surface, self.splat_count.rect)
 			self.clock.tick(60)
