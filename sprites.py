@@ -4,11 +4,11 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
 )
-from helpers import moveTo, randedge, pixel_to_view
+from helpers import moveTo, randedge, pixel_to_view, get_vector
 import screen
 from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
-from math import pi, sqrt
+from math import pi
 
 def set_sprite(image_file, location, color=(255, 255, 255), size=None):
 	surface = pg.image.load(image_file).convert()
@@ -135,15 +135,27 @@ class Splat(objloader.Obj):
 		self.update()
 		super().draw()
 
-class Splat_Collect(pg.sprite.Sprite):
-	def __init__(self, x, y, destination, *groups):
-		super().__init__(*groups)
-		self.surface, self.rect = set_sprite(splat_png, (x, y))
+class Splat_Collect(objloader.Obj):
+	def __init__(self, location, destination, groups):
+		super().__init__(square_obj, object_vs, object_fs, splat_png)
+		self.generate()
+		self.set_texture(1)
+		self.translate(*location, 0)
+		self.scale(.04, .06, 1)
 		self.destination = destination
+		self.vector = get_vector(.1, *destination, *location)
+		for group in groups:
+			group.append(self)
+		self.groups = groups
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
 	def update(self):
-		self.rect.move_ip(moveTo(self.rect.center, self.destination.center, 100))
-		if self.rect.colliderect(self.destination):
-			self.kill()
+		self.translate(*self.vector, 0)
+	def draw(self):
+		self.update()
+		super().draw()
+
 
 class Tornado(objloader.Obj):
 	def __init__(self, groups):
@@ -155,19 +167,15 @@ class Tornado(objloader.Obj):
 		self.scale(.06, .09, 1)
 		self.translate(*randedge(.05, -1, 1, -1, 1), 0)
 		self.speed = uniform(.001, .003)
-		self.vector = self.get_vector(
+		self.vector = get_vector(
 			self.speed,
 			uniform(-.5, .5) - self.box.mlz[0],
-			uniform(-.5, .5) - self.box.mlz[1]
+			uniform(-.5, .5) - self.box.mlz[1],
+			*self.box.muz[:2],
 		)
 		self.groups = groups
 		for group in groups:
 			group.append(self)
-	def get_vector(self, magnitude, x, y):
-		hypotenuse = sqrt((x**2) + (y**2))
-		normal_x = x / hypotenuse
-		normal_y = y / hypotenuse
-		return (normal_x * magnitude, normal_y * magnitude)
 	def kill(self):
 		for group in self.groups:
 			group.remove(self)

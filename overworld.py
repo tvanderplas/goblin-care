@@ -9,7 +9,7 @@ import ui
 import screen
 from random import randint
 from assets.paths import desert_road_png, treasure_png
-from helpers import groupcollide, collideany
+from helpers import group_collide, collide_any, get_collided
 
 class Game():
 	def __init__(self):
@@ -37,14 +37,14 @@ class Game():
 	def play(self):
 		while self.isRunning:
 
-			if collideany(self.player.body, self.enemies):
+			if collide_any(self.player.body, self.enemies):
 				self.isRunning = False
-			for enemy in groupcollide(self.enemies, self.bullets, True, True):
+			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
-			# for splat in pg.sprite.spritecollide(self.player, self.splats, False):
-			# 	self.splat_count += 1
-			# 	Splat_Collect(*splat.rect.center, self.loot_button.rect, (self.all_sprites, self.splats_collect))
-			# 	splat.kill()
+			for splat in get_collided(self.player.body, self.splats):
+				self.splat_count += 1
+				Splat_Collect(splat.box.muz[:2], (-.85, -.8), (self.all_sprites, self.splats_collect))
+				splat.kill()
 			# for tornado in pg.sprite.spritecollide(self.player, self.tornados, False):
 			# 	if tornado.is_rainbow:
 			# 		self.player.embiggen()
@@ -70,6 +70,8 @@ class Game():
 			# self.all_sprites.update()
 			for splat in self.splats:
 				splat.draw()
+			for splat in self.splats_collect:
+				splat.draw()
 			self.player.draw()
 			self.loot_button.draw()
 			for bullet in self.bullets:
@@ -78,7 +80,6 @@ class Game():
 					enemy.draw()
 			for tornado in self.tornados:
 					tornado.draw()
-			# self.view.blits([(splat.surface, splat.rect) for splat in self.splats_collect])
 			# self.view.blit(self.loot_button.surface, self.loot_button.rect)
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
