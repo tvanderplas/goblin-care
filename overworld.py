@@ -73,9 +73,6 @@ class Game():
 			self.player.draw()
 			self.loot_button.draw()
 			for bullet in self.bullets:
-				if bullet.box.lx > 1:
-					self.bullets.remove(bullet)
-				else:
 					bullet.draw()
 			for enemy in self.enemies:
 					enemy.draw()
