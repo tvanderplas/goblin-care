@@ -68,12 +68,19 @@ class Window:
 
 		self.close_button = Close_Button()
 
+		self.splat_icon = objloader.Obj(square_obj, object_vs, object_fs, splat_png)
+		self.splat_icon.generate()
+		self.splat_icon.set_texture(1)
+		self.splat_icon.scale(.04, .06, 1)
+		self.splat_icon.translate(-.9, -.9, 0)
+
 		self.is_open = True
 	def draw(self):
 		self.background.draw()
 		self.title_bar.draw()
 		self.title_text.draw()
 		self.close_button.draw()
+		self.splat_icon.draw()
 	def open(self):
 		while self.is_open:
 			for event in pg.event.get():
