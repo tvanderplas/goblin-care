@@ -20,7 +20,7 @@ class Close_Button:
 		self.close_button.translate(
 			1 - self.close_button.box.ux,
 			1 - self.close_button.box.uy,
-			0
+			-.1
 		)
 
 		self.close_button_hover = objloader.Obj(square_obj, object_vs, object_fs, window_close_active_png)
@@ -30,7 +30,7 @@ class Close_Button:
 		self.close_button_hover.translate(
 			1 - self.close_button_hover.box.ux,
 			1 - self.close_button_hover.box.uy,
-			0
+			-.1
 		)
 
 	def rollover(self):
@@ -51,6 +51,7 @@ class Window:
 		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.background.generate()
 		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
+		self.background.translate(0, 0, .1)
 
 		self.title_bar = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.title_bar.generate()
@@ -64,7 +65,7 @@ class Window:
 		self.title_text.set_texture(1)
 		self.title_text.scale(1, .1, 1)
 		self.title_text.scale(.66, .66, 1)
-		self.title_text.translate(0, 1 - self.title_text.box.uy, 0)
+		self.title_text.translate(0, 1 - self.title_text.box.uy, -.1)
 
 		self.close_button = Close_Button()
 
