@@ -11,6 +11,7 @@ turning
 customizable controls
 android release
 
-integrate opengl into game
-use 3d object as 2d sprite
-buttons in loot menu
+in loot menu:
+	buttons
+	car animation
+	buy button
