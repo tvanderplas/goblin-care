@@ -74,6 +74,13 @@ class Window:
 		self.splat_icon.scale(.04, .06, 1)
 		self.splat_icon.translate(-.9, -.9, 0)
 
+		text_image_file = text_image(str(splat_count), (170, 64, 78), 'left')
+		self.splats_number = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
+		self.splats_number.generate()
+		self.splats_number.set_texture(1)
+		self.splats_number.scale(1, .1, 1)
+		self.splats_number.translate(.2, -.9, 0)
+
 		self.is_open = True
 	def draw(self):
 		self.background.draw()
@@ -81,6 +88,7 @@ class Window:
 		self.title_text.draw()
 		self.close_button.draw()
 		self.splat_icon.draw()
+		self.splats_number.draw()
 	def open(self):
 		while self.is_open:
 			for event in pg.event.get():
