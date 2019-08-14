@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs
+from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs
 from fonts.paths import calibri_ttf
 from assets import objloader
 from helpers import text_image
@@ -85,25 +85,24 @@ class Window:
 		self.clock = pg.time.Clock()
 		self.view = view
 
-		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
-		self.light.scale(0, 0, 0)
-		self.light.translate(0, 0, 2)
-
-		self.background = objloader.Obj(square_obj, object_vs, object_fs)
-		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
+		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.background.generate()
-		self.background.set_light_source(self.light)
+		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
 
-		size = (screen.width, screen.height // 30)
-		text_image_file = text_image(size, (65, 65, 65), title, (170, 64, 78), .5)
-
-		self.title_bar = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
+		self.title_bar = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.title_bar.generate()
-		self.title_bar.set_texture(1)
-		self.title_bar.scale(1, 1 / 30, 1)
+		self.title_bar.color = (.25, .25, .25)
+		self.title_bar.scale(1, 1 / 15, 1)
 		self.title_bar.translate(0, 1 - self.title_bar.box.uy, 0)
 
-		# self.title = Text(title, self.title_bar.rect.center, self.title_bar.rect.height * 7 // 8)
+		text_image_file = text_image(title, (170, 64, 78))
+		self.title_text = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
+		self.title_text.generate()
+		self.title_text.set_texture(1)
+		self.title_text.scale(1, .1, 1)
+		self.title_text.scale(.66, .66, 1)
+		self.title_text.translate(0, 1 - self.title_text.box.uy, 0)
+
 		# self.close_button = Button(
 		# 	(screen.width, 0),
 		# 	(self.title_bar.rect.height, self.title_bar.rect.height),
@@ -127,6 +126,7 @@ class Window:
 	def draw(self):
 		self.background.draw()
 		self.title_bar.draw()
+		self.title_text.draw()
 	def open(self):
 		while self.is_open:
 			# self.close_button.hover()
