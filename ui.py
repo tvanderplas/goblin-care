@@ -6,10 +6,10 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs
+from assets.paths import window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs
 from fonts.paths import calibri_ttf
 from assets import objloader
-from helpers import text_image
+from helpers import text_image, pixel_to_view
 
 class Element():
 	def __init__(self, location, size, color=(0, 0, 0), orientation='center'):
@@ -45,40 +45,37 @@ class Icon():
 		elif orientation == 'topleft':
 			self.rect.topleft = location
 
-class Button():
-	def __init__(self, location, size, image_file, orientation='center', color=(255, 255, 255)):
-		self.location = location
-		self.size = size
-		self.image_file = image_file
-		self.orientation = orientation
-		self.color = color
+class Close_Button:
+	def __init__(self):
+		self.close_button = objloader.Obj(square_obj, object_vs, object_fs, window_close_png)
+		self.close_button.generate()
+		self.close_button.set_texture(1)
+		self.close_button.scale(1 / 20, 1 / 15, 1)
+		self.close_button.translate(
+			1 - self.close_button.box.ux,
+			1 - self.close_button.box.uy,
+			0
+		)
 
-		icon = Icon(self.location, self.size, self.image_file, self.orientation, self.color)
-		self.surface, self.rect = icon.surface, icon.rect
-		self.is_hovering = False
+		self.close_button_hover = objloader.Obj(square_obj, object_vs, object_fs, window_close_active_png)
+		self.close_button_hover.generate()
+		self.close_button_hover.set_texture(1)
+		self.close_button_hover.scale(1 / 20, 1 / 15, 1)
+		self.close_button_hover.translate(
+			1 - self.close_button_hover.box.ux,
+			1 - self.close_button_hover.box.uy,
+			0
+		)
+
 	def rollover(self):
-		over_x = self.rect.left <= pg.mouse.get_pos()[0] <= self.rect.right
-		over_y = self.rect.top <= pg.mouse.get_pos()[1] <= self.rect.bottom
+		over_x = self.close_button.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.close_button.box.ux
+		over_y = self.close_button.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.close_button.box.uy
 		return over_x and over_y
-	def hover(self):
-		if self.rollover() and not self.is_hovering:
-			self.surface = Icon(
-				self.location,
-				self.size,
-				self.image_file,
-				self.orientation,
-				color=(0, 0, 0)
-			).surface
-			self.is_hovering = True
-		if not self.rollover() and self.is_hovering:
-			self.surface = Icon(
-				self.location,
-				self.size,
-				self.image_file,
-				self.orientation,
-				self.color
-			).surface
-			self.is_hovering = False
+	def draw(self):
+		if self.rollover():
+			self.close_button_hover.draw()
+		else:
+			self.close_button.draw()
 
 class Window:
 	def __init__(self, title, splat_count, view):
@@ -103,15 +100,7 @@ class Window:
 		self.title_text.scale(.66, .66, 1)
 		self.title_text.translate(0, 1 - self.title_text.box.uy, 0)
 
-		self.close_button = objloader.Obj(square_obj, object_vs, object_fs, window_close_png)
-		self.close_button.generate()
-		self.close_button.set_texture(1)
-		self.close_button.scale(1 / 20, 1 / 15, 1)
-		self.close_button.translate(
-			1 - self.close_button.box.ux,
-			1 - self.close_button.box.uy,
-			0
-		)
+		self.close_button = Close_Button()
 
 		self.splat_icon = Icon(
 			(screen.width // 50, screen.height * 11 // 12),
