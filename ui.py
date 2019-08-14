@@ -103,13 +103,16 @@ class Window:
 		self.title_text.scale(.66, .66, 1)
 		self.title_text.translate(0, 1 - self.title_text.box.uy, 0)
 
-		# self.close_button = Button(
-		# 	(screen.width, 0),
-		# 	(self.title_bar.rect.height, self.title_bar.rect.height),
-		# 	window_close_png,
-		# 	orientation='topright',
-		# 	color=(232, 17, 35)
-		# )
+		self.close_button = objloader.Obj(square_obj, object_vs, object_fs, window_close_png)
+		self.close_button.generate()
+		self.close_button.set_texture(1)
+		self.close_button.scale(1 / 20, 1 / 15, 1)
+		self.close_button.translate(
+			1 - self.close_button.box.ux,
+			1 - self.close_button.box.uy,
+			0
+		)
+
 		self.splat_icon = Icon(
 			(screen.width // 50, screen.height * 11 // 12),
 			(screen.width // 25, screen.height // 16),
@@ -127,6 +130,7 @@ class Window:
 		self.background.draw()
 		self.title_bar.draw()
 		self.title_text.draw()
+		self.close_button.draw()
 	def open(self):
 		while self.is_open:
 			# self.close_button.hover()
