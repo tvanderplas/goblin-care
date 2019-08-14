@@ -1,20 +1,19 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB, FULLSCREEN, OPENGL, DOUBLEBUF
+	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB
 )
 from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
-import screen
 from random import randint
 from assets.paths import desert_road_png, treasure_png
 from helpers import group_collide, collide_any, get_collided
 
 class Game():
-	def __init__(self):
+	def __init__(self, view):
 		self.clock = pg.time.Clock()
-		self.view = pg.display.set_mode((screen.width, screen.height), FULLSCREEN|OPENGL|DOUBLEBUF) # pylint: disable=no-member
+		self.view = view
 		glEnable(GL_DEPTH_TEST)
 
 		self.ADDENEMY = pg.USEREVENT + 1 # pylint: disable=no-member

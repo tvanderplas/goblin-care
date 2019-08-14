@@ -81,7 +81,7 @@ class Menu():
 					raise SystemExit
 				if event.type == MOUSEBUTTONDOWN:
 					if self.play_button.rollover():
-						game = overworld.Game()
+						game = overworld.Game(self.view)
 						game.play()
 						self.__init__()
 					elif self.quit_button.rollover():
