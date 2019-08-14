@@ -203,6 +203,7 @@ class Background(objloader.Obj):
 		super().__init__(square_obj, object_vs, object_fs, image_file)
 		self.generate()
 		self.set_texture(1)
+		self.translate(0, 0, .5)
 
 class Hud_Button(objloader.Obj):
 	def __init__(self, image_file, location):

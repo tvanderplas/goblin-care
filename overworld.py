@@ -3,7 +3,7 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB, FULLSCREEN, OPENGL, DOUBLEBUF
 )
-from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
+from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST
 from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
 import screen
@@ -15,6 +15,7 @@ class Game():
 	def __init__(self):
 		self.clock = pg.time.Clock()
 		self.view = pg.display.set_mode((screen.width, screen.height), FULLSCREEN|OPENGL|DOUBLEBUF) # pylint: disable=no-member
+		glEnable(GL_DEPTH_TEST)
 
 		self.ADDENEMY = pg.USEREVENT + 1 # pylint: disable=no-member
 		pg.time.set_timer(self.ADDENEMY, randint(500, 750))

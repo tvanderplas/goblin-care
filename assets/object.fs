@@ -25,6 +25,9 @@ void main()
 	if (texture_mode == 0) {
 		fragment_color = vec4(result, 1.0);
 	} else {
+		vec4 tex_color = texture(textureObj, texture_coord);
+		if(tex_color.a == 0)
+			discard;
 		fragment_color = texture2D(textureObj, texture_coord);
 	}
 }
