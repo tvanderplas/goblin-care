@@ -10,6 +10,8 @@ from assets.paths import window_close_png, window_close_active_png, splat_png, s
 from fonts.paths import calibri_ttf
 from assets import objloader
 from helpers import text_image, pixel_to_view
+from sprites import Player
+from math import pi
 
 class Close_Button:
 	def __init__(self):
@@ -51,7 +53,7 @@ class Window:
 		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.background.generate()
 		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
-		self.background.translate(0, 0, .1)
+		self.background.translate(0, 0, .9)
 
 		self.title_bar = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.title_bar.generate()
@@ -82,6 +84,11 @@ class Window:
 		self.splats_number.scale(1, .1, 1)
 		self.splats_number.translate(.2, -.9, 0)
 
+		self.car = Player()
+		self.car.generate()
+		self.car.scale(5, 3, 5)
+		self.car.rotate(pi / 3, 1, 0, 0)
+
 		self.is_open = True
 	def draw(self):
 		self.background.draw()
@@ -90,6 +97,8 @@ class Window:
 		self.close_button.draw()
 		self.splat_icon.draw()
 		self.splats_number.draw()
+		self.car.rotate(pi / 500, 0, 0, 1)
+		self.car.draw()
 	def open(self):
 		while self.is_open:
 			for event in pg.event.get():
