@@ -13,6 +13,8 @@ class Player:
 	def __init__(self):
 		self.body = objloader.Obj(sedan_body_obj, object_vs, object_fs)
 		self.glass = objloader.Obj(sedan_glass_obj, object_vs, object_fs)
+		self.wheels = objloader.Obj(sedan_wheels_obj, object_vs, object_fs)
+		self.tires = objloader.Obj(sedan_tires_obj, object_vs, object_fs)
 		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
 		self.light.scale(0, 0, 0)
 		self.light.translate(0, 0, -2)
@@ -31,18 +33,28 @@ class Player:
 	def generate(self):
 		self.body.generate()
 		self.glass.generate()
+		self.wheels.generate()
+		self.tires.generate()
 	def set_light_source(self, light):
 		self.body.set_light_source(light)
 		self.glass.set_light_source(light)
+		self.wheels.set_light_source(light)
+		self.tires.set_light_source(light)
 	def translate(self, x, y, z):
 		self.body.translate(x, y, z)
 		self.glass.translate(x, y, z)
+		self.wheels.translate(x, y, z)
+		self.tires.translate(x, y, z)
 	def rotate(self, angle, x, y, z):
 		self.body.rotate(angle, x, y, z)
 		self.glass.rotate(angle, x, y, z)
+		self.wheels.rotate(angle, x, y, z)
+		self.tires.rotate(angle, x, y, z)
 	def scale(self, x, y, z):
 		self.body.scale(x, y, z)
 		self.glass.scale(x, y, z)
+		self.wheels.scale(x, y, z)
+		self.tires.scale(x, y, z)
 	def draw(self):
 		pressed_keys = pg.key.get_pressed()
 		if pressed_keys[K_w] or pressed_keys[K_UP]: # pylint: disable=undefined-variable
@@ -67,6 +79,8 @@ class Player:
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 		self.body.draw()
 		self.glass.draw()
+		self.wheels.draw()
+		self.tires.draw()
 
 class PlayerBullet(objloader.Obj):
 	def __init__(self, x, y, *groups):
