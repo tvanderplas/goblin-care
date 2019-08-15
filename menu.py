@@ -19,7 +19,7 @@ class Pointer_Indicator(objloader.Obj):
 		super().__init__(square_obj, object_vs, object_fs)
 		self.generate()
 		self.scale(.01, .01, .01)
-		self.color = (0, 10, 10)
+		self.color = (0, 1, 1, 1)
 
 	def update(self):
 		mousepos = pixel_to_view(*pg.mouse.get_pos())
@@ -33,7 +33,7 @@ class Pointer_Indicator(objloader.Obj):
 class Menu_Button:
 	def __init__(self, text:str, location:tuple):
 		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.background.color = (.25, .25, .25)
+		self.background.color = (.25, .25, .25, 1)
 		self.background.generate()
 		self.background.translate(*location, 0)
 		self.background.scale(.33, .05, 1)

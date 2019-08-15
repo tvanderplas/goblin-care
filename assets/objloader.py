@@ -134,7 +134,7 @@ class Obj:
 			if name == 'transform':
 				glUniformMatrix4fv(address, 1, False, np.matrix(self.model) * np.matrix(self.perspective))
 			if name == 'self_color':
-				glUniform3f(address, *self.color[:3])
+				glUniform4f(address, *self.color)
 			if name == 'light_color':
 				glUniform3f(address, *self.light.color[:3])
 			if name == 'light_position':
