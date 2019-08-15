@@ -34,7 +34,6 @@ class Close_Button:
 			1 - self.close_button_hover.box.uy,
 			-.1
 		)
-
 	def rollover(self):
 		over_x = self.close_button.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.close_button.box.ux
 		over_y = self.close_button.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.close_button.box.uy
@@ -44,6 +43,31 @@ class Close_Button:
 			self.close_button_hover.draw()
 		else:
 			self.close_button.draw()
+
+class Color_Button:
+	def __init__(self, location, color):
+		self.fill = objloader.Obj(square_obj, ui_vs, ui_fs)
+		self.fill.generate()
+		self.fill.color = color
+		self.fill.scale(1 / 30, 1 / 21, 1)
+		self.fill.translate(*location, -.1)
+
+		self.border = objloader.Obj(square_obj, ui_vs, ui_fs)
+		self.border.generate()
+		self.border.color = [1, 1, 1, .25]
+		self.border.scale(1 / 20, 1 / 15, 1)
+		self.border.translate(*location, 0)
+	def rollover(self):
+		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
+		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
+		return over_x and over_y
+	def draw(self):
+		if self.rollover():
+			self.border.color[3] = .75
+		else:
+			self.border.color[3] = .25
+		self.border.draw()
+		self.fill.draw()
 
 class Window:
 	def __init__(self, title, splat_count, view):
@@ -57,7 +81,7 @@ class Window:
 
 		self.title_bar = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.title_bar.generate()
-		self.title_bar.color = (.25, .25, .25)
+		self.title_bar.color = (.25, .25, .25, 1)
 		self.title_bar.scale(1, 1 / 15, 1)
 		self.title_bar.translate(0, 1 - self.title_bar.box.uy, 0)
 
@@ -89,6 +113,8 @@ class Window:
 		self.car.scale(5, 3, 5)
 		self.car.rotate(pi / 3, 1, 0, 0)
 
+		self.color_select = Color_Button((.5, .5), (1, 1, 0, 1))
+
 		self.is_open = True
 	def draw(self):
 		self.background.draw()
@@ -97,6 +123,7 @@ class Window:
 		self.close_button.draw()
 		self.splat_icon.draw()
 		self.splats_number.draw()
+		self.color_select.draw()
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
