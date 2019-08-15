@@ -146,6 +146,9 @@ class Window:
 					event.type == QUIT
 				):
 					self.is_open = False
+				for button in self.color_select:
+					if event.type == MOUSEBUTTONDOWN and button.rollover():
+						self.car.body.color = button.fill.color
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.draw()
