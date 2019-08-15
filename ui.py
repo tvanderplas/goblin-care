@@ -49,13 +49,13 @@ class Color_Button:
 		self.fill = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.fill.generate()
 		self.fill.color = color
-		self.fill.scale(1 / 30, 1 / 21, 1)
+		self.fill.scale(.03, .05, 1)
 		self.fill.translate(*location, -.1)
 
 		self.border = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.border.generate()
 		self.border.color = [1, 1, 1, .25]
-		self.border.scale(1 / 20, 1 / 15, 1)
+		self.border.scale(.04, .06, 1)
 		self.border.translate(*location, 0)
 	def rollover(self):
 		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
@@ -95,6 +95,17 @@ class Window:
 
 		self.close_button = Close_Button()
 
+		self.color_select = []
+		for args in [
+			(-.95, .78, 1, 0, 0, 1),
+			(-.95, .64, 0, 1, 0, 1),
+			(-.95, .50, 0, 0, 1, 1),
+			(-.85, .78, 1, 1, 0, 1),
+			(-.85, .64, 0, 1, 1, 1),
+			(-.85, .50, 1, 0, 1, 1)
+		]:
+			self.color_select.append(Color_Button(args[:2], args[2:]))
+
 		self.splat_icon = objloader.Obj(square_obj, object_vs, object_fs, splat_png)
 		self.splat_icon.generate()
 		self.splat_icon.set_texture(1)
@@ -113,8 +124,6 @@ class Window:
 		self.car.scale(5, 3, 5)
 		self.car.rotate(pi / 3, 1, 0, 0)
 
-		self.color_select = Color_Button((.5, .5), (1, 1, 0, 1))
-
 		self.is_open = True
 	def draw(self):
 		self.background.draw()
@@ -123,7 +132,8 @@ class Window:
 		self.close_button.draw()
 		self.splat_icon.draw()
 		self.splats_number.draw()
-		self.color_select.draw()
+		for button in self.color_select:
+			button.draw()
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
