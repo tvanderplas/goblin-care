@@ -123,8 +123,6 @@ class Window:
 		self.car.generate()
 		self.car.scale(5, 3, 5)
 		self.car.rotate(pi / 3, 1, 0, 0)
-
-		self.is_open = True
 	def draw(self):
 		self.background.draw()
 		self.title_bar.draw()
@@ -137,6 +135,7 @@ class Window:
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
+		self.is_open = True
 		while self.is_open:
 			for event in pg.event.get():
 				if (

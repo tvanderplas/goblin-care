@@ -28,11 +28,12 @@ class Game():
 		self.tornados = []
 		self.all_sprites = []
 		self.player = Player()
+		self.splat_count = 0
 
 		self.background = Background(desert_road_png)
 		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
+		self.loot = ui.Window('Loot', self.splat_count, self.view)
 
-		self.splat_count = 0
 		self.isRunning = True
 	def play(self):
 		while self.isRunning:
@@ -66,8 +67,7 @@ class Game():
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
 				):
-					loot = ui.Window('Loot', self.splat_count, self.view)
-					loot.open()
+					self.loot.open()
 
 			# draw frame
 			for splat in self.splats:
