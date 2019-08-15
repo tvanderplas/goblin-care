@@ -46,6 +46,7 @@ class Close_Button:
 
 class Color_Button:
 	def __init__(self, location, color):
+		self.active = False
 		self.fill = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.fill.generate()
 		self.fill.color = color
@@ -62,10 +63,11 @@ class Color_Button:
 		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
 		return over_x and over_y
 	def draw(self):
+		self.border.color[3] = .25
 		if self.rollover():
-			self.border.color[3] = .75
-		else:
-			self.border.color[3] = .25
+			self.border.color[3] = .5
+		if self.active:
+			self.border.color[3] = 1
 		self.border.draw()
 		self.fill.draw()
 
@@ -147,6 +149,9 @@ class Window:
 					self.is_open = False
 				for button in self.color_select:
 					if event.type == MOUSEBUTTONDOWN and button.rollover():
+						for other_button in self.color_select:
+							other_button.active = False
+						button.active = True
 						self.car.body.color = button.fill.color
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)

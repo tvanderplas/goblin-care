@@ -33,6 +33,7 @@ class Game():
 		self.background = Background(desert_road_png)
 		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
 		self.loot = ui.Window('Loot', self.splat_count, self.view)
+		self.loot.color_select[0].active = True
 
 		self.isRunning = True
 	def play(self):
