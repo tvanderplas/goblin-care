@@ -51,15 +51,11 @@ class Close_Button:
 class Color_Button:
 	def __init__(self, location, color):
 		self.active = False
-		self.fill = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.fill.generate()
-		self.fill.color = color
+		self.fill = Ui_Color(color)
 		self.fill.scale(.03, .05, 1)
 		self.fill.translate(*location, -.1)
 
-		self.border = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.border.generate()
-		self.border.color = [1, 1, 1, .25]
+		self.border = Ui_Color([1, 1, 1, .25])
 		self.border.scale(.04, .06, 1)
 		self.border.translate(*location, 0)
 	def rollover(self):
@@ -78,15 +74,11 @@ class Color_Button:
 class Texture_Button:
 	def __init__(self, x, y, texture):
 		self.active = False
-		self.fill = objloader.Obj(square_obj, object_vs, object_fs, texture)
-		self.fill.generate()
-		self.fill.set_texture(1)
+		self.fill = Ui_Image(texture)
 		self.fill.scale(.03, .05, 1)
 		self.fill.translate(x, y, -.1)
 
-		self.border = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.border.generate()
-		self.border.color = [1, 1, 1, .25]
+		self.border = Ui_Color([1, 1, 1, .25])
 		self.border.scale(.04, .06, 1)
 		self.border.translate(x, y, 0)
 	def rollover(self):
@@ -106,6 +98,18 @@ class Text(objloader.Obj):
 	def __init__(self, text, orientation='left'):
 		text_image_file = text_image(text, (170, 64, 78), orientation)
 		super().__init__(square_obj, object_vs, object_fs, text_image_file)
+		self.generate()
+		self.set_texture(1)
+
+class Ui_Color(objloader.Obj):
+	def __init__(self, color):
+		super().__init__(square_obj, ui_vs, ui_fs)
+		self.generate()
+		self.color = color
+
+class Ui_Image(objloader.Obj):
+	def __init__(self, image):
+		super().__init__(square_obj, object_vs, object_fs, image)
 		self.generate()
 		self.set_texture(1)
 
