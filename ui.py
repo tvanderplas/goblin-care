@@ -135,21 +135,14 @@ class Window:
 		self.view = view
 		self.splat_count = splat_count
 
-		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.background.generate()
-		self.background.color = (21 / 256, 26 / 256, 27 / 256, 1)
+		self.background = Ui_Color((21 / 256, 26 / 256, 27 / 256, 1))
 		self.background.translate(0, 0, .9)
 
-		self.title_bar = objloader.Obj(square_obj, ui_vs, ui_fs)
-		self.title_bar.generate()
-		self.title_bar.color = (.25, .25, .25, 1)
+		self.title_bar = Ui_Color((.25, .25, .25, 1))
 		self.title_bar.scale(1, 1 / 15, 1)
 		self.title_bar.translate(0, 1 - self.title_bar.box.uy, 0)
 
-		text_image_file = text_image(title, (170, 64, 78))
-		self.title_text = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
-		self.title_text.generate()
-		self.title_text.set_texture(1)
+		self.title_text = Text(title, 'center')
 		self.title_text.scale(1, .1, 1)
 		self.title_text.scale(.66, .66, 1)
 		self.title_text.translate(0, 1 - self.title_text.box.uy, -.1)
