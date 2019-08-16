@@ -28,7 +28,7 @@ class Game():
 		self.tornados = []
 		self.all_sprites = []
 		self.player = Player()
-		self.splat_count = 0
+		self.splat_count = [0]
 
 		self.background = Background(desert_road_png)
 		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
@@ -45,7 +45,7 @@ class Game():
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			for splat in get_collided(self.player.body, self.splats):
-				self.splat_count += 1
+				self.splat_count[0] += 1
 				Splat_Collect(splat.box.muz[:2], (-.85, -.8), (self.all_sprites, self.splats_collect))
 				splat.kill()
 			for tornado in get_collided(self.player.body, self.tornados):

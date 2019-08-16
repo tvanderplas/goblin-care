@@ -71,10 +71,26 @@ class Color_Button:
 		self.border.draw()
 		self.fill.draw()
 
+class Text(objloader.Obj):
+	def __init__(self, text, orientation='left'):
+		text_image_file = text_image(text, (170, 64, 78), orientation)
+		super().__init__(square_obj, object_vs, object_fs, text_image_file)
+		self.generate()
+		self.set_texture(1)
+
+class Splats_Number(Text):
+	def __init__(self, text):
+		super().__init__(str(text))
+		self.scale(1, .1, 1)
+		self.translate(.2, -.9, 0)
+	def update(self, text):
+		self.__init__(text)
+
 class Window:
 	def __init__(self, title, splat_count, view):
 		self.clock = pg.time.Clock()
 		self.view = view
+		self.splat_count = splat_count
 
 		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
 		self.background.generate()
@@ -99,12 +115,12 @@ class Window:
 
 		self.color_select = []
 		for args in [
-			(-.95, .78, 1, 0, 0, 1),
-			(-.95, .64, 0, 1, 0, 1),
-			(-.95, .50, 0, 0, 1, 1),
-			(-.85, .78, 1, 1, 0, 1),
-			(-.85, .64, 0, 1, 1, 1),
-			(-.85, .50, 1, 0, 1, 1)
+			(-.95, .78, 1, 0, 0, 1), # red
+			(-.95, .64, 0, 1, 0, 1), # green
+			(-.95, .50, 0, 0, 1, 1), # blue
+			(-.85, .78, 1, 1, 0, 1), # yellow
+			(-.85, .64, 0, 1, 1, 1), # cyan
+			(-.85, .50, 1, 0, 1, 1) # magenta
 		]:
 			self.color_select.append(Color_Button(args[:2], args[2:]))
 
@@ -114,12 +130,7 @@ class Window:
 		self.splat_icon.scale(.04, .06, 1)
 		self.splat_icon.translate(-.9, -.9, 0)
 
-		text_image_file = text_image(str(splat_count), (170, 64, 78), 'left')
-		self.splats_number = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
-		self.splats_number.generate()
-		self.splats_number.set_texture(1)
-		self.splats_number.scale(1, .1, 1)
-		self.splats_number.translate(.2, -.9, 0)
+		self.splats_number = Splats_Number(str(splat_count[0]))
 
 		self.car = Player()
 		self.car.generate()
@@ -137,6 +148,7 @@ class Window:
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
+		self.splats_number.update(str(self.splat_count[0]))
 		self.is_open = True
 		while self.is_open:
 			for event in pg.event.get():
