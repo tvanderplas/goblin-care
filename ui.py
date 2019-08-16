@@ -9,7 +9,7 @@ import screen
 from assets.paths import (
 	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj,
 	object_vs, object_fs, ui_vs, ui_fs, fractal_png, pink_bubbles_png,
-	depot_png, red_gloop_png, blue_squares_png
+	depot_png, red_gloop_png, blue_squares_png, buy_png
 )
 from fonts.paths import calibri_ttf
 from assets import objloader
@@ -51,6 +51,8 @@ class Close_Button:
 class Color_Button:
 	def __init__(self, location, color):
 		self.active = False
+		self.cost = 5
+		self.owned = False
 		self.fill = Ui_Color(color)
 		self.fill.scale(.03, .05, 1)
 		self.fill.translate(*location, -.1)
@@ -58,11 +60,15 @@ class Color_Button:
 		self.border = Ui_Color([1, 1, 1, .25])
 		self.border.scale(.04, .06, 1)
 		self.border.translate(*location, 0)
+
+		self.buy_button = Buy_Button(self.cost)
 	def rollover(self):
 		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
 		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
 		return over_x and over_y
 	def draw(self):
+		if self.active and not self.owned:
+			self.buy_button.draw()
 		self.border.color[3] = .25
 		if self.rollover():
 			self.border.color[3] = .5
@@ -74,6 +80,8 @@ class Color_Button:
 class Texture_Button:
 	def __init__(self, x, y, texture):
 		self.active = False
+		self.cost = 20
+		self.owned = False
 		self.fill = Ui_Image(texture)
 		self.fill.scale(.03, .05, 1)
 		self.fill.translate(x, y, -.1)
@@ -81,11 +89,15 @@ class Texture_Button:
 		self.border = Ui_Color([1, 1, 1, .25])
 		self.border.scale(.04, .06, 1)
 		self.border.translate(x, y, 0)
+
+		self.buy_button = Buy_Button(self.cost)
 	def rollover(self):
 		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
 		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
 		return over_x and over_y
 	def draw(self):
+		if self.active and not self.owned:
+			self.buy_button.draw()
 		self.border.color[3] = .25
 		if self.rollover():
 			self.border.color[3] = .5
@@ -113,14 +125,6 @@ class Ui_Image(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 
-class Buy_Button(Ui_Image):
-	def __init__(self):
-		super().__init__(Buy_Button)
-	def rollover(self):
-		over_x = self.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.box.ux
-		over_y = self.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.box.uy
-		return over_x and over_y
-
 class Splats_Number(Text):
 	def __init__(self, text):
 		super().__init__(str(text))
@@ -128,6 +132,28 @@ class Splats_Number(Text):
 		self.translate(.2, -.9, 0)
 	def update(self, text):
 		self.__init__(text)
+
+class Buy_Button:
+	def __init__(self, cost):
+		self.buy_button = Ui_Image(buy_png)
+		self.buy_button.scale(.08, .06, 1)
+		self.buy_button.translate(-.05, -.4, 0)
+
+		self.cost_icon = Ui_Image(splat_png)
+		self.cost_icon.scale(.04, .06, 1)
+		self.cost_icon.translate(-.075, -.27, 0)
+
+		self.splat_cost = Text(str(cost))
+		self.splat_cost.scale(.28, .07, 1)
+		self.splat_cost.translate(.25, -.27, 0)
+	def rollover(self):
+		over_x = self.buy_button.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.buy_button.box.ux
+		over_y = self.buy_button.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.buy_button.box.uy
+		return over_x and over_y
+	def draw(self):
+		self.buy_button.draw()
+		self.cost_icon.draw()
+		self.splat_cost.draw()
 
 class Window:
 	def __init__(self, title, splat_count, view, player):
