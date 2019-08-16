@@ -6,7 +6,11 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs, fractal_png
+from assets.paths import (
+	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj,
+	object_vs, object_fs, ui_vs, ui_fs, fractal_png, pink_bubbles_png,
+	depot_png, red_gloop_png, blue_squares_png
+)
 from fonts.paths import calibri_ttf
 from assets import objloader
 from helpers import text_image, pixel_to_view
@@ -144,7 +148,6 @@ class Window:
 		for args in [
 			(-.95, .78, 1, 0, 0, 1), # red
 			(-.95, .64, 0, .449, 0, 1), # green
-			(-.95, .50, 0, 0, .6, 1), # blue
 			(-.85, .78, .7245, .7245, .7245, 1), # silver
 			(-.85, .64, .977, .977, 0, 1), # yellow
 			(-.85, .50, 1, 0.078125, 0.703125, 1) # pink
@@ -152,7 +155,11 @@ class Window:
 			self.paint_select.append(Color_Button(args[:2], args[2:]))
 
 		for args in [
-			(-.95, .36, fractal_png)
+			(-.95, .50, blue_squares_png),
+			(-.95, .36, red_gloop_png),
+			(-.85, .36, pink_bubbles_png),
+			(-.95, .22, depot_png),
+			(-.85, .22, fractal_png)
 		]:
 			self.paint_select.append(Texture_Button(*args))
 
