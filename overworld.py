@@ -19,7 +19,7 @@ class Game():
 		self.ADDENEMY = pg.USEREVENT + 1 # pylint: disable=no-member
 		pg.time.set_timer(self.ADDENEMY, randint(500, 750))
 		self.NEWTORNADO = pg.USEREVENT + 2 # pylint: disable=no-member
-		pg.time.set_timer(self.NEWTORNADO, randint(1000, 3500))
+		pg.time.set_timer(self.NEWTORNADO, randint(5000, 20000))
 
 		self.enemies = []
 		self.splats = []
