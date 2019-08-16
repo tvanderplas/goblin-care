@@ -113,6 +113,14 @@ class Ui_Image(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 
+class Buy_Button(Ui_Image):
+	def __init__(self):
+		super().__init__(Buy_Button)
+	def rollover(self):
+		over_x = self.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.box.ux
+		over_y = self.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.box.uy
+		return over_x and over_y
+
 class Splats_Number(Text):
 	def __init__(self, text):
 		super().__init__(str(text))
