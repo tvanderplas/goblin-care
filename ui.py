@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs
+from assets.paths import window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, object_vs, object_fs, ui_vs, ui_fs, fractal_png
 from fonts.paths import calibri_ttf
 from assets import objloader
 from helpers import text_image, pixel_to_view
@@ -58,6 +58,33 @@ class Color_Button:
 		self.border.color = [1, 1, 1, .25]
 		self.border.scale(.04, .06, 1)
 		self.border.translate(*location, 0)
+	def rollover(self):
+		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
+		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
+		return over_x and over_y
+	def draw(self):
+		self.border.color[3] = .25
+		if self.rollover():
+			self.border.color[3] = .5
+		if self.active:
+			self.border.color[3] = 1
+		self.border.draw()
+		self.fill.draw()
+
+class Texture_Button:
+	def __init__(self, x, y, texture):
+		self.active = False
+		self.fill = objloader.Obj(square_obj, object_vs, object_fs, texture)
+		self.fill.generate()
+		self.fill.set_texture(1)
+		self.fill.scale(.03, .05, 1)
+		self.fill.translate(x, y, -.1)
+
+		self.border = objloader.Obj(square_obj, ui_vs, ui_fs)
+		self.border.generate()
+		self.border.color = [1, 1, 1, .25]
+		self.border.scale(.04, .06, 1)
+		self.border.translate(x, y, 0)
 	def rollover(self):
 		over_x = self.border.box.lx <= pixel_to_view(*pg.mouse.get_pos())[0] <= self.border.box.ux
 		over_y = self.border.box.ly <= pixel_to_view(*pg.mouse.get_pos())[1] <= self.border.box.uy
@@ -124,6 +151,8 @@ class Window:
 		]:
 			self.color_select.append(Color_Button(args[:2], args[2:]))
 
+		self.texture_select = Texture_Button(-.95, .36, fractal_png)
+
 		self.splat_icon = objloader.Obj(square_obj, object_vs, object_fs, splat_png)
 		self.splat_icon.generate()
 		self.splat_icon.set_texture(1)
@@ -147,6 +176,7 @@ class Window:
 		self.splats_number.draw()
 		for button in self.color_select:
 			button.draw()
+		self.texture_select.draw()
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
@@ -167,7 +197,16 @@ class Window:
 							other_button.active = False
 						button.active = True
 						self.car.body.color = button.fill.color
+						self.car.body.set_texture(0)
 						self.player.body.color = button.fill.color
+						self.player.body.set_texture(0)
+				
+				if event.type == MOUSEBUTTONDOWN and self.texture_select.rollover():
+					self.texture_select.active = True
+					self.player.body.texture = self.texture_select.fill.texture
+					self.player.body.set_texture(1)
+					self.car.body.texture = self.texture_select.fill.texture
+					self.car.body.set_texture(1)
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.draw()
