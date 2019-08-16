@@ -151,7 +151,10 @@ class Window:
 		]:
 			self.paint_select.append(Color_Button(args[:2], args[2:]))
 
-		self.texture_select = Texture_Button(-.95, .36, fractal_png)
+		for args in [
+			(-.95, .36, fractal_png)
+		]:
+			self.paint_select.append(Texture_Button(*args))
 
 		self.splat_icon = objloader.Obj(square_obj, object_vs, object_fs, splat_png)
 		self.splat_icon.generate()
@@ -176,7 +179,6 @@ class Window:
 		self.splats_number.draw()
 		for button in self.paint_select:
 			button.draw()
-		self.texture_select.draw()
 		self.car.rotate(pi / 500, 0, 0, 1)
 		self.car.draw()
 	def open(self):
@@ -191,22 +193,23 @@ class Window:
 					event.type == QUIT
 				):
 					self.is_open = False
+
 				for button in self.paint_select:
 					if event.type == MOUSEBUTTONDOWN and button.rollover():
 						for other_button in self.paint_select:
 							other_button.active = False
 						button.active = True
-						self.car.body.color = button.fill.color
-						self.car.body.set_texture(0)
-						self.player.body.color = button.fill.color
-						self.player.body.set_texture(0)
-				
-				if event.type == MOUSEBUTTONDOWN and self.texture_select.rollover():
-					self.texture_select.active = True
-					self.player.body.texture = self.texture_select.fill.texture
-					self.player.body.set_texture(1)
-					self.car.body.texture = self.texture_select.fill.texture
-					self.car.body.set_texture(1)
+						if type(button) == Color_Button:
+							self.car.body.color = button.fill.color
+							self.car.body.set_texture(0)
+							self.player.body.color = button.fill.color
+							self.player.body.set_texture(0)
+						elif type(button) == Texture_Button:
+							self.player.body.texture = button.fill.texture
+							self.player.body.set_texture(1)
+							self.car.body.texture = button.fill.texture
+							self.car.body.set_texture(1)
+
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.draw()
