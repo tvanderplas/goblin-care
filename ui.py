@@ -233,6 +233,21 @@ class Window:
 					self.is_open = False
 
 				for button in self.paint_select:
+					if all([
+						event.type == MOUSEBUTTONDOWN,
+						button.buy_button.rollover(),
+						button.active,
+						self.splat_count[0] >= button.cost
+					]):
+						self.splat_count[0] -= button.cost
+						button.owned = True
+						self.splats_number.update(str(self.splat_count[0]))
+						if type(button) == Color_Button:
+								self.player.body.color = button.fill.color
+								self.player.body.set_texture(0)
+						elif type(button) == Texture_Button:
+								self.player.body.texture = button.fill.texture
+								self.player.body.set_texture(1)
 					if event.type == MOUSEBUTTONDOWN and button.rollover():
 						for other_button in self.paint_select:
 							other_button.active = False
@@ -240,13 +255,15 @@ class Window:
 						if type(button) == Color_Button:
 							self.car.body.color = button.fill.color
 							self.car.body.set_texture(0)
-							self.player.body.color = button.fill.color
-							self.player.body.set_texture(0)
+							if button.owned:
+								self.player.body.color = button.fill.color
+								self.player.body.set_texture(0)
 						elif type(button) == Texture_Button:
-							self.player.body.texture = button.fill.texture
-							self.player.body.set_texture(1)
 							self.car.body.texture = button.fill.texture
 							self.car.body.set_texture(1)
+							if button.owned:
+								self.player.body.texture = button.fill.texture
+								self.player.body.set_texture(1)
 
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)

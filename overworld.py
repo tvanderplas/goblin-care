@@ -34,6 +34,7 @@ class Game():
 		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
 		self.loot = ui.Window('Loot', self.splat_count, self.view, self.player)
 		self.loot.paint_select[0].active = True
+		self.loot.paint_select[0].owned = True
 
 		self.isRunning = True
 	def play(self):
