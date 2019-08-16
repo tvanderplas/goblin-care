@@ -96,6 +96,10 @@ class PlayerBullet(objloader.Obj):
 	def kill(self):
 		for group in self.groups:
 			group.remove(self)
+	def update(self):
+		self.translate(-self.speed, 0, 0)
+		if self.box.lx > 1:
+			self.kill()
 	def draw(self):
 		self.translate(self.speed, 0, 0)
 		super().draw()
@@ -115,8 +119,12 @@ class Enemy(objloader.Obj):
 	def kill(self):
 		for group in self.groups:
 			group.remove(self)
-	def draw(self):
+	def update(self):
 		self.translate(-self.speed, 0, 0)
+		if self.box.ux < -1:
+			self.kill()
+	def draw(self):
+		self.update()
 		super().draw()
 
 class Splat(objloader.Obj):
@@ -157,6 +165,8 @@ class Splat_Collect(objloader.Obj):
 		for group in self.groups:
 			group.remove(self)
 	def update(self):
+		if self.box.lx < self.destination[0] and self.box.ly < self.destination[1]:
+			self.kill()
 		self.translate(*self.vector, 0)
 	def draw(self):
 		self.update()
