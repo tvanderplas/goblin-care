@@ -140,7 +140,7 @@ class Window:
 
 		self.close_button = Close_Button()
 
-		self.color_select = []
+		self.paint_select = []
 		for args in [
 			(-.95, .78, 1, 0, 0, 1), # red
 			(-.95, .64, 0, .449, 0, 1), # green
@@ -149,7 +149,7 @@ class Window:
 			(-.85, .64, .977, .977, 0, 1), # yellow
 			(-.85, .50, 1, 0.078125, 0.703125, 1) # pink
 		]:
-			self.color_select.append(Color_Button(args[:2], args[2:]))
+			self.paint_select.append(Color_Button(args[:2], args[2:]))
 
 		self.texture_select = Texture_Button(-.95, .36, fractal_png)
 
@@ -174,7 +174,7 @@ class Window:
 		self.close_button.draw()
 		self.splat_icon.draw()
 		self.splats_number.draw()
-		for button in self.color_select:
+		for button in self.paint_select:
 			button.draw()
 		self.texture_select.draw()
 		self.car.rotate(pi / 500, 0, 0, 1)
@@ -191,9 +191,9 @@ class Window:
 					event.type == QUIT
 				):
 					self.is_open = False
-				for button in self.color_select:
+				for button in self.paint_select:
 					if event.type == MOUSEBUTTONDOWN and button.rollover():
-						for other_button in self.color_select:
+						for other_button in self.paint_select:
 							other_button.active = False
 						button.active = True
 						self.car.body.color = button.fill.color
