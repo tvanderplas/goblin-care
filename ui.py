@@ -87,7 +87,7 @@ class Splats_Number(Text):
 		self.__init__(text)
 
 class Window:
-	def __init__(self, title, splat_count, view):
+	def __init__(self, title, splat_count, view, player):
 		self.clock = pg.time.Clock()
 		self.view = view
 		self.splat_count = splat_count
@@ -116,11 +116,11 @@ class Window:
 		self.color_select = []
 		for args in [
 			(-.95, .78, 1, 0, 0, 1), # red
-			(-.95, .64, 0, 1, 0, 1), # green
+			(-.95, .64, .234, .699, .441, 1), # green
 			(-.95, .50, 0, 0, 1, 1), # blue
-			(-.85, .78, 1, 1, 0, 1), # yellow
-			(-.85, .64, 0, 1, 1, 1), # cyan
-			(-.85, .50, 1, 0, 1, 1) # magenta
+			(-.85, .78, .7245, .7245, .7245, 1), # silver
+			(-.85, .64, .977, .977, 0, 1), # yellow
+			(-.85, .50, 1, 0.078125, 0.703125, 1) # pink
 		]:
 			self.color_select.append(Color_Button(args[:2], args[2:]))
 
@@ -131,6 +131,8 @@ class Window:
 		self.splat_icon.translate(-.9, -.9, 0)
 
 		self.splats_number = Splats_Number(str(splat_count[0]))
+
+		self.player = player
 
 		self.car = Player()
 		self.car.generate()
@@ -165,6 +167,7 @@ class Window:
 							other_button.active = False
 						button.active = True
 						self.car.body.color = button.fill.color
+						self.player.body.color = button.fill.color
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.draw()
