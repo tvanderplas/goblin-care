@@ -175,7 +175,7 @@ class Splat_Collect(objloader.Obj):
 
 class Tornado(objloader.Obj):
 	def __init__(self, groups):
-		self.is_rainbow = True if random() > .8 else False
+		self.is_rainbow = True if random() > .9 else False
 		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
 		super().__init__(square_obj, object_vs, object_fs, self.image_file)
 		self.generate()
