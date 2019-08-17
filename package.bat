@@ -3,11 +3,11 @@ cd %~dp0
 mkdir "temp pyinstaller build"
 cd "temp pyinstaller build"
 set PATH=%PATH%;C:\Windows\System32\downlevel
-pyinstaller "C:\repos\goblin-care\goblin care.py"
+pyinstaller "C:\repos\goblin-care\goblin care.py" -w
 del "dist\goblin care\goblin care.exe.manifest"
 cd..
 xcopy "temp pyinstaller build\dist\goblin care" "Goblin Care" /E /Y /I
-xcopy "game art" "Goblin Care\game art" /Y /I
+xcopy "assets" "Goblin Care\assets" /Y /I
 xcopy "fonts" "Goblin Care\fonts" /Y /I
 rd /s /q "temp pyinstaller build"
 REM heat.exe dir "Goblin Care" -gg -sfrag -out windows.wxs
