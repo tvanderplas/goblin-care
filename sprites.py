@@ -97,11 +97,11 @@ class PlayerBullet(objloader.Obj):
 		for group in self.groups:
 			group.remove(self)
 	def update(self):
-		self.translate(-self.speed, 0, 0)
+		self.translate(self.speed, 0, 0)
 		if self.box.lx > 1:
 			self.kill()
 	def draw(self):
-		self.translate(self.speed, 0, 0)
+		self.update()
 		super().draw()
 
 class Enemy(objloader.Obj):
