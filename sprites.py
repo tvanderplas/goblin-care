@@ -112,7 +112,7 @@ class Enemy(objloader.Obj):
 		height = uniform(-.9, .9)
 		self.translate(1, height, 0)
 		self.scale(.04, .06, 1)
-		self.speed = uniform(.002, .01)
+		self.speed = uniform(.001, .005)
 		for group in groups:
 			group.append(self)
 		self.groups = groups
