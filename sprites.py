@@ -110,7 +110,7 @@ class Enemy(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 		height = uniform(-.9, .9)
-		self.translate(1, height, 0)
+		self.translate(1, height, -.1)
 		self.scale(.04, .06, 1)
 		self.speed = uniform(.001, .005)
 		for group in groups:
@@ -181,7 +181,7 @@ class Tornado(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 		self.scale(.06, .09, 1)
-		self.translate(*randedge(.05, -1, 1, -1, 1), 0)
+		self.translate(*randedge(.05, -1, 1, -1, 1), -.2)
 		self.speed = uniform(.001, .003)
 		self.vector = get_vector(
 			self.speed,
@@ -221,7 +221,7 @@ class Hud_Button(objloader.Obj):
 		self.generate()
 		self.set_texture(1)
 		self.scale(.1, .15, 1)
-		self.translate(*location, 0)
+		self.translate(*location, -.3)
 		self.is_hovering = False
 	def rollover(self):
 		over_x = self.box.lx < pixel_to_view(*pg.mouse.get_pos())[0] < self.box.ux
