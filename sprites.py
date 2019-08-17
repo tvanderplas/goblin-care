@@ -27,8 +27,8 @@ class Player:
 		self.is_big = False
 	def embiggen(self):
 		if not self.is_big:
-			self.scale(2, 2, 2)
-			self.bigtime = 50
+			self.scale(1.5, 1.5, 1.5)
+			self.bigtime = 150
 			self.is_big = True
 	def generate(self):
 		self.body.generate()
@@ -66,7 +66,7 @@ class Player:
 		if pressed_keys[K_d] or pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
 			self.translate(self.speed, 0, 0)
 		if self.bigtime <= 0 and self.is_big:
-			self.scale(.5, .5, .5)
+			self.scale(2/3, 2/3, 2/3)
 			self.is_big = False
 		if self.body.box.lx < -1:
 			self.translate(-1 - self.body.box.lx, 0, 0)
@@ -134,7 +134,7 @@ class Splat(objloader.Obj):
 		self.set_texture(1)
 		self.translate(*location, 0)
 		self.scale(.04, .06, 1)
-		self.health = 300
+		self.health = 600
 		for group in groups:
 			group.append(self)
 		self.groups = groups
