@@ -1,5 +1,4 @@
 
-player skins
 rainbow collecting bonuses
 rainbow bullet buff
 controls menu
@@ -10,8 +9,3 @@ turning
 2d playfield
 customizable controls
 android release
-
-in loot menu:
-	buttons
-	car animation
-	buy button
