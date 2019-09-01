@@ -28,7 +28,7 @@ class Player:
 	def embiggen(self):
 		if not self.is_big:
 			self.scale(1.5, 1.5, 1.5)
-			self.bigtime = 150
+			self.bigtime = 500
 			self.is_big = True
 	def generate(self):
 		self.body.generate()
@@ -197,7 +197,7 @@ class Splat_Collect(objloader.Obj):
 
 class Tornado(objloader.Obj):
 	def __init__(self, groups):
-		self.is_rainbow = True # if random() > .9 else False
+		self.is_rainbow = True if random() > .9 else False
 		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
 		super().__init__(square_obj, object_vs, object_fs, self.image_file)
 		self.generate()
