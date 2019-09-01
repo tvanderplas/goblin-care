@@ -1,6 +1,4 @@
 
-rainbow collecting bonuses
-rainbow bullet buff
 controls menu
 persistent game if not dead
 auto updater - with git?
