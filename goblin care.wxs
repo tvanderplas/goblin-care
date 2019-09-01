@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="{B80B8ED8-AB99-406F-9357-5ECCDDE6BC3C}" Language="1033" Name="Goblin Care" UpgradeCode="{72476625-E7E0-49AA-87FD-51A4F00EA8CF}" Version="0.5.0" Manufacturer="Tim Vanderplas">
+    <Product Id="{B80B8ED8-AB99-406F-9357-5ECCDDE6BC3C}" Language="1033" Name="Goblin Care" UpgradeCode="{72476625-E7E0-49AA-87FD-51A4F00EA8CF}" Version="0.6.0" Manufacturer="Tim Vanderplas">
 		<Package Compressed="yes" InstallerVersion="200" />
         <Directory Id="TARGETDIR" Name="SourceDir">
 
@@ -18,673 +18,676 @@
 			<Component Id="main_exe_component" Guid="{44698024-3E4B-425F-9E20-5F068818D6EA}">
 				<File Id="main_exe_file" KeyPath="yes" Source="SourceDir\Goblin Care\goblin care.exe" />
 			</Component>
-                <Component Id="cmpB638A64B5C54A9869F74B9C9670725E7" Guid="{98535CDD-9767-4464-907F-4C9E9E2B5B32}">
-                    <File Id="fil4492B5F60D6BF3CAE30C2ADE234774E0" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-console-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpFDCBBCED1A6C115260E33FC794EF1223" Guid="{963CA322-4525-41A5-A06A-FBDEB7FBF3BB}">
-                    <File Id="filE6F19BA83E441BE89B1D7E94ABA6AEED" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-datetime-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpF14472FD9FD1776B368CC9A0A5C3F128" Guid="{60165EEB-6AE5-43E9-AB86-EADA0B7CDD45}">
-                    <File Id="fil5BB210188A51608F7A0AA556A6D545E9" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-debug-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp91159467AE909D48B82EC1D278F21273" Guid="{665CACBD-BA5A-49DD-A488-55CD7BA8D447}">
-                    <File Id="filAD2741AAF3B773DDF72A1DDC6D326D67" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-errorhandling-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpC53DA1D63757F08ACED309A4C959EE58" Guid="{FB2AAFFC-53F3-4736-8DCC-00C3C36E62B0}">
-                    <File Id="fil3E56E769F2D6340C8B7BC93553EE0F15" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp3573D3191FA2E1F678BB29F2CDA28674" Guid="{1CB19389-C21D-48E3-BAC4-E0BC6954B3B4}">
-                    <File Id="filA5949AD219EAAED836446882EA277741" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l1-2-0.dll" />
-                </Component>
-                <Component Id="cmp39BEAAC5B5EBBFCC1501E2758EB56A17" Guid="{9F4EF559-2440-43DE-951E-35F57E4A1369}">
-                    <File Id="fil003107FB5A1CBCEAFADCC6E566904F52" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l2-1-0.dll" />
-                </Component>
-                <Component Id="cmpF0DD58EC34D30FD00760FDD69BBC6675" Guid="{AB92CE02-6EFB-496D-BD28-C879FCF92247}">
-                    <File Id="fil144C36D8D2AF73B85AE086C73031803F" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-handle-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp84CFF9DF670537C6E0200F5998E28AC2" Guid="{BC8B8E6D-3DA4-44C9-9637-00FCB89934CC}">
-                    <File Id="fil0E416BCE806191833CDE8DEBCAF2C667" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-heap-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp984AE9D5B0147DB34797793D981F2A47" Guid="{8E5CC6C1-94EF-4BBA-8463-67345DDACA4C}">
-                    <File Id="fil9B87B5FA77C5F3E2A8F6E0CCC0675C06" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-interlocked-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp9AA774F60FF1EF7288E1C54C93EC6EED" Guid="{43B0C5F3-B619-46C5-90B0-CEA18E0D6462}">
-                    <File Id="fil78C6099D03757334E8D542FFFA196210" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-libraryloader-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp896EEBFADF2226FE1A26667D969C52A1" Guid="{71A6CF23-7311-41EC-A9B3-140476DE0F39}">
-                    <File Id="fil60F1C19EBD6F54B760C20880724FADDE" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-localization-l1-2-0.dll" />
-                </Component>
-                <Component Id="cmp0D19A87533A3E643B1D74765C6EF6E3D" Guid="{5CF6B1B5-92E9-4802-96BB-98EA1FDB94B8}">
-                    <File Id="fil261C632794D0F3DF64F270B353AFD8F5" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-memory-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp340A3B771EEFCD5135984464678AB77B" Guid="{84CF3A60-B43A-45A4-AA7A-A7C1BE926E9C}">
-                    <File Id="filC97FEC2A7C68E9B6911D09587EAC73A8" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-namedpipe-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpCFDF9316B4BC7398F4C53EF9C121B1A5" Guid="{42191802-4474-4165-8542-08493831AD48}">
-                    <File Id="filBFF565223FAC981E37378EE3C004E525" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processenvironment-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp00C669F622341964FCD4F268CDEE4418" Guid="{5CA290E3-63FA-48CB-A84D-A7421A2B32D2}">
-                    <File Id="filD8345E3428B07004903FC8FB3463C1DB" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processthreads-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpB6AB2BF238115244B8B39C5CB0C14D33" Guid="{A69ED3E1-C7BE-42DF-9DBA-870A883E1CE6}">
-                    <File Id="filDF9273AC99E7D8FAB8CE28B007479AD2" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processthreads-l1-1-1.dll" />
-                </Component>
-                <Component Id="cmp4FFF4A8F0FA11CEBB4D020B6F06D65FB" Guid="{788076CF-B9A5-44A0-A1F6-211056772EDF}">
-                    <File Id="filD69567C9E625B53218869E2400A8F3D6" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-profile-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpC2CC7356A9295414B5DA398050AE71C7" Guid="{64727AC6-B2A7-4E35-8F21-2034E33F3691}">
-                    <File Id="filDFB8E39081B75FEB7BBFB8DFC6AA7794" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-rtlsupport-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp1EC68C5E8C0DE0F9F4B66B5988E3BBF9" Guid="{A231E668-9C38-4402-896C-C15F0F8A0917}">
-                    <File Id="fil457C06B08D0DE99ED929C54F0FE1CD77" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-string-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpED0F12BF868F7B6123CAE9AB818FAAE7" Guid="{795F8C25-4C03-4F90-9EF2-231C0B4B6481}">
-                    <File Id="filB59A67EF1B1DCE3AE0D4C582BCCE738C" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-synch-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpEE76953A46EA4DEF9D7C1DE2B72E9BDE" Guid="{85EF7EED-8F63-4DCB-8AF6-30ABD1944725}">
-                    <File Id="fil3E91294E3632B5CD6CD76189F97C8DDD" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-synch-l1-2-0.dll" />
-                </Component>
-                <Component Id="cmpB07E6459139BA800453A59B8EEB623C8" Guid="{72A664F9-C16D-406E-A7E5-3464132EB5F0}">
-                    <File Id="fil47F309BCB90AB0BF6E2E21C70C7CBB7A" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-sysinfo-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp02219CB760B4E89A7205433B23CAE98C" Guid="{93300899-6FB4-4170-88F8-0E99301035EF}">
-                    <File Id="fil8DF49B413C3784CA8A7520A37F4AFD09" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-timezone-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp07EBAB706A6E57CEA4FFD3B997316AB0" Guid="{83B41802-19BF-4573-84D7-ADFA2FDCD9CA}">
-                    <File Id="fil2481960A79DD90AEA73176413CE84446" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-util-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpDAB15D4B240426B9333A669ABB346CA2" Guid="{12914978-7FDE-4A66-8D9A-5E7A20C63B1E}">
-                    <File Id="fil0A95B89924C45A733984EF9E96E1932C" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-conio-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp2A8BAAC35ACAEC69BBE69A8DEF00839D" Guid="{475EC4A7-0026-4204-918A-3228E6B43C99}">
-                    <File Id="filFD3A02A069C70822827FC5C90A1D31C5" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-convert-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp40F9611814435FAC5462DA75E2248B26" Guid="{F8DD788E-598B-4290-9250-9674354C00DE}">
-                    <File Id="filEA29A07E14AA80BB5E60417A0D592A41" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-environment-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp0812D247198DC3AF8C142703B10594EF" Guid="{A3AFB826-535D-4A13-9BE3-D29672C1CC24}">
-                    <File Id="filD960A1BDDE286D5DC17A4578ECBBDDE9" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-filesystem-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp489EB1768DE7DE9C7044B5AB7A5C3FC2" Guid="{6FEB379F-6D70-43CD-B4D7-0E24C9AB74A0}">
-                    <File Id="filA7B6271FB428073D57CB85A07AB69CF8" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-heap-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp73A3E5913364B0960D77A510F5046FD8" Guid="{7084B421-87AC-4E48-9F48-8AAEC56E1770}">
-                    <File Id="filFB0AA7BB17B6763DCD7210CB3B371F82" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-locale-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmpA07082E3869B3CA91ABA69124B124E66" Guid="{F425E56E-99DA-4BEF-833D-9CC537944971}">
-                    <File Id="fil894365C08358DE048918152D642DB530" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-math-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp84FD977E5B80B6360EC068CCB79B95CC" Guid="{6016DB10-695C-4FDC-A585-17D69D780885}">
-                    <File Id="filA9B994C5EDFAB80807B78203E9A8ABBC" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-multibyte-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp920E2E98DC74DA2BE2A778DB93924593" Guid="{53E3BB9C-32B7-4094-99F4-AB38A9604ED3}">
-                    <File Id="fil178F79E55D2BD832B38654A7BA14D438" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-process-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp38EF943CEFD8674B7A08EBF3653DC98C" Guid="{DD0F406E-78E9-44BE-AF0E-246B22A93D59}">
-                    <File Id="filF95D4D2586EA52B178DB84B4A6F63BA7" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-runtime-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp86839C0C03EE651FA92732349AA55F6C" Guid="{8C324281-10A7-465B-B7C6-B22C8400B9F2}">
-                    <File Id="filD51F18E4906BDD22325421C7531B5E56" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-stdio-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp587F3989DB490C8CB319A2F8BF1C8891" Guid="{20597FD5-AFEB-4BCC-8929-728552D543FD}">
-                    <File Id="fil2A9637BB09BBDCCC09932DD669206D7E" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-string-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp93F8E860EAC8DADAED7B9E7443535964" Guid="{36C0DA8C-D426-4C29-A9B9-F1CB1A4F985C}">
-                    <File Id="fil92A722BB029AA4D875FBC7FCCC462869" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-time-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp91E2F29D49B0ECD0C37F2022CB992A1D" Guid="{A504717F-747A-48BC-87DE-B02BEAB5ADD0}">
-                    <File Id="fil084E9F1395ECB1C4594453FE9CD27DFB" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-utility-l1-1-0.dll" />
-                </Component>
-                <Component Id="cmp2814AA69E56B8F7A36BA7AAC130CEFF4" Guid="{37D95854-9869-469F-A608-24DC9F582893}">
-                    <File Id="fil9DC5539F6FACCEED1FBFC33EA653648B" KeyPath="yes" Source="SourceDir\Goblin Care\base_library.zip" />
-                </Component>
-                <Component Id="cmpBC993E465BC1382E6C181E1262752269" Guid="{117A87EB-375E-4A63-ACF4-99FE5DE049D3}">
-                    <File Id="fil95334A3CB8D96BA0AE083B1DFF705AF3" KeyPath="yes" Source="SourceDir\Goblin Care\glm.cp37-win32.pyd" />
-                </Component>
-                <Component Id="cmpAA34D81FDEB741A78096A9113C78EFCA" Guid="{FB86985F-1DBE-489B-BA5C-44AEA4B63338}">
-                    <File Id="fil411D3E21C161A5793C99DCF04BD68A49" KeyPath="yes" Source="SourceDir\Goblin Care\libansari.Q4BAGRNANLWD2YZJOKYPOAUIOLXW2LXK.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpB01966372097943AA594A778E012F330" Guid="{2CD3A122-94CD-497D-AF28-5F6F72AAA43A}">
-                    <File Id="fil31C2BF885499D5E733C267C4EFEA22A6" KeyPath="yes" Source="SourceDir\Goblin Care\libbanded5x.OTQGTGOWDVOSJDN556X4GUSI6OEQTLFJ.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp9DDEC48114628CAA6024349A399430D4" Guid="{6731E189-73C0-45AB-B33A-951B5C9C05E0}">
-                    <File Id="fil8EFDFF561CE0393898531D476BD39047" KeyPath="yes" Source="SourceDir\Goblin Care\libbispeu.OAANPWJKKXZRFOCA7BPAXPEXKORTJQMF.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp84C8885AC6A2922A2705545EA5D4BE48" Guid="{53DEFD13-149F-4535-8ACA-30258387A1DC}">
-                    <File Id="fil63465B90D3B98A00E14F7E76AE5E1F15" KeyPath="yes" Source="SourceDir\Goblin Care\libblkdta00.54I3HX6FZWA5HBFZL6T6FGETXPA3Z62W.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpB510FF58A8CF94CF576C81DF5CA9596A" Guid="{8463A1C8-3CD3-49B8-A54C-DA415BD22256}">
-                    <File Id="fil898C01163A227A2AD69913A337C771D1" KeyPath="yes" Source="SourceDir\Goblin Care\libchkder.23IDUBONJEDQJXE3WT2KTJUEFGPJBH5V.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp876C9D980254CE49717CC178D49173EA" Guid="{EBF4450C-10D7-478A-853F-D761F305AE4B}">
-                    <File Id="fil55BDE70FF3B0DAB0A3415388B547817C" KeyPath="yes" Source="SourceDir\Goblin Care\libcobyla2.MZIYBZPTVTYIHRT7JCIZN4FNMM5IPWLD.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp47BCDDB81F4FE3CB491430BF9E56EF15" Guid="{9D94589F-C0F3-470F-8A91-4E51A3219C1F}">
-                    <File Id="fil9EDE5B47CF8E5C1DF4DCAAA39F6D0D4F" KeyPath="yes" Source="SourceDir\Goblin Care\libcrypto-1_1.dll" />
-                </Component>
-                <Component Id="cmpA95B7DB03F5B316496A4EE6DF33ED8CB" Guid="{E15565BB-1AA8-451C-8742-03E06F039933}">
-                    <File Id="fil4F35BC6AFA4C23F79A1A304714B386DB" KeyPath="yes" Source="SourceDir\Goblin Care\libdcosqb.3VZOXZKO53O75NWVYHOUJGPASB2ZKGJ5.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp47D1D9761E06F3B06C9B6D5C87CD4B94" Guid="{C5255DC7-2F15-4C90-A6FD-E0B4DD62C552}">
-                    <File Id="fil6E6DC6B35767ECE13A377F8E56995CF1" KeyPath="yes" Source="SourceDir\Goblin Care\libdcosqb.BSF6YTIPIV6BF3DZBNWD4YMH3UDU6DI7.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpAF598A269CADB10041B3AEBEB6E69CB0" Guid="{4C1645BD-4E73-44CE-BA48-6782913BC8DB}">
-                    <File Id="filAFDE7DDC003FCE36CDF1E649C29C9171" KeyPath="yes" Source="SourceDir\Goblin Care\libdcsrch.CTD6WPTKUW4MYYPI2KYOJ4427ZGGSXEQ.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp18C0E6FB0C4E3FB228B16A0C977A917E" Guid="{7920F826-CA3C-4AB3-B797-B921E1A1E0B2}">
-                    <File Id="fil7DB69ACA77A69D7B440449FE937352F3" KeyPath="yes" Source="SourceDir\Goblin Care\libdet.54PIL56SC4PWH4OJDIF47MU7MUQ2Q25W.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpA3192DBEB11BC8FE11C87DE093AD7183" Guid="{3BD6E010-1B7D-476E-A0D2-E5DC2E391386}">
-                    <File Id="fil242927324B2C3B488261D426B2CF57E4" KeyPath="yes" Source="SourceDir\Goblin Care\libdfft_sub.H7E5IG7S2VYW5BLNPY6N4CGXYYTSOOCL.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpA5F5FEC2B8D5CEE9FDE2A35B0922CA27" Guid="{89934068-ECC8-462A-8B54-0FA82BCAF2A1}">
-                    <File Id="fil788958DFB6A80C4AC4936293E8E42672" KeyPath="yes" Source="SourceDir\Goblin Care\libdfitpack.EXJWQURDNSA2B5QGBXJD4H5UREUPFPDG.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpFD03C84F18172BB2165B8D8267568F04" Guid="{39BACCA5-75F8-4553-BCF2-8ABE9F36B82A}">
-                    <File Id="fil435BFD2EEF56A11AC5BE425500D2BE85" KeyPath="yes" Source="SourceDir\Goblin Care\libdgamln.ZASUXBSO7FVE6RDOLRHY4PRC33KW2K3V.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpD0B6020C4B4D9C8D55C9CCCF7B7AA108" Guid="{78FAB646-2018-48D7-B16D-8A8B9B4E18AC}">
-                    <File Id="filAFF251C2784E548AE6EEDF4035A212B5" KeyPath="yes" Source="SourceDir\Goblin Care\libdop853.ZDB77F5S63EPO7WWG3LICXZSBW2LFM2N.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpE62CDB2BD1C88D6091820E74F92A799C" Guid="{55EDD9C9-2222-4F3D-8C60-85C2490787A2}">
-                    <File Id="filA9ED2CBCD5F944465EB084490EB6E573" KeyPath="yes" Source="SourceDir\Goblin Care\libdqag.DFBF4LATN5PNJT56UKJVPJNRKLLPKFJO.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp7262FE698E946B90AB3A423C27FAB514" Guid="{061595D5-39FA-4C79-9E70-F4E4077C7376}">
-                    <File Id="fil53015853CAA8C382A15719A138765740" KeyPath="yes" Source="SourceDir\Goblin Care\libd_odr.VCIGLUQ47ITWGKC64XGXMUYOLD2TZNBR.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp3EC98E0F0D0ED294D3C0ECA5AFB8D670" Guid="{48C330A8-7349-44BE-BE59-C5074B5BD3ED}">
-                    <File Id="fil8EDADB6B0C05E0ACFF6E3BC56BE5EFE6" KeyPath="yes" Source="SourceDir\Goblin Care\libfreetype-6.dll" />
-                </Component>
-                <Component Id="cmp050DD5DA22178E54E9474986D3B9DA8E" Guid="{7A1B1B11-0616-4512-A0FD-71B92A05902D}">
-                    <File Id="fil4F3B50C81490A2B522B1328F5E946E44" KeyPath="yes" Source="SourceDir\Goblin Care\libgcc_s_sjlj-1.dll" />
-                </Component>
-                <Component Id="cmpE9601D4D0D3E64C662CF1542A2AFDAC5" Guid="{654AF575-CC4D-49CE-BFD1-A23D18A5B46A}">
-                    <File Id="fil34427C07A71587B25A6FE89E05C2B909" KeyPath="yes" Source="SourceDir\Goblin Care\libgetbreak.NUDYNUJU3LWOH35DGTV6RS6R7GIDVS7J.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp2177A21F96B6D56942C85EF0810E592B" Guid="{CE2E2055-AB89-410F-B73A-D2540465E2A1}">
-                    <File Id="filD6105A523000E17BE9E90DD290F43B86" KeyPath="yes" Source="SourceDir\Goblin Care\libjpeg-8.dll" />
-                </Component>
-                <Component Id="cmp4E50469CE6BB78FA7805E107ADDD6573" Guid="{D61AE13B-0D5F-446A-8DC5-C2D49E3A7452}">
-                    <File Id="filB843DC277586E1DBB850062E2E8F3E51" KeyPath="yes" Source="SourceDir\Goblin Care\liblbfgsb.VL5BPDGXE7BVJ5SDUWXHMGIZ23DLHL47.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpF98F59550B277C0B751077BA5E1E62CE" Guid="{591B7CB3-E86C-4049-A488-0602E2455193}">
-                    <File Id="filA20BBA52A600D1DC8112AAE422AD926B" KeyPath="yes" Source="SourceDir\Goblin Care\libmpg123-0.dll" />
-                </Component>
-                <Component Id="cmp269D36B100FFF4A5593D4BF6B67ADAE5" Guid="{F1912B00-5F89-4EFD-B0C7-C2112F68773A}">
-                    <File Id="fil778369DFFDA2A43EA916F2E02E9DA06F" KeyPath="yes" Source="SourceDir\Goblin Care\libmvndst.UEXYY5YZLETRZLLV7GKDGWYVIASLDNJ6.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp07BC14379E66FBA838958EABFF289A83" Guid="{8E0C4A5D-36FC-4FD5-B0ED-A310C2F134D4}">
-                    <File Id="fil3DF5D984BFC632C20851A0BA7C76F41B" KeyPath="yes" Source="SourceDir\Goblin Care\libnnls.GX3LBH56JRQ7JMAOG7UBTDQJYFS6BPRN.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpBD5287E6234CB74A2576A59C578BBF9D" Guid="{4CD44797-6C1B-4144-88D8-63A1AF4570C7}">
-                    <File Id="filC595326E2918B773FEA34028673D7507" KeyPath="yes" Source="SourceDir\Goblin Care\libogg-0.dll" />
-                </Component>
-                <Component Id="cmp91448D3FF6E40548638DD8BFAE4A919A" Guid="{17FDAA33-6026-4F5C-8F03-1F471B4CFAC5}">
-                    <File Id="fil28897CE31C224BEE4195DECD43415F1B" KeyPath="yes" Source="SourceDir\Goblin Care\libopenblas.JKAMQ5EVHIVCPXP2XZJB2RQPIN47S32M.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpF0BC4450F195236105C86329666C128D" Guid="{469C8183-810A-4E46-9B92-6BB35321F534}">
-                    <File Id="fil32035B94C27D6278C69AC85B43C3788A" KeyPath="yes" Source="SourceDir\Goblin Care\libopenblas.KZGMSHIV2CB7DB4HQYDV2LEPUALNSYMY.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp544F295AEAA30234B419D1709D2DB7DC" Guid="{42C6CB54-545E-4DB7-84BD-00E04D47074C}">
-                    <File Id="fil567F91C418DCDFE9E357F4A2CF695CB6" KeyPath="yes" Source="SourceDir\Goblin Care\libpng16-16.dll" />
-                </Component>
-                <Component Id="cmp9F239A23A3A20BBD0B1E805213F74B62" Guid="{5BCE8CA4-C08D-45FC-8ACC-4C19FCCCA02A}">
-                    <File Id="fil09616BF5499D091670D291739821E5D2" KeyPath="yes" Source="SourceDir\Goblin Care\libslsqp_op.CVAJHOQHKECBN7VLKMGEOZQ54GU3YWV7.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp296631356C8088C494179BA29377C6DC" Guid="{5EEA5662-3D19-4E4A-A0BA-67CFA011B9E0}">
-                    <File Id="fil9352983DA4D9F09DC96C3A822E480A3C" KeyPath="yes" Source="SourceDir\Goblin Care\libspecfun.I7OMDT5L33XVQM2MTW5AACQJUBYEOUFN.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp4E1AC6DFAF2F9F617911C28F128A87E1" Guid="{875B45B5-5342-427B-8025-E172D40FA0B7}">
-                    <File Id="filD5B4B7393D4C1D6FCEDD6D00D13410DA" KeyPath="yes" Source="SourceDir\Goblin Care\libssl-1_1.dll" />
-                </Component>
-                <Component Id="cmpDCC1970A6088882AB489F61FD4E2E95D" Guid="{C8E1F19C-2BC5-4A22-B7E2-3BC69EF88685}">
-                    <File Id="fil60C0E99849BA7F24061D1B31E6282BB3" KeyPath="yes" Source="SourceDir\Goblin Care\libtiff-5.dll" />
-                </Component>
-                <Component Id="cmp5FC836784377F3187FEBA3E5F3BA31EF" Guid="{71C766AF-10F9-49F4-9269-3C6F15AFEA81}">
-                    <File Id="fil640F1A477D8B15BECD0D461E7528FE74" KeyPath="yes" Source="SourceDir\Goblin Care\libvode.3WG7J4FXPCNUB4LM3L2S3J2WIYR5IZZ6.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp10578741D20929386B384FF4BA5E9951" Guid="{31528A67-C320-4489-9919-E66B33517D72}">
-                    <File Id="filD806D9949563D3BE881FEC387DCF12A5" KeyPath="yes" Source="SourceDir\Goblin Care\libvorbis-0.dll" />
-                </Component>
-                <Component Id="cmp888BA69ECF0C815FCAC7EFA1E35CBBE2" Guid="{0F18A86D-F4D8-46A3-8B16-2851C5F2BCB4}">
-                    <File Id="fil1C44CA77FAF4440953F93B2A92259303" KeyPath="yes" Source="SourceDir\Goblin Care\libvorbisfile-3.dll" />
-                </Component>
-                <Component Id="cmpA453DDF260846BEB0D7D1F3FD8530C49" Guid="{A507DC9E-8D52-438D-AAF9-57F89313CB16}">
-                    <File Id="fil335EDE778C1B9E36B0B89C95759C7532" KeyPath="yes" Source="SourceDir\Goblin Care\libwebp-5.dll" />
-                </Component>
-                <Component Id="cmpDAADD755B2C12E0F9C611EB917786F82" Guid="{E99BE5DF-3347-4190-A7CF-30B8C4DED400}">
-                    <File Id="filF5283DB52F2DA276F1032D40DF13AA4A" KeyPath="yes" Source="SourceDir\Goblin Care\libwrap_dum.2G4A2DEEJQX6YSCH42YTLQ2FI57IBKS6.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp000C9314CBDE2588257FD9B116B714BB" Guid="{1293E05A-889B-4B57-80D3-8EE838BA7E8D}">
-                    <File Id="filD84A3EEF0125D308175D34C6BFE769B6" KeyPath="yes" Source="SourceDir\Goblin Care\libwrap_dum.RVNL4W7577HF2V4QDALLKHXD3JAS4VHU.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp7BE10CA4D44EC28CA39CDCB1407DB5BC" Guid="{F0D69418-999E-4769-B97B-904393489973}">
-                    <File Id="fil43DE9E56AD6292FE4EE7944C5AC14428" KeyPath="yes" Source="SourceDir\Goblin Care\lib_arpack-.T4BQQIUIMNSYQAWYM6F3TWT2H2FRWTGP.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmpE10D84F333F1AFB656E61F82E218D2A4" Guid="{3369C5BB-9EAC-4E69-B563-1B447540C1D9}">
-                    <File Id="filB6FA7711CA036A6A77E4A905DAA811E8" KeyPath="yes" Source="SourceDir\Goblin Care\lib_blas_su.ODPMMEVPHUEZXPT6C76ZYIONJW7E2IUE.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp946A7EEF90DB1241499EC27C1B6059EC" Guid="{30FDCC62-B37E-4FEE-9057-728D9B0B722E}">
-                    <File Id="fil59095CFC0EEEB23F134A6B9DB3E5BA67" KeyPath="yes" Source="SourceDir\Goblin Care\lib_test_fo.6QS7HUU6UWQ3ZZ2H5HU3YC3T72Y24U6T.gfortran-win32.dll" />
-                </Component>
-                <Component Id="cmp76C0E66DF88711B00C35026A63E0ECCB" Guid="{18292B96-1A7F-4342-BEFD-FE92D5A17A09}">
-                    <File Id="filC10F9C920E4ECFBC98BB57AAA69141B5" KeyPath="yes" Source="SourceDir\Goblin Care\mfc140u.dll" />
-                </Component>
-                <Component Id="cmp48394393E1E4E4528A9C63A76726B1E1" Guid="{443D7D2B-CE31-4CC1-B7C4-7C802E027E72}">
-                    <File Id="fil0F9C4F38BBBE5560D00F71AECE309B88" KeyPath="yes" Source="SourceDir\Goblin Care\pyexpat.pyd" />
-                </Component>
-                <Component Id="cmp34313EEE48D24BDA78CEA694239188A0" Guid="{DD5AFDE0-80A5-4746-9DD6-7F9D294D5EEF}">
-                    <File Id="fil277A40A011301B6699F96A6C638627EC" KeyPath="yes" Source="SourceDir\Goblin Care\python37.dll" />
-                </Component>
-                <Component Id="cmpAC43B3BD01EDE00E0FDC250978B232B3" Guid="{380495A5-4F0E-40D1-82A6-38B1146A9058}">
-                    <File Id="fil04BD9E8A5B38CF5894E2FD31A7C73824" KeyPath="yes" Source="SourceDir\Goblin Care\pythoncom37.dll" />
-                </Component>
-                <Component Id="cmpFC4E46BB2C1556D71411409A4FD15990" Guid="{33CB795A-B0AB-45C8-BE64-32BD568CFEAB}">
-                    <File Id="fil4F841C759E153BE8C525B9DD8B48E618" KeyPath="yes" Source="SourceDir\Goblin Care\pywintypes37.dll" />
-                </Component>
-                <Component Id="cmp7B73CDD8402B032A62DF557637CEF8A2" Guid="{C1FD5EAB-0183-44FD-88B0-BF87693D9E9E}">
-                    <File Id="filCDCC2A448709DA781C4B8C69BE08C999" KeyPath="yes" Source="SourceDir\Goblin Care\SDL.dll" />
-                </Component>
-                <Component Id="cmpA70466794B603D8CFF178A258E71E691" Guid="{C7D2BCB9-CC9A-4408-A42F-070DD221A4B4}">
-                    <File Id="fil7C4A71C7833C201D4731A727637551FE" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_image.dll" />
-                </Component>
-                <Component Id="cmp1C9AD681CE2429B374FC2118275084C8" Guid="{C5F8EDA0-1442-4C72-BAAE-08E16DE77DEB}">
-                    <File Id="fil82A74EB63D5390CBA2AC0778053451E4" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_mixer.dll" />
-                </Component>
-                <Component Id="cmp11AE9DCC6D5FD60FB54516C6A3FFD0AE" Guid="{30ED0727-A3A9-4836-85AF-27218E631284}">
-                    <File Id="fil071ADB02B5E8BFCE723CE0A38A53141E" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_ttf.dll" />
-                </Component>
-                <Component Id="cmpD6667891C6DC313C392290CAC36CD327" Guid="{2B51BF9D-5918-4C4F-847D-C3E09E11D16B}">
-                    <File Id="filFF180CE93320CEDC0A83F09D5573D92F" KeyPath="yes" Source="SourceDir\Goblin Care\select.pyd" />
-                </Component>
-                <Component Id="cmp152F541A8BC13A9C990C60CEAC27D086" Guid="{0F56FB28-D1D9-4CEA-AAA9-4E0BE7D8AC60}">
-                    <File Id="filEA5CD4D387B4079A86023289568A4E8A" KeyPath="yes" Source="SourceDir\Goblin Care\ucrtbase.dll" />
-                </Component>
-                <Component Id="cmp94669ADF0C8DD69F8BBC34BCAB98C0AD" Guid="{C2D663A7-D8CF-43F4-A88C-265240D33839}">
-                    <File Id="fil1C9AD419EFA30F52689DC6574110EEA0" KeyPath="yes" Source="SourceDir\Goblin Care\unicodedata.pyd" />
-                </Component>
-                <Component Id="cmp314EEC87D4736A0C940FD96E0565BE55" Guid="{AF10D3EC-4767-4055-BC66-D2E1352FA1C9}">
-                    <File Id="fil84659A980A263EFA03825C77572E396A" KeyPath="yes" Source="SourceDir\Goblin Care\VCRUNTIME140.dll" />
-                </Component>
-                <Component Id="cmp9E361D4C31B8F8889240FC414967C7BC" Guid="{F893FDE1-9BA3-443E-82D0-354CCDC7CC8F}">
-                    <File Id="filE7C41B057702401933BFA571D0A7FC85" KeyPath="yes" Source="SourceDir\Goblin Care\win32api.pyd" />
-                </Component>
-                <Component Id="cmp4098AE47452E2DA24AB39C235C32810F" Guid="{165040C9-CDEB-4B72-A249-35A37F201EF1}">
-                    <File Id="filE7873705BE1D305D818559BAE9D7D95E" KeyPath="yes" Source="SourceDir\Goblin Care\win32pdh.pyd" />
-                </Component>
-                <Component Id="cmpBC776ADBA678826E09F126E99A9BAF0D" Guid="{31483B0E-12C8-427E-AA5E-0EEF0480DFF8}">
-                    <File Id="fil6E166612D167AB6BD04274FF83490443" KeyPath="yes" Source="SourceDir\Goblin Care\win32trace.pyd" />
-                </Component>
-                <Component Id="cmpDDE1B732C1679C9E00FE8DFFE4AE5795" Guid="{6AACE625-540D-4608-ADE4-90F679B06C76}">
-                    <File Id="fil1C75D16ACAB7A775530F9A1E7D65E032" KeyPath="yes" Source="SourceDir\Goblin Care\win32ui.pyd" />
-                </Component>
-                <Component Id="cmp38D182711CBF92DCD93A66423D7B115A" Guid="{7BAEABA5-C44D-4871-99CE-2077922D75DD}">
-                    <File Id="filAD1788449B2EBD9892D2DF199054DAB9" KeyPath="yes" Source="SourceDir\Goblin Care\win32wnet.pyd" />
-                </Component>
-                <Component Id="cmp049FDC302801EBA865C56A51BE217B59" Guid="{961F0EF5-D74D-456B-AD9D-AAC0C660F0AB}">
-                    <File Id="filD5243B72ABDE2DA8F028095A69076B7D" KeyPath="yes" Source="SourceDir\Goblin Care\zlib1.dll" />
-                </Component>
-                <Component Id="cmp9A3DB7DF9A690696123AA1274AD2697C" Guid="{6FD38909-8E78-4894-B673-1994F43664F6}">
-                    <File Id="filEBF752B867D1D06159A624BFFDF3FBF0" KeyPath="yes" Source="SourceDir\Goblin Care\_bz2.pyd" />
-                </Component>
-                <Component Id="cmpDF6D4574B046E17058AA1C9A2456FF3F" Guid="{E6B76A39-AB19-4440-B813-79200D62EA4A}">
-                    <File Id="fil203B34BCF1F560019E3B93C55383E823" KeyPath="yes" Source="SourceDir\Goblin Care\_cffi_backend.cp37-win32.pyd" />
-                </Component>
-                <Component Id="cmp36CF09684750C93903EDD6C15C71E2D2" Guid="{3DC92227-99D8-4128-8C0C-42378B2C1458}">
-                    <File Id="fil6AF80F6EC649A29CCFBDCD82D59A3C88" KeyPath="yes" Source="SourceDir\Goblin Care\_contextvars.pyd" />
-                </Component>
-                <Component Id="cmp0DA5E80E8B1D510CC8EDDCC19487A176" Guid="{FEB2922E-E147-4E2D-9B6F-A85B0001203C}">
-                    <File Id="fil8529FAFDB83823BE2C85222FE5B681E0" KeyPath="yes" Source="SourceDir\Goblin Care\_ctypes.pyd" />
-                </Component>
-                <Component Id="cmp211D1FA056027325AF7233B56E02BBA1" Guid="{ED20BF89-AA55-424C-BBDE-E926C021880B}">
-                    <File Id="fil228CB319BF2A5A28C99B75055D7CF6F1" KeyPath="yes" Source="SourceDir\Goblin Care\_decimal.pyd" />
-                </Component>
-                <Component Id="cmp4294B942499906AE50969BFC59274769" Guid="{5C79C8EF-92A8-4C42-A1E1-C1EA448E7ECC}">
-                    <File Id="fil14281EA0182406BD7651A4D4D3BDBD1D" KeyPath="yes" Source="SourceDir\Goblin Care\_distutils_findvs.pyd" />
-                </Component>
-                <Component Id="cmpFC3395029850741045C06FEA6E43A0DA" Guid="{E3A18B21-82FC-4CC5-90C6-E8A171B533A5}">
-                    <File Id="fil98E62BC014E772BEB1BA6C84E89A5331" KeyPath="yes" Source="SourceDir\Goblin Care\_hashlib.pyd" />
-                </Component>
-                <Component Id="cmp8E0A8E6DDC096F2DB4C05C3DD7884CAF" Guid="{6C959405-22E7-4F91-A6C6-ACC6E18AA721}">
-                    <File Id="filF7FFDE31AAE37E3DAE6EBD1E88958265" KeyPath="yes" Source="SourceDir\Goblin Care\_lzma.pyd" />
-                </Component>
-                <Component Id="cmp6F6B2412543A6EB98F8DDEF88BEC17C6" Guid="{F299BBD2-0E2B-474E-9D3D-D5FF5690730A}">
-                    <File Id="fil0794C95EF0A9F8E0BC34C980E2DA43ED" KeyPath="yes" Source="SourceDir\Goblin Care\_multiprocessing.pyd" />
-                </Component>
-                <Component Id="cmp919D626AB40376B43CAC7C8EFC8E6614" Guid="{13A95441-F4A3-4888-95CB-66BE62171567}">
-                    <File Id="filB231A908FB234B91950E3C1B40B63A2D" KeyPath="yes" Source="SourceDir\Goblin Care\_queue.pyd" />
-                </Component>
-                <Component Id="cmpF1D6009528982D0868CD664193F3D3F4" Guid="{F966A125-39DD-447A-A327-E957D2A192B0}">
-                    <File Id="fil90B628D23B7C2EDD4A3EAF5B837CD58E" KeyPath="yes" Source="SourceDir\Goblin Care\_socket.pyd" />
-                </Component>
-                <Component Id="cmpC3EFEFE2E60EA8FA8EF92FFFF6335A02" Guid="{4B610258-B911-4703-A7A3-6E4B6BFF94F5}">
-                    <File Id="fil3B336001BC7CB42F473FC1833AE9D858" KeyPath="yes" Source="SourceDir\Goblin Care\_ssl.pyd" />
-                </Component>
-                <Component Id="cmp7D280DAFF63D187649B8F1D69B4DE115" Guid="{5BA0E7D0-AEDE-44C7-867A-FD732020FAD7}">
-                    <File Id="fil6016380F6E2C0526995F6FA42A81875F" KeyPath="yes" Source="SourceDir\Goblin Care\_win32sysloader.pyd" />
-                </Component>
-                <Directory Id="dir81CCA744DF1669B906165399D0C2CD54" Name="assets">
-                    <Component Id="cmp79F00B65810F68DB8E641B3E64098EDF" Guid="{289DAD2B-F639-4EDD-A6F1-D20443EADA93}">
-                        <File Id="filEBF715DE7F347C93CDDF3B29F505C41F" KeyPath="yes" Source="SourceDir\Goblin Care\assets\blue squares.png" />
-                    </Component>
-                    <Component Id="cmp687E8F7806E40B748CACCAB251CC8AF3" Guid="{9F78A7AA-3F3E-4FDD-8404-D431A249FE91}">
-                        <File Id="fil1034E614860DCC76FE27D26AC556B183" KeyPath="yes" Source="SourceDir\Goblin Care\assets\bullet.png" />
-                    </Component>
-                    <Component Id="cmpC6B5B31F640B38FF3C567F60A2506FAF" Guid="{E2F96AD2-C7F0-495C-9F15-2A96E0CBD068}">
-                        <File Id="fil0691933AF4DE99A933E4AC4B3015CDA0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\buy.png" />
-                    </Component>
-                    <Component Id="cmp0C282B783DED45D45848D8A55124BCC8" Guid="{549A414C-A3C5-4A03-8A19-BFA033AEB53E}">
-                        <File Id="fil3F2A4934592AE31A1FC8EE334889F766" KeyPath="yes" Source="SourceDir\Goblin Care\assets\cube.mtl" />
-                    </Component>
-                    <Component Id="cmp4461C310FC5D55C490CE52E28C3A00AE" Guid="{88DBBF5D-1D9D-4165-B4A9-761B99567EE1}">
-                        <File Id="fil8AB854A0E8AF9267D316B57D5ABBBC42" KeyPath="yes" Source="SourceDir\Goblin Care\assets\cube.obj" />
-                    </Component>
-                    <Component Id="cmp7B162984E3DAC46FDFD4ECF4E5200FC8" Guid="{F44CF517-765C-4D98-BC2D-D2FD4D43D94C}">
-                        <File Id="fil6F0D359E4157A11C652C5C92096B2D00" KeyPath="yes" Source="SourceDir\Goblin Care\assets\depot.png" />
-                    </Component>
-                    <Component Id="cmp8BB316826ED32DA10D6B34612B917509" Guid="{835EBEBF-44A1-47D7-BCA9-5E2DF2851F62}">
-                        <File Id="fil656AF2D6361A861920A109E9C46D2B01" KeyPath="yes" Source="SourceDir\Goblin Care\assets\desert road.png" />
-                    </Component>
-                    <Component Id="cmp7799630299F5085BB69183E1CB173312" Guid="{FAF09165-7959-4350-9CA1-DBE7D8CBAABE}">
-                        <File Id="filBB05FD272888191B1E08A115A6F459B0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\fractal.png" />
-                    </Component>
-                    <Component Id="cmp3764AB017AB1E0ECE48D3A5FB56BAD84" Guid="{BDABC9DB-D21D-4222-9F8B-765AEAB67D27}">
-                        <File Id="fil78D29F33C088AAEBC01FFE2BDD0E3D31" KeyPath="yes" Source="SourceDir\Goblin Care\assets\green goblin.png" />
-                    </Component>
-                    <Component Id="cmp3A13AD1BD1F1D110E2685D19397402D9" Guid="{585EDEF4-9A6C-4FF3-B5B4-625E64C86118}">
-                        <File Id="filD99134D9902BF732CC8F901A5DAED4D1" KeyPath="yes" Source="SourceDir\Goblin Care\assets\light.fs" />
-                    </Component>
-                    <Component Id="cmp12FB23C77FDA9715525C4D848414152B" Guid="{18065483-C4DB-491D-A1A7-68224F5A9DFD}">
-                        <File Id="fil3B1A68BE681B6D90AB49B157AE3A7B2E" KeyPath="yes" Source="SourceDir\Goblin Care\assets\light.vs" />
-                    </Component>
-                    <Component Id="cmp196FE0FE7591AACEA973D67A1527852E" Guid="{0C26FF2A-B863-4031-938A-E8A3F3D7E782}">
-                        <File Id="filEF3E0EA364D0AFF04EF3E143DAFB9FDE" KeyPath="yes" Source="SourceDir\Goblin Care\assets\menu.png" />
-                    </Component>
-                    <Component Id="cmp696082DC187FABE8F90CDEC9278F4B07" Guid="{1714A228-99A3-4E5D-8717-721AC2374B1B}">
-                        <File Id="filED822E3652B484921E9A1FA1C9EDBF9C" KeyPath="yes" Source="SourceDir\Goblin Care\assets\object.fs" />
-                    </Component>
-                    <Component Id="cmp43DFE958F7070A9AD41ECB191FDAD2A7" Guid="{462BEF1B-5EDA-4263-9F7B-75CB9738086D}">
-                        <File Id="fil4A4B90FECFCF8F3D32B5CC9A0DDB7D56" KeyPath="yes" Source="SourceDir\Goblin Care\assets\object.vs" />
-                    </Component>
-                    <Component Id="cmp8BAB90BE4036AB06DF25D93295FDA5B1" Guid="{2A9BFED0-3C30-47B4-B39B-673408EFEF7C}">
-                        <File Id="fil27B0FCCEEEB3869099CC8E08D9E4E005" KeyPath="yes" Source="SourceDir\Goblin Care\assets\objloader.py" />
-                    </Component>
-                    <Component Id="cmpE5D07F5CE03F6E7C50455A31DCAB2F72" Guid="{2D958C04-F033-48C2-8640-934ABCAE8D24}">
-                        <File Id="fil91598B7CADA0277769C01310AD893D7D" KeyPath="yes" Source="SourceDir\Goblin Care\assets\objviewer.py" />
-                    </Component>
-                    <Component Id="cmpFFC908C37F6535C349666AA59648621D" Guid="{88492DDB-FA63-490E-AA2D-238387C695FC}">
-                        <File Id="fil28D159FB425E0621D8693E3C0475DA26" KeyPath="yes" Source="SourceDir\Goblin Care\assets\paths.py" />
-                    </Component>
-                    <Component Id="cmpD5B83A8AAA2C08A62C53DF971B7D5DE3" Guid="{DCD3CB1C-E874-4C50-83AA-668660ADEF5C}">
-                        <File Id="fil69BC6E3937C412D3BAF35E3837DC6833" KeyPath="yes" Source="SourceDir\Goblin Care\assets\pink bubbles.png" />
-                    </Component>
-                    <Component Id="cmpEA1AB36E035617819377702609A1C39B" Guid="{1EB5A84A-430A-42A8-A994-EE439433B280}">
-                        <File Id="filB4B726A012EC7BD918C5F34E8E8A5A4A" KeyPath="yes" Source="SourceDir\Goblin Care\assets\rainbow_tornado.png" />
-                    </Component>
-                    <Component Id="cmpFA9BD8E531054FF53B5B1CDDD8EF135C" Guid="{81829234-90AC-4C63-BB2D-E4326B8D23D2}">
-                        <File Id="filF3E3DDA94271421E4B8C0DB41750CF18" KeyPath="yes" Source="SourceDir\Goblin Care\assets\red gloop.png" />
-                    </Component>
-                    <Component Id="cmpEECEDEE29957DF2D3DAE6537B7973680" Guid="{C4EA5135-35F2-451A-AD74-BADAB03628C3}">
-                        <File Id="fil5B47D42FC9E4888FD2944596C9AB64D6" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_body.mtl" />
-                    </Component>
-                    <Component Id="cmp0278318D93CA3CEE2282034E21BB40D7" Guid="{6E4B63A6-8BD2-4E6A-B316-9D18873D9A19}">
-                        <File Id="fil460B42F1DB49A4FE481B8CE93217450F" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_body.obj" />
-                    </Component>
-                    <Component Id="cmp5D1230290DDD1F9ACD31AA1118DB261B" Guid="{55146E86-181B-4E16-8F6A-10A6E34F8F51}">
-                        <File Id="filC69A6C9B0BDB666105CD3D4FF52F1EBE" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_glass.mtl" />
-                    </Component>
-                    <Component Id="cmp93F7900AFDE52CE9D617712256FF6E85" Guid="{951D7AA3-7C7A-449A-97F2-53035A61D76A}">
-                        <File Id="fil82D4051AF085F71196067852D975D6AA" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_glass.obj" />
-                    </Component>
-                    <Component Id="cmpC42FE1AD3A7FDA4E4A829A1569744E06" Guid="{D4786D25-347D-47B7-AE22-938E77822833}">
-                        <File Id="fil72B49312725C212E2953927980BBE673" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_tires.mtl" />
-                    </Component>
-                    <Component Id="cmpF368FCE11B264811793D9B65F08AB1C0" Guid="{E8B5D8FA-B91E-47DE-B129-E893D281C780}">
-                        <File Id="fil9DE55F6CB2AD19D60B847B9B1A9A0DA7" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_tires.obj" />
-                    </Component>
-                    <Component Id="cmp1521B285FF4F8586500FA01453390288" Guid="{FFDE5824-5D04-456C-B387-1F2D90034F27}">
-                        <File Id="fil37D23ED06F69FDD3330EC80E00543E24" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_wheels.mtl" />
-                    </Component>
-                    <Component Id="cmp2AC97874C48772CABC44200B51A685FB" Guid="{E83E6F01-7988-4F6C-95E2-5F438A9FF09F}">
-                        <File Id="filB1122282712575F38E4BE335487DB85A" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_wheels.obj" />
-                    </Component>
-                    <Component Id="cmpF4AB43F455FCA8089124315E65663B37" Guid="{6C452C0D-AF98-423B-8BCA-1B291B8B9FD8}">
-                        <File Id="fil94ACC5FFF640422DAA1CE6E9E4693408" KeyPath="yes" Source="SourceDir\Goblin Care\assets\Splat.png" />
-                    </Component>
-                    <Component Id="cmp2349042059F7B2050B4FB0B4FC0C5E84" Guid="{6087A527-FC92-4F04-876F-9CB5798AC325}">
-                        <File Id="filA630E17082E88397682DD9D626FDBF99" KeyPath="yes" Source="SourceDir\Goblin Care\assets\square.mtl" />
-                    </Component>
-                    <Component Id="cmpC4A61E548618467EFA1103FB254267EA" Guid="{359312DF-ED9D-4FE1-97CB-33697A853C64}">
-                        <File Id="filB73A7E7EF7B47BA050C980E721143EE2" KeyPath="yes" Source="SourceDir\Goblin Care\assets\square.obj" />
-                    </Component>
-                    <Component Id="cmpDD9393B13E4FB7CAA589D198AFD0DF5D" Guid="{C4BF5D26-490F-4B38-875E-2C2744BF3C29}">
-                        <File Id="fil5BED8E7FE2EDF4ABCFD5DEC5D5C29B21" KeyPath="yes" Source="SourceDir\Goblin Care\assets\text image.png" />
-                    </Component>
-                    <Component Id="cmpD5A72B8EE45EDEC89EB3645EBA5ABD5E" Guid="{5CBBAE91-9C02-4D65-A7FC-AA6E8BA6919E}">
-                        <File Id="filCD4ECEA299CC208B1AFC2056AEB5F0A5" KeyPath="yes" Source="SourceDir\Goblin Care\assets\tornado.png" />
-                    </Component>
-                    <Component Id="cmpA893B398AB005EF15F8DE2C06ECC8746" Guid="{E7C79C4F-33A2-4541-AC2D-C9739BC41F11}">
-                        <File Id="filEFC64FF0440A18A75D563BD602BAC56D" KeyPath="yes" Source="SourceDir\Goblin Care\assets\treasure.png" />
-                    </Component>
-                    <Component Id="cmp263A23BC08A53763FEE66030DA8FDC8D" Guid="{BBB34DDE-45B7-4A57-9306-0A135465BFD8}">
-                        <File Id="fil94359F73F4F12C8850143F8AA06A8DAC" KeyPath="yes" Source="SourceDir\Goblin Care\assets\ui.fs" />
-                    </Component>
-                    <Component Id="cmpA7A9EC67BAFB13825F43D5D596B16498" Guid="{866C552F-BF72-491D-8BF8-F55FE382B801}">
-                        <File Id="filD2228222C3E2CA6E212CB255A15500F1" KeyPath="yes" Source="SourceDir\Goblin Care\assets\ui.vs" />
-                    </Component>
-                    <Component Id="cmpDEB1159099E6C5E552BC92CB9DC79144" Guid="{145CA45D-AD88-4CE0-947D-976BC6938D25}">
-                        <File Id="fil92E3F86C090CDD7A0C3D2DB8D8641483" KeyPath="yes" Source="SourceDir\Goblin Care\assets\window close active.png" />
-                    </Component>
-                    <Component Id="cmp55B2192AE0D85DF8ED73904DCB3A9366" Guid="{D83A1727-60C9-4D2E-AD33-BD1C6C45F200}">
-                        <File Id="fil368FCAEC6ED0491FDA2D394C28F380C0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\window close.png" />
-                    </Component>
-                </Directory>
-                <Directory Id="dirA740E7CC4C7D9029C2E5F46BD5EF453E" Name="fonts">
-                    <Component Id="cmp4BFE0025E360E434E65EACB766709BC7" Guid="{4EDEA74C-D36A-4462-B7A8-CDD3A1C4F0EE}">
-                        <File Id="filFED89836BEB8E70470B89457E9EE2842" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibri.ttf" />
-                    </Component>
-                    <Component Id="cmpEC9E40BE1F13FC93897FD849B6D03799" Guid="{A3378416-A222-4A95-967A-1D6F3F10CD54}">
-                        <File Id="fil0A3CD8FA5CD3A5EFF5937691A9A12F24" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrib.ttf" />
-                    </Component>
-                    <Component Id="cmpD00F264B9771DB725BEA7DCBC18A8252" Guid="{ED12BCE5-C560-46F1-9F40-DAB1A69001C2}">
-                        <File Id="fil9D1F346132289951E4F4E0AB522C6DC4" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrii.ttf" />
-                    </Component>
-                    <Component Id="cmpFAB97CA8AA12AD4D8B4F384291282559" Guid="{150CEF29-719B-4C7B-AA11-D9F4D5CBCF5B}">
-                        <File Id="fil132941279C92D697A50E1B9F7F7175E6" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibril.ttf" />
-                    </Component>
-                    <Component Id="cmp6250CD0309A4FE54061B5C95A6999D0F" Guid="{55E3503B-83A8-43E7-B922-4D08D0951E00}">
-                        <File Id="filF880A60A9EEBEEDAE89C74A76C3E9A6D" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrili.ttf" />
-                    </Component>
-                    <Component Id="cmpDB314AC0478BDA6886B31826F9858187" Guid="{4D494C28-5A44-4444-BF46-68B54EC06631}">
-                        <File Id="filA8CF54D39CB0D152058193E14D241277" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibriz.ttf" />
-                    </Component>
-                    <Component Id="cmp1F510E576943F08DA9AE6726E00F948C" Guid="{A90DC870-D86B-465C-8E47-29046D2BF9FC}">
-                        <File Id="filD321F3FEF181E7BFFD10D3850EF8630F" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\paths.py" />
-                    </Component>
-                </Directory>
-                <Directory Id="dir1EAF9B3A40899A33506DCF3C9618C9DD" Name="Include">
-                    <Component Id="cmp698B2C0C983E2DFE770DE096CBD5F8C7" Guid="{68442CC3-56D1-4880-8445-14CD81317491}">
-                        <File Id="filA45D0B9DFB65765887E0E9E8C323A493" KeyPath="yes" Source="SourceDir\Goblin Care\Include\pyconfig.h" />
-                    </Component>
-                </Directory>
-                <Directory Id="dir175DBAEC7925A726383F28FEA9CB6D39" Name="lib2to3">
-                    <Component Id="cmpF63DFEEA1594D34CD9F8BC0482985BDD" Guid="{DCACB772-C077-4CCC-9E7E-9BEF975CA7E0}">
-                        <File Id="fil1A920192CDB56280F5C1AE12FB7BB600" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\Grammar.txt" />
-                    </Component>
-                    <Component Id="cmp3417D6AC34612DF74D7E5C5E0B49C613" Guid="{690E6CCE-DAD4-483A-B5F9-23DD8199D63D}">
-                        <File Id="fil374829650427C068F24E84BD17E98E6D" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\Grammar3.7.0.final.0.pickle" />
-                    </Component>
-                    <Component Id="cmpAE7418994137EC27772D7F3CCC4DA3E3" Guid="{8CAC252C-2A7D-4BAA-86AA-33ACBEE0D6CC}">
-                        <File Id="fil82EBA83A97C2927BE1E8D4A68F66DA51" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\PatternGrammar.txt" />
-                    </Component>
-                    <Component Id="cmpBE2C20E41FF5BD77E28B9EE380514BB9" Guid="{28F78979-CA8D-4924-8200-3A402359A00B}">
-                        <File Id="filCD5A28A208A1B0473464135265906A69" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\PatternGrammar3.7.0.final.0.pickle" />
-                    </Component>
-                    <Directory Id="dirD4D294EB39130CFE4204078603C2FC52" Name="tests">
-                        <Directory Id="dir00364436866E92E520248A5608793244" Name="data">
-                            <Component Id="cmp4C9308EFB3C954ACFC470A04CD3984D5" Guid="{8954D28A-62D2-4966-90C9-4A954E8A22E8}">
-                                <File Id="filCD1510035B4428C3E5E1CE8A13602CD0" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\tests\data\README" />
-                            </Component>
-                        </Directory>
-                    </Directory>
-                </Directory>
-                <Directory Id="dirC613BEC6FD3EBB78BD7B1C99CDEFE6E8" Name="numpy">
-                    <Directory Id="dirF2AAB6D35823EE9A4BD72B11029543BC" Name="core">
-                        <Component Id="cmp648613868E1A2462E5544E7F82A039CE" Guid="{48DD55CB-3BFA-4DAB-AD30-AF6989F67E65}">
-                            <File Id="filF4E5659295BD3358DDC44D4CDDBFFB6E" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\multiarray.cp37-win32.pyd" />
-                        </Component>
-                        <Component Id="cmpEAE97BA620893BE8CF8B963B114ED6F8" Guid="{9C5744CA-ADDF-4ED6-9BA3-7D2BC0A06C72}">
-                            <File Id="filF6D4F9499995C1C81A50063E4D0B41E2" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\umath.cp37-win32.pyd" />
-                        </Component>
-                        <Component Id="cmpDACB11DC1133B924FC4738D9595774C4" Guid="{4B34E630-A50C-477B-8A1A-F22AF3E266E7}">
-                            <File Id="fil116CE433FEE24D074EE59C6A9FF48545" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\_multiarray_tests.cp37-win32.pyd" />
-                        </Component>
-                    </Directory>
-                    <Directory Id="dirAE690C7FAA1718DB6154113F09AF3ADC" Name="fft">
-                        <Component Id="cmp38354835A9E126ADEA8A6D981FCB5566" Guid="{78C296F9-1452-4B14-BB5F-4FA370B835F4}">
-                            <File Id="filE7FD7146637FD092D77A0A3245F8445C" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\fft\fftpack_lite.cp37-win32.pyd" />
-                        </Component>
-                    </Directory>
-                    <Directory Id="dirB5063D6CF5452D1510C8B44D8B077865" Name="linalg">
-                        <Component Id="cmp0DD8DA6ED7BD1419EA72C2951EC597C0" Guid="{0A857970-2FB1-4C6D-A771-5568FB86D635}">
-                            <File Id="filB136FD123350467EB5D71DAFF5BB8FCC" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\linalg\lapack_lite.cp37-win32.pyd" />
-                        </Component>
-                        <Component Id="cmpC609F47E765C96EF58DB1C5A621781DE" Guid="{044743B6-06F1-4FF0-8156-3AA9F65ECD81}">
-                            <File Id="fil80A6471493A3C798567561D24F77EC5A" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\linalg\_umath_linalg.cp37-win32.pyd" />
-                        </Component>
-                    </Directory>
-                    <Directory Id="dirE0ADC8E655CA8D8009A94AAB2F753887" Name="random">
-                        <Component Id="cmpCD902411F7522770A99938C16521F52F" Guid="{EBD8C413-9DBC-4B94-B90A-D3C5B9916CA7}">
-                            <File Id="fil31CB80D28B7B33C956A3835456991347" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\random\mtrand.cp37-win32.pyd" />
-                        </Component>
-                    </Directory>
-                </Directory>
-                <Directory Id="dir45CF3892D96FA8DB5EDF8BAECF6DA025" Name="PIL">
-                    <Component Id="cmp751AB4E4C1B4F2E49D46E51890F47920" Guid="{8893ECD0-D26C-42BA-A362-E19EF62A510E}">
-                        <File Id="fil8050C27ED0FF3154297B5A4AAC438D56" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imaging.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp56AE86EC706A7B5999475AB84E42EE01" Guid="{7067A5D7-129B-4B5C-897D-FA3D9BC49883}">
-                        <File Id="fil65D8355088430C6366EB129A8E92F0CC" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imagingft.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp4CF8CD04DC2A930D82061427AAC6D13D" Guid="{CBF62039-A1BA-4CDF-B96D-A52D3CA3A68A}">
-                        <File Id="filDC4D8805AFFB48C00E9D2B2E1F18B122" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imagingtk.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpACF95A56F2CFD341D09B3B9EED17456D" Guid="{EFC95A80-B14E-447F-8D29-0F31B366A04A}">
-                        <File Id="filC4009B6C5CDBDFCFD43BE6EC9DB0CB30" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_webp.cp37-win32.pyd" />
-                    </Component>
-                </Directory>
-                <Directory Id="dirDDF575FE5BB80FA45CBAA59B7AAD6898" Name="pygame">
-                    <Component Id="cmpBDBF5D40BC565C72AE85660992BFF479" Guid="{1BE0FCBA-DE78-4597-9424-61D2C8EFD9D3}">
-                        <File Id="filF736BE6A8AFFD1DBE32384AFC812992F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\base.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp6D6BF667DF95AC9BC0A85F6F77B07E5B" Guid="{C7CE1137-FA36-4FD0-82C1-ACD8F7679321}">
-                        <File Id="fil29D996D074B5C18CEA7612535432E91B" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\bufferproxy.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp4C5529FEE117A371D6CBD20C3C8DCD9E" Guid="{9F1E4BEE-F9CE-4683-A347-10B35F9462C6}">
-                        <File Id="fil72E7F6B08AACABA05C594FBBA652D80E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\cdrom.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp72E1BE30D77CFBEA585E4C6CBF69B7F9" Guid="{3B1410CE-459D-4CA4-93F3-D2C618AAC6F7}">
-                        <File Id="filD81310780CD3708A9CC93478FED11BE3" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\color.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp9B411E21F4C29F4FB5FB9E87A38598B5" Guid="{AE646B32-1585-49AC-B953-519AAE45FDD3}">
-                        <File Id="fil68080CBAD741BCD59BC5BC7464C0E378" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\constants.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp206EAC15B897AEFEC51FCB5614C1A1D6" Guid="{26620827-62B8-4697-AC5B-68B60B2F01AB}">
-                        <File Id="fil4A486243A68E1146C61FE08FB4828101" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\display.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpCDCB18BE4D66E8F8E5C53FE0AA47456C" Guid="{53EEC5A0-72AA-4BEB-AB62-22E82D3B53E8}">
-                        <File Id="filD52E6C4E507CA1C0EFD26C7E1591EDA8" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\draw.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp00045E87A56A89E501796890E46D38AB" Guid="{6089174C-9E9B-4F7F-A293-5B1F02105AFF}">
-                        <File Id="filF3A9C3DA186D7F406FA08B1B093C83D5" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\event.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp3909A796E1012995DDA7D0D821A941D7" Guid="{E11B62E2-0F47-47D4-BC3A-F58BAB5DE3C4}">
-                        <File Id="fil55754A1528A9FFB5B9438C02039EFB18" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\fastevent.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp0C53A9818619CB5893812FD04CA89904" Guid="{BE6F295C-9A00-4804-BF86-97293FBA26F5}">
-                        <File Id="filE3470BB7A911E1BF827274C06A6B8F30" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\font.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpA9744D6246E5D235E7618C5ACF8BB223" Guid="{B9313823-0009-4A63-954C-F987B81F7547}">
-                        <File Id="filE30C109B4905CCD7BB28E0D66C632F13" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\image.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp18D115F4EF4704E582F7E40427D81BDC" Guid="{2125E629-4906-4E8C-BA9E-1DC4E3C1AAFB}">
-                        <File Id="fil4E82726EB3EF135C09F7992A42F16F38" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\imageext.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpE8DDE2204C017CA4C3F783CB84E7D4A0" Guid="{ACF0AE73-2B62-4DE5-8F8F-5BCB587EA646}">
-                        <File Id="fil6CF84D543632E7AA3FFC3CC2ABDE12E0" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\joystick.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpD8E2ABAA6BC92E3857B397E6EFAD42F1" Guid="{464AEBB4-2667-4F23-ACB6-3208A28DA556}">
-                        <File Id="fil6D99F630ED38163445D4067AD9C6B113" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\key.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp883BCECF272A6ABDFFE534E4CD5EF2C3" Guid="{16E7ACBD-1015-47C9-B88C-4A82B351B467}">
-                        <File Id="fil987A7EE2D65B4D5199E9511782C7386C" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mask.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp745F9BD5A78DEECE65A0D6AAA4176C12" Guid="{947EAA7B-A07C-42E4-AB14-133EBC3EA296}">
-                        <File Id="fil7157D1D22AC9532AFD5B0A606AECA5F7" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\math.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp758AA19AD4EC1799F4A67EB198B10F4F" Guid="{E503DD99-74A0-4D89-9739-BDC62A6A5206}">
-                        <File Id="fil51F1CC94A4B2621CE9C0CFE6E1238068" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mixer.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpAD7471BDEF3A92E81589BBEE655F7FAD" Guid="{49D2860C-A6EB-4EB8-9A20-C17807EFA8B7}">
-                        <File Id="filF488F3F52A4951FD6FB6CB9D295BCBBF" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mixer_music.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmpDD1A30BA50503EEBD3556DBBF93450E8" Guid="{1F77B3D6-E783-4B62-BFBA-2BAF9B4488BE}">
-                        <File Id="fil38F9A8D64DC21183F46B0E172563A10F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mouse.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp7213BEE045742FD3DF410F4D39C4ED58" Guid="{347FB5D8-6D00-4C5B-96D9-7EE2A37D782B}">
-                        <File Id="filD05046CA4127464C553996C487CF5688" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\overlay.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp16631CA18B0CB883CA2F1B37EB643623" Guid="{2A334D59-26BB-4CEC-83C0-6319DBC18B87}">
-                        <File Id="fil45E0339895C587B4CE5FA9B21504F7BF" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\pixelarray.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp27968441F295DC9153EC3D5911ABCE94" Guid="{4109C8FD-DC59-47CF-8EC3-5DEA5317E03A}">
-                        <File Id="filF66CE5C3C55F5C9EDE0BD4FD5A72981F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\pixelcopy.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp79E07C95EAEB7BF07D62BD6516FF12DC" Guid="{08232954-3FEA-43E3-BE8E-083D9822FC65}">
-                        <File Id="fil39865AA86D415C967FF9DD689301C291" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\rect.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp5763FBC6DE4D0D2DF06AA6486F458A0C" Guid="{5B6AB903-6F51-4F6C-82E6-AEBB3B7E1252}">
-                        <File Id="fil4EFFA3CC7621F52D23219CB38F8FDF0E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\rwobject.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp0C864CC343B51E4BC1756F1ED3DEA23E" Guid="{F7F70303-0818-4876-9508-D049E88921C4}">
-                        <File Id="fil1456A0781B8D0A8E7E24AB825975C94B" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\scrap.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp3BB8B2518F3665463E249906D865894E" Guid="{A378D590-6AEC-488A-8D56-520E25E75867}">
-                        <File Id="fil487E6D51645B693D10F979B182B6C4E1" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\surface.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp70005B320224096453F0520932D44A34" Guid="{200A84C7-DE04-461C-923C-AD688ED7E4DC}">
-                        <File Id="fil581B0A1796B4462AB3D34E2CF3094269" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\surflock.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp5022FBCE38553453E280DF5ED1C8553F" Guid="{0AB9D26B-4427-48D9-BD3D-C1FB17C3C236}">
-                        <File Id="fil703A271F7B729D2489D251042B1F6DC7" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\time.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp39D0E7930264E8D31008445855713C18" Guid="{42D7581D-2AE6-4F41-AF1C-D3C4A1C7F35C}">
-                        <File Id="filBAECBBDE43BAB9F1941FA62D0A249B09" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\transform.cp37-win32.pyd" />
-                    </Component>
-                    <Component Id="cmp06742557F8FCFCC4F591662A7E91130A" Guid="{E2339D68-6B0C-424B-84F8-CD767D30AD62}">
-                        <File Id="fil6E1F75F051A7AD3839A255165FA5249E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\_freetype.cp37-win32.pyd" />
-                    </Component>
-                </Directory>
-                <Directory Id="dir09B50D2DA45B96FC86866199FBF43586" Name="scipy">
-                    <Directory Id="dir494A14851E9ED1EB8C9EF18A39E35D20" Name="_lib">
-                        <Component Id="cmpCF82EDC4B2BEB611555C60A334D39A9B" Guid="{79F184DF-4BF7-47F9-8D7E-3CE47C2B695A}">
-                            <File Id="filFE6C6768EFDA5288EABD66FED4AB87D6" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\messagestream.cp37-win32.pyd" />
-                        </Component>
-                        <Component Id="cmpEBA274FBF7B122660F4F61C8BD6D34CD" Guid="{9B43392D-EA0E-4C33-81D2-056F808FCCB8}">
-                            <File Id="fil39EEDF9DB12E18BA8E59912E342CCCE4" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\_ccallback_c.cp37-win32.pyd" />
-                        </Component>
-                        <Component Id="cmp2D65C57012D519901FADFDE37BFF67CE" Guid="{CA4C530D-1A9F-498C-9E47-37E40B249BED}">
-                            <File Id="fil0DB1C9821F271C77EC430D32DFB81217" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\_fpumode.cp37-win32.pyd" />
-                        </Component>
-                    </Directory>
-                </Directory>
-                <Directory Id="dir05CA3F3E1B3F9769B20360A60AE99434" Name="win32com">
-                    <Directory Id="dirD6C02F8E604D036DCF8ADC89C7C15672" Name="shell">
-                        <Component Id="cmp96D801AC97457CBC6C26F5AB5E5C9A18" Guid="{F8EF5982-906A-4999-8021-43CDD083DD46}">
-                            <File Id="fil0407F12E4727D1C8420346AB64C53DD7" KeyPath="yes" Source="SourceDir\Goblin Care\win32com\shell\shell.pyd" />
-                        </Component>
-                    </Directory>
-                </Directory>
+			<Component Id="cmpB638A64B5C54A9869F74B9C9670725E7" Guid="{EB418233-8C55-42D4-8589-2C03CE353CD9}">
+				<File Id="fil4492B5F60D6BF3CAE30C2ADE234774E0" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-console-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpFDCBBCED1A6C115260E33FC794EF1223" Guid="{D339EBAE-32C1-4FC9-80CD-30A787514FFA}">
+				<File Id="filE6F19BA83E441BE89B1D7E94ABA6AEED" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-datetime-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpF14472FD9FD1776B368CC9A0A5C3F128" Guid="{7803EC81-2F31-4224-AFC1-96EE9DB0AF9E}">
+				<File Id="fil5BB210188A51608F7A0AA556A6D545E9" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-debug-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp91159467AE909D48B82EC1D278F21273" Guid="{F8ED00FE-E663-446A-AAE4-066FD228EFBB}">
+				<File Id="filAD2741AAF3B773DDF72A1DDC6D326D67" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-errorhandling-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpC53DA1D63757F08ACED309A4C959EE58" Guid="{88B7A51E-EDB3-4130-BB01-A11C683DAD97}">
+				<File Id="fil3E56E769F2D6340C8B7BC93553EE0F15" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp3573D3191FA2E1F678BB29F2CDA28674" Guid="{9CCF409F-F619-4862-8077-B7DFB075FF49}">
+				<File Id="filA5949AD219EAAED836446882EA277741" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l1-2-0.dll" />
+			</Component>
+			<Component Id="cmp39BEAAC5B5EBBFCC1501E2758EB56A17" Guid="{B93DFA07-20BB-42AD-AA4D-3F07C6B976E5}">
+				<File Id="fil003107FB5A1CBCEAFADCC6E566904F52" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-file-l2-1-0.dll" />
+			</Component>
+			<Component Id="cmpF0DD58EC34D30FD00760FDD69BBC6675" Guid="{97BC790C-CEF1-46E0-BFF6-D95F14B85209}">
+				<File Id="fil144C36D8D2AF73B85AE086C73031803F" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-handle-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp84CFF9DF670537C6E0200F5998E28AC2" Guid="{5A84BC83-8D6B-4A2C-8232-80E067FDD8BC}">
+				<File Id="fil0E416BCE806191833CDE8DEBCAF2C667" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-heap-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp984AE9D5B0147DB34797793D981F2A47" Guid="{DE967A96-2FC4-4F02-946F-2B3FBF72CC57}">
+				<File Id="fil9B87B5FA77C5F3E2A8F6E0CCC0675C06" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-interlocked-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp9AA774F60FF1EF7288E1C54C93EC6EED" Guid="{81E18211-98C1-40A5-9198-736243328D3E}">
+				<File Id="fil78C6099D03757334E8D542FFFA196210" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-libraryloader-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp896EEBFADF2226FE1A26667D969C52A1" Guid="{F7BA01C0-5F2D-4E23-9427-7218A1AC7222}">
+				<File Id="fil60F1C19EBD6F54B760C20880724FADDE" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-localization-l1-2-0.dll" />
+			</Component>
+			<Component Id="cmp0D19A87533A3E643B1D74765C6EF6E3D" Guid="{DE9B172D-CA06-4BAA-9DB6-E998B490D364}">
+				<File Id="fil261C632794D0F3DF64F270B353AFD8F5" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-memory-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp340A3B771EEFCD5135984464678AB77B" Guid="{1CE674C1-6EB6-4596-B9A3-62C40FE4B88B}">
+				<File Id="filC97FEC2A7C68E9B6911D09587EAC73A8" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-namedpipe-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpCFDF9316B4BC7398F4C53EF9C121B1A5" Guid="{9FC9AA4A-3C17-407E-BEA2-936F1619E75F}">
+				<File Id="filBFF565223FAC981E37378EE3C004E525" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processenvironment-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp00C669F622341964FCD4F268CDEE4418" Guid="{213CB061-09EE-40D5-9B6F-E0704A2294DD}">
+				<File Id="filD8345E3428B07004903FC8FB3463C1DB" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processthreads-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpB6AB2BF238115244B8B39C5CB0C14D33" Guid="{3184F829-B4CA-4633-8F67-971FC627B81C}">
+				<File Id="filDF9273AC99E7D8FAB8CE28B007479AD2" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-processthreads-l1-1-1.dll" />
+			</Component>
+			<Component Id="cmp4FFF4A8F0FA11CEBB4D020B6F06D65FB" Guid="{AC2242E1-4ED9-4253-A461-14ED580FE692}">
+				<File Id="filD69567C9E625B53218869E2400A8F3D6" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-profile-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpC2CC7356A9295414B5DA398050AE71C7" Guid="{158CB337-B44E-42F0-A937-B026784220DC}">
+				<File Id="filDFB8E39081B75FEB7BBFB8DFC6AA7794" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-rtlsupport-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp1EC68C5E8C0DE0F9F4B66B5988E3BBF9" Guid="{F58D2D1A-B4AE-4CBE-A816-1CCA963BCE23}">
+				<File Id="fil457C06B08D0DE99ED929C54F0FE1CD77" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-string-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpED0F12BF868F7B6123CAE9AB818FAAE7" Guid="{C7421262-D6A0-43A4-8052-281C621065FB}">
+				<File Id="filB59A67EF1B1DCE3AE0D4C582BCCE738C" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-synch-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpEE76953A46EA4DEF9D7C1DE2B72E9BDE" Guid="{11B2F438-A12C-4AE6-9F2F-637D6A0B9AED}">
+				<File Id="fil3E91294E3632B5CD6CD76189F97C8DDD" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-synch-l1-2-0.dll" />
+			</Component>
+			<Component Id="cmpB07E6459139BA800453A59B8EEB623C8" Guid="{34B849E0-617A-4FCC-B68A-5F1C7738B0BD}">
+				<File Id="fil47F309BCB90AB0BF6E2E21C70C7CBB7A" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-sysinfo-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp02219CB760B4E89A7205433B23CAE98C" Guid="{7C4C91A3-9679-444D-86D8-090AFF669D9F}">
+				<File Id="fil8DF49B413C3784CA8A7520A37F4AFD09" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-timezone-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp07EBAB706A6E57CEA4FFD3B997316AB0" Guid="{146D2441-344D-48B2-8727-3555DD750FB0}">
+				<File Id="fil2481960A79DD90AEA73176413CE84446" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-core-util-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpDAB15D4B240426B9333A669ABB346CA2" Guid="{F561F33F-0617-464D-B63D-A0FD95197387}">
+				<File Id="fil0A95B89924C45A733984EF9E96E1932C" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-conio-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp2A8BAAC35ACAEC69BBE69A8DEF00839D" Guid="{B02239CE-AAD6-4F35-A2FC-2C0F09196E1B}">
+				<File Id="filFD3A02A069C70822827FC5C90A1D31C5" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-convert-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp40F9611814435FAC5462DA75E2248B26" Guid="{AE0A6FBA-7A09-48EF-89E7-FB9E7EE8146B}">
+				<File Id="filEA29A07E14AA80BB5E60417A0D592A41" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-environment-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp0812D247198DC3AF8C142703B10594EF" Guid="{BD2664B9-C9CF-4914-8C55-D86D5B20C824}">
+				<File Id="filD960A1BDDE286D5DC17A4578ECBBDDE9" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-filesystem-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp489EB1768DE7DE9C7044B5AB7A5C3FC2" Guid="{87FE72D9-F94C-4826-9B98-0C070FC20F44}">
+				<File Id="filA7B6271FB428073D57CB85A07AB69CF8" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-heap-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp73A3E5913364B0960D77A510F5046FD8" Guid="{5E339215-02EF-4112-BFC7-DDC33264917F}">
+				<File Id="filFB0AA7BB17B6763DCD7210CB3B371F82" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-locale-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmpA07082E3869B3CA91ABA69124B124E66" Guid="{A7A9E08F-1445-4975-BFB0-6A52646658F3}">
+				<File Id="fil894365C08358DE048918152D642DB530" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-math-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp84FD977E5B80B6360EC068CCB79B95CC" Guid="{C6CAA27F-9640-4180-B20D-9F8D6C94D772}">
+				<File Id="filA9B994C5EDFAB80807B78203E9A8ABBC" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-multibyte-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp920E2E98DC74DA2BE2A778DB93924593" Guid="{9562C88B-0A20-4C22-A773-D3D37F4423CA}">
+				<File Id="fil178F79E55D2BD832B38654A7BA14D438" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-process-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp38EF943CEFD8674B7A08EBF3653DC98C" Guid="{F8462EE5-0DF9-4E48-BD05-46411AA1F918}">
+				<File Id="filF95D4D2586EA52B178DB84B4A6F63BA7" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-runtime-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp86839C0C03EE651FA92732349AA55F6C" Guid="{77545AC2-EA9D-498D-842E-241476CC1C61}">
+				<File Id="filD51F18E4906BDD22325421C7531B5E56" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-stdio-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp587F3989DB490C8CB319A2F8BF1C8891" Guid="{98F9DBF3-B7CF-4E66-9C50-2101A8CFF9E0}">
+				<File Id="fil2A9637BB09BBDCCC09932DD669206D7E" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-string-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp93F8E860EAC8DADAED7B9E7443535964" Guid="{2CD2FDEE-5B73-4A78-B3AC-BC16DAEC557D}">
+				<File Id="fil92A722BB029AA4D875FBC7FCCC462869" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-time-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp91E2F29D49B0ECD0C37F2022CB992A1D" Guid="{CA733F84-6F21-40C4-AF51-2291963AB25E}">
+				<File Id="fil084E9F1395ECB1C4594453FE9CD27DFB" KeyPath="yes" Source="SourceDir\Goblin Care\api-ms-win-crt-utility-l1-1-0.dll" />
+			</Component>
+			<Component Id="cmp2814AA69E56B8F7A36BA7AAC130CEFF4" Guid="{F106EF90-00D5-4152-BA79-CA2EF3AB8001}">
+				<File Id="fil9DC5539F6FACCEED1FBFC33EA653648B" KeyPath="yes" Source="SourceDir\Goblin Care\base_library.zip" />
+			</Component>
+			<Component Id="cmpBC993E465BC1382E6C181E1262752269" Guid="{5E0AB5FE-DC40-4BF3-AA1B-402E1D847528}">
+				<File Id="fil95334A3CB8D96BA0AE083B1DFF705AF3" KeyPath="yes" Source="SourceDir\Goblin Care\glm.cp37-win32.pyd" />
+			</Component>
+			<Component Id="cmpAA34D81FDEB741A78096A9113C78EFCA" Guid="{C5147BF6-F4B8-4AD7-A381-83A34F5B3C1F}">
+				<File Id="fil411D3E21C161A5793C99DCF04BD68A49" KeyPath="yes" Source="SourceDir\Goblin Care\libansari.Q4BAGRNANLWD2YZJOKYPOAUIOLXW2LXK.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpB01966372097943AA594A778E012F330" Guid="{1817B3B8-886D-4C5D-ACD3-B3C1CA0B9830}">
+				<File Id="fil31C2BF885499D5E733C267C4EFEA22A6" KeyPath="yes" Source="SourceDir\Goblin Care\libbanded5x.OTQGTGOWDVOSJDN556X4GUSI6OEQTLFJ.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp9DDEC48114628CAA6024349A399430D4" Guid="{97417E80-EB4B-4719-8FC7-CAEB1E8AC94B}">
+				<File Id="fil8EFDFF561CE0393898531D476BD39047" KeyPath="yes" Source="SourceDir\Goblin Care\libbispeu.OAANPWJKKXZRFOCA7BPAXPEXKORTJQMF.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp84C8885AC6A2922A2705545EA5D4BE48" Guid="{CE4F3D97-A49C-4A01-BE83-737132BE6416}">
+				<File Id="fil63465B90D3B98A00E14F7E76AE5E1F15" KeyPath="yes" Source="SourceDir\Goblin Care\libblkdta00.54I3HX6FZWA5HBFZL6T6FGETXPA3Z62W.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpB510FF58A8CF94CF576C81DF5CA9596A" Guid="{4195D236-AB96-4F43-BAF1-AA30C8C018A5}">
+				<File Id="fil898C01163A227A2AD69913A337C771D1" KeyPath="yes" Source="SourceDir\Goblin Care\libchkder.23IDUBONJEDQJXE3WT2KTJUEFGPJBH5V.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp876C9D980254CE49717CC178D49173EA" Guid="{A31F22C9-65A4-42C1-891A-35C1219BC380}">
+				<File Id="fil55BDE70FF3B0DAB0A3415388B547817C" KeyPath="yes" Source="SourceDir\Goblin Care\libcobyla2.MZIYBZPTVTYIHRT7JCIZN4FNMM5IPWLD.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp47BCDDB81F4FE3CB491430BF9E56EF15" Guid="{3A731D1A-EE1B-42BA-8647-992F45B634C0}">
+				<File Id="fil9EDE5B47CF8E5C1DF4DCAAA39F6D0D4F" KeyPath="yes" Source="SourceDir\Goblin Care\libcrypto-1_1.dll" />
+			</Component>
+			<Component Id="cmpA95B7DB03F5B316496A4EE6DF33ED8CB" Guid="{8802C980-42FC-4A4C-85BE-11717DCDB29E}">
+				<File Id="fil4F35BC6AFA4C23F79A1A304714B386DB" KeyPath="yes" Source="SourceDir\Goblin Care\libdcosqb.3VZOXZKO53O75NWVYHOUJGPASB2ZKGJ5.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp47D1D9761E06F3B06C9B6D5C87CD4B94" Guid="{6D39DB5B-AD8F-492B-9002-7FD5C6A72734}">
+				<File Id="fil6E6DC6B35767ECE13A377F8E56995CF1" KeyPath="yes" Source="SourceDir\Goblin Care\libdcosqb.BSF6YTIPIV6BF3DZBNWD4YMH3UDU6DI7.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpAF598A269CADB10041B3AEBEB6E69CB0" Guid="{65ADEC3B-EF25-40CC-A15D-136BA2918763}">
+				<File Id="filAFDE7DDC003FCE36CDF1E649C29C9171" KeyPath="yes" Source="SourceDir\Goblin Care\libdcsrch.CTD6WPTKUW4MYYPI2KYOJ4427ZGGSXEQ.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp18C0E6FB0C4E3FB228B16A0C977A917E" Guid="{83D70819-31EA-4FEC-947A-742A2A305C90}">
+				<File Id="fil7DB69ACA77A69D7B440449FE937352F3" KeyPath="yes" Source="SourceDir\Goblin Care\libdet.54PIL56SC4PWH4OJDIF47MU7MUQ2Q25W.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpA3192DBEB11BC8FE11C87DE093AD7183" Guid="{8662A41F-2B58-449B-97C9-245EF64E6875}">
+				<File Id="fil242927324B2C3B488261D426B2CF57E4" KeyPath="yes" Source="SourceDir\Goblin Care\libdfft_sub.H7E5IG7S2VYW5BLNPY6N4CGXYYTSOOCL.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpA5F5FEC2B8D5CEE9FDE2A35B0922CA27" Guid="{2B15A90E-76E4-4BB1-8803-A9267EA03D84}">
+				<File Id="fil788958DFB6A80C4AC4936293E8E42672" KeyPath="yes" Source="SourceDir\Goblin Care\libdfitpack.EXJWQURDNSA2B5QGBXJD4H5UREUPFPDG.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpFD03C84F18172BB2165B8D8267568F04" Guid="{8A50596D-4622-4341-84E9-6796629D0EF1}">
+				<File Id="fil435BFD2EEF56A11AC5BE425500D2BE85" KeyPath="yes" Source="SourceDir\Goblin Care\libdgamln.ZASUXBSO7FVE6RDOLRHY4PRC33KW2K3V.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpD0B6020C4B4D9C8D55C9CCCF7B7AA108" Guid="{594C96CD-1176-43FF-BDDA-9092DAACADB6}">
+				<File Id="filAFF251C2784E548AE6EEDF4035A212B5" KeyPath="yes" Source="SourceDir\Goblin Care\libdop853.ZDB77F5S63EPO7WWG3LICXZSBW2LFM2N.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpE62CDB2BD1C88D6091820E74F92A799C" Guid="{9737D16D-E1D2-4035-9E2C-391FC30F616D}">
+				<File Id="filA9ED2CBCD5F944465EB084490EB6E573" KeyPath="yes" Source="SourceDir\Goblin Care\libdqag.DFBF4LATN5PNJT56UKJVPJNRKLLPKFJO.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp7262FE698E946B90AB3A423C27FAB514" Guid="{F25CFCEC-61F7-41D4-8DB2-BED0CD854203}">
+				<File Id="fil53015853CAA8C382A15719A138765740" KeyPath="yes" Source="SourceDir\Goblin Care\libd_odr.VCIGLUQ47ITWGKC64XGXMUYOLD2TZNBR.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp3EC98E0F0D0ED294D3C0ECA5AFB8D670" Guid="{720B3148-8F27-47E4-8EAD-58387951F810}">
+				<File Id="fil8EDADB6B0C05E0ACFF6E3BC56BE5EFE6" KeyPath="yes" Source="SourceDir\Goblin Care\libfreetype-6.dll" />
+			</Component>
+			<Component Id="cmp050DD5DA22178E54E9474986D3B9DA8E" Guid="{BFDC033F-4B75-450A-9C2A-7B065E711850}">
+				<File Id="fil4F3B50C81490A2B522B1328F5E946E44" KeyPath="yes" Source="SourceDir\Goblin Care\libgcc_s_sjlj-1.dll" />
+			</Component>
+			<Component Id="cmpE9601D4D0D3E64C662CF1542A2AFDAC5" Guid="{12592C24-31DC-4DAB-89CA-5AE50DE981A2}">
+				<File Id="fil34427C07A71587B25A6FE89E05C2B909" KeyPath="yes" Source="SourceDir\Goblin Care\libgetbreak.NUDYNUJU3LWOH35DGTV6RS6R7GIDVS7J.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp2177A21F96B6D56942C85EF0810E592B" Guid="{AE63117A-15C8-4E62-853A-EE96BC48AB9A}">
+				<File Id="filD6105A523000E17BE9E90DD290F43B86" KeyPath="yes" Source="SourceDir\Goblin Care\libjpeg-8.dll" />
+			</Component>
+			<Component Id="cmp4E50469CE6BB78FA7805E107ADDD6573" Guid="{A9536742-C6CF-4927-8ECF-0BBEB912CD71}">
+				<File Id="filB843DC277586E1DBB850062E2E8F3E51" KeyPath="yes" Source="SourceDir\Goblin Care\liblbfgsb.VL5BPDGXE7BVJ5SDUWXHMGIZ23DLHL47.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpF98F59550B277C0B751077BA5E1E62CE" Guid="{750318A8-8D83-4878-ADE9-DC0AE4027919}">
+				<File Id="filA20BBA52A600D1DC8112AAE422AD926B" KeyPath="yes" Source="SourceDir\Goblin Care\libmpg123-0.dll" />
+			</Component>
+			<Component Id="cmp269D36B100FFF4A5593D4BF6B67ADAE5" Guid="{F6C91430-3D86-44FB-BAEC-1635F374C928}">
+				<File Id="fil778369DFFDA2A43EA916F2E02E9DA06F" KeyPath="yes" Source="SourceDir\Goblin Care\libmvndst.UEXYY5YZLETRZLLV7GKDGWYVIASLDNJ6.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp07BC14379E66FBA838958EABFF289A83" Guid="{1B74A11A-D9B6-448F-B89F-F3A41AA782EF}">
+				<File Id="fil3DF5D984BFC632C20851A0BA7C76F41B" KeyPath="yes" Source="SourceDir\Goblin Care\libnnls.GX3LBH56JRQ7JMAOG7UBTDQJYFS6BPRN.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpBD5287E6234CB74A2576A59C578BBF9D" Guid="{86FB5919-8C26-4B1A-ACD3-45F05E20CD08}">
+				<File Id="filC595326E2918B773FEA34028673D7507" KeyPath="yes" Source="SourceDir\Goblin Care\libogg-0.dll" />
+			</Component>
+			<Component Id="cmp91448D3FF6E40548638DD8BFAE4A919A" Guid="{149E14DB-D20E-426C-8A59-32BF76108786}">
+				<File Id="fil28897CE31C224BEE4195DECD43415F1B" KeyPath="yes" Source="SourceDir\Goblin Care\libopenblas.JKAMQ5EVHIVCPXP2XZJB2RQPIN47S32M.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpF0BC4450F195236105C86329666C128D" Guid="{E9DFBA19-AAD8-41B0-A768-931FF76292B1}">
+				<File Id="fil32035B94C27D6278C69AC85B43C3788A" KeyPath="yes" Source="SourceDir\Goblin Care\libopenblas.KZGMSHIV2CB7DB4HQYDV2LEPUALNSYMY.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp544F295AEAA30234B419D1709D2DB7DC" Guid="{10C0A424-6AB3-41EE-95DB-3A87DA2DF0CE}">
+				<File Id="fil567F91C418DCDFE9E357F4A2CF695CB6" KeyPath="yes" Source="SourceDir\Goblin Care\libpng16-16.dll" />
+			</Component>
+			<Component Id="cmp9F239A23A3A20BBD0B1E805213F74B62" Guid="{9355E490-C42E-458D-8033-70A8EF387509}">
+				<File Id="fil09616BF5499D091670D291739821E5D2" KeyPath="yes" Source="SourceDir\Goblin Care\libslsqp_op.CVAJHOQHKECBN7VLKMGEOZQ54GU3YWV7.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp296631356C8088C494179BA29377C6DC" Guid="{B13C7DC6-02D1-4499-AE48-917D990C9729}">
+				<File Id="fil9352983DA4D9F09DC96C3A822E480A3C" KeyPath="yes" Source="SourceDir\Goblin Care\libspecfun.I7OMDT5L33XVQM2MTW5AACQJUBYEOUFN.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp4E1AC6DFAF2F9F617911C28F128A87E1" Guid="{C9CC909E-FDD4-48E4-9462-4AD8D988678A}">
+				<File Id="filD5B4B7393D4C1D6FCEDD6D00D13410DA" KeyPath="yes" Source="SourceDir\Goblin Care\libssl-1_1.dll" />
+			</Component>
+			<Component Id="cmpDCC1970A6088882AB489F61FD4E2E95D" Guid="{DE323905-C789-4D97-9795-35C0B21E1095}">
+				<File Id="fil60C0E99849BA7F24061D1B31E6282BB3" KeyPath="yes" Source="SourceDir\Goblin Care\libtiff-5.dll" />
+			</Component>
+			<Component Id="cmp5FC836784377F3187FEBA3E5F3BA31EF" Guid="{18618C3E-6EF8-4196-A53E-265BD53691DD}">
+				<File Id="fil640F1A477D8B15BECD0D461E7528FE74" KeyPath="yes" Source="SourceDir\Goblin Care\libvode.3WG7J4FXPCNUB4LM3L2S3J2WIYR5IZZ6.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp10578741D20929386B384FF4BA5E9951" Guid="{0137E884-DE47-4156-9CB5-EE2731D50345}">
+				<File Id="filD806D9949563D3BE881FEC387DCF12A5" KeyPath="yes" Source="SourceDir\Goblin Care\libvorbis-0.dll" />
+			</Component>
+			<Component Id="cmp888BA69ECF0C815FCAC7EFA1E35CBBE2" Guid="{A91F4589-CB49-453F-A1BC-FA6A66D02847}">
+				<File Id="fil1C44CA77FAF4440953F93B2A92259303" KeyPath="yes" Source="SourceDir\Goblin Care\libvorbisfile-3.dll" />
+			</Component>
+			<Component Id="cmpA453DDF260846BEB0D7D1F3FD8530C49" Guid="{65634464-3E92-42DD-927C-81AB6BD0CA66}">
+				<File Id="fil335EDE778C1B9E36B0B89C95759C7532" KeyPath="yes" Source="SourceDir\Goblin Care\libwebp-5.dll" />
+			</Component>
+			<Component Id="cmpDAADD755B2C12E0F9C611EB917786F82" Guid="{DCB0BB71-542C-412A-AFDB-E0A7ECA65B23}">
+				<File Id="filF5283DB52F2DA276F1032D40DF13AA4A" KeyPath="yes" Source="SourceDir\Goblin Care\libwrap_dum.2G4A2DEEJQX6YSCH42YTLQ2FI57IBKS6.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp000C9314CBDE2588257FD9B116B714BB" Guid="{E54048EB-9FF9-4FAE-AA27-ED5383D4AC2A}">
+				<File Id="filD84A3EEF0125D308175D34C6BFE769B6" KeyPath="yes" Source="SourceDir\Goblin Care\libwrap_dum.RVNL4W7577HF2V4QDALLKHXD3JAS4VHU.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp7BE10CA4D44EC28CA39CDCB1407DB5BC" Guid="{D5EE4251-E3C8-432E-8090-BAC01165C421}">
+				<File Id="fil43DE9E56AD6292FE4EE7944C5AC14428" KeyPath="yes" Source="SourceDir\Goblin Care\lib_arpack-.T4BQQIUIMNSYQAWYM6F3TWT2H2FRWTGP.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmpE10D84F333F1AFB656E61F82E218D2A4" Guid="{8EC07A06-FF3A-4605-863B-57B635C36975}">
+				<File Id="filB6FA7711CA036A6A77E4A905DAA811E8" KeyPath="yes" Source="SourceDir\Goblin Care\lib_blas_su.ODPMMEVPHUEZXPT6C76ZYIONJW7E2IUE.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp946A7EEF90DB1241499EC27C1B6059EC" Guid="{6B88A866-2686-47D2-A107-F7577BAB2EBD}">
+				<File Id="fil59095CFC0EEEB23F134A6B9DB3E5BA67" KeyPath="yes" Source="SourceDir\Goblin Care\lib_test_fo.6QS7HUU6UWQ3ZZ2H5HU3YC3T72Y24U6T.gfortran-win32.dll" />
+			</Component>
+			<Component Id="cmp76C0E66DF88711B00C35026A63E0ECCB" Guid="{76D5DEB8-112D-492B-ACAF-841C6B19FCAF}">
+				<File Id="filC10F9C920E4ECFBC98BB57AAA69141B5" KeyPath="yes" Source="SourceDir\Goblin Care\mfc140u.dll" />
+			</Component>
+			<Component Id="cmp48394393E1E4E4528A9C63A76726B1E1" Guid="{2A3BEF39-DC5F-434D-8CB3-FD3F6E7C29B2}">
+				<File Id="fil0F9C4F38BBBE5560D00F71AECE309B88" KeyPath="yes" Source="SourceDir\Goblin Care\pyexpat.pyd" />
+			</Component>
+			<Component Id="cmp34313EEE48D24BDA78CEA694239188A0" Guid="{FF7C237F-53B0-40E9-B446-B705A79B3823}">
+				<File Id="fil277A40A011301B6699F96A6C638627EC" KeyPath="yes" Source="SourceDir\Goblin Care\python37.dll" />
+			</Component>
+			<Component Id="cmpAC43B3BD01EDE00E0FDC250978B232B3" Guid="{989358E6-5E63-416D-9940-54C4A2B9A161}">
+				<File Id="fil04BD9E8A5B38CF5894E2FD31A7C73824" KeyPath="yes" Source="SourceDir\Goblin Care\pythoncom37.dll" />
+			</Component>
+			<Component Id="cmpFC4E46BB2C1556D71411409A4FD15990" Guid="{9237A06D-ADB9-4D7C-A056-28D4FF9B62D3}">
+				<File Id="fil4F841C759E153BE8C525B9DD8B48E618" KeyPath="yes" Source="SourceDir\Goblin Care\pywintypes37.dll" />
+			</Component>
+			<Component Id="cmp7B73CDD8402B032A62DF557637CEF8A2" Guid="{5CD44101-D1F1-480E-A24F-BF8699FE2F1D}">
+				<File Id="filCDCC2A448709DA781C4B8C69BE08C999" KeyPath="yes" Source="SourceDir\Goblin Care\SDL.dll" />
+			</Component>
+			<Component Id="cmpA70466794B603D8CFF178A258E71E691" Guid="{53FF3B8F-D2F6-4B99-BF36-D70B21CB26F7}">
+				<File Id="fil7C4A71C7833C201D4731A727637551FE" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_image.dll" />
+			</Component>
+			<Component Id="cmp1C9AD681CE2429B374FC2118275084C8" Guid="{2C690892-6479-4476-94E2-56EF98571F54}">
+				<File Id="fil82A74EB63D5390CBA2AC0778053451E4" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_mixer.dll" />
+			</Component>
+			<Component Id="cmp11AE9DCC6D5FD60FB54516C6A3FFD0AE" Guid="{CE13408E-CC35-4E3D-BEC1-D575664C8E8A}">
+				<File Id="fil071ADB02B5E8BFCE723CE0A38A53141E" KeyPath="yes" Source="SourceDir\Goblin Care\SDL_ttf.dll" />
+			</Component>
+			<Component Id="cmpD6667891C6DC313C392290CAC36CD327" Guid="{FD276653-61C4-4746-B3B8-C00E790A65B8}">
+				<File Id="filFF180CE93320CEDC0A83F09D5573D92F" KeyPath="yes" Source="SourceDir\Goblin Care\select.pyd" />
+			</Component>
+			<Component Id="cmp152F541A8BC13A9C990C60CEAC27D086" Guid="{72EB60F1-BC53-45FB-A095-516EBE33A40D}">
+				<File Id="filEA5CD4D387B4079A86023289568A4E8A" KeyPath="yes" Source="SourceDir\Goblin Care\ucrtbase.dll" />
+			</Component>
+			<Component Id="cmp94669ADF0C8DD69F8BBC34BCAB98C0AD" Guid="{11771542-568D-4073-BF0D-CF911DE306A3}">
+				<File Id="fil1C9AD419EFA30F52689DC6574110EEA0" KeyPath="yes" Source="SourceDir\Goblin Care\unicodedata.pyd" />
+			</Component>
+			<Component Id="cmp314EEC87D4736A0C940FD96E0565BE55" Guid="{A73804B5-909E-442F-81E9-66F05E71B1C6}">
+				<File Id="fil84659A980A263EFA03825C77572E396A" KeyPath="yes" Source="SourceDir\Goblin Care\VCRUNTIME140.dll" />
+			</Component>
+			<Component Id="cmp9E361D4C31B8F8889240FC414967C7BC" Guid="{815F9D87-ECC6-47C9-8F39-A66543D4E835}">
+				<File Id="filE7C41B057702401933BFA571D0A7FC85" KeyPath="yes" Source="SourceDir\Goblin Care\win32api.pyd" />
+			</Component>
+			<Component Id="cmp4098AE47452E2DA24AB39C235C32810F" Guid="{575DB970-5E24-41B3-B2DA-9B963795C416}">
+				<File Id="filE7873705BE1D305D818559BAE9D7D95E" KeyPath="yes" Source="SourceDir\Goblin Care\win32pdh.pyd" />
+			</Component>
+			<Component Id="cmpBC776ADBA678826E09F126E99A9BAF0D" Guid="{26197079-F125-4D78-8023-05B3670AEED4}">
+				<File Id="fil6E166612D167AB6BD04274FF83490443" KeyPath="yes" Source="SourceDir\Goblin Care\win32trace.pyd" />
+			</Component>
+			<Component Id="cmpDDE1B732C1679C9E00FE8DFFE4AE5795" Guid="{BE10519C-62F3-49E3-87F0-198BBAE39486}">
+				<File Id="fil1C75D16ACAB7A775530F9A1E7D65E032" KeyPath="yes" Source="SourceDir\Goblin Care\win32ui.pyd" />
+			</Component>
+			<Component Id="cmp38D182711CBF92DCD93A66423D7B115A" Guid="{59B20FF0-2542-43F4-9674-E422EE3F6F2A}">
+				<File Id="filAD1788449B2EBD9892D2DF199054DAB9" KeyPath="yes" Source="SourceDir\Goblin Care\win32wnet.pyd" />
+			</Component>
+			<Component Id="cmp049FDC302801EBA865C56A51BE217B59" Guid="{013707D6-6A4D-43E1-978B-D7EF5173D0B3}">
+				<File Id="filD5243B72ABDE2DA8F028095A69076B7D" KeyPath="yes" Source="SourceDir\Goblin Care\zlib1.dll" />
+			</Component>
+			<Component Id="cmp9A3DB7DF9A690696123AA1274AD2697C" Guid="{320F05D4-1A53-4BFF-BB78-9A4EF98C584E}">
+				<File Id="filEBF752B867D1D06159A624BFFDF3FBF0" KeyPath="yes" Source="SourceDir\Goblin Care\_bz2.pyd" />
+			</Component>
+			<Component Id="cmpDF6D4574B046E17058AA1C9A2456FF3F" Guid="{1DC3DBA7-16B9-4F7C-90A6-ABBF1BFC1C5E}">
+				<File Id="fil203B34BCF1F560019E3B93C55383E823" KeyPath="yes" Source="SourceDir\Goblin Care\_cffi_backend.cp37-win32.pyd" />
+			</Component>
+			<Component Id="cmp36CF09684750C93903EDD6C15C71E2D2" Guid="{B7737773-D3D2-41EF-8D97-A5C2F0E357B8}">
+				<File Id="fil6AF80F6EC649A29CCFBDCD82D59A3C88" KeyPath="yes" Source="SourceDir\Goblin Care\_contextvars.pyd" />
+			</Component>
+			<Component Id="cmp0DA5E80E8B1D510CC8EDDCC19487A176" Guid="{D292D255-3330-4203-A934-4950C2455FC6}">
+				<File Id="fil8529FAFDB83823BE2C85222FE5B681E0" KeyPath="yes" Source="SourceDir\Goblin Care\_ctypes.pyd" />
+			</Component>
+			<Component Id="cmp211D1FA056027325AF7233B56E02BBA1" Guid="{05EA2D4F-0723-4053-9609-E0240A5DB798}">
+				<File Id="fil228CB319BF2A5A28C99B75055D7CF6F1" KeyPath="yes" Source="SourceDir\Goblin Care\_decimal.pyd" />
+			</Component>
+			<Component Id="cmp4294B942499906AE50969BFC59274769" Guid="{4B82C40D-5A59-4A69-A24B-E3D3C4E8E360}">
+				<File Id="fil14281EA0182406BD7651A4D4D3BDBD1D" KeyPath="yes" Source="SourceDir\Goblin Care\_distutils_findvs.pyd" />
+			</Component>
+			<Component Id="cmpFC3395029850741045C06FEA6E43A0DA" Guid="{5ECB80D4-F079-4589-B0BC-AE259A655B3D}">
+				<File Id="fil98E62BC014E772BEB1BA6C84E89A5331" KeyPath="yes" Source="SourceDir\Goblin Care\_hashlib.pyd" />
+			</Component>
+			<Component Id="cmp8E0A8E6DDC096F2DB4C05C3DD7884CAF" Guid="{6B3F477A-296C-4372-B4C5-09BE0451925A}">
+				<File Id="filF7FFDE31AAE37E3DAE6EBD1E88958265" KeyPath="yes" Source="SourceDir\Goblin Care\_lzma.pyd" />
+			</Component>
+			<Component Id="cmp6F6B2412543A6EB98F8DDEF88BEC17C6" Guid="{4503567A-2DE8-4AA7-B9FB-A9E95A060488}">
+				<File Id="fil0794C95EF0A9F8E0BC34C980E2DA43ED" KeyPath="yes" Source="SourceDir\Goblin Care\_multiprocessing.pyd" />
+			</Component>
+			<Component Id="cmp919D626AB40376B43CAC7C8EFC8E6614" Guid="{BA444F33-1C07-4FBB-B2C9-4E34EDB92E7D}">
+				<File Id="filB231A908FB234B91950E3C1B40B63A2D" KeyPath="yes" Source="SourceDir\Goblin Care\_queue.pyd" />
+			</Component>
+			<Component Id="cmpF1D6009528982D0868CD664193F3D3F4" Guid="{A17F242C-361B-411A-9A31-6B30AFE61C71}">
+				<File Id="fil90B628D23B7C2EDD4A3EAF5B837CD58E" KeyPath="yes" Source="SourceDir\Goblin Care\_socket.pyd" />
+			</Component>
+			<Component Id="cmpC3EFEFE2E60EA8FA8EF92FFFF6335A02" Guid="{B520B2D2-9332-48BD-9FCF-AA01C23CEBC4}">
+				<File Id="fil3B336001BC7CB42F473FC1833AE9D858" KeyPath="yes" Source="SourceDir\Goblin Care\_ssl.pyd" />
+			</Component>
+			<Component Id="cmp7D280DAFF63D187649B8F1D69B4DE115" Guid="{9350B097-30CB-4B9C-A6A0-E8A3A4E4687E}">
+				<File Id="fil6016380F6E2C0526995F6FA42A81875F" KeyPath="yes" Source="SourceDir\Goblin Care\_win32sysloader.pyd" />
+			</Component>
+			<Directory Id="dir81CCA744DF1669B906165399D0C2CD54" Name="assets">
+				<Component Id="cmp79F00B65810F68DB8E641B3E64098EDF" Guid="{762D9C0B-C1FA-4347-9DA4-1BB5CB5A10F2}">
+					<File Id="filEBF715DE7F347C93CDDF3B29F505C41F" KeyPath="yes" Source="SourceDir\Goblin Care\assets\blue squares.png" />
+				</Component>
+				<Component Id="cmp687E8F7806E40B748CACCAB251CC8AF3" Guid="{3E164E16-F5FB-4C0D-93B9-72CFEA1012B8}">
+					<File Id="fil1034E614860DCC76FE27D26AC556B183" KeyPath="yes" Source="SourceDir\Goblin Care\assets\bullet.png" />
+				</Component>
+				<Component Id="cmpC6B5B31F640B38FF3C567F60A2506FAF" Guid="{7AB4A88A-ED09-4B24-827F-CF20FDB49B1F}">
+					<File Id="fil0691933AF4DE99A933E4AC4B3015CDA0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\buy.png" />
+				</Component>
+				<Component Id="cmp0C282B783DED45D45848D8A55124BCC8" Guid="{CF7A7EBC-0E18-4E64-B83B-75CE23CAD50E}">
+					<File Id="fil3F2A4934592AE31A1FC8EE334889F766" KeyPath="yes" Source="SourceDir\Goblin Care\assets\cube.mtl" />
+				</Component>
+				<Component Id="cmp4461C310FC5D55C490CE52E28C3A00AE" Guid="{2F878D87-7646-4118-8BC4-C81D996FB67B}">
+					<File Id="fil8AB854A0E8AF9267D316B57D5ABBBC42" KeyPath="yes" Source="SourceDir\Goblin Care\assets\cube.obj" />
+				</Component>
+				<Component Id="cmp7B162984E3DAC46FDFD4ECF4E5200FC8" Guid="{B051EA0D-27B8-4E6D-A19C-AC0DC7B277FF}">
+					<File Id="fil6F0D359E4157A11C652C5C92096B2D00" KeyPath="yes" Source="SourceDir\Goblin Care\assets\depot.png" />
+				</Component>
+				<Component Id="cmp8BB316826ED32DA10D6B34612B917509" Guid="{5D8839AC-CB4A-4346-976B-2759538AA3A1}">
+					<File Id="fil656AF2D6361A861920A109E9C46D2B01" KeyPath="yes" Source="SourceDir\Goblin Care\assets\desert road.png" />
+				</Component>
+				<Component Id="cmp7799630299F5085BB69183E1CB173312" Guid="{EA1D24D1-2339-4C65-BFBD-25770C974ADE}">
+					<File Id="filBB05FD272888191B1E08A115A6F459B0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\fractal.png" />
+				</Component>
+				<Component Id="cmp3764AB017AB1E0ECE48D3A5FB56BAD84" Guid="{B46C641C-9BE0-4962-A9E7-7726F14063B8}">
+					<File Id="fil78D29F33C088AAEBC01FFE2BDD0E3D31" KeyPath="yes" Source="SourceDir\Goblin Care\assets\green goblin.png" />
+				</Component>
+				<Component Id="cmp3A13AD1BD1F1D110E2685D19397402D9" Guid="{69D543CF-5993-451E-B5AF-3C440E208D0B}">
+					<File Id="filD99134D9902BF732CC8F901A5DAED4D1" KeyPath="yes" Source="SourceDir\Goblin Care\assets\light.fs" />
+				</Component>
+				<Component Id="cmp12FB23C77FDA9715525C4D848414152B" Guid="{9BB46F3A-4221-4E57-B5FC-A83EB0234A24}">
+					<File Id="fil3B1A68BE681B6D90AB49B157AE3A7B2E" KeyPath="yes" Source="SourceDir\Goblin Care\assets\light.vs" />
+				</Component>
+				<Component Id="cmp196FE0FE7591AACEA973D67A1527852E" Guid="{3A8986D7-24C1-46CB-B9B8-A879CE768660}">
+					<File Id="filEF3E0EA364D0AFF04EF3E143DAFB9FDE" KeyPath="yes" Source="SourceDir\Goblin Care\assets\menu.png" />
+				</Component>
+				<Component Id="cmp696082DC187FABE8F90CDEC9278F4B07" Guid="{44344570-D47E-4F4A-BCB1-F7176D3FE6AA}">
+					<File Id="filED822E3652B484921E9A1FA1C9EDBF9C" KeyPath="yes" Source="SourceDir\Goblin Care\assets\object.fs" />
+				</Component>
+				<Component Id="cmp43DFE958F7070A9AD41ECB191FDAD2A7" Guid="{046A5EAB-A10D-4773-8E2F-A04E5C574EDC}">
+					<File Id="fil4A4B90FECFCF8F3D32B5CC9A0DDB7D56" KeyPath="yes" Source="SourceDir\Goblin Care\assets\object.vs" />
+				</Component>
+				<Component Id="cmp8BAB90BE4036AB06DF25D93295FDA5B1" Guid="{A7CB827C-DD5A-4EE7-9248-D87FC6A05A15}">
+					<File Id="fil27B0FCCEEEB3869099CC8E08D9E4E005" KeyPath="yes" Source="SourceDir\Goblin Care\assets\objloader.py" />
+				</Component>
+				<Component Id="cmpE5D07F5CE03F6E7C50455A31DCAB2F72" Guid="{E7DE7E23-38DD-4168-B269-D8782B401032}">
+					<File Id="fil91598B7CADA0277769C01310AD893D7D" KeyPath="yes" Source="SourceDir\Goblin Care\assets\objviewer.py" />
+				</Component>
+				<Component Id="cmpFFC908C37F6535C349666AA59648621D" Guid="{AD389EF9-E594-4DC8-99F1-008B77D73FF2}">
+					<File Id="fil28D159FB425E0621D8693E3C0475DA26" KeyPath="yes" Source="SourceDir\Goblin Care\assets\paths.py" />
+				</Component>
+				<Component Id="cmpD5B83A8AAA2C08A62C53DF971B7D5DE3" Guid="{B17A84D0-D3C8-45C2-87ED-D559E38ACDF2}">
+					<File Id="fil69BC6E3937C412D3BAF35E3837DC6833" KeyPath="yes" Source="SourceDir\Goblin Care\assets\pink bubbles.png" />
+				</Component>
+				<Component Id="cmp9CF7979A7CA6F97F7D323EC96073AE98" Guid="{AF0E277A-19D3-44D3-9533-7FF1E7C68B8E}">
+					<File Id="fil109873498AA0B1459AB3D6925D696FAB" KeyPath="yes" Source="SourceDir\Goblin Care\assets\rainbow bullet.png" />
+				</Component>
+				<Component Id="cmpEA1AB36E035617819377702609A1C39B" Guid="{0724D844-E0D8-4DC6-8BF8-FB105E830B73}">
+					<File Id="filB4B726A012EC7BD918C5F34E8E8A5A4A" KeyPath="yes" Source="SourceDir\Goblin Care\assets\rainbow_tornado.png" />
+				</Component>
+				<Component Id="cmpFA9BD8E531054FF53B5B1CDDD8EF135C" Guid="{99059B49-8305-46B9-9325-C717B3BF55B5}">
+					<File Id="filF3E3DDA94271421E4B8C0DB41750CF18" KeyPath="yes" Source="SourceDir\Goblin Care\assets\red gloop.png" />
+				</Component>
+				<Component Id="cmpEECEDEE29957DF2D3DAE6537B7973680" Guid="{E9AD3F13-CC3E-4608-80C9-C1E0449A1D7E}">
+					<File Id="fil5B47D42FC9E4888FD2944596C9AB64D6" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_body.mtl" />
+				</Component>
+				<Component Id="cmp0278318D93CA3CEE2282034E21BB40D7" Guid="{4B20E28C-C85D-4532-9240-7166EBA6A6B3}">
+					<File Id="fil460B42F1DB49A4FE481B8CE93217450F" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_body.obj" />
+				</Component>
+				<Component Id="cmp5D1230290DDD1F9ACD31AA1118DB261B" Guid="{BC32E2FE-249D-4958-AFFE-0E2F8ED1BBF4}">
+					<File Id="filC69A6C9B0BDB666105CD3D4FF52F1EBE" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_glass.mtl" />
+				</Component>
+				<Component Id="cmp93F7900AFDE52CE9D617712256FF6E85" Guid="{BC6D7CD1-6703-4C9E-A83F-B9CE3CBE3267}">
+					<File Id="fil82D4051AF085F71196067852D975D6AA" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_glass.obj" />
+				</Component>
+				<Component Id="cmpC42FE1AD3A7FDA4E4A829A1569744E06" Guid="{29BD97A2-C55A-4E8B-8349-67E0482A4E03}">
+					<File Id="fil72B49312725C212E2953927980BBE673" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_tires.mtl" />
+				</Component>
+				<Component Id="cmpF368FCE11B264811793D9B65F08AB1C0" Guid="{33C2411C-63CF-49F5-8096-E54B7DAF3877}">
+					<File Id="fil9DE55F6CB2AD19D60B847B9B1A9A0DA7" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_tires.obj" />
+				</Component>
+				<Component Id="cmp1521B285FF4F8586500FA01453390288" Guid="{57B72B86-C6C3-40A6-8E43-4F00EC8E6E59}">
+					<File Id="fil37D23ED06F69FDD3330EC80E00543E24" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_wheels.mtl" />
+				</Component>
+				<Component Id="cmp2AC97874C48772CABC44200B51A685FB" Guid="{B47AED4D-CE53-4ECC-9E41-67610A3404DB}">
+					<File Id="filB1122282712575F38E4BE335487DB85A" KeyPath="yes" Source="SourceDir\Goblin Care\assets\sedan_wheels.obj" />
+				</Component>
+				<Component Id="cmpF4AB43F455FCA8089124315E65663B37" Guid="{E1D2378D-A799-4A15-9F43-5C1C453F48AC}">
+					<File Id="fil94ACC5FFF640422DAA1CE6E9E4693408" KeyPath="yes" Source="SourceDir\Goblin Care\assets\Splat.png" />
+				</Component>
+				<Component Id="cmp2349042059F7B2050B4FB0B4FC0C5E84" Guid="{7075D9D7-BDB6-4858-ACA0-747C7D62D97F}">
+					<File Id="filA630E17082E88397682DD9D626FDBF99" KeyPath="yes" Source="SourceDir\Goblin Care\assets\square.mtl" />
+				</Component>
+				<Component Id="cmpC4A61E548618467EFA1103FB254267EA" Guid="{AC9216F6-5478-4726-857F-3C0B12535ADC}">
+					<File Id="filB73A7E7EF7B47BA050C980E721143EE2" KeyPath="yes" Source="SourceDir\Goblin Care\assets\square.obj" />
+				</Component>
+				<Component Id="cmpDD9393B13E4FB7CAA589D198AFD0DF5D" Guid="{E519E366-9E1D-485E-B65E-2AA9CAEB1A35}">
+					<File Id="fil5BED8E7FE2EDF4ABCFD5DEC5D5C29B21" KeyPath="yes" Source="SourceDir\Goblin Care\assets\text image.png" />
+				</Component>
+				<Component Id="cmpD5A72B8EE45EDEC89EB3645EBA5ABD5E" Guid="{4ABBEC37-F3CC-4073-94EC-B6C246F887AD}">
+					<File Id="filCD4ECEA299CC208B1AFC2056AEB5F0A5" KeyPath="yes" Source="SourceDir\Goblin Care\assets\tornado.png" />
+				</Component>
+				<Component Id="cmpA893B398AB005EF15F8DE2C06ECC8746" Guid="{3BD50A5B-09DA-43BD-AC3A-2BDAB5B4737D}">
+					<File Id="filEFC64FF0440A18A75D563BD602BAC56D" KeyPath="yes" Source="SourceDir\Goblin Care\assets\treasure.png" />
+				</Component>
+				<Component Id="cmp263A23BC08A53763FEE66030DA8FDC8D" Guid="{AC7C655B-9745-47E0-9E8E-15949BC0308E}">
+					<File Id="fil94359F73F4F12C8850143F8AA06A8DAC" KeyPath="yes" Source="SourceDir\Goblin Care\assets\ui.fs" />
+				</Component>
+				<Component Id="cmpA7A9EC67BAFB13825F43D5D596B16498" Guid="{7F07459F-1914-4E9E-9AF5-C7FBCE911E99}">
+					<File Id="filD2228222C3E2CA6E212CB255A15500F1" KeyPath="yes" Source="SourceDir\Goblin Care\assets\ui.vs" />
+				</Component>
+				<Component Id="cmpDEB1159099E6C5E552BC92CB9DC79144" Guid="{0826316A-8AEE-43F2-8BFE-8CD699E5BCBE}">
+					<File Id="fil92E3F86C090CDD7A0C3D2DB8D8641483" KeyPath="yes" Source="SourceDir\Goblin Care\assets\window close active.png" />
+				</Component>
+				<Component Id="cmp55B2192AE0D85DF8ED73904DCB3A9366" Guid="{D196F829-1C31-4BDB-B4CB-6BCCBA6E4889}">
+					<File Id="fil368FCAEC6ED0491FDA2D394C28F380C0" KeyPath="yes" Source="SourceDir\Goblin Care\assets\window close.png" />
+				</Component>
+			</Directory>
+			<Directory Id="dirA740E7CC4C7D9029C2E5F46BD5EF453E" Name="fonts">
+				<Component Id="cmp4BFE0025E360E434E65EACB766709BC7" Guid="{6DB06A02-8E76-485E-9BE2-6123895C791F}">
+					<File Id="filFED89836BEB8E70470B89457E9EE2842" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibri.ttf" />
+				</Component>
+				<Component Id="cmpEC9E40BE1F13FC93897FD849B6D03799" Guid="{A9991053-4FB9-42FD-B886-4745EE0C2E13}">
+					<File Id="fil0A3CD8FA5CD3A5EFF5937691A9A12F24" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrib.ttf" />
+				</Component>
+				<Component Id="cmpD00F264B9771DB725BEA7DCBC18A8252" Guid="{F003876F-E3FA-4BF7-8939-8203478A3D66}">
+					<File Id="fil9D1F346132289951E4F4E0AB522C6DC4" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrii.ttf" />
+				</Component>
+				<Component Id="cmpFAB97CA8AA12AD4D8B4F384291282559" Guid="{391DE5E3-D05B-452D-A691-18ED5A9F8EFE}">
+					<File Id="fil132941279C92D697A50E1B9F7F7175E6" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibril.ttf" />
+				</Component>
+				<Component Id="cmp6250CD0309A4FE54061B5C95A6999D0F" Guid="{93B1E80B-A253-46AC-9858-F87753541841}">
+					<File Id="filF880A60A9EEBEEDAE89C74A76C3E9A6D" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibrili.ttf" />
+				</Component>
+				<Component Id="cmpDB314AC0478BDA6886B31826F9858187" Guid="{C863117C-5866-4776-A3B0-566A3D96461E}">
+					<File Id="filA8CF54D39CB0D152058193E14D241277" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\calibriz.ttf" />
+				</Component>
+				<Component Id="cmp1F510E576943F08DA9AE6726E00F948C" Guid="{72D96381-0452-46BE-A629-F9E8454F88A3}">
+					<File Id="filD321F3FEF181E7BFFD10D3850EF8630F" KeyPath="yes" Source="SourceDir\Goblin Care\fonts\paths.py" />
+				</Component>
+			</Directory>
+			<Directory Id="dir1EAF9B3A40899A33506DCF3C9618C9DD" Name="Include">
+				<Component Id="cmp698B2C0C983E2DFE770DE096CBD5F8C7" Guid="{32CB14AD-9A27-4864-8D98-1A1F4BA1D321}">
+					<File Id="filA45D0B9DFB65765887E0E9E8C323A493" KeyPath="yes" Source="SourceDir\Goblin Care\Include\pyconfig.h" />
+				</Component>
+			</Directory>
+			<Directory Id="dir175DBAEC7925A726383F28FEA9CB6D39" Name="lib2to3">
+				<Component Id="cmpF63DFEEA1594D34CD9F8BC0482985BDD" Guid="{72D23D7B-FC9C-4AB3-9203-08096FEE4841}">
+					<File Id="fil1A920192CDB56280F5C1AE12FB7BB600" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\Grammar.txt" />
+				</Component>
+				<Component Id="cmp3417D6AC34612DF74D7E5C5E0B49C613" Guid="{8D1F17A0-0668-461B-83EF-D6E07CD31184}">
+					<File Id="fil374829650427C068F24E84BD17E98E6D" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\Grammar3.7.0.final.0.pickle" />
+				</Component>
+				<Component Id="cmpAE7418994137EC27772D7F3CCC4DA3E3" Guid="{F619BC0B-DC0F-42B2-9597-42E7F5B82DA3}">
+					<File Id="fil82EBA83A97C2927BE1E8D4A68F66DA51" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\PatternGrammar.txt" />
+				</Component>
+				<Component Id="cmpBE2C20E41FF5BD77E28B9EE380514BB9" Guid="{1891BD17-D8AB-4EF4-95A8-6A3537B495DF}">
+					<File Id="filCD5A28A208A1B0473464135265906A69" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\PatternGrammar3.7.0.final.0.pickle" />
+				</Component>
+				<Directory Id="dirD4D294EB39130CFE4204078603C2FC52" Name="tests">
+					<Directory Id="dir00364436866E92E520248A5608793244" Name="data">
+						<Component Id="cmp4C9308EFB3C954ACFC470A04CD3984D5" Guid="{AD823B99-F11A-4CD4-BB4A-7539591F0302}">
+							<File Id="filCD1510035B4428C3E5E1CE8A13602CD0" KeyPath="yes" Source="SourceDir\Goblin Care\lib2to3\tests\data\README" />
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+			<Directory Id="dirC613BEC6FD3EBB78BD7B1C99CDEFE6E8" Name="numpy">
+				<Directory Id="dirF2AAB6D35823EE9A4BD72B11029543BC" Name="core">
+					<Component Id="cmp648613868E1A2462E5544E7F82A039CE" Guid="{3B62435B-EE68-44C1-A67F-FB9FFCDA93A7}">
+						<File Id="filF4E5659295BD3358DDC44D4CDDBFFB6E" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\multiarray.cp37-win32.pyd" />
+					</Component>
+					<Component Id="cmpEAE97BA620893BE8CF8B963B114ED6F8" Guid="{7C66A7A7-448D-4D51-B28B-91E9E6ACED35}">
+						<File Id="filF6D4F9499995C1C81A50063E4D0B41E2" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\umath.cp37-win32.pyd" />
+					</Component>
+					<Component Id="cmpDACB11DC1133B924FC4738D9595774C4" Guid="{F4DCB94F-C1A7-42A0-8B17-7CEFC2422073}">
+						<File Id="fil116CE433FEE24D074EE59C6A9FF48545" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\core\_multiarray_tests.cp37-win32.pyd" />
+					</Component>
+				</Directory>
+				<Directory Id="dirAE690C7FAA1718DB6154113F09AF3ADC" Name="fft">
+					<Component Id="cmp38354835A9E126ADEA8A6D981FCB5566" Guid="{273C9459-B2A5-429B-B0A1-821999724647}">
+						<File Id="filE7FD7146637FD092D77A0A3245F8445C" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\fft\fftpack_lite.cp37-win32.pyd" />
+					</Component>
+				</Directory>
+				<Directory Id="dirB5063D6CF5452D1510C8B44D8B077865" Name="linalg">
+					<Component Id="cmp0DD8DA6ED7BD1419EA72C2951EC597C0" Guid="{B4293FA5-4B53-4776-8C0C-991621DFF2B7}">
+						<File Id="filB136FD123350467EB5D71DAFF5BB8FCC" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\linalg\lapack_lite.cp37-win32.pyd" />
+					</Component>
+					<Component Id="cmpC609F47E765C96EF58DB1C5A621781DE" Guid="{8072F772-2120-46BE-BF95-FE07FDE60DB7}">
+						<File Id="fil80A6471493A3C798567561D24F77EC5A" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\linalg\_umath_linalg.cp37-win32.pyd" />
+					</Component>
+				</Directory>
+				<Directory Id="dirE0ADC8E655CA8D8009A94AAB2F753887" Name="random">
+					<Component Id="cmpCD902411F7522770A99938C16521F52F" Guid="{7FA48685-25A0-4F4A-B3DA-A452C14BBC2F}">
+						<File Id="fil31CB80D28B7B33C956A3835456991347" KeyPath="yes" Source="SourceDir\Goblin Care\numpy\random\mtrand.cp37-win32.pyd" />
+					</Component>
+				</Directory>
+			</Directory>
+			<Directory Id="dir45CF3892D96FA8DB5EDF8BAECF6DA025" Name="PIL">
+				<Component Id="cmp751AB4E4C1B4F2E49D46E51890F47920" Guid="{162AD04C-2C22-48EC-A777-7AD09E516622}">
+					<File Id="fil8050C27ED0FF3154297B5A4AAC438D56" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imaging.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp56AE86EC706A7B5999475AB84E42EE01" Guid="{B96DA727-1236-42A9-B0C8-B59523FC215B}">
+					<File Id="fil65D8355088430C6366EB129A8E92F0CC" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imagingft.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp4CF8CD04DC2A930D82061427AAC6D13D" Guid="{2047ED89-2089-4244-BA9B-6F8C502C4D4E}">
+					<File Id="filDC4D8805AFFB48C00E9D2B2E1F18B122" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_imagingtk.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpACF95A56F2CFD341D09B3B9EED17456D" Guid="{A954C062-CF12-4AAD-8761-7AFFB3C10CB5}">
+					<File Id="filC4009B6C5CDBDFCFD43BE6EC9DB0CB30" KeyPath="yes" Source="SourceDir\Goblin Care\PIL\_webp.cp37-win32.pyd" />
+				</Component>
+			</Directory>
+			<Directory Id="dirDDF575FE5BB80FA45CBAA59B7AAD6898" Name="pygame">
+				<Component Id="cmpBDBF5D40BC565C72AE85660992BFF479" Guid="{E57A8F61-280A-481E-9799-5890F04C9714}">
+					<File Id="filF736BE6A8AFFD1DBE32384AFC812992F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\base.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp6D6BF667DF95AC9BC0A85F6F77B07E5B" Guid="{0B019B17-610C-4B63-9542-3007629DC55C}">
+					<File Id="fil29D996D074B5C18CEA7612535432E91B" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\bufferproxy.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp4C5529FEE117A371D6CBD20C3C8DCD9E" Guid="{8E20637E-2F38-429A-93EB-7B0305643CAD}">
+					<File Id="fil72E7F6B08AACABA05C594FBBA652D80E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\cdrom.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp72E1BE30D77CFBEA585E4C6CBF69B7F9" Guid="{1D4974CE-2192-49AB-9407-348B0E15E3D7}">
+					<File Id="filD81310780CD3708A9CC93478FED11BE3" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\color.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp9B411E21F4C29F4FB5FB9E87A38598B5" Guid="{AD7CCFF0-84AF-49E0-80CE-425AEFD64FED}">
+					<File Id="fil68080CBAD741BCD59BC5BC7464C0E378" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\constants.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp206EAC15B897AEFEC51FCB5614C1A1D6" Guid="{8C64BE02-077D-4F75-9E2B-84346ED0BF29}">
+					<File Id="fil4A486243A68E1146C61FE08FB4828101" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\display.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpCDCB18BE4D66E8F8E5C53FE0AA47456C" Guid="{D31B5D7F-6F42-4A23-AD80-BD205831092C}">
+					<File Id="filD52E6C4E507CA1C0EFD26C7E1591EDA8" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\draw.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp00045E87A56A89E501796890E46D38AB" Guid="{B05513AA-293B-4995-8313-05FDCAE34A40}">
+					<File Id="filF3A9C3DA186D7F406FA08B1B093C83D5" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\event.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp3909A796E1012995DDA7D0D821A941D7" Guid="{32079CE6-208C-4712-BD3F-02DDADA09699}">
+					<File Id="fil55754A1528A9FFB5B9438C02039EFB18" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\fastevent.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp0C53A9818619CB5893812FD04CA89904" Guid="{AB95CF7F-F7D1-4ACF-8087-3261E8C1A8F4}">
+					<File Id="filE3470BB7A911E1BF827274C06A6B8F30" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\font.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpA9744D6246E5D235E7618C5ACF8BB223" Guid="{36E58B4D-F695-4985-80E7-D20E9F7A0A16}">
+					<File Id="filE30C109B4905CCD7BB28E0D66C632F13" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\image.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp18D115F4EF4704E582F7E40427D81BDC" Guid="{3849711D-A3AD-4AB0-A32C-1F4963EB2846}">
+					<File Id="fil4E82726EB3EF135C09F7992A42F16F38" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\imageext.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpE8DDE2204C017CA4C3F783CB84E7D4A0" Guid="{F235EB2C-A0DA-4A7D-9809-3167FA6EED41}">
+					<File Id="fil6CF84D543632E7AA3FFC3CC2ABDE12E0" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\joystick.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpD8E2ABAA6BC92E3857B397E6EFAD42F1" Guid="{3093CCE3-9049-4D66-969B-562C1350B082}">
+					<File Id="fil6D99F630ED38163445D4067AD9C6B113" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\key.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp883BCECF272A6ABDFFE534E4CD5EF2C3" Guid="{54162EDF-F7D8-431E-8C17-8AD6793C77AE}">
+					<File Id="fil987A7EE2D65B4D5199E9511782C7386C" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mask.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp745F9BD5A78DEECE65A0D6AAA4176C12" Guid="{2B07D6BF-59A9-4A54-9B73-A6C0EBB3D1B7}">
+					<File Id="fil7157D1D22AC9532AFD5B0A606AECA5F7" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\math.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp758AA19AD4EC1799F4A67EB198B10F4F" Guid="{9B779AD6-30D2-4FD0-BF6E-D8CDDBB38A69}">
+					<File Id="fil51F1CC94A4B2621CE9C0CFE6E1238068" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mixer.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpAD7471BDEF3A92E81589BBEE655F7FAD" Guid="{127B6EE9-4F0E-419C-9196-C1FF9866643C}">
+					<File Id="filF488F3F52A4951FD6FB6CB9D295BCBBF" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mixer_music.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmpDD1A30BA50503EEBD3556DBBF93450E8" Guid="{CDAFD33B-D4E5-4116-B5F3-FAE7B8229B1F}">
+					<File Id="fil38F9A8D64DC21183F46B0E172563A10F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\mouse.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp7213BEE045742FD3DF410F4D39C4ED58" Guid="{E53734A6-4BF1-43AC-A88F-A5A8C0CC40DE}">
+					<File Id="filD05046CA4127464C553996C487CF5688" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\overlay.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp16631CA18B0CB883CA2F1B37EB643623" Guid="{5DF35F89-D671-48AA-AC5D-C908F4BD94C3}">
+					<File Id="fil45E0339895C587B4CE5FA9B21504F7BF" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\pixelarray.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp27968441F295DC9153EC3D5911ABCE94" Guid="{2199356A-F52C-4727-8985-7C32BA9F5FC0}">
+					<File Id="filF66CE5C3C55F5C9EDE0BD4FD5A72981F" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\pixelcopy.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp79E07C95EAEB7BF07D62BD6516FF12DC" Guid="{0471E709-E46B-4499-9270-F791D432E715}">
+					<File Id="fil39865AA86D415C967FF9DD689301C291" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\rect.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp5763FBC6DE4D0D2DF06AA6486F458A0C" Guid="{5CA9D154-F9D9-4250-BB3E-A70E5C43C8BF}">
+					<File Id="fil4EFFA3CC7621F52D23219CB38F8FDF0E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\rwobject.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp0C864CC343B51E4BC1756F1ED3DEA23E" Guid="{49214FBD-E997-4641-93B5-4A4CD99FB68A}">
+					<File Id="fil1456A0781B8D0A8E7E24AB825975C94B" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\scrap.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp3BB8B2518F3665463E249906D865894E" Guid="{392B0C9B-237E-4CDC-92FD-EF95DDDE41DD}">
+					<File Id="fil487E6D51645B693D10F979B182B6C4E1" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\surface.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp70005B320224096453F0520932D44A34" Guid="{2E44DA7E-6988-421F-A989-C2D8A051A28C}">
+					<File Id="fil581B0A1796B4462AB3D34E2CF3094269" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\surflock.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp5022FBCE38553453E280DF5ED1C8553F" Guid="{3952C254-2C41-4E7F-B109-F04074014B83}">
+					<File Id="fil703A271F7B729D2489D251042B1F6DC7" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\time.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp39D0E7930264E8D31008445855713C18" Guid="{3BE879C6-C5E2-4A6E-BF38-F26A47FCD353}">
+					<File Id="filBAECBBDE43BAB9F1941FA62D0A249B09" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\transform.cp37-win32.pyd" />
+				</Component>
+				<Component Id="cmp06742557F8FCFCC4F591662A7E91130A" Guid="{72F79A93-9FBD-4D40-93EB-B89839D342B3}">
+					<File Id="fil6E1F75F051A7AD3839A255165FA5249E" KeyPath="yes" Source="SourceDir\Goblin Care\pygame\_freetype.cp37-win32.pyd" />
+				</Component>
+			</Directory>
+			<Directory Id="dir09B50D2DA45B96FC86866199FBF43586" Name="scipy">
+				<Directory Id="dir494A14851E9ED1EB8C9EF18A39E35D20" Name="_lib">
+					<Component Id="cmpCF82EDC4B2BEB611555C60A334D39A9B" Guid="{E3F93567-A6F0-43D3-8004-71E6F57C83BF}">
+						<File Id="filFE6C6768EFDA5288EABD66FED4AB87D6" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\messagestream.cp37-win32.pyd" />
+					</Component>
+					<Component Id="cmpEBA274FBF7B122660F4F61C8BD6D34CD" Guid="{B65B2751-A316-4827-8BAB-0351D0868FC4}">
+						<File Id="fil39EEDF9DB12E18BA8E59912E342CCCE4" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\_ccallback_c.cp37-win32.pyd" />
+					</Component>
+					<Component Id="cmp2D65C57012D519901FADFDE37BFF67CE" Guid="{7D749306-00E5-4E53-A13E-CEE8FAAFE81B}">
+						<File Id="fil0DB1C9821F271C77EC430D32DFB81217" KeyPath="yes" Source="SourceDir\Goblin Care\scipy\_lib\_fpumode.cp37-win32.pyd" />
+					</Component>
+				</Directory>
+			</Directory>
+			<Directory Id="dir05CA3F3E1B3F9769B20360A60AE99434" Name="win32com">
+				<Directory Id="dirD6C02F8E604D036DCF8ADC89C7C15672" Name="shell">
+					<Component Id="cmp96D801AC97457CBC6C26F5AB5E5C9A18" Guid="{F0AA4EB8-78ED-4898-A39F-AC5225E4C49F}">
+						<File Id="fil0407F12E4727D1C8420346AB64C53DD7" KeyPath="yes" Source="SourceDir\Goblin Care\win32com\shell\shell.pyd" />
+					</Component>
+				</Directory>
+			</Directory>
 		</DirectoryRef>
 
 		<DirectoryRef Id="DesktopFolder">
@@ -928,6 +931,7 @@
             <ComponentRef Id='cmpEBA274FBF7B122660F4F61C8BD6D34CD' />
             <ComponentRef Id='cmp2D65C57012D519901FADFDE37BFF67CE' />
             <ComponentRef Id='cmp96D801AC97457CBC6C26F5AB5E5C9A18' />
+            <ComponentRef Id='cmp9CF7979A7CA6F97F7D323EC96073AE98' />
         </Feature>
 
 		<Icon Id="pygame_icon" SourceFile="SourceDir\Goblin Care\goblin care.exe" />
