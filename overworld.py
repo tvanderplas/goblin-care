@@ -32,7 +32,7 @@ class Game():
 		self.splat_count = [0]
 
 		self.background = Background(desert_road_png)
-		self.loot_button = Hud_Button(treasure_png, (-.85, -.8))
+		self.loot_button = Hud_Button(treasure_png, (-.85, -.8), (self.all_sprites,))
 		self.loot = ui.Window('Loot', self.splat_count, self.view, self.player)
 		self.loot.paint_select[0].active = True
 		self.loot.paint_select[0].owned = True
@@ -73,9 +73,9 @@ class Game():
 					Tornado((self.all_sprites, self.tornados))
 				if event.type == KEYDOWN and event.key == K_SPACE:
 					if self.player.is_big:
-						Rainbow_Bullet(*self.player.body.box.mux[:2], (self.pierce_bullets))
+						Rainbow_Bullet(*self.player.body.box.mux[:2], (self.all_sprites, self.pierce_bullets))
 					else:
-						PlayerBullet(*self.player.body.box.mux[:2], (self.bullets))
+						PlayerBullet(*self.player.body.box.mux[:2], (self.all_sprites, self.bullets))
 				if (
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
@@ -83,20 +83,9 @@ class Game():
 					self.loot.open()
 
 			# draw frame
-			for splat in self.splats:
-				splat.draw()
-			for splat in self.splats_collect:
-				splat.draw()
 			self.player.draw()
-			self.loot_button.draw()
-			for bullet in self.bullets:
-				bullet.draw()
-			for bullet in self.pierce_bullets:
-				bullet.draw()
-			for enemy in self.enemies:
-				enemy.draw()
-			for tornado in self.tornados:
-				tornado.draw()
+			for sprite in self.all_sprites:
+				sprite.draw()
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.background.draw()

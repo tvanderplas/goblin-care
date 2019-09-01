@@ -83,7 +83,7 @@ class Player:
 		self.tires.draw()
 
 class PlayerBullet(objloader.Obj):
-	def __init__(self, x, y, *groups):
+	def __init__(self, x, y, groups):
 		super().__init__(square_obj, object_vs, object_fs, bullet_png)
 		self.generate()
 		self.set_texture(1)
@@ -105,7 +105,7 @@ class PlayerBullet(objloader.Obj):
 		super().draw()
 
 class Rainbow_Bullet(objloader.Obj):
-	def __init__(self, x, y, *groups):
+	def __init__(self, x, y, groups):
 		super().__init__(square_obj, object_vs, object_fs, rainbow_bullet_png)
 		self.generate()
 		self.set_texture(1)
@@ -238,13 +238,19 @@ class Background(objloader.Obj):
 		self.translate(0, 0, .5)
 
 class Hud_Button(objloader.Obj):
-	def __init__(self, image_file, location):
+	def __init__(self, image_file, location, groups):
 		super().__init__(square_obj, object_vs, object_fs, image_file)
 		self.generate()
 		self.set_texture(1)
 		self.scale(.1, .15, 1)
 		self.translate(*location, -.3)
 		self.is_hovering = False
+		self.groups = groups
+		for group in groups:
+			group.append(self)
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
 	def rollover(self):
 		over_x = self.box.lx < pixel_to_view(*pg.mouse.get_pos())[0] < self.box.ux
 		over_y = self.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
