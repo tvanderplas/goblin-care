@@ -47,6 +47,7 @@ class Game():
 			# collisions
 			if collide_any(self.player.body, self.enemies):
 				self.isRunning = False
+			get_collided(self.loot_button, self.splats_collect, False, True)
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			for splat in get_collided(self.player.body, self.splats):
