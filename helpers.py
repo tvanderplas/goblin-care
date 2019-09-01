@@ -65,14 +65,18 @@ def collide_any(entity, group):
 			break
 	return answer
 
-def get_collided(entity, group):
+def get_collided(entity, group, kill1:bool=False, kill2:bool=False):
 	answer = []
 	for member in group:
 		if collide(member, entity):
 			answer.append(member)
+			if kill1:
+				entity.kill()
+			if kill2:
+				member.kill()
 	return answer
 
-def group_collide(group1, group2, kill1:bool, kill2:bool):
+def group_collide(group1, group2, kill1:bool=False, kill2:bool=False):
 	answer = []
 	for entity1 in group1:
 		for entity2 in group2:
