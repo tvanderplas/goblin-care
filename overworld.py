@@ -37,6 +37,10 @@ class Game():
 		self.loot.paint_select[0].owned = True
 
 		self.isRunning = True
+	def collect(self, splat):
+		self.splat_count[0] += 1
+		Splat_Collect(splat.box.muz[:2], (-.85, -.8), (self.all_sprites, self.splats_collect))
+		splat.kill()
 	def play(self):
 		while self.isRunning:
 
@@ -46,12 +50,12 @@ class Game():
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			for splat in get_collided(self.player.body, self.splats):
-				self.splat_count[0] += 1
-				Splat_Collect(splat.box.muz[:2], (-.85, -.8), (self.all_sprites, self.splats_collect))
-				splat.kill()
+				self.collect(splat)
 			for tornado in get_collided(self.player.body, self.tornados):
 				if tornado.is_rainbow:
 					self.player.embiggen()
+					for splat in self.splats:
+						self.collect(splat)
 				else:
 					self.isRunning = False
 
@@ -79,11 +83,11 @@ class Game():
 			self.player.draw()
 			self.loot_button.draw()
 			for bullet in self.bullets:
-					bullet.draw()
+				bullet.draw()
 			for enemy in self.enemies:
-					enemy.draw()
+				enemy.draw()
 			for tornado in self.tornados:
-					tornado.draw()
+				tornado.draw()
 			pg.display.flip()
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.background.draw()
