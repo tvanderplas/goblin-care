@@ -104,6 +104,28 @@ class PlayerBullet(objloader.Obj):
 		self.update()
 		super().draw()
 
+class Rainbow_Bullet(objloader.Obj):
+	def __init__(self, x, y, *groups):
+		super().__init__(square_obj, object_vs, object_fs, rainbow_bullet_png)
+		self.generate()
+		self.set_texture(1)
+		self.translate(x, y, 0)
+		self.scale(.05, .05, 1)
+		self.speed = .06
+		for group in groups:
+			group.append(self)
+		self.groups = groups
+	def kill(self):
+		for group in self.groups:
+			group.remove(self)
+	def update(self):
+		self.translate(self.speed, 0, 0)
+		if self.box.lx > 1:
+			self.kill()
+	def draw(self):
+		self.update()
+		super().draw()
+
 class Enemy(objloader.Obj):
 	def __init__(self, groups):
 		super().__init__(square_obj, object_vs, object_fs, green_goblin_png)
@@ -175,7 +197,7 @@ class Splat_Collect(objloader.Obj):
 
 class Tornado(objloader.Obj):
 	def __init__(self, groups):
-		self.is_rainbow = True if random() > .9 else False
+		self.is_rainbow = True # if random() > .9 else False
 		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
 		super().__init__(square_obj, object_vs, object_fs, self.image_file)
 		self.generate()
