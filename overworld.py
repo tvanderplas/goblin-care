@@ -4,7 +4,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB
 )
 from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST
-from sprites import Background, Enemy, Player, PlayerBullet, Splat, Splat_Collect, Tornado, Hud_Button
+from sprites import Background, Enemy, Player, PlayerBullet, Rainbow_Bullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
 from random import randint
 from assets.paths import desert_road_png, treasure_png
@@ -25,6 +25,7 @@ class Game():
 		self.splats = []
 		self.splats_collect = []
 		self.bullets = []
+		self.pierce_bullets = []
 		self.tornados = []
 		self.all_sprites = []
 		self.player = Player()
@@ -50,6 +51,8 @@ class Game():
 			get_collided(self.loot_button, self.splats_collect, False, True)
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
+			for enemy in group_collide(self.enemies, self.pierce_bullets, True, False):
+				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			for splat in get_collided(self.player.body, self.splats):
 				self.collect(splat)
 			for tornado in get_collided(self.player.body, self.tornados):
@@ -69,7 +72,10 @@ class Game():
 				if event.type == self.NEWTORNADO:
 					Tornado((self.all_sprites, self.tornados))
 				if event.type == KEYDOWN and event.key == K_SPACE:
-					PlayerBullet(*self.player.body.box.mux[:2], (self.bullets))
+					if self.player.is_big:
+						Rainbow_Bullet(*self.player.body.box.mux[:2], (self.pierce_bullets))
+					else:
+						PlayerBullet(*self.player.body.box.mux[:2], (self.bullets))
 				if (
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
@@ -84,6 +90,8 @@ class Game():
 			self.player.draw()
 			self.loot_button.draw()
 			for bullet in self.bullets:
+				bullet.draw()
+			for bullet in self.pierce_bullets:
 				bullet.draw()
 			for enemy in self.enemies:
 				enemy.draw()
