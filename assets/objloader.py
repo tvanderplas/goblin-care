@@ -1,5 +1,5 @@
 
-from pygame import image
+from PIL import Image
 from OpenGL.GL import * # pylint: disable=unused-wildcard-import
 from OpenGL.GL import shaders
 from pywavefront import Wavefront
@@ -148,8 +148,8 @@ class Obj:
 			self.apply_texture()
 
 	def apply_texture(self):
-		texture_surface = image.load(self.texture)
-		texture_data = image.tostring(texture_surface, "RGBA", 1)
+		texture = Image.open(self.texture)
+		texture_data = np.flipud(np.asarray(texture)).tobytes()
 
 		glBindVertexArray(self.VAO)
 		glEnable(GL_TEXTURE_2D)
@@ -157,7 +157,7 @@ class Obj:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 		self.tex_id = glGenTextures(1)
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture_surface.get_size(), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture.size, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 		glGenerateMipmap(GL_TEXTURE_2D)
