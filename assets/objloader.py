@@ -148,7 +148,10 @@ class Obj:
 			self.apply_texture()
 
 	def apply_texture(self):
-		texture = Image.open(self.texture)
+		if isinstance(self.texture, Image.Image):
+			texture = self.texture
+		else:
+			texture = Image.open(self.texture)
 		texture_data = np.flipud(np.asarray(texture)).tobytes()
 
 		glBindVertexArray(self.VAO)

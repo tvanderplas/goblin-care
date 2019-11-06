@@ -38,8 +38,7 @@ class Menu_Button:
 		self.background.translate(*location, 0)
 		self.background.scale(.33, .05, 1)
 
-		text_image_file = text_image(text, (170, 64, 78), 'right')
-		self.text = objloader.Obj(square_obj, object_vs, object_fs, text_image_file)
+		self.text = objloader.Obj(square_obj, object_vs, object_fs, text_image(text, (170, 64, 78), 'right'))
 		self.text.generate()
 		self.text.set_texture(1)
 		self.text.scale(1, .1, 1)

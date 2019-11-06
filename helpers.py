@@ -18,8 +18,7 @@ def text_image(text, text_color, orientation='center'):
 	else:
 		text_location = ((screen.width / 2) - (text_size * 2.1 + 45), 0)
 	decoration.text(text_location, text, font=font_, fill=text_color)
-	img.save(text_image_png)
-	return text_image_png
+	return img
 
 def randedge(distance, x_min, x_max, y_min, y_max):
 	edge = choice([
