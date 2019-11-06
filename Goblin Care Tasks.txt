@@ -1,9 +1,13 @@
 
 controls menu
+game over animation
 persistent game if not dead
+sounds
+player health bar
 auto updater - with git?
 automated tests
 turning
 2d playfield
 customizable controls
 android release
+logging
