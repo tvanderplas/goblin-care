@@ -1,7 +1,7 @@
 
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB
+	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
 )
 from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST
 from sprites import Background, Enemy, Player, PlayerBullet, Rainbow_Bullet, Splat, Splat_Collect, Tornado, Hud_Button
@@ -64,6 +64,16 @@ class Game():
 					self.isRunning = False
 
 			# input
+			pressed_keys = pg.key.get_pressed()
+			if pressed_keys[K_w] or pressed_keys[K_UP]: # pylint: disable=undefined-variable
+				self.player.translate(0, self.player.speed, 0)
+			if pressed_keys[K_s] or pressed_keys[K_DOWN]: # pylint: disable=undefined-variable
+				self.player.translate(0, -self.player.speed, 0)
+			if pressed_keys[K_a] or pressed_keys[K_LEFT]: # pylint: disable=undefined-variable
+				self.player.translate(-self.player.speed, 0, 0)
+			if pressed_keys[K_d] or pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
+				self.player.translate(self.player.speed, 0, 0)
+
 			for event in pg.event.get():
 				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 					self.isRunning = False

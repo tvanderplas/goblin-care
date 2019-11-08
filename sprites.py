@@ -2,7 +2,7 @@
 from random import random, uniform
 import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
-	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d, K_ESCAPE, K_SPACE
+	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
 )
 from helpers import randedge, pixel_to_view, get_vector
 from assets import objloader
@@ -56,15 +56,6 @@ class Player:
 		self.wheels.scale(x, y, z)
 		self.tires.scale(x, y, z)
 	def draw(self):
-		pressed_keys = pg.key.get_pressed()
-		if pressed_keys[K_w] or pressed_keys[K_UP]: # pylint: disable=undefined-variable
-			self.translate(0, self.speed, 0)
-		if pressed_keys[K_s] or pressed_keys[K_DOWN]: # pylint: disable=undefined-variable
-			self.translate(0, -self.speed, 0)
-		if pressed_keys[K_a] or pressed_keys[K_LEFT]: # pylint: disable=undefined-variable
-			self.translate(-self.speed, 0, 0)
-		if pressed_keys[K_d] or pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
-			self.translate(self.speed, 0, 0)
 		if self.bigtime <= 0 and self.is_big:
 			self.scale(2/3, 2/3, 2/3)
 			self.is_big = False
