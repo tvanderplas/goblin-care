@@ -1,9 +1,6 @@
 
 from random import random, uniform
-import pygame as pg
-from pygame.constants import ( # pylint: disable=no-name-in-module
-	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE
-)
+from pygame import mouse
 from helpers import randedge, pixel_to_view, get_vector
 from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
@@ -243,8 +240,8 @@ class Hud_Button(objloader.Obj):
 		for group in self.groups:
 			group.remove(self)
 	def rollover(self):
-		over_x = self.box.lx < pixel_to_view(*pg.mouse.get_pos())[0] < self.box.ux
-		over_y = self.box.ly < pixel_to_view(*pg.mouse.get_pos())[1] < self.box.uy
+		over_x = self.box.lx < pixel_to_view(*mouse.get_pos())[0] < self.box.ux
+		over_y = self.box.ly < pixel_to_view(*mouse.get_pos())[1] < self.box.uy
 		return over_x and over_y
 	def update(self):
 		if self.rollover() and not self.is_hovering:
