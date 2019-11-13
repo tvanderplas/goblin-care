@@ -155,7 +155,7 @@ class Buy_Button:
 		self.cost_icon.draw()
 		self.splat_cost.draw()
 
-class Window:
+class Loot_Screen:
 	def __init__(self, title, splat_count, view, player):
 		self.clock = pg.time.Clock()
 		self.view = view
