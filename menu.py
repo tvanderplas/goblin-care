@@ -42,7 +42,8 @@ class Controls_Popup:
 	def toggle(self):
 		self.visible ^= 1
 	def draw(self):
-		self.background.draw()
+		if self.visible:
+			self.background.draw()
 
 class Menu_Button:
 	def __init__(self, text:str, location:tuple):
@@ -113,6 +114,5 @@ class Menu():
 			self.play_button.draw()
 			self.controls_button.draw()
 			self.quit_button.draw()
-			if self.controls.visible:
-				self.controls.draw()
+			self.controls.draw()
 			self.clock.tick(60)
