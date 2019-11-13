@@ -1,9 +1,6 @@
 
-import pygame as pg
 from menu import Menu
 import traceback as tb
-
-pg.init() # pylint: disable=no-member
 
 if __name__ == '__main__':
 	menu = Menu()
