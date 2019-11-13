@@ -10,9 +10,10 @@ import overworld
 import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
-from assets.paths import square_obj, object_vs, object_fs, menu_png, ui_vs, ui_fs
+from assets.paths import square_obj, object_vs, object_fs, menu_png, ui_vs, ui_fs, controls_png
 from fonts.paths import calibri_ttf
 from helpers import pixel_to_view, text_image
+from ui import Ui_Image
 
 class Pointer_Indicator(objloader.Obj):
 	def __init__(self):
@@ -74,6 +75,7 @@ class Menu():
 		self.play_button = Menu_Button('Play!', (-1.05, 0))
 		self.controls_button = Menu_Button('Controls   ', (-1.05, -.2))
 		self.quit_button = Menu_Button('Quit', (-1.05, -.4))
+		self.show_controls = False
 	def play(self):
 		while True:
 			for event in pg.event.get():
@@ -84,6 +86,9 @@ class Menu():
 						game = overworld.Game(self.view)
 						game.play()
 						self.__init__()
+					elif self.controls_button.rollover():
+						self.controls = Ui_Image(controls_png)
+						self.show_controls ^= 1
 					elif self.quit_button.rollover():
 						raise SystemExit
 			pg.display.flip()
@@ -92,4 +97,6 @@ class Menu():
 			self.play_button.draw()
 			self.controls_button.draw()
 			self.quit_button.draw()
+			if self.show_controls:
+				self.controls.draw()
 			self.clock.tick(60)
