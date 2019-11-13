@@ -31,6 +31,19 @@ class Pointer_Indicator(objloader.Obj):
 		self.update()
 		super().draw()
 
+class Controls_Popup:
+	def __init__(self):
+		self.background = Ui_Image(controls_png)
+		self.visible = False
+	def show(self):
+		self.visible = True
+	def hide(self):
+		self.visible = False
+	def toggle(self):
+		self.visible ^= 1
+	def draw(self):
+		self.background.draw()
+
 class Menu_Button:
 	def __init__(self, text:str, location:tuple):
 		self.background = objloader.Obj(square_obj, ui_vs, ui_fs)
@@ -75,24 +88,23 @@ class Menu():
 		self.play_button = Menu_Button('Play!', (-1.05, 0))
 		self.controls_button = Menu_Button('Controls   ', (-1.05, -.2))
 		self.quit_button = Menu_Button('Quit', (-1.05, -.4))
-		self.show_controls = False
+		self.controls = Controls_Popup()
 	def play(self):
 		while True:
 			for event in pg.event.get():
 				if event.type == QUIT or (
-					event.type == KEYDOWN and event.key == K_ESCAPE and not self.show_controls
+					event.type == KEYDOWN and event.key == K_ESCAPE and not self.controls.visible
 				):
 					raise SystemExit
-				if event.type == KEYDOWN and event.key == K_ESCAPE and self.show_controls:
-					self.show_controls ^= 1
+				if event.type == KEYDOWN and event.key == K_ESCAPE and self.controls.visible:
+					self.controls.toggle()
 				if event.type == MOUSEBUTTONDOWN:
 					if self.play_button.rollover():
 						game = overworld.Game(self.view)
 						game.play()
 						self.__init__()
 					elif self.controls_button.rollover():
-						self.controls = Ui_Image(controls_png)
-						self.show_controls ^= 1
+						self.controls.toggle()
 					elif self.quit_button.rollover():
 						raise SystemExit
 			pg.display.flip()
@@ -101,6 +113,6 @@ class Menu():
 			self.play_button.draw()
 			self.controls_button.draw()
 			self.quit_button.draw()
-			if self.show_controls:
+			if self.controls.visible:
 				self.controls.draw()
 			self.clock.tick(60)
