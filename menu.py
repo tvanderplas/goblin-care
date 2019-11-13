@@ -72,7 +72,8 @@ class Menu():
 		self.view = pg.display.set_mode((screen.width, screen.height), FULLSCREEN|OPENGL|DOUBLEBUF)
 		self.menu_screen = Background(menu_png)
 		self.play_button = Menu_Button('Play!', (-1.05, 0))
-		self.quit_button = Menu_Button('Quit', (-1.05, -.2))
+		self.controls_button = Menu_Button('Controls   ', (-1.05, -.2))
+		self.quit_button = Menu_Button('Quit', (-1.05, -.4))
 	def play(self):
 		while True:
 			for event in pg.event.get():
@@ -89,5 +90,6 @@ class Menu():
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 			self.menu_screen.draw()
 			self.play_button.draw()
+			self.controls_button.draw()
 			self.quit_button.draw()
 			self.clock.tick(60)
