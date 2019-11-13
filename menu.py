@@ -79,8 +79,12 @@ class Menu():
 	def play(self):
 		while True:
 			for event in pg.event.get():
-				if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
+				if event.type == QUIT or (
+					event.type == KEYDOWN and event.key == K_ESCAPE and not self.show_controls
+				):
 					raise SystemExit
+				if event.type == KEYDOWN and event.key == K_ESCAPE and self.show_controls:
+					self.show_controls ^= 1
 				if event.type == MOUSEBUTTONDOWN:
 					if self.play_button.rollover():
 						game = overworld.Game(self.view)
