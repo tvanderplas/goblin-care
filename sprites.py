@@ -6,12 +6,14 @@ from assets import objloader
 from assets.paths import * # pylint: disable=unused-wildcard-import
 from math import pi
 
-class Player:
+class Player(object):
 	def __init__(self):
-		self.body = objloader.Obj(sedan_body_obj, object_vs, object_fs)
-		self.glass = objloader.Obj(sedan_glass_obj, object_vs, object_fs)
-		self.wheels = objloader.Obj(sedan_wheels_obj, object_vs, object_fs)
-		self.tires = objloader.Obj(sedan_tires_obj, object_vs, object_fs)
+		self.parts = [
+			objloader.Obj(sedan_body_obj, object_vs, object_fs),
+			objloader.Obj(sedan_glass_obj, object_vs, object_fs),
+			objloader.Obj(sedan_wheels_obj, object_vs, object_fs),
+			objloader.Obj(sedan_tires_obj, object_vs, object_fs),
+		]
 		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
 		self.light.scale(0, 0, 0)
 		self.light.translate(0, 0, -2)
@@ -22,53 +24,44 @@ class Player:
 		self.speed = .02
 		self.bigtime = 0
 		self.is_big = False
+	@property
+	def box(self):
+		return self.parts[0].box
 	def embiggen(self):
 		if not self.is_big:
 			self.scale(1.5, 1.5, 1.5)
 			self.bigtime = 500
 			self.is_big = True
 	def generate(self):
-		self.body.generate()
-		self.glass.generate()
-		self.wheels.generate()
-		self.tires.generate()
+		for part in self.parts:
+			part.generate()
 	def set_light_source(self, light):
-		self.body.set_light_source(light)
-		self.glass.set_light_source(light)
-		self.wheels.set_light_source(light)
-		self.tires.set_light_source(light)
+		for part in self.parts:
+			part.set_light_source(light)
 	def translate(self, x, y, z):
-		self.body.translate(x, y, z)
-		self.glass.translate(x, y, z)
-		self.wheels.translate(x, y, z)
-		self.tires.translate(x, y, z)
+		for part in self.parts:
+			part.translate(x, y, z)
 	def rotate(self, angle, x, y, z):
-		self.body.rotate(angle, x, y, z)
-		self.glass.rotate(angle, x, y, z)
-		self.wheels.rotate(angle, x, y, z)
-		self.tires.rotate(angle, x, y, z)
+		for part in self.parts:
+			part.rotate(angle, x, y, z)
 	def scale(self, x, y, z):
-		self.body.scale(x, y, z)
-		self.glass.scale(x, y, z)
-		self.wheels.scale(x, y, z)
-		self.tires.scale(x, y, z)
+		for part in self.parts:
+			part.scale(x, y, z)
 	def draw(self):
 		if self.bigtime <= 0 and self.is_big:
 			self.scale(2/3, 2/3, 2/3)
 			self.is_big = False
-		if self.body.box.lx < -1:
-			self.translate(-1 - self.body.box.lx, 0, 0)
-		if self.body.box.ux > 1:
-			self.translate(1 - self.body.box.ux, 0, 0)
-		if self.body.box.ly < -1:
-			self.translate(0, -1 - self.body.box.ly, 0)
-		if self.body.box.uy > 1:
-			self.translate(0, 1 - self.body.box.uy, 0)
+		if self.box.lx < -1:
+			self.translate(-1 - self.box.lx, 0, 0)
+		if self.box.ux > 1:
+			self.translate(1 - self.box.ux, 0, 0)
+		if self.box.ly < -1:
+			self.translate(0, -1 - self.box.ly, 0)
+		if self.box.uy > 1:
+			self.translate(0, 1 - self.box.uy, 0)
 		self.bigtime -= 1 if self.bigtime > 0 else 0
-		self.body.draw()
-		self.glass.draw()
-		self.wheels.draw()
-		self.tires.draw()
+		for part in self.parts:
+			part.draw()
 
 class PlayerBullet(objloader.Obj):
 	def __init__(self, x, y, groups):

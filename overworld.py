@@ -46,16 +46,16 @@ class Game():
 		while self.isRunning:
 
 			# collisions
-			if collide_any(self.player.body, self.enemies):
+			if collide_any(self.player, self.enemies):
 				self.isRunning = False
 			get_collided(self.loot_button, self.splats_collect, False, True)
 			for enemy in group_collide(self.enemies, self.bullets, True, True):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
 			for enemy in group_collide(self.enemies, self.pierce_bullets, True, False):
 				Splat(enemy.box.muz[:2], (self.all_sprites, self.splats))
-			for splat in get_collided(self.player.body, self.splats):
+			for splat in get_collided(self.player, self.splats):
 				self.collect(splat)
-			for tornado in get_collided(self.player.body, self.tornados):
+			for tornado in get_collided(self.player, self.tornados):
 				if tornado.is_rainbow:
 					self.player.embiggen()
 					for splat in self.splats:
@@ -83,9 +83,9 @@ class Game():
 					Tornado((self.all_sprites, self.tornados))
 				if event.type == KEYDOWN and event.key == K_SPACE:
 					if self.player.is_big:
-						Rainbow_Bullet(*self.player.body.box.mux[:2], (self.all_sprites, self.pierce_bullets))
+						Rainbow_Bullet(*self.player.box.mux[:2], (self.all_sprites, self.pierce_bullets))
 					else:
-						PlayerBullet(*self.player.body.box.mux[:2], (self.all_sprites, self.bullets))
+						PlayerBullet(*self.player.box.mux[:2], (self.all_sprites, self.bullets))
 				if (
 					event.type == MOUSEBUTTONDOWN and self.loot_button.rollover() or
 					(event.type == KEYDOWN and event.key == K_TAB)
