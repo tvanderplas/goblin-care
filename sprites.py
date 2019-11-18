@@ -27,6 +27,19 @@ class Player(object):
 	@property
 	def box(self):
 		return self.parts[0].box
+	def keep_on_screen(self):
+		if self.box.lx < -1:
+			self.translate(-1 - self.box.lx, 0, 0)
+		if self.box.ux > 1:
+			self.translate(1 - self.box.ux, 0, 0)
+		if self.box.ly < -1:
+			self.translate(0, -1 - self.box.ly, 0)
+		if self.box.uy > 1:
+			self.translate(0, 1 - self.box.uy, 0)
+	def check_bigness(self):
+		if self.bigtime <= 0 and self.is_big:
+			self.scale(2/3, 2/3, 2/3)
+			self.is_big = False
 	def embiggen(self):
 		if not self.is_big:
 			self.scale(1.5, 1.5, 1.5)
@@ -48,17 +61,8 @@ class Player(object):
 		for part in self.parts:
 			part.scale(x, y, z)
 	def draw(self):
-		if self.bigtime <= 0 and self.is_big:
-			self.scale(2/3, 2/3, 2/3)
-			self.is_big = False
-		if self.box.lx < -1:
-			self.translate(-1 - self.box.lx, 0, 0)
-		if self.box.ux > 1:
-			self.translate(1 - self.box.ux, 0, 0)
-		if self.box.ly < -1:
-			self.translate(0, -1 - self.box.ly, 0)
-		if self.box.uy > 1:
-			self.translate(0, 1 - self.box.uy, 0)
+		self.check_bigness()
+		self.keep_on_screen()
 		self.bigtime -= 1 if self.bigtime > 0 else 0
 		for part in self.parts:
 			part.draw()
