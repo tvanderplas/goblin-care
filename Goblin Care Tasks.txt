@@ -1,5 +1,4 @@
 
-controls menu
 game over animation
 persistent game if not dead
 sounds
