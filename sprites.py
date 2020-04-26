@@ -14,6 +14,7 @@ class Player(object):
 			objloader.Obj(sedan_wheels_obj, object_vs, object_fs),
 			objloader.Obj(sedan_tires_obj, object_vs, object_fs),
 		]
+		self.body = self.parts[0]
 		self.light = objloader.Obj(cube_obj, object_vs, object_fs)
 		self.light.scale(0, 0, 0)
 		self.light.translate(0, 0, -2)
