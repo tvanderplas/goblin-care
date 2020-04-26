@@ -9,5 +9,5 @@ if os.name == "Windows":
     user32.SetProcessDPIAware()
     """prevents stretching"""
 
-width = get_monitors()[0].x
-height = get_monitors()[0].y
+width = get_monitors()[0].width
+height = get_monitors()[0].height
