@@ -31,6 +31,6 @@ void main()
 		vec4 tex_color = texture(textureObj, texture_coord);
 		if(tex_color.a == 0.0)
 			discard;
-		fragment_color = texture2D(textureObj, texture_coord);
+		fragment_color = texture(textureObj, texture_coord);
 	}
 }
