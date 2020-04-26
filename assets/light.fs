@@ -1,5 +1,8 @@
 
-#version 330 core
+#version 320 es
+
+precision mediump float;
+
 out vec4 fragment_color;
 
 in vec3 position;

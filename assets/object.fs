@@ -1,5 +1,8 @@
 
-#version 330 core
+#version 320 es
+
+precision mediump float;
+
 out vec4 fragment_color;
 
 in vec3 position;
@@ -26,7 +29,7 @@ void main()
 		fragment_color = result;
 	} else {
 		vec4 tex_color = texture(textureObj, texture_coord);
-		if(tex_color.a == 0)
+		if(tex_color.a == 0.0)
 			discard;
 		fragment_color = texture2D(textureObj, texture_coord);
 	}
