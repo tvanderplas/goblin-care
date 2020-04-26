@@ -169,18 +169,18 @@ class Obj:
 		self.perspective = glm.mat4(glm.perspective(angle, width / height, z_min, z_max))
 
 	def translate(self, x, y, z):
-		self.translated = glm.mat4(glm.translate(self.translated, [x, y, z]))
+		self.translated = glm.mat4(glm.translate(self.translated, glm.vec3(x, y, z)))
 		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 		self.position += np.array([x, y, z], np.float32)
 
 	def rotate(self, angle, x, y, z):
-		self.rotated = glm.mat4(glm.rotate(self.rotated, angle, [x, y, z]))
+		self.rotated = glm.mat4(glm.rotate(self.rotated, angle, glm.vec3(x, y, z)))
 		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 
 	def scale(self, x, y, z):
-		self.scaled = glm.mat4(glm.scale(self.scaled, [x, y, z]))
+		self.scaled = glm.mat4(glm.scale(self.scaled, glm.vec3(x, y, z)))
 		self.model = self.translated * self.rotated * self.scaled
 		self.get_box()
 
