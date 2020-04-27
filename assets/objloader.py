@@ -61,8 +61,8 @@ class Obj:
 		self.light.color = (0, 0, 0)
 		self.light.position = (0, 0, 0)
 		self.shader = None
-		self.vertex_shader = open(v_shader)
-		self.fragment_shader = open(f_shader)
+		self.vertex_shader = v_shader
+		self.fragment_shader = f_shader
 		self.texture_mode = 0
 		self.texture = texture
 		self.translated = glm.mat4()

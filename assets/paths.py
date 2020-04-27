@@ -2,14 +2,27 @@
 from os.path import dirname, realpath, join
 dir_path = dirname(realpath(__file__))
 
+with open(join(dir_path, 'ui.fs'), 'r') as shader_file:
+    ui_fs = shader_file.read()
+    shader_file.close()
+with open(join(dir_path, 'ui.vs'), 'r') as shader_file:
+    ui_vs = shader_file.read()
+    shader_file.close()
+with open(join(dir_path, 'light.fs'), 'r') as shader_file:
+    light_fs = shader_file.read()
+    shader_file.close()
+with open(join(dir_path, 'light.vs'), 'r') as shader_file:
+    light_vs = shader_file.read()
+    shader_file.close()
+with open(join(dir_path, 'object.fs'), 'r') as shader_file:
+    object_fs = shader_file.read()
+    shader_file.close()
+with open(join(dir_path, 'object.vs'), 'r') as shader_file:
+    object_vs = shader_file.read()
+    shader_file.close()
+
 cube_obj = join(dir_path, 'cube.obj')
-light_fs = join(dir_path, 'light.fs')
-light_vs = join(dir_path, 'light.vs')
 menu_png = join(dir_path, 'menu.png')
-object_fs = join(dir_path, 'object.fs')
-object_vs = join(dir_path, 'object.vs')
-ui_fs = join(dir_path, 'ui.fs')
-ui_vs = join(dir_path, 'ui.vs')
 sedan_body_obj = join(dir_path, 'sedan_body.obj')
 sedan_glass_obj = join(dir_path, 'sedan_glass.obj')
 sedan_tires_obj = join(dir_path, 'sedan_tires.obj')
