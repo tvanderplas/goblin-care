@@ -128,19 +128,13 @@ class Obj:
 		if self.shader == None:
 			self.compile_shader()
 		shaders.glUseProgram(self.shader) # pylint: disable=no-member
-		for name, address in self.uniforms.items():
-			if name == 'model':
-				glUniformMatrix4fv(address, 1, False, np.matrix(self.model))
-			if name == 'transform':
-				glUniformMatrix4fv(address, 1, False, np.matrix(self.model) * np.matrix(self.perspective))
-			if name == 'self_color':
-				glUniform4f(address, *self.color)
-			if name == 'light_color':
-				glUniform3f(address, *self.light.color[:3])
-			if name == 'light_position':
-				glUniform3f(address, *self.light.position[:3])
-			if name == 'texture_mode':
-				glUniform1i(address, self.texture_mode)
+
+		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.matrix(self.model))
+		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.matrix(self.model) * np.matrix(self.perspective))
+		glUniform4f(self.uniforms['self_color'], *self.color)
+		glUniform3f(self.uniforms['light_color'], *self.light.color[:3])
+		glUniform3f(self.uniforms['light_position'], *self.light.position[:3])
+		glUniform1i(self.uniforms['texture_mode'], self.texture_mode)
 
 	def set_texture(self, setting):
 		self.texture_mode = setting
