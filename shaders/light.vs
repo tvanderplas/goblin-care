@@ -9,12 +9,12 @@ in vec3 vertex_position;
 
 out vec3 position;
 out vec3 normal;
-out vec3 color;
+out vec4 color;
 out vec2 texture_coord;
 
 uniform mat4 transform;
 uniform mat4 model;
-uniform vec3 self_color;
+uniform vec4 self_color;
 
 void main()
 {

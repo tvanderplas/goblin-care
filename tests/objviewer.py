@@ -1,17 +1,19 @@
 
+import context
 import pygame
-from pygame.locals import * # pylint: disable=unused-wildcard-import
-from OpenGL.GL import * # pylint: disable=unused-wildcard-import
+from pygame.locals import *
+from OpenGL.GL import *
 from OpenGL.GL import shaders
-import objloader
+from assets import objloader
 import numpy as np
 from math import pi
-from paths import * # pylint: disable=unused-wildcard-import
+from assets.paths import *
+from shaders.paths import *
 
 def main():
-	pygame.init() # pylint: disable=no-member
+	pygame.init()
 	display = (1024, 768)
-	pygame.display.set_mode(display, DOUBLEBUF|OPENGL) # pylint: disable=undefined-variable
+	pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 	glEnable(GL_DEPTH_TEST)
 	# glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
@@ -30,32 +32,32 @@ def main():
 
 	while True:
 		for event in pygame.event.get():
-			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT: # pylint: disable=undefined-variable
+			if (event.type == KEYDOWN and event.key == K_ESCAPE) or event.type == QUIT:
 				raise SystemExit
 		pressed_keys = pygame.key.get_pressed()
-		if pressed_keys[K_w]: # pylint: disable=undefined-variable
+		if pressed_keys[K_w]:
 			light_cube.translate(0, 0, .1)
-		if pressed_keys[K_s]: # pylint: disable=undefined-variable
+		if pressed_keys[K_s]:
 			light_cube.translate(0, 0, -.1)
-		if pressed_keys[K_a]: # pylint: disable=undefined-variable
+		if pressed_keys[K_a]:
 			light_cube.translate(-.1, 0, 0)
-		if pressed_keys[K_d]: # pylint: disable=undefined-variable
+		if pressed_keys[K_d]:
 			light_cube.translate(.1, 0, 0)
-		if pressed_keys[K_SPACE]: # pylint: disable=undefined-variable
+		if pressed_keys[K_SPACE]:
 			light_cube.translate(0, .1, 0)
-		if pressed_keys[K_LCTRL]: # pylint: disable=undefined-variable
+		if pressed_keys[K_LCTRL]:
 			light_cube.translate(0, -.1, 0)
-		if pressed_keys[K_UP]: # pylint: disable=undefined-variable
+		if pressed_keys[K_UP]:
 			light_cube.rotate(pi / 1000, 1, 0, 0)
-		if pressed_keys[K_DOWN]: # pylint: disable=undefined-variable
+		if pressed_keys[K_DOWN]:
 			light_cube.rotate(pi / 1000, -1, 0, 0)
-		if pressed_keys[K_LEFT]: # pylint: disable=undefined-variable
+		if pressed_keys[K_LEFT]:
 			light_cube.rotate(pi / 1000, 0, 1, 0)
-		if pressed_keys[K_RIGHT]: # pylint: disable=undefined-variable
+		if pressed_keys[K_RIGHT]:
 			light_cube.rotate(pi / 1000, 0, -1, 0)
-		if pressed_keys[K_q]: # pylint: disable=undefined-variable
+		if pressed_keys[K_q]:
 			light_cube.rotate(pi / 1000, 0, 0, 1)
-		if pressed_keys[K_e]: # pylint: disable=undefined-variable
+		if pressed_keys[K_e]:
 			light_cube.rotate(pi / 1000, 0, 0, -1)
 
 		square.rotate(pi / 100, 0, 1, 0)

@@ -58,8 +58,8 @@ class Obj:
 		obj_list.append(self)
 		self.position = np.array([0, 0, 0], np.float32)
 		self.light = self
-		self.light.color = (0, 0, 0)
-		self.light.position = (0, 0, 0)
+		self.light.color = [np.float32(0)] * 3
+		self.light.position = [np.float32(0)] * 3
 		self.shader = None
 		self.vertex_shader = v_shader
 		self.fragment_shader = f_shader
@@ -78,7 +78,7 @@ class Obj:
 					vertex_format += int(i)
 			vertices = np.array(material.vertices, np.float32).reshape(len(material.vertices) // vertex_format, vertex_format)
 			indices, vertex_info = dedup_and_index(vertices)
-			self.color = material.diffuse
+			self.color = [np.float32(i) for i in material.diffuse]
 		self.indices = np.array(indices, np.int32)
 		self.vertex_info = np.array(vertex_info, np.float32)
 		self.get_box()
@@ -127,12 +127,25 @@ class Obj:
 	def use_shader(self):
 		if self.shader == None:
 			self.compile_shader()
-		shaders.glUseProgram(self.shader) # pylint: disable=no-member
 
-		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.matrix(self.model))
-		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.matrix(self.model) * np.matrix(self.perspective))
+		self.vertex_texture_coord = glGetAttribLocation(self.shader, b'vertex_texture_coord')
+		if self.vertex_texture_coord > 0:
+			glBindAttribLocation(self.shader, self.vertex_texture_coord, b'vertex_texture_coord')
+
+		self.vertex_normal = glGetAttribLocation(self.shader, b'vertex_normal')
+		if self.vertex_normal > 0:
+			glBindAttribLocation(self.shader, self.vertex_normal, b'vertex_normal')
+
+		self.vertex_position = glGetAttribLocation(self.shader, b'vertex_position')
+		if self.vertex_position > 0:
+			glBindAttribLocation(self.shader, self.vertex_position, b'vertex_position')
+
+		shaders.glUseProgram(self.shader)
+
+		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
+		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.array(self.model) * np.array(self.perspective))
 		glUniform4f(self.uniforms['self_color'], *self.color)
-		glUniform3f(self.uniforms['light_color'], *self.light.color[:3])
+		glUniform3f(self.uniforms['light_color'], *list(self.light.color)[:3])
 		glUniform3f(self.uniforms['light_position'], *self.light.position[:3])
 		glUniform1i(self.uniforms['texture_mode'], self.texture_mode)
 
