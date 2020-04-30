@@ -58,8 +58,8 @@ class Obj:
 		obj_list.append(self)
 		self.position = np.array([0, 0, 0], np.float32)
 		self.light = self
-		self.light.color = [np.float32(0)] * 3
-		self.light.position = [np.float32(0)] * 3
+		self.light.color = (0, 0, 0)
+		self.light.position = (0, 0, 0)
 		self.shader = None
 		self.vertex_shader = v_shader
 		self.fragment_shader = f_shader
@@ -78,7 +78,7 @@ class Obj:
 					vertex_format += int(i)
 			vertices = np.array(material.vertices, np.float32).reshape(len(material.vertices) // vertex_format, vertex_format)
 			indices, vertex_info = dedup_and_index(vertices)
-			self.color = [np.float32(i) for i in material.diffuse]
+			self.color = material.diffuse
 		self.indices = np.array(indices, np.int32)
 		self.vertex_info = np.array(vertex_info, np.float32)
 		self.get_box()
@@ -145,7 +145,7 @@ class Obj:
 		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
 		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.array(self.model) * np.array(self.perspective))
 		glUniform4f(self.uniforms['self_color'], *self.color)
-		glUniform3f(self.uniforms['light_color'], *list(self.light.color)[:3])
+		glUniform3f(self.uniforms['light_color'], *self.light.color[:3])
 		glUniform3f(self.uniforms['light_position'], *self.light.position[:3])
 		glUniform1i(self.uniforms['texture_mode'], self.texture_mode)
 
