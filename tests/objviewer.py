@@ -9,6 +9,8 @@ import numpy as np
 from math import pi
 from assets.paths import *
 from shaders.paths import *
+from tests.paths import *
+from random import random
 
 def main():
 	pygame.init()
@@ -22,13 +24,14 @@ def main():
 	square = objloader.Obj(square_obj, object_vs, object_fs, uv_test_png)
 	square.generate()
 	square.set_light_source(light_cube)
+	square.set_texture(1)
 
-	objloader.set_perspective(pi / 4, *display, 0.1, 100)
+	# objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.rotate(pi / 6, 1, 0, 0)
-	square.translate(0, 0, -50)
-	# square.rotate(pi / 3, -1, 0, 0)
-	# square.scale(.5, .5, .5)
+	# square.translate(0, 0, -50)
+	square.rotate(pi / 3, -1, 0, 0)
+	# square.scale(5, 5, 5)
 
 	while True:
 		for event in pygame.event.get():
@@ -36,29 +39,29 @@ def main():
 				raise SystemExit
 		pressed_keys = pygame.key.get_pressed()
 		if pressed_keys[K_w]:
-			light_cube.translate(0, 0, .1)
+			square.translate(0, 0, .1)
 		if pressed_keys[K_s]:
-			light_cube.translate(0, 0, -.1)
+			square.translate(0, 0, -.1)
 		if pressed_keys[K_a]:
-			light_cube.translate(-.1, 0, 0)
+			square.translate(-.1, 0, 0)
 		if pressed_keys[K_d]:
-			light_cube.translate(.1, 0, 0)
+			square.translate(.1, 0, 0)
 		if pressed_keys[K_SPACE]:
-			light_cube.translate(0, .1, 0)
+			square.translate(0, .1, 0)
 		if pressed_keys[K_LCTRL]:
-			light_cube.translate(0, -.1, 0)
+			square.translate(0, -.1, 0)
 		if pressed_keys[K_UP]:
-			light_cube.rotate(pi / 1000, 1, 0, 0)
+			square.rotate(pi / 1000, 1, 0, 0)
 		if pressed_keys[K_DOWN]:
-			light_cube.rotate(pi / 1000, -1, 0, 0)
+			square.rotate(pi / 1000, -1, 0, 0)
 		if pressed_keys[K_LEFT]:
-			light_cube.rotate(pi / 1000, 0, 1, 0)
+			square.rotate(pi / 1000, 0, 1, 0)
 		if pressed_keys[K_RIGHT]:
-			light_cube.rotate(pi / 1000, 0, -1, 0)
+			square.rotate(pi / 1000, 0, -1, 0)
 		if pressed_keys[K_q]:
-			light_cube.rotate(pi / 1000, 0, 0, 1)
+			square.rotate(pi / 1000, 0, 0, 1)
 		if pressed_keys[K_e]:
-			light_cube.rotate(pi / 1000, 0, 0, -1)
+			square.rotate(pi / 1000, 0, 0, -1)
 
 		square.rotate(pi / 100, 0, 1, 0)
 		square.draw()
