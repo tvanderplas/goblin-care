@@ -11,11 +11,12 @@ from assets.paths import *
 from shaders.paths import *
 from tests.paths import *
 from random import random
+import screen
 
 def main():
 	pygame.init()
-	display = (1024, 768)
-	pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+	display = (screen.width, screen.height)
+	pygame.display.set_mode(display, FULLSCREEN|DOUBLEBUF|OPENGL)
 	glEnable(GL_DEPTH_TEST)
 	# glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
@@ -26,12 +27,8 @@ def main():
 	square.set_light_source(light_cube)
 	square.set_texture(1)
 
-	# objloader.set_perspective(pi / 4, *display, 0.1, 100)
 	light_cube.translate(10, 5, -25)
 	light_cube.rotate(pi / 6, 1, 0, 0)
-	# square.translate(0, 0, -50)
-	square.rotate(pi / 3, -1, 0, 0)
-	# square.scale(5, 5, 5)
 
 	while True:
 		for event in pygame.event.get():
@@ -63,10 +60,8 @@ def main():
 		if pressed_keys[K_e]:
 			square.rotate(pi / 1000, 0, 0, -1)
 
-		square.rotate(pi / 100, 0, 1, 0)
 		square.draw()
 
-		light_cube.rotate(pi / 100, 0, -1, 0)
 		light_cube.draw()
 
 		pygame.display.flip()
