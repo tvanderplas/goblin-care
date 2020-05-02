@@ -128,18 +128,6 @@ class Obj:
 		if self.shader == None:
 			self.compile_shader()
 
-		self.vertex_texture_coord = glGetAttribLocation(self.shader, b'vertex_texture_coord')
-		if self.vertex_texture_coord > 0:
-			glBindAttribLocation(self.shader, self.vertex_texture_coord, b'vertex_texture_coord')
-
-		self.vertex_normal = glGetAttribLocation(self.shader, b'vertex_normal')
-		if self.vertex_normal > 0:
-			glBindAttribLocation(self.shader, self.vertex_normal, b'vertex_normal')
-
-		self.vertex_position = glGetAttribLocation(self.shader, b'vertex_position')
-		if self.vertex_position > 0:
-			glBindAttribLocation(self.shader, self.vertex_position, b'vertex_position')
-
 		shaders.glUseProgram(self.shader)
 
 		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
@@ -168,8 +156,10 @@ class Obj:
 		self.tex_id = glGenTextures(1)
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture.size, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
 		glGenerateMipmap(GL_TEXTURE_2D)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
