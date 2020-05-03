@@ -9,7 +9,7 @@ import numpy as np
 from math import pi
 from assets import *
 from shaders.paths import *
-from tests.paths import *
+from tests import *
 from random import random
 import screen
 
