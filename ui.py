@@ -6,7 +6,7 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
 import screen
-from assets.paths import (
+from assets import (
 	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, fractal_png, pink_bubbles_png,
 	depot_png, red_gloop_png, blue_squares_png, buy_png
 )

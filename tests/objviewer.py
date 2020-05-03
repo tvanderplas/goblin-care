@@ -7,7 +7,7 @@ from OpenGL.GL import shaders
 from assets import objloader
 import numpy as np
 from math import pi
-from assets.paths import *
+from assets import *
 from shaders.paths import *
 from tests.paths import *
 from random import random

@@ -3,7 +3,7 @@ from random import random, uniform
 from pygame import mouse
 from helpers import randedge, pixel_to_view, get_vector
 from assets import objloader
-from assets.paths import *
+from assets import *
 from shaders.paths import object_vs, object_fs, ui_vs, ui_fs
 from math import pi
 

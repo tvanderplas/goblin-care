@@ -3,7 +3,7 @@ import context
 import sys
 from PIL import Image
 import numpy as np
-from assets.paths import tornado_png, rainbow_tornado_png
+from assets import tornado_png, rainbow_tornado_png
 
 find_color = [255, 255, 255, 255]
 replace_color = [255, 255, 255, 0]

@@ -7,7 +7,7 @@ from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BI
 from sprites import Background, Enemy, Player, PlayerBullet, Rainbow_Bullet, Splat, Splat_Collect, Tornado, Hud_Button
 import ui
 from random import randint
-from assets.paths import desert_road_png, treasure_png
+from assets import desert_road_png, treasure_png
 from helpers import group_collide, collide_any, get_collided
 
 class Game():
