@@ -140,7 +140,7 @@ class Obj:
 		shaders.glUseProgram(self.shader)
 
 		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
-		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.array(self.model) * np.array(self.perspective))
+		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.array(self.model * self.perspective))
 		glUniform4f(self.uniforms['self_color'], *self.color)
 		glUniform3f(self.uniforms['light_color'], *self.light.color[:3])
 		glUniform3f(self.uniforms['light_position'], *self.light.position[:3])
