@@ -84,6 +84,8 @@ class Obj:
 		self.get_box()
 
 	def generate(self):
+		self.compile_shader()
+
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
 		self.VAO = glGenVertexArrays(1)
 		glBindVertexArray(self.VAO)
@@ -96,12 +98,22 @@ class Obj:
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
 
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 32, None)
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(8))
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(20))
-		glEnableVertexAttribArray(0)
-		glEnableVertexAttribArray(1)
-		glEnableVertexAttribArray(2)
+		vertex_texture_coord = glGetAttribLocation(self.shader, b'vertex_texture_coord')
+		vertex_normal = glGetAttribLocation(self.shader, b'vertex_normal')
+		vertex_position = glGetAttribLocation(self.shader, b'vertex_position')
+
+		print(self.shader, vertex_texture_coord, vertex_normal, vertex_position)
+
+		if vertex_texture_coord >= 0:
+			glVertexAttribPointer(vertex_texture_coord, 2, GL_FLOAT, GL_FALSE, 32, None)
+			glEnableVertexAttribArray(vertex_texture_coord)
+		if vertex_normal >= 0:
+			glVertexAttribPointer(vertex_normal, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(8))
+			glEnableVertexAttribArray(vertex_normal)
+		if vertex_position >= 0:
+			glVertexAttribPointer(vertex_position, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(20))
+			glEnableVertexAttribArray(vertex_position)
+
 
 		glBindVertexArray(0)
 		self.set_texture(self.texture_mode)
@@ -125,9 +137,6 @@ class Obj:
 		self.light = source
 
 	def use_shader(self):
-		if self.shader == None:
-			self.compile_shader()
-
 		shaders.glUseProgram(self.shader)
 
 		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
