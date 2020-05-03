@@ -8,7 +8,7 @@ from assets import objloader
 import numpy as np
 from math import pi
 from assets import *
-from shaders.paths import *
+from shaders import *
 from tests import *
 from random import random
 import screen

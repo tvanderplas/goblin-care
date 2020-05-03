@@ -11,7 +11,7 @@ import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
 from assets import square_obj, menu_png, controls_png
-from shaders.paths import object_vs, object_fs, ui_vs, ui_fs
+from shaders import object_vs, object_fs, ui_vs, ui_fs
 from fonts.paths import calibri_ttf
 from helpers import pixel_to_view, text_image
 from ui import Ui_Image

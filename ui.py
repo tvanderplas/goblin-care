@@ -12,7 +12,7 @@ from assets import (
 )
 from fonts.paths import calibri_ttf
 from assets import objloader
-from shaders.paths import object_vs, object_fs, ui_vs, ui_fs
+from shaders import object_vs, object_fs, ui_vs, ui_fs
 from helpers import text_image, pixel_to_view
 from sprites import Player
 from math import pi
