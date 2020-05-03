@@ -10,7 +10,7 @@ from assets import (
 	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, fractal_png, pink_bubbles_png,
 	depot_png, red_gloop_png, blue_squares_png, buy_png
 )
-from fonts.paths import calibri_ttf
+from fonts import calibri_ttf
 from assets import objloader
 from shaders import object_vs, object_fs, ui_vs, ui_fs
 from helpers import text_image, pixel_to_view

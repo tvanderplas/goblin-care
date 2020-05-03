@@ -2,7 +2,7 @@
 from random import uniform, choice
 from math import sqrt
 import screen
-from fonts.paths import calibri_ttf
+from fonts import calibri_ttf
 from assets import text_image_png
 from PIL import Image, ImageDraw, ImageFont
 
