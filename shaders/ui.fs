@@ -3,12 +3,11 @@
 
 precision mediump float;
 
-out vec4 fragment_color;
-
 in vec3 position;
-in vec3 normal;
 in vec4 color;
 in vec2 texture_coord;
+
+out vec4 fragment_color;
 
 uniform vec3 light_color;
 uniform vec3 light_position;
@@ -17,5 +16,12 @@ uniform int texture_mode;
 
 void main()
 {
-	fragment_color = color;
+	if (texture_mode == 0) {
+		fragment_color = color;
+	} else {
+		vec4 tex_color = texture(textureObj, texture_coord);
+		if(tex_color.a == 0.0)
+			discard;
+		fragment_color = tex_color;
+	}
 }
