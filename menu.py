@@ -11,14 +11,15 @@ import screen
 from PIL import Image, ImageDraw, ImageFont
 from assets import objloader
 from assets import square_obj, menu_png, controls_png
-from shaders import object_vs, object_fs, ui_vs, ui_fs
+from shaders import ui_vs, ui_fs
 from fonts import calibri_ttf
 from helpers import pixel_to_view, text_image
 from ui import Ui_Image
 
+# this class is currently only used for testing
 class Pointer_Indicator(objloader.Obj):
 	def __init__(self):
-		super().__init__(square_obj, object_vs, object_fs)
+		super().__init__(square_obj, ui_vs, ui_fs)
 		self.generate()
 		self.scale(.01, .01, .01)
 		self.color = (0, 1, 1, 1)
@@ -54,7 +55,7 @@ class Menu_Button:
 		self.background.translate(*location, 0)
 		self.background.scale(.33, .05, 1)
 
-		self.text = objloader.Obj(square_obj, object_vs, object_fs, text_image(text, (170, 64, 78), 'right'))
+		self.text = objloader.Obj(square_obj, ui_vs, ui_fs, text_image(text, (170, 64, 78), 'right'))
 		self.text.generate()
 		self.text.set_texture(1)
 		self.text.scale(1, .1, 1)

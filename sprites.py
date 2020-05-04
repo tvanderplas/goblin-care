@@ -71,7 +71,7 @@ class Player(object):
 
 class PlayerBullet(objloader.Obj):
 	def __init__(self, x, y, groups):
-		super().__init__(square_obj, object_vs, object_fs, bullet_png)
+		super().__init__(square_obj, ui_vs, ui_fs, bullet_png)
 		self.generate()
 		self.set_texture(1)
 		self.translate(x, y, 0)
@@ -93,7 +93,7 @@ class PlayerBullet(objloader.Obj):
 
 class Rainbow_Bullet(objloader.Obj):
 	def __init__(self, x, y, groups):
-		super().__init__(square_obj, object_vs, object_fs, rainbow_bullet_png)
+		super().__init__(square_obj, ui_vs, ui_fs, rainbow_bullet_png)
 		self.generate()
 		self.set_texture(1)
 		self.translate(x, y, 0)
@@ -115,7 +115,7 @@ class Rainbow_Bullet(objloader.Obj):
 
 class Enemy(objloader.Obj):
 	def __init__(self, groups):
-		super().__init__(square_obj, object_vs, object_fs, green_goblin_png)
+		super().__init__(square_obj, ui_vs, ui_fs, green_goblin_png)
 		self.generate()
 		self.set_texture(1)
 		height = uniform(-.9, .9)
@@ -138,7 +138,7 @@ class Enemy(objloader.Obj):
 
 class Splat(objloader.Obj):
 	def __init__(self, location, groups):
-		super().__init__(square_obj, object_vs, object_fs, splat_png)
+		super().__init__(square_obj, ui_vs, ui_fs, splat_png)
 		self.generate()
 		self.set_texture(1)
 		self.translate(*location, 0)
@@ -160,7 +160,7 @@ class Splat(objloader.Obj):
 
 class Splat_Collect(objloader.Obj):
 	def __init__(self, location, destination, groups):
-		super().__init__(square_obj, object_vs, object_fs, splat_png)
+		super().__init__(square_obj, ui_vs, ui_fs, splat_png)
 		self.generate()
 		self.set_texture(1)
 		self.translate(*location, 0)
@@ -186,7 +186,7 @@ class Tornado(objloader.Obj):
 	def __init__(self, groups):
 		self.is_rainbow = True if random() > .8 else False
 		self.image_file = rainbow_tornado_png if self.is_rainbow else tornado_png
-		super().__init__(square_obj, object_vs, object_fs, self.image_file)
+		super().__init__(square_obj, ui_vs, ui_fs, self.image_file)
 		self.generate()
 		self.set_texture(1)
 		self.scale(.06, .09, 1)
@@ -219,14 +219,14 @@ class Tornado(objloader.Obj):
 
 class Background(objloader.Obj):
 	def __init__(self, image_file):
-		super().__init__(square_obj, object_vs, object_fs, image_file)
+		super().__init__(square_obj, ui_vs, ui_fs, image_file)
 		self.generate()
 		self.set_texture(1)
 		self.translate(0, 0, .5)
 
 class Hud_Button(objloader.Obj):
 	def __init__(self, image_file, location, groups):
-		super().__init__(square_obj, object_vs, object_fs, image_file)
+		super().__init__(square_obj, ui_vs, ui_fs, image_file)
 		self.generate()
 		self.set_texture(1)
 		self.scale(.1, .15, 1)
