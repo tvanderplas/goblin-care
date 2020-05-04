@@ -24,13 +24,14 @@ void main()
 	vec3 light_direction = normalize(light_position - position);
 	float diff = max(dot(normal, light_direction), 0.0);
 	vec3 diffuse = diff * light_color;
-	vec4 result = vec4(ambient + diffuse, 1.0) * color;
 	if (texture_mode == 0) {
+		vec4 result = vec4(ambient + diffuse, 1.0) * color;
 		fragment_color = result;
 	} else {
 		vec4 tex_color = texture(textureObj, texture_coord);
+		vec4 result = vec4(ambient + diffuse, 1.0) * tex_color;
 		if(tex_color.a == 0.0)
 			discard;
-		fragment_color = texture(textureObj, texture_coord);
+		fragment_color = result;
 	}
 }
