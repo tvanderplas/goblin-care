@@ -4,11 +4,11 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, K_TAB, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
 )
 from OpenGL.GL import glClear, glEnable, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST
-from sprites import Background, Enemy, Player, PlayerBullet, Rainbow_Bullet, Splat, Splat_Collect, Tornado, Hud_Button
-import ui
+from game import ui
+from game.sprites import Background, Enemy, Player, PlayerBullet, Rainbow_Bullet, Splat, Splat_Collect, Tornado, Hud_Button
+from game.assets import desert_road_png, treasure_png
+from game.helpers import group_collide, collide_any, get_collided
 from random import randint
-from assets.paths import desert_road_png, treasure_png
-from helpers import group_collide, collide_any, get_collided
 
 class Game():
 	def __init__(self, view):

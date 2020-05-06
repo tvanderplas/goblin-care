@@ -4,7 +4,7 @@ A game about goblins and cars
 
 ### Prerequisites
 
-This game depends on Python 3.7, although it may also work with some older versions. Currently only works on Windows. 
+This game is tested with Python 3.7, although it may also work with some older versions. 
 
 ### Installing
 
@@ -21,7 +21,7 @@ cd goblin-care
 python -m venv env
 ```
 
-Activate the environment
+Activate the environment (use `env/bin/activate` for linux)
 
 ```
 env\Scripts\activate

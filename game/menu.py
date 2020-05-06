@@ -3,21 +3,21 @@ import pygame as pg
 from pygame.constants import ( # pylint: disable=no-name-in-module
 	MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_SPACE, FULLSCREEN, OPENGL, DOUBLEBUF
 )
-import pygame.freetype as ft
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
-from sprites import Background
-import overworld
-import screen
+from game.sprites import Background
+from game import overworld, screen
 from PIL import Image, ImageDraw, ImageFont
-from assets import objloader
-from assets.paths import square_obj, object_vs, object_fs, menu_png, ui_vs, ui_fs, controls_png
-from fonts.paths import calibri_ttf
-from helpers import pixel_to_view, text_image
-from ui import Ui_Image
+from game.assets import objloader
+from game.assets import square_obj, menu_png, controls_png
+from game.shaders import ui_vs, ui_fs
+from game.fonts import calibri_ttf
+from game.helpers import pixel_to_view, text_image
+from game.ui import Ui_Image
 
+# this class is currently only used for testing
 class Pointer_Indicator(objloader.Obj):
 	def __init__(self):
-		super().__init__(square_obj, object_vs, object_fs)
+		super().__init__(square_obj, ui_vs, ui_fs)
 		self.generate()
 		self.scale(.01, .01, .01)
 		self.color = (0, 1, 1, 1)
@@ -53,7 +53,7 @@ class Menu_Button:
 		self.background.translate(*location, 0)
 		self.background.scale(.33, .05, 1)
 
-		self.text = objloader.Obj(square_obj, object_vs, object_fs, text_image(text, (170, 64, 78), 'right'))
+		self.text = objloader.Obj(square_obj, ui_vs, ui_fs, text_image(text, (170, 64, 78), 'right'))
 		self.text.generate()
 		self.text.set_texture(1)
 		self.text.scale(1, .1, 1)

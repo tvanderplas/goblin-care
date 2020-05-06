@@ -1,8 +1,11 @@
 
-#version 330 core
-layout (location = 0) in vec2 vertex_texture_coord;
-layout (location = 1) in vec3 vertex_normal;
-layout (location = 2) in vec3 vertex_position;
+#version 150
+
+precision mediump float;
+
+in vec2 vertex_texture_coord;
+in vec3 vertex_normal;
+in vec3 vertex_position;
 
 out vec3 position;
 out vec3 normal;

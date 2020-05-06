@@ -1,9 +1,9 @@
 
 from random import uniform, choice
 from math import sqrt
-import screen
-from fonts.paths import calibri_ttf
-from assets.paths import text_image_png
+from game import screen
+from game.fonts import calibri_ttf
+from game.assets import text_image_png
 from PIL import Image, ImageDraw, ImageFont
 
 def text_image(text, text_color, orientation='center'):

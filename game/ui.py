@@ -4,22 +4,21 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 	RLEACCEL, MOUSEBUTTONDOWN, KEYDOWN, QUIT, K_ESCAPE, K_TAB
 )
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
-import pygame.freetype as ft
-import screen
-from assets.paths import (
-	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj,
-	object_vs, object_fs, ui_vs, ui_fs, fractal_png, pink_bubbles_png,
+from game import screen
+from game.assets import (
+	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, fractal_png, pink_bubbles_png,
 	depot_png, red_gloop_png, blue_squares_png, buy_png
 )
-from fonts.paths import calibri_ttf
-from assets import objloader
-from helpers import text_image, pixel_to_view
-from sprites import Player
+from game.fonts import calibri_ttf
+from game.assets import objloader
+from game.shaders import ui_vs, ui_fs
+from game.helpers import text_image, pixel_to_view
+from game.sprites import Player
 from math import pi
 
 class Close_Button:
 	def __init__(self):
-		self.close_button = objloader.Obj(square_obj, object_vs, object_fs, window_close_png)
+		self.close_button = objloader.Obj(square_obj, ui_vs, ui_fs, window_close_png)
 		self.close_button.generate()
 		self.close_button.set_texture(1)
 		self.close_button.scale(1 / 20, 1 / 15, 1)
@@ -29,7 +28,7 @@ class Close_Button:
 			-.1
 		)
 
-		self.close_button_hover = objloader.Obj(square_obj, object_vs, object_fs, window_close_active_png)
+		self.close_button_hover = objloader.Obj(square_obj, ui_vs, ui_fs, window_close_active_png)
 		self.close_button_hover.generate()
 		self.close_button_hover.set_texture(1)
 		self.close_button_hover.scale(1 / 20, 1 / 15, 1)
@@ -109,7 +108,7 @@ class Texture_Button:
 class Text(objloader.Obj):
 	def __init__(self, text, orientation='left'):
 		text_image_file = text_image(text, (170, 64, 78), orientation)
-		super().__init__(square_obj, object_vs, object_fs, text_image_file)
+		super().__init__(square_obj, ui_vs, ui_fs, text_image_file)
 		self.generate()
 		self.set_texture(1)
 
@@ -121,7 +120,7 @@ class Ui_Color(objloader.Obj):
 
 class Ui_Image(objloader.Obj):
 	def __init__(self, image):
-		super().__init__(square_obj, object_vs, object_fs, image)
+		super().__init__(square_obj, ui_vs, ui_fs, image)
 		self.generate()
 		self.set_texture(1)
 
@@ -194,7 +193,7 @@ class Loot_Screen:
 		]:
 			self.paint_select.append(Texture_Button(*args))
 
-		self.splat_icon = objloader.Obj(square_obj, object_vs, object_fs, splat_png)
+		self.splat_icon = objloader.Obj(square_obj, ui_vs, ui_fs, splat_png)
 		self.splat_icon.generate()
 		self.splat_icon.set_texture(1)
 		self.splat_icon.scale(.04, .06, 1)

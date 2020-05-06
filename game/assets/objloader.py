@@ -61,8 +61,8 @@ class Obj:
 		self.light.color = (0, 0, 0)
 		self.light.position = (0, 0, 0)
 		self.shader = None
-		self.vertex_shader = open(v_shader)
-		self.fragment_shader = open(f_shader)
+		self.vertex_shader = v_shader
+		self.fragment_shader = f_shader
 		self.texture_mode = 0
 		self.texture = texture
 		self.translated = glm.mat4()
@@ -84,6 +84,8 @@ class Obj:
 		self.get_box()
 
 	def generate(self):
+		self.compile_shader()
+
 		self.VAO, self.VBO, self.EBO = GLuint(), GLuint(), GLuint()
 		self.VAO = glGenVertexArrays(1)
 		glBindVertexArray(self.VAO)
@@ -96,12 +98,22 @@ class Obj:
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.indices, GL_STATIC_DRAW)
 
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 32, None)
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(8))
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(20))
-		glEnableVertexAttribArray(0)
-		glEnableVertexAttribArray(1)
-		glEnableVertexAttribArray(2)
+		vertex_texture_coord = glGetAttribLocation(self.shader, b'vertex_texture_coord')
+		vertex_normal = glGetAttribLocation(self.shader, b'vertex_normal')
+		vertex_position = glGetAttribLocation(self.shader, b'vertex_position')
+
+		print(self.shader, vertex_texture_coord, vertex_normal, vertex_position)
+
+		if vertex_texture_coord >= 0:
+			glVertexAttribPointer(vertex_texture_coord, 2, GL_FLOAT, GL_FALSE, 32, None)
+			glEnableVertexAttribArray(vertex_texture_coord)
+		if vertex_normal >= 0:
+			glVertexAttribPointer(vertex_normal, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(8))
+			glEnableVertexAttribArray(vertex_normal)
+		if vertex_position >= 0:
+			glVertexAttribPointer(vertex_position, 3, GL_FLOAT, GL_FALSE, 32, ctypes.c_void_p(20))
+			glEnableVertexAttribArray(vertex_position)
+
 
 		glBindVertexArray(0)
 		self.set_texture(self.texture_mode)
@@ -125,22 +137,14 @@ class Obj:
 		self.light = source
 
 	def use_shader(self):
-		if self.shader == None:
-			self.compile_shader()
-		shaders.glUseProgram(self.shader) # pylint: disable=no-member
-		for name, address in self.uniforms.items():
-			if name == 'model':
-				glUniformMatrix4fv(address, 1, False, np.matrix(self.model))
-			if name == 'transform':
-				glUniformMatrix4fv(address, 1, False, np.matrix(self.model) * np.matrix(self.perspective))
-			if name == 'self_color':
-				glUniform4f(address, *self.color)
-			if name == 'light_color':
-				glUniform3f(address, *self.light.color[:3])
-			if name == 'light_position':
-				glUniform3f(address, *self.light.position[:3])
-			if name == 'texture_mode':
-				glUniform1i(address, self.texture_mode)
+		shaders.glUseProgram(self.shader)
+
+		glUniformMatrix4fv(self.uniforms['model'], 1, False, np.array(self.model))
+		glUniformMatrix4fv(self.uniforms['transform'], 1, False, np.array(self.model * self.perspective))
+		glUniform4f(self.uniforms['self_color'], *self.color)
+		glUniform3f(self.uniforms['light_color'], *self.light.color[:3])
+		glUniform3f(self.uniforms['light_position'], *self.light.position[:3])
+		glUniform1i(self.uniforms['texture_mode'], self.texture_mode)
 
 	def set_texture(self, setting):
 		self.texture_mode = setting
@@ -161,8 +165,10 @@ class Obj:
 		self.tex_id = glGenTextures(1)
 		glBindTexture(GL_TEXTURE_2D, self.tex_id)
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, *texture.size, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
 		glGenerateMipmap(GL_TEXTURE_2D)
 
 	def set_perspective(self, angle, width, height, z_min, z_max):
