@@ -1,4 +1,5 @@
 
+fix bug where menu labels don't appear after exiting overworld
 game over animation
 persistent game if not dead
 sounds
