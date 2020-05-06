@@ -1,5 +1,5 @@
 
-from game.menu import Menu
-
-menu = Menu()
-menu.play()
+def play():
+    from game.menu import Menu
+    menu = Menu()
+    menu.play()

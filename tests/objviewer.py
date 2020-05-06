@@ -4,14 +4,13 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GL import shaders
-from assets import objloader
-import numpy as np
-from math import pi
-from assets import *
-from shaders import *
+from game.assets import objloader
+from game.assets import *
+from game.shaders import *
 from tests import *
+from game import screen
+from math import pi
 from random import random
-import screen
 
 def main():
 	pygame.init()
