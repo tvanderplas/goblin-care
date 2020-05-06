@@ -1,10 +1,10 @@
 
 from random import random, uniform
 from pygame import mouse
-from helpers import randedge, pixel_to_view, get_vector
-from assets import objloader
-from assets import *
-from shaders import object_vs, object_fs, ui_vs, ui_fs
+from game.helpers import randedge, pixel_to_view, get_vector
+from game.assets import objloader
+from game.assets import *
+from game.shaders import object_vs, object_fs, ui_vs, ui_fs
 from math import pi
 
 class Player(object):

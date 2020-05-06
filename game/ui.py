@@ -5,16 +5,16 @@ from pygame.constants import ( # pylint: disable=no-name-in-module
 )
 from OpenGL.GL import glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 import pygame.freetype as ft
-import screen
-from assets import (
+from game import screen
+from game.assets import (
 	window_close_png, window_close_active_png, splat_png, square_obj, cube_obj, fractal_png, pink_bubbles_png,
 	depot_png, red_gloop_png, blue_squares_png, buy_png
 )
-from fonts import calibri_ttf
-from assets import objloader
-from shaders import ui_vs, ui_fs
-from helpers import text_image, pixel_to_view
-from sprites import Player
+from game.fonts import calibri_ttf
+from game.assets import objloader
+from game.shaders import ui_vs, ui_fs
+from game.helpers import text_image, pixel_to_view
+from game.sprites import Player
 from math import pi
 
 class Close_Button:
